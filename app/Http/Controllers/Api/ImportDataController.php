@@ -28,9 +28,9 @@ class ImportDataController extends Controller
             $product = new Product();
             $product->item_id = $item_basic['itemid'];
             $product->name = $item_basic['name'];
-            $product->price = $item_basic['price'];
-            $product->price_max = $item_basic['price_max'];
-            $product->price_min = $item_basic['price_min'];
+            $product->price = $item_basic['price'] / 10000;
+            $product->price_max = $item_basic['price_max'] / 10000;
+            $product->price_min = $item_basic['price_min'] / 10000;
             $product->image = $item_basic['image'];
             $product->status = $item_basic['status'];
 
