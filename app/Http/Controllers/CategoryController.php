@@ -12,11 +12,11 @@ class CategoryController extends Controller
 {
 
         // 分類頁
-        public function index(Request $request)
+        public function index(Request $request, $category_id = 0)
         {
 
             $req = $request->all();
-            $category_id = isset($req['category_id']) ? $req['category_id'] : 0;
+            $category_id = $category_id == 0 ? 0 : $category_id;
 
             if($category_id == 0) {
                 $products = Product::paginate(12);

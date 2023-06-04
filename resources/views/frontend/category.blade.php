@@ -45,7 +45,7 @@
                                         @foreach($product_categories as $product_category)
                                         <li class="mb-2"><a
                                                 class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                                href="#">
+                                                href="/category/{{ $product_category->id }}">
                                                 <span>
                                                     <i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
                                                     {{ $product_category->name }}
@@ -390,7 +390,7 @@
                     <!-- Products-->
                     <div class="row g-4 mb-5">
 
-                        @foreach($products as $product)
+                        @forelse($products as $product)
                         <div class="col-12 col-sm-6 col-md-4">
                             <!-- Card Product-->
                             <div class="card position-relative h-100 card-listing hover-trigger">
@@ -441,7 +441,13 @@
                             </div>
                             <!--/ Card Product-->
                         </div>
-                        @endforeach
+                        @empty
+                        <div class="col-12 col-sm-6 col-md-12 d-flex justify-content-center">
+                            <div class="p-5" style="font-size: 26px">
+                                尚未有商品
+                            </div>
+                        </div>
+                        @endforelse
                     </div>
                     <!-- / Products-->
 
