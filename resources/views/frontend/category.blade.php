@@ -403,16 +403,16 @@
                                         <img class="w-100 img-fluid" title=""
                                             src="https://down-tw.img.susercontent.com/file/{{ $product->image }}" alt="">
                                     </picture>
-                                    <div class="card-actions">
+                                    {{-- <div class="card-actions">
                                         <span class="small text-uppercase tracking-wide fw-bolder text-center d-block">
                                             商品內容
                                         </span>
-                                        {{-- <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
+                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
                                             <button class="btn btn-outline-dark btn-sm mx-2">S</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">M</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div> --}}
-                                    </div>
+                                        </div>
+                                    </div> --}}
                                 </div>
                                 <div class="card-body px-0 text-center">
                                     {{-- <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
