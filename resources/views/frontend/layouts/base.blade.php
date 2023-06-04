@@ -87,15 +87,25 @@
                             <i class="ri-close-circle-line ri-2x"></i>
                         </button>
                         <!-- / Mobile Nav Toggler-->
-
                         <ul class="navbar-nav py-lg-2 mx-auto">
-                            @foreach($product_categories as $product_category)
-                            <li class="nav-item me-lg-4 ">
-                                <a class="nav-link fw-bolder py-lg-4" href="/category/{{ $product_category->id }}">
-                                    {{ $product_category->name }}
+                            <li class="nav-item dropdown me-lg-4">
+                                <a class="nav-link fw-bolder dropdown-toggle py-lg-4" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    全系列商品
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($product_categories as $product_category)
+                                        <li><a class="dropdown-item"
+                                                href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown me-lg-4">
+                                <a class="nav-link fw-bolder py-lg-4" href="#">
+                                    聯絡我們
                                 </a>
                             </li>
-                            @endforeach
                         </ul>
                     </div>
                     <!-- / Main Navigation-->
@@ -108,8 +118,7 @@
                             <button
                                 class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center"
                                 data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                                aria-controls="navbarNavDropdown" aria-expanded="false"
-                                aria-label="Toggle navigation">
+                                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <i class="ri-menu-line ri-lg align-middle"></i>
                             </button>
                         </li>
@@ -135,8 +144,7 @@
 
                         <!-- Navbar Login-->
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
-                                href="#">
+                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#">
                                 <i class="ri-user-line ri-lg align-middle"></i>
                             </a>
                         </li>
@@ -381,44 +389,44 @@
                             <ul class="list-unstyled list-default-text">
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Waterproof
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Waterproof
                                             Jackets</span> <span class="text-muted ms-4">(21)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Down
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Down
                                             Jackets</span> <span class="text-muted ms-4">(13)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Windproof
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Windproof
                                             Jackets</span> <span class="text-muted ms-4">(18)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Hiking
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Hiking
                                             Jackets</span> <span class="text-muted ms-4">(25)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Climbing
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Climbing
                                             Jackets</span> <span class="text-muted ms-4">(11)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Trekking
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Trekking
                                             Jackets</span> <span class="text-muted ms-4">(19)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Allround
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Allround
                                             Jackets</span> <span class="text-muted ms-4">(24)</span></a>
                                 </li>
                             </ul>
@@ -437,14 +445,12 @@
                             <div class="filter-price mt-6"></div>
                             <div class="d-flex justify-content-between align-items-center mt-7">
                                 <div class="input-group mb-0 me-2 border">
-                                    <span
-                                        class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
                                     <input type="number" min="00" max="1000" step="1"
                                         class="filter-min form-control-sm border flex-grow-1 text-muted border-0">
                                 </div>
                                 <div class="input-group mb-0 ms-2 border">
-                                    <span
-                                        class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
                                     <input type="number" min="00" max="1000" step="1"
                                         class="filter-max form-control-sm flex-grow-1 text-muted border-0">
                                 </div>
@@ -471,80 +477,70 @@
                             <div class="simplebar-wrapper">
                                 <div class="filter-options" data-pixr-simplebar>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-0">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-0">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-0">Adidas <span
                                                 class="text-muted">(21)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-1">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-1">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-1">Asics <span
                                                 class="text-muted">(13)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-2">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-2">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-2">Canterbury <span
                                                 class="text-muted">(18)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-3">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-3">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-3">Converse <span
                                                 class="text-muted">(25)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-4">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-4">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-4">Donnay <span
                                                 class="text-muted">(11)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-5">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-5">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-5">Nike <span
                                                 class="text-muted">(19)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-6">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-6">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-6">Millet <span
                                                 class="text-muted">(24)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-7">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-7">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-7">Puma <span
                                                 class="text-muted">(11)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-8">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-8">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-8">Reebok <span
                                                 class="text-muted">(19)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-9">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-9">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-9">Under Armour <span
@@ -559,8 +555,8 @@
                     <!-- Type Filter -->
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
-                            data-bs-toggle="collapse" href="#filter-modal-type" role="button"
-                            aria-expanded="false" aria-controls="filter-modal-type">
+                            data-bs-toggle="collapse" href="#filter-modal-type" role="button" aria-expanded="false"
+                            aria-controls="filter-modal-type">
                             Type
                         </a>
                         <div id="filter-modal-type" class="collapse">
@@ -656,8 +652,7 @@
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-8">
-                                    <label class="form-check-label fw-normal"
-                                        for="filter-sizes-modal-8">10.5</label>
+                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-8">10.5</label>
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-9">
@@ -665,8 +660,7 @@
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-10">
-                                    <label class="form-check-label fw-normal"
-                                        for="filter-sizes-modal-10">11.5</label>
+                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-10">11.5</label>
                                 </div>
                             </div>
                         </div>

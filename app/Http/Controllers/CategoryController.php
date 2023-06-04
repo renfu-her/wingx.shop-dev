@@ -19,12 +19,16 @@ class CategoryController extends Controller
             $category_id = isset($req['category_id']) ? $req['category_id'] : 0;
 
             if($category_id == 0) {
-                $products = Product::paginate(10);
+                $products = Product::paginate(12);
             } else{
-                $products = Product::where('category_id', $category_id)->paginate(10);
+                $products = Product::where('category_id', $category_id)->paginate(12);
             }
 
             $product_categories = ProductCategory::all();
+            foreach($product_categories as $product_category){
+                $product_count = Product::where('category_id', $product_category->id)->count();
+                $product_category->count = $product_count;
+            }
 
             return view('frontend.category', compact('products', 'product_categories'));
         }
