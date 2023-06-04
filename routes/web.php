@@ -11,4 +11,5 @@ Route::get('/', function () {
 });
 
 Route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
+Route::get('/importStoreData', [ImportDataController::class, 'storeData']);
 
