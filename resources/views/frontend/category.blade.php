@@ -405,13 +405,13 @@
                                     </picture>
                                     <div class="card-actions">
                                         <span class="small text-uppercase tracking-wide fw-bolder text-center d-block">
-                                            加入購物車
+                                            商品內容
                                         </span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
+                                        {{-- <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
                                             <button class="btn btn-outline-dark btn-sm mx-2">S</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">M</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="card-body px-0 text-center">
@@ -449,7 +449,7 @@
                     <!-- Pagination-->
                     <nav class="border-top mt-5 pt-5 d-flex justify-content-between align-items-center text-center"
                         aria-label="Category Pagination">
-                        {{ $products->withQueryString()->links('pagination::bootstrap-5') }}
+                        {{ $products->links('pagination::bootstrap-5') }}
                     </nav> <!-- / Pagination-->
 
                     <!-- Related Categories-->
