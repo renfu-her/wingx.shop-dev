@@ -449,7 +449,7 @@
                     <!-- Pagination-->
                     <nav class="border-top mt-5 pt-5 d-flex justify-content-between align-items-center text-center"
                         aria-label="Category Pagination">
-                        {{ $products->links() }}
+                        {{ $products->withQueryString()->links('pagination::bootstrap-5') }}
                     </nav> <!-- / Pagination-->
 
                     <!-- Related Categories-->
