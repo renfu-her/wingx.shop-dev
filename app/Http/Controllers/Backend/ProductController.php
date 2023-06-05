@@ -15,10 +15,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::orderByDesl('id')->get();
+        $products = Product::orderByDesc('id')->get();
         foreach($products as $product){
             $product->category_name = ProductCategory::where('id', $product->category_id)->value('name');
-            $product->image = ProductImage::where('product_id', $product->id)->value('image');
+            if($product->define_image == 1)
+                $product->image = public_path('upload/images/' . $product->id . '/' . $product->image);
+            else
+                $product->image = 'https://down-tw.img.susercontent.com/file/' .$product->image;
         }
 
         $product_categories = ProductCategory::orderBy('id')->get();

@@ -22,18 +22,19 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th style="width: 20%">標題</th>
-                                <th style="width: 20%">封面圖檔</th>
-                                <th style="width: 10%">價格</th>
-                                <th>編輯</th>
-                                <th>刪除</th>
+                                <th style="width: 40%">標題</th>
+                                <th style="width: 30%">封面圖檔</th>
+                                <th style="width: 20%">價格</th>
+                                <th style="width: 5%">編輯</th>
+                                <th style="width: 5%">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($products as $key => $value)
                             <tr>
-                                <td>{{ $value->title }}</td>
-                                <td>{{ $value->image }}</td>
+                                <td>{{ $value->name }}</td>
+                                <td>
+                                    <img src="{!! $value->image !!}" class="w-100" alt=""></td>
                                 <td>{{ $value->price }}</td>
 
                                 <td>
