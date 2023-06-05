@@ -23,11 +23,11 @@
                                 <div class="sbp-preview-content">
                                     <x:form::form method="POST" :action="route('product.store')">
                                         <div class="mt-3">
-                                            <x:form::input name="title" label="標題" />
+                                            <x:form::input name="name" label="標題" required />
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input type="number" name="price" label="價格" />
+                                            <x:form::input type="number" name="price" label="價格" required />
                                         </div>
 
                                         <div class="mt-3">
@@ -39,11 +39,11 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input type="file" name="image" label="封面圖片" />
+                                            <x:form::input type="file" name="image" label="封面圖片" required />
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::textarea name="description" label="詳細內容" rows="3" />
+                                            <x:form::textarea name="description" label="詳細內容" rows="10" />
                                         </div>
 
                                         <div class="mt-3">

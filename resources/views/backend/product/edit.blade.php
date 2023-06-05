@@ -23,11 +23,11 @@
                                 <div class="sbp-preview-content">
                                     <x:form::form method="PUT" :action="route('product.update', $product->id)" :bind="$product">
                                         <div class="mt-3">
-                                            <x:form::input name="title" label="標題" />
+                                            <x:form::input name="name" label="標題" required />
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input type="number" name="price" label="價格" />
+                                            <x:form::input type="number" name="price" label="價格" required />
                                         </div>
 
                                         <div class="mt-3">
@@ -39,11 +39,16 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input type="file" name="image" label="封面圖片" />
+                                            @if($product->define_image == 1)
+                                                <img src="{{ asset('upload/images/' . $product->id . '/' . $product->image) }}" style="width: 15rem">
+                                            @else
+                                                <img src="https://down-tw.img.susercontent.com/file/{{ $product->image }}" style="width: 15rem" alt="">
+                                            @endif
+                                            <x:form::input type="file" name="image" label="封面圖片"/>
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::textarea name="description" label="詳細內容" rows="3" />
+                                            <x:form::textarea name="description" label="詳細內容" rows="10" />
                                         </div>
 
                                         <div class="mt-3">
