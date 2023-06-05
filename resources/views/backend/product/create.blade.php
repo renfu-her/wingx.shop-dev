@@ -21,7 +21,7 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="POST" :action="route('prouct.store')">
+                                    <x:form::form method="POST" :action="route('product.store')">
                                         <div class="mt-3">
                                             <x:form::input name="title" label="標題" />
                                         </div>

@@ -21,7 +21,7 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="PUT" :action="route('prouct.update', $product->id)" :bind="$product">
+                                    <x:form::form method="PUT" :action="route('product.update', $product->id)" :bind="$product">
                                         <div class="mt-3">
                                             <x:form::input name="title" label="標題" />
                                         </div>
