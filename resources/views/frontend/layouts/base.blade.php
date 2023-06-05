@@ -186,32 +186,27 @@
 
                     <!-- Footer Nav-->
                     <nav class="col-6 col-md mb-4 mb-md-0">
-                        <h6 class="mb-4 fw-bolder fs-6">Shop</h6>
+                        <h6 class="mb-4 fw-bolder fs-6">全系列商品</h6>
                         <ul class="list-unstyled">
+                            @foreach($product_categories as $product_category)
                             <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category.html">Menswear</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category.html">Womenswear</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category.html">Kidswear</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category.html">New Arrivals</a></li>
+                                    href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
+                            </li>
+                            @endforeach
                         </ul>
                     </nav>
                     <!-- /Footer Nav-->
 
                     <!-- Footer Nav-->
                     <nav class="col-6 col-md mb-4 mb-md-0">
-                        <h6 class="mb-4 fw-bolder fs-6">Company</h6>
+                        <h6 class="mb-4 fw-bolder fs-6">關於我們</h6>
                         <ul class="list-unstyled">
                             <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">About Us</a></li>
-                            <li class="mb-2"><a
+                                    href="#">關於我們</a>
+                            </li>
+                            {{-- <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="#">Our Blog</a></li>
                             <li class="mb-2"><a
@@ -219,13 +214,13 @@
                                     href="#">FAQs</a></li>
                             <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Contact</a></li>
+                                    href="#">Contact</a></li> --}}
                         </ul>
                     </nav>
                     <!-- /Footer Nav-->
 
                     <!-- Footer Nav-->
-                    <nav class="d-none d-md-block col-md">
+                    {{-- <nav class="d-none d-md-block col-md">
                         <h6 class="mb-4 fw-bolder fs-6">Navigation</h6>
                         <ul class="list-unstyled">
                             <li class="mb-2"><a
@@ -241,7 +236,7 @@
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="#">Account</a></li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                     <!-- /Footer Nav-->
 
                     <!-- Footer Contact-->

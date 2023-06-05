@@ -17,6 +17,7 @@ jobs:
         script: |
           cd ~/htdocs/e-commerce.dev-laravel.co
           git pull
+          composer install
           php artisan migrate
           php artisan route:cache
           php artisan config:cache
