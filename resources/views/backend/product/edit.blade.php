@@ -21,10 +21,16 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="PUT" :action="route('product.update', $product->id)" :bind="$product">
+                                    <x:form::form method="PUT" enctype="multipart/form-data" :action="route('product.update', $product->id)" :bind="$product">
+
+                                        <div class="mt-3">
+                                            <x:form::select name="category_id" class="form-control" label="分類" :options="$product_category" :selected="$product->category_id" required />
+                                        </div>
+
                                         <div class="mt-3">
                                             <x:form::input name="name" label="標題" required />
                                         </div>
+
 
                                         <div class="mt-3">
                                             <x:form::input type="number" name="price" label="價格" required />
@@ -57,10 +63,9 @@
                                         </div>
 
                                         <div class="mt-3 text-center">
-                                            <x:form::input type="hidden" name="type" value="2" />
+                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                             <x:form::button.link class="btn-secondary" href="/backend/product">取消
                                             </x:form::button.link>
-                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                         </div>
 
                                     </x:form::form>

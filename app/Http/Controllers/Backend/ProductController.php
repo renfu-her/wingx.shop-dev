@@ -19,9 +19,9 @@ class ProductController extends Controller
         foreach($products as $product){
             $product->category_name = ProductCategory::where('id', $product->category_id)->value('name');
             if($product->define_image == 1)
-                $product->image = public_path('upload/images/' . $product->id . '/' . $product->image);
+                $product->image_url = asset('upload/images/' . $product->id . '/' . $product->image);
             else
-                $product->image = 'https://down-tw.img.susercontent.com/file/' .$product->image;
+                $product->image_url = 'https://down-tw.img.susercontent.com/file/' .$product->image;
         }
 
         $product_categories = ProductCategory::orderBy('id')->get();
@@ -33,8 +33,12 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $product_categories = ProductCategory::orderBy('id')->get();
+        $product_category = [];
+        foreach($product_categories as $key => $value){
+            $product_category[($key + 1)] = $value->name;
+        }
 
-        return view('backend.product.create', compact('product_categories'));
+        return view('backend.product.create', compact('product_category'));
     }
 
     // 產品新增儲存
@@ -72,8 +76,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product_categories = ProductCategory::orderBy('id')->get();
+        $product_category = [];
+        foreach($product_categories as $key => $value){
+            $product_category[($key + 1)] = $value->name;
+        }
 
-        return view('backend.product.edit', compact('product', 'product_categories'));
+        return view('backend.product.edit', compact('product', 'product_category'));
     }
 
     // 產品編輯儲存
@@ -107,7 +115,7 @@ class ProductController extends Controller
     }
 
     // 產品刪除
-    public function destroy(Request $request, $id)
+    public function delete(Request $request, $id)
     {
         $product = Product::find($id);
         $product->delete();

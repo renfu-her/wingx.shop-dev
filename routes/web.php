@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\route;
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\ImportDataController;
 
-Route::get('/', [IndexController::class, 'index']);
-Route::get('/category/{category_id}', [CategoryController::class, 'index']);
+route::get('/', [IndexController::class, 'index']);
+route::get('/category/{category_id}', [CategoryController::class, 'index']);
 
-Route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
-Route::get('/importStoreData', [ImportDataController::class, 'storeData']);
+route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
+route::get('/importStoreData', [ImportDataController::class, 'storeData']);
 

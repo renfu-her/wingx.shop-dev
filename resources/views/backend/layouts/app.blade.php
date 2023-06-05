@@ -35,7 +35,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/backend/users">
                     <i class="fas fa-folder"></i>
                     <span>管理者管理</span>
@@ -49,6 +49,13 @@
             <div class="sidebar-heading">
                 系統管理
             </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/backend/product">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>產品管理</span>
+                </a>
+            </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -71,31 +78,6 @@
                     <span>關於我們</span>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/backend/posts">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>部落格文章管理</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/backend/cases">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>案例文章管理</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="/backend/category">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>文章分類管理</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

@@ -21,7 +21,12 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="POST" :action="route('product.store')">
+                                    <x:form::form method="POST" enctype="multipart/form-data" :action="route('product.store')" >
+
+                                        <div class="mt-3">
+                                            <x:form::select name="category_id" class="form-control" label="分類" :options="$product_category" required />
+                                        </div>
+
                                         <div class="mt-3">
                                             <x:form::input name="name" label="標題" required />
                                         </div>
@@ -52,10 +57,9 @@
                                         </div>
 
                                         <div class="mt-3 text-center">
-                                            <x:form::input type="hidden" name="type" value="2" />
+                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                             <x:form::button.link class="btn-secondary" href="/backend/product">取消
                                             </x:form::button.link>
-                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                         </div>
 
                                     </x:form::form>
