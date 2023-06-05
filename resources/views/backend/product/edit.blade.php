@@ -21,7 +21,7 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="PUT" enctype="multipart/form-data" :action="route('product.update', $product->id)" :bind="$product">
+                                    <x:form::form method="PUT" id="form_post" enctype="multipart/form-data" :action="route('product.update', $product->id)" :bind="$product">
 
                                         <div class="mt-3">
                                             <x:form::select name="category_id" class="form-control" label="分類" :options="$product_category" :selected="$product->category_id" required />

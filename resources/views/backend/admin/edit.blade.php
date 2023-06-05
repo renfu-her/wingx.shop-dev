@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">產品管理 - 新增</h1>
+            <h1 class="h3 mb-0 text-gray-800">管理者管理 - 編輯</h1>
         </div>
 
         <!-- DataTales Example -->
@@ -21,34 +21,19 @@
                             <!-- Component Preview-->
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
-                                    <x:form::form method="POST" id="form_post" enctype="multipart/form-data" :action="route('product.store')" >
+                                    <x:form::form method="PUT" id="form_post" enctype="multipart/form-data" :action="route('admin.update', $user->id)" :bind="$user">
 
                                         <div class="mt-3">
-                                            <x:form::select name="category_id" class="form-control" label="分類" :options="$product_category" required />
+                                            <x:form::input name="name" label="姓名" required />
+                                        </div>
+
+
+                                        <div class="mt-3">
+                                            <x:form::input type="email" name="email" label="E-mail" required />
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input name="name" label="標題" required />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="price" label="價格" required />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="price_min" label="最低價格" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="price_max" label="最高價格" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="file" name="image" label="封面圖片" required />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::textarea name="description" label="詳細內容" rows="10" />
+                                            <x:form::input type="password" name="password" label="密碼(保持原來方式，請保持空白)" value="" />
                                         </div>
 
                                         <div class="mt-3">
@@ -58,7 +43,7 @@
 
                                         <div class="mt-3 text-center">
                                             <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
-                                            <x:form::button.link class="btn-secondary" href="/backend/product">取消
+                                            <x:form::button.link class="btn-secondary" href="/backend/user">取消
                                             </x:form::button.link>
                                         </div>
 
@@ -79,11 +64,26 @@
 @endsection
 
 @section('js')
-
     <script>
         $(function() {
 
+            $('#form_post').on('submit', function(){
+                let error_msg = [];
+
+                if($('input[name=name]').val() == ''){
+                    error_msg.push('請輸入姓名');
+                }
+
+                if($('input[name=email]').val() == ''){
+                    error_msg.push('請輸入E-mail');
+                }
+
+                if(error_msg.length > 0){
+                    alert(error_msg.join('\n'));
+                    return false;
+                }
+            })
         })
 
-    </script>
+   </script>
 @endsection

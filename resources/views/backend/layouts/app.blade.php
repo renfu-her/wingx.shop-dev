@@ -36,7 +36,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="/backend/users">
+                <a class="nav-link" href="/backend/admin">
                     <i class="fas fa-folder"></i>
                     <span>管理者管理</span>
                 </a>
