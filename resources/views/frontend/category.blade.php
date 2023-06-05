@@ -453,9 +453,9 @@
 
                     <!-- Pagiation-->
                     <!-- Pagination-->
-                    <nav class="border-top mt-5 pt-5 d-flex justify-content-between align-items-center text-center"
+                    <nav class="border-top mt-5 pt-5 d-flex justify-content-center align-items-center text-center"
                         aria-label="Category Pagination">
-                        {{ $products->links('pagination::bootstrap-5') }}
+                        {{ $products->links('pages') }}
                     </nav> <!-- / Pagination-->
 
                     <!-- Related Categories-->
