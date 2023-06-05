@@ -85,10 +85,10 @@ class ProductController extends Controller
     }
 
     // 產品編輯儲存
-    public function update(Request $request, $id)
+    public function update(Request $request, $productId)
     {
 
-        $product = Product::find($id);
+        $product = Product::find($productId);
         $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->price = $request->price;
@@ -98,8 +98,6 @@ class ProductController extends Controller
         $product->define_image = 1;
         $product->status = $request->status;
         $product->save();
-
-        $productId = $product->id;
 
         $imageName = '';
         if ($request->hasFile('image')) {
