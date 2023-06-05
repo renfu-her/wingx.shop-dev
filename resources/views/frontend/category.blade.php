@@ -397,11 +397,11 @@
                                 <div class="card-header">
                                     <picture class="position-relative overflow-hidden d-block bg-light">
                                         <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="https://down-tw.img.susercontent.com/file/{{ $product->image }}" alt="">
+                                            src="{{ $product->image_url }}" alt="">
                                     </picture>
                                     <picture class="position-absolute z-index-20 start-0 top-0 hover-show bg-light">
                                         <img class="w-100 img-fluid" title=""
-                                            src="https://down-tw.img.susercontent.com/file/{{ $product->image }}" alt="">
+                                            src="{{ $product->image_url }}" alt="">
                                     </picture>
                                     {{-- <div class="card-actions">
                                         <span class="small text-uppercase tracking-wide fw-bolder text-center d-block">

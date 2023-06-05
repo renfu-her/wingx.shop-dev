@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ImportDataController;
 
 route::get('/', [IndexController::class, 'index']);
 route::get('/category/{category_id}', [CategoryController::class, 'index']);
+route::get('/product/{product_id}', [ProductController::class, 'index']);
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
