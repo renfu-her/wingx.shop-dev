@@ -14,4 +14,5 @@ route::get('/product/{product_id}', [ProductIndexController::class, 'index']);
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
+route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']);
 

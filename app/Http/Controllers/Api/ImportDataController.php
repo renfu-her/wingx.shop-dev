@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductCategory;
 use App\Models\Store;
+use App\Models\ProductImport;
 
 class ImportDataController extends Controller
 {
@@ -74,6 +75,23 @@ class ImportDataController extends Controller
         $store->location = $items['shop_location'];
         $store->save();
 
+    }
+
+    // 儲存商品詳細資料
+    public function storeDetailData(){
+
+        $productImport = ProductImport::all();
+
+        foreach($productImport as $product){
+
+            $product_data = Product::where('item_id', $product->product_id)->first();
+            if($product_data){
+                $product_data->description = $product->description;
+                $product_data->save();
+            }
+
+        }
 
     }
+
 }
