@@ -43,8 +43,8 @@ class ProductImageController extends Controller
 
         $product_image = new ProductImage;
         $product_image->product_id = $product_id;
-        // $product_image->image = $req['image'];
         $product_image->sort = $req['sort'];
+        $product_image->define_image = 1;
         $product_image->save();
 
         $product_image_id = $product_image->id;
@@ -54,7 +54,7 @@ class ProductImageController extends Controller
             $menuImage = ProductImage::find($product_image_id);
             $file = $request->file('image');
             $imageName = time() .'.'.$file->extension();
-            $file->move(public_path('upload/images/' . $product_image_id), $imageName);
+            $file->move(public_path('upload/images/' . $product_id), $imageName);
             $menuImage->image = $imageName;
             $menuImage->save();
         }
@@ -78,16 +78,18 @@ class ProductImageController extends Controller
         $req = $request->all();
 
         $product_image = ProductImage::find($product_image_id);
-        // $product_image->image = $req['image'];
         $product_image->sort = $req['sort'];
+        $product_image->define_image = 1;
         $product_image->save();
+
+        $product_id = $product_image->product_id;
 
         $imageName = '';
         if ($request->hasFile('image')) {
             $menuImage = ProductImage::find($product_image_id);
             $file = $request->file('image');
             $imageName = time() .'.'.$file->extension();
-            $file->move(public_path('upload/images/' . $product_image_id), $imageName);
+            $file->move(public_path('upload/images/' . $product_id), $imageName);
             $menuImage->image = $imageName;
             $menuImage->save();
         }
