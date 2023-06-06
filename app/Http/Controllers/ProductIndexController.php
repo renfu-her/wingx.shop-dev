@@ -11,10 +11,12 @@ use App\Models\ProductImage;
 class ProductIndexController extends Controller
 {
     // 產品細項，購買訊息的頁面
-    public function index($product_id)
+    public function index(Request $request, $product_id)
     {
         $product = Product::find($product_id);
         $product_category = ProductCategory::find($product->category_id);
+        $product_categories = ProductCategory::all();
+
         $product_images = ProductImage::where('product_id', $product_id)->get();
         foreach ($product_images as $product_image) {
             if($product_image->define_image == 0){
@@ -28,6 +30,7 @@ class ProductIndexController extends Controller
             'product' => $product,
             'product_category' => $product_category,
             'product_images' => $product_images,
+            'product_categories' => $product_categories,
         ]);
     }
 }

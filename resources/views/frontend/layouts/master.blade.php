@@ -187,8 +187,8 @@
                         <h6 class="mb-4 fw-bolder fs-6">全系列商品</h6>
                         <ul class="list-unstyled">
                             @foreach($product_categories as $product_category)
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                            <li class="mb-2">
+                                <a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
                             </li>
                             @endforeach
@@ -894,13 +894,9 @@
             </div>
         </div>
     </section>
-    <!-- Theme JS -->
-    <!-- Vendor JS -->
+    <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor.bundle.js') }}"></script>
-
-    <!-- Theme JS -->
     <script src="{{ asset('frontend/js/theme.bundle.js') }}"></script>
-
     @yield('js')
 </body>
 

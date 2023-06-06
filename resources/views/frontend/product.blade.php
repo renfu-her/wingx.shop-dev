@@ -12,7 +12,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                    <li class="breadcrumb-item"><a href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a></li>
                 </ol>
             </nav> <!-- /Breadcrumbs-->
 
@@ -20,41 +21,10 @@
 
                 <!-- Images Section-->
                 <div class="col-12 col-lg-7">
-                    <div class="row g-1">
-                        <div class="swiper-container gallery-thumbs-vertical col-2 pb-4">
-                            <div class="swiper-wrapper">
-                                @foreach($product_images as $product_image)
-                                    <div class="swiper-slide bg-light bg-light h-auto">
-                                        <picture>
-                                            <img class="img-fluid mx-auto d-table" src="{{ $product_image->image_url }}"
-                                                alt="Bootstrap 5 Template by Pixel Rocket">
-                                        </picture>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="swiper-container gallery-top-vertical col-10">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide bg-white h-auto">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="./assets/images/products/product-5.jpg"
-                                            alt="Bootstrap 5 Template by Pixel Rocket" data-zoomable>
-                                    </picture>
-                                </div>
-                                <div class="swiper-slide bg-white h-auto">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="./assets/images/products/product-5b.jpg"
-                                            alt="Bootstrap 5 Template by Pixel Rocket" data-zoomable>
-                                    </picture>
-                                </div>
-                                <div class="swiper-slide bg-white h-auto">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="./assets/images/products/product-5c.jpg"
-                                            alt="Bootstrap 5 Template by Pixel Rocket" data-zoomable>
-                                    </picture>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="fotorama" data-nav="thumbs">
+                        @foreach ($product_images as $product_image)
+                            <img src="{{ $product_image->image_url }}" alt="">
+                        @endforeach
                     </div>
                 </div>
                 <!-- /Images Section-->
@@ -65,8 +35,8 @@
 
                         <!-- Product Name, Review, Brand, Price-->
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">Billabong</p>
-                            <div class="d-flex justify-content-start align-items-center">
+                            <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">{{ $product_category->name }}</p>
+                            {{-- <div class="d-flex justify-content-start align-items-center">
                                 <!-- Review Stars Small-->
                                 <div class="rating position-relative d-table">
                                     <div class="position-absolute stars" style="width: 80%">
@@ -84,13 +54,13 @@
                                         <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                     </div>
                                 </div> <small class="text-muted d-inline-block ms-2 fs-bolder">(1288)</small>
-                            </div>
+                            </div> --}}
                         </div>
-                        <h1 class="mb-2 fs-2 fw-bold">Coastline Plus Waterproof Stormbreaker</h1>
+                        <h1 class="mb-2 fs-2 fw-bold">{{ $product->name }}</h1>
                         <div class="d-flex justify-content-start align-items-center">
-                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">$84.99</p>
-                            <s class="lh-1 me-2"><span class="fw-bolder m-0">$94.99</span></s>
-                            <p class="lead fw-bolder m-0 fs-6 lh-1 text-success">Save $10.00</p>
+                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">$ {{ $product->price }}</p>
+                            {{-- <s class="lh-1 me-2"><span class="fw-bolder m-0">$94.99</span></s>
+                            <p class="lead fw-bolder m-0 fs-6 lh-1 text-success">Save $10.00</p> --}}
                         </div>
                         <!-- /Product Name, Review, Brand, Price-->
 
@@ -109,7 +79,7 @@
 
                         <!-- Product Options-->
                         <div class="border-top mt-4 mb-3">
-                            <div class="product-option mb-4 mt-4">
+                            {{-- <div class="product-option mb-4 mt-4">
                                 <small class="text-uppercase d-block fw-bolder mb-2">
                                     Colour : <span class="selected-option fw-bold">Crimson Blue</span>
                                 </small>
@@ -139,8 +109,8 @@
                                         <label class="form-check-label" for="option-colour-4"></label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-option">
+                            </div> --}}
+                            {{-- <div class="product-option">
                                 <small class="text-uppercase d-block fw-bolder mb-2">
                                     Size (UK) : <span class="selected-option fw-bold"></span>
                                 </small>
@@ -153,13 +123,13 @@
                                         <option value="Extra Large">XL</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- /Product Options-->
 
                         <!-- Add To Cart-->
                         <div class="d-flex justify-content-between mt-3">
-                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white">Add To Cart</button>
+                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white">加入購物車</button>
                             <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
                         </div>
                         <!-- /Add To Cart-->
@@ -167,7 +137,7 @@
                         <!-- Socials-->
                         <div class="my-4">
                             <div class="d-flex justify-content-start align-items-center">
-                                <p class="fw-bolder lh-1 mb-0 me-3">Share</p>
+                                <p class="fw-bolder lh-1 mb-0 me-3">分享</p>
                                 <ul
                                     class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
@@ -188,8 +158,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex border-0 px-0 bg-transparent">
                                     <i class="ri-truck-line"></i>
-                                    <span class="fs-6 ms-3">Standard delivery free for orders over $99. Next day delivery
-                                        $9.99</span>
+                                    <span class="fs-6 ms-3">運費：中華郵政 $80。 宅配 $150。</span>
                                 </li>
                             </ul>
                         </div>
@@ -1097,10 +1066,12 @@
                 <!-- Buttons-->
                 <div
                     class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4">
-                    <i class="ri-arrow-left-s-line ri-lg"></i></div>
+                    <i class="ri-arrow-left-s-line ri-lg"></i>
+                </div>
                 <div
                     class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5">
-                    <i class="ri-arrow-right-s-line ri-lg"></i></div>
+                    <i class="ri-arrow-right-s-line ri-lg"></i>
+                </div>
 
                 <!-- Add Scrollbar -->
                 <div class="swiper-scrollbar"></div>
@@ -1114,4 +1085,12 @@
         <!-- /Page Content -->
     </section>
     <!-- / Main Section-->
+@endsection
+
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+@endsection
+
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 @endsection

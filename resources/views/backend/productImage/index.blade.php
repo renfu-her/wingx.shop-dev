@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">產品管理</h1>
+            <h1 class="h3 mb-0 text-gray-800">圖像管理</h1>
         </div>
 
         <button onclick="add_row()" class="btn btn-success mb-3">
@@ -23,28 +23,20 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%">ID</th>
-                                <th style="width: 40%">標題</th>
-                                <th style="width: 20%">封面圖檔</th>
-                                <th style="width: 10%">價格</th>
-                                <th style="width: 8%">圖檔維護</th>
-                                <th style="width: 6%">編輯</th>
-                                <th style="width: 6%">刪除</th>
+                                <th style="width: 40%">圖檔</th>
+                                <th style="width: 16%">順序</th>
+                                <th style="width: 8%">編輯</th>
+                                <th style="width: 8%">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $key => $value)
+                            @foreach($product_images as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->name }}</td>
                                 <td>
-                                    <img src="{!! $value->image_url !!}" class="w-100" alt="">
+                                    <img src="{!! $value->image_url !!}" style="width: 15rem" alt="">
                                 </td>
-                                <td>{{ $value->price }}</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="edit_image_row({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
+                                <td>{{ $value->sort }}</td>
                                 <td>
                                     <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -83,21 +75,19 @@
 
     })
 
+    let product_id = '{{ $product_id }}'
+
     const edit_row = (id) => {
-        location.href = '/backend/product/' + id + '/edit';
+        location.href = '/backend/product/image/' + product_id + '/' + id + '/edit';
     }
 
     const add_row = () => {
-        location.href = '/backend/product/create';
-    }
-
-    const edit_image_row = (id) => {
-        location.href = '/backend/product/image/' + id ;
+        location.href = '/backend/product/image/' + product_id + '/create';
     }
 
     const delete_row = (id) => {
         if(confirm('確定刪除？')){
-            location.href = '/backend/product/delete/' + id;
+            location.href = '/backend/product/image/delete/' + id;
         }
     }
 </script>
