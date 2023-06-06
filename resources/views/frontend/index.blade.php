@@ -3,131 +3,28 @@
 @section('content')
     <!-- Main Section-->
     <section class="mt-0 ">
-        <!-- Page Content Goes Here -->
 
-        <!-- / Hero Section -->
-        <section class="vh-100 position-relative bg-overlay-dark ">
-            <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
-                <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
-                    <div>
-                        <h1 class="display-1 fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up"
-                            data-aos-delay="1000">Where will your next adventure take you?</h1>
-                        <div data-aos="fade-in" data-aos-delay="2000">
-                            <div class="d-md-flex justify-content-center mt-4 mb-3 my-md-5">
-                                <a href="./category.html"
-                                    class="btn btn-skew-left btn-orange btn-orange-chunky text-white mx-1 w-100 w-md-auto mb-2 mb-md-0"><span>Shop
-                                        Menswear <i class="ri-arrow-right-line align-middle fw-bold"></i></span></a>
-                                <a href="./category.html"
-                                    class="btn btn-skew-left btn-orange btn-orange-chunky text-white mx-1 w-100 w-md-auto mb-2 mb-md-0"><span>Shop
-                                        Womenswear <i class="ri-arrow-right-line align-middle fw-bold"></i></span></a>
-                            </div>
-                            <i class="ri-mouse-line d-block text-center animation-float ri-2x transition-all opacity-50-hover text-white"
-                                data-pixr-scrollto data-target=".brand-section" data-aos="fade-up" data-aos-delay="700"></i>
-                        </div>
+        <section class="position-relative bg-overlay-dark " style="height: 550px">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach($banners as $key => $value)
+                    <div class="carousel-item @if($key == 0) active @endif">
+                        <img src="{{ asset('upload/banner/' . $value->image) }}" class="d-block w-100" style="object-fit: cover; width: 100%; height: 550px">
                     </div>
-                </div>
-            </div>
-            <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
-                <!-- Swiper Info -->
-                <div class="swiper-container overflow-hidden bg-light w-100 h-100" data-swiper
-                    data-options='{
-                "slidesPerView": 1,
-                "speed": 1500,
-                "loop": true,
-                "effect": "fade",
-                "autoplay": {
-                  "delay": 5000
-                }
-              }'>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center"
-                                style="background-image: url({{ asset('frontend/images/slideshows/slideshow-1.jpg') }});">
-                            </div>
-                        </div>
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center"
-                                style="background-image: url({{ asset('frontend/images/slideshows/slideshow-2.jpg') }});">
-                            </div>
-                        </div>
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center"
-                                style="background-image: url({{ asset('frontend/images/slideshows/slideshow-3.jpg') }});">
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div>
-                <!-- / Swiper Info-->
             </div>
         </section>
-        <!--/ Hero Section-->
 
-        <!-- Featured Brands-->
-        <div class="mb-lg-7 bg-light py-4" data-aos="fade-in">
-            <div class="container">
-                <div class="row gx-3 align-items-center">
-                    <div
-                        class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop Kathmandu">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-1.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop Billabong">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-2.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop Oakley">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-9.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop Patagonia">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-4.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop North Face">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-5.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                            <a class="d-block" href="./category.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Shop Salomon">
-                                <img class="img-fluid d-table mx-auto" src="{{ asset('frontend/images/logos/logo-7.svg') }}"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </a>
-                        </div>
-                        <a href="./category.html" class="btn btn-link fw-bolder">Explore All Brands <i
-                                class="ri-arrow-right-line align-bottom fw-bold"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/ Featured Brands-->
-
-        <!-- Staff Picks-->
         <section class="mb-9 mt-5" data-aos="fade-up">
             <div class="container">
                 <div class="w-md-50 mb-5">
-                    <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Summer Favourites</p>
-                    <h2 class="display-5 fw-bold mb-3">Staff Picks</h2>
-                    <p class="lead">We've sorted through our feed to put together a collection of our products
+                    {{-- <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Summer Favourites</p> --}}
+                    <h2 class="display-5 fw-bold mb-3">#304不鏽鋼白鐵專區</h2>
+                    {{-- <p class="lead">We've sorted through our feed to put together a collection of our products
                         perfect
-                        for a summer outdoors.</p>
+                        for a summer outdoors.</p> --}}
                 </div>
                 <!-- Swiper Latest -->
                 <div class="swiper-container overflow-visible" data-swiper
@@ -160,19 +57,20 @@
                 }
               }'>
                     <div class="swiper-wrapper pb-5 pe-1">
+                        @foreach($products as $key => $value)
                         <div class="swiper-slide d-flex h-auto">
                             <!-- Card Product-->
                             <div class="card position-relative h-100 card-listing hover-trigger">
                                 <div class="card-header">
                                     <picture class="position-relative overflow-hidden d-block bg-light">
                                         <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-1.jpg') }}" alt="">
+                                            src="{{ $value->image_url }}" alt="">
                                     </picture>
                                     <picture class="position-absolute z-index-20 start-0 top-0 hover-show bg-light">
                                         <img class="w-100 img-fluid" title=""
-                                            src="{{ asset('frontend/images/products/product-1b.jpg') }}" alt="">
+                                            src="{{ $value->image_url }}" alt="">
                                     </picture>
-                                    <div class="card-actions">
+                                    {{-- <div class="card-actions">
                                         <span
                                             class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
                                             Add</span>
@@ -181,10 +79,10 @@
                                             <button class="btn btn-outline-dark btn-sm mx-2">M</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">L</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
+                                    {{-- <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
                                         <!-- Review Stars Small-->
                                         <div class="rating position-relative d-table">
                                             <div class="position-absolute stars" style="width: 90%">
@@ -202,173 +100,89 @@
                                                 <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                             </div>
                                         </div> <span class="small fw-bolder ms-2 text-muted"> 4.7 (456)</span>
-                                    </div>
+                                    </div> --}}
                                     <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Full Zip Hoodie</a>
-                                    <p class="fw-bolder m-0 mt-2">$1129.99</p>
+                                        href="/product/{{ $value->id }}">{{ $value->name }}</a>
+                                    <p class="fw-bolder m-0 mt-2">$ {{ $value->price }}</p>
                                 </div>
                             </div>
                             <!--/ Card Product-->
                         </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <span class="badge card-badge bg-secondary">-25%</span>
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-2.jpg') }}" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 60%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.4 (1289)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Mens Sherpa Hoodie</a>
-                                    <div class="d-flex justify-content-center align-items-center mt-2">
-                                        <p class="mb-0 me-2 text-danger fw-bolder">$<span>599.55</span></p>
-                                        <p class="mb-0 text-muted fw-bolder"><s>$<span>150.00</span></s></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <span class="badge card-badge bg-secondary">-65%</span>
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="frontend/images/products/product-3.jpg" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 20%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.7 (754)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Womens Essentials Hoodie</a>
-                                    <div class="d-flex justify-content-center align-items-center mt-2">
-                                        <p class="mb-0 me-2 text-danger fw-bolder">$<span>779.55</span></p>
-                                        <p class="mb-0 text-muted fw-bolder"><s>$<span>1100.00</span></s></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Buttons-->
+                    <div
+                        class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4">
+                        <i class="ri-arrow-left-s-line ri-lg"></i>
+                    </div>
+                    <div
+                        class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5">
+                        <i class="ri-arrow-right-s-line ri-lg"></i>
+                    </div>
+
+                    <!-- Add Scrollbar -->
+                    <div class="swiper-scrollbar"></div>
+
+                </div>
+                <!-- / Swiper Latest-->
+            </div>
+        </section>
+
+        <section class="mb-9 mt-5" data-aos="fade-up">
+            <div class="container">
+                <div class="w-md-50 mb-5">
+                    {{-- <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Summer Favourites</p> --}}
+                    <h2 class="display-5 fw-bold mb-3">各式尺寸鍍鋅籠</h2>
+                    {{-- <p class="lead">We've sorted through our feed to put together a collection of our products
+                        perfect
+                        for a summer outdoors.</p> --}}
+                </div>
+                <!-- Swiper Latest -->
+                <div class="swiper-container overflow-visible" data-swiper
+                    data-options='{
+                "spaceBetween": 25,
+                "cssMode": true,
+                "roundLengths": true,
+                "scrollbar": {
+                  "el": ".swiper-scrollbar",
+                  "hide": false,
+                  "draggable": true
+                },
+                "navigation": {
+                  "nextEl": ".swiper-next",
+                  "prevEl": ".swiper-prev"
+                },
+                "breakpoints": {
+                  "576": {
+                    "slidesPerView": 1
+                  },
+                  "768": {
+                    "slidesPerView": 2
+                  },
+                  "992": {
+                    "slidesPerView": 3
+                  },
+                  "1200": {
+                    "slidesPerView": 4
+                  }
+                }
+              }'>
+                    <div class="swiper-wrapper pb-5 pe-1">
+                        @foreach($products3 as $key => $value)
                         <div class="swiper-slide d-flex h-auto">
                             <!-- Card Product-->
                             <div class="card position-relative h-100 card-listing hover-trigger">
                                 <div class="card-header">
                                     <picture class="position-relative overflow-hidden d-block bg-light">
                                         <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-4.jpg') }}" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 70%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.4 (1289)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Elevated Lined Hoodie</a>
-                                    <p class="fw-bolder m-0 mt-2">$1829.99</p>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-5.jpg') }}" alt="">
+                                            src="{{ $value->image_url }}" alt="">
                                     </picture>
                                     <picture class="position-absolute z-index-20 start-0 top-0 hover-show bg-light">
                                         <img class="w-100 img-fluid" title=""
-                                            src="{{ asset('frontend/images/products/product-5b.jpg') }}" alt="">
+                                            src="{{ $value->image_url }}" alt="">
                                     </picture>
-                                    <div class="card-actions">
+                                    {{-- <div class="card-actions">
                                         <span
                                             class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
                                             Add</span>
@@ -377,13 +191,13 @@
                                             <button class="btn btn-outline-dark btn-sm mx-2">M</button>
                                             <button class="btn btn-outline-dark btn-sm mx-2">L</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
+                                    {{-- <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
                                         <!-- Review Stars Small-->
                                         <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 84%">
+                                            <div class="position-absolute stars" style="width: 90%">
                                                 <i class="ri-star-fill text-dark mr-1"></i>
                                                 <i class="ri-star-fill text-dark mr-1"></i>
                                                 <i class="ri-star-fill text-dark mr-1"></i>
@@ -397,169 +211,16 @@
                                                 <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                                 <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                             </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.8 (189)</span>
-                                    </div>
+                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.7 (456)</span>
+                                    </div> --}}
                                     <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Mens Slab Hoodie</a>
-                                    <p class="fw-bolder m-0 mt-2">$29.99</p>
+                                        href="/product/{{ $value->id }}">{{ $value->name }}</a>
+                                    <p class="fw-bolder m-0 mt-2">$ {{ $value->price }}</p>
                                 </div>
                             </div>
                             <!--/ Card Product-->
                         </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-6.jpg') }}" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 60%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.5 (1567)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Blocked Striped Hoodie</a>
-                                    <p class="fw-bolder m-0 mt-2">$1329.99</p>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <span class="badge card-badge bg-secondary">-13%</span>
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-7.jpg') }}" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 60%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.4 (1289)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Womens Classic Hoodie</a>
-                                    <div class="d-flex justify-content-center align-items-center mt-2">
-                                        <p class="mb-0 me-2 text-danger fw-bolder">$<span>599.55</span></p>
-                                        <p class="mb-0 text-muted fw-bolder"><s>$<span>150.00</span></s></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
-                        <div class="swiper-slide d-flex h-auto">
-                            <!-- Card Product-->
-                            <div class="card position-relative h-100 card-listing hover-trigger">
-                                <span class="badge card-badge bg-secondary">-33%</span>
-                                <div class="card-header">
-                                    <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                            src="{{ asset('frontend/images/products/product-8.jpg') }}" alt="">
-                                    </picture>
-                                    <div class="card-actions">
-                                        <span
-                                            class="small text-uppercase tracking-wide fw-bolder text-center d-block">Quick
-                                            Add</span>
-                                        <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
-                                            <button class="btn btn-outline-dark btn-sm mx-2">S</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">M</button>
-                                            <button class="btn btn-outline-dark btn-sm mx-2">L</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 text-center">
-                                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                        <!-- Review Stars Small-->
-                                        <div class="rating position-relative d-table">
-                                            <div class="position-absolute stars" style="width: 20%">
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                                <i class="ri-star-fill text-dark mr-1"></i>
-                                            </div>
-                                            <div class="stars">
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                            </div>
-                                        </div> <span class="small fw-bolder ms-2 text-muted"> 4.7 (754)</span>
-                                    </div>
-                                    <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                        href="./product.html">Mens Sherpa Hoodie</a>
-                                    <div class="d-flex justify-content-center align-items-center mt-2">
-                                        <p class="mb-0 me-2 text-danger fw-bolder">$<span>779.55</span></p>
-                                        <p class="mb-0 text-muted fw-bolder"><s>$<span>1100.00</span></s></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Card Product-->
-                        </div>
-                        <div class="swiper-slide d-flex h-auto justify-content-center align-items-center">
-                            <a href="./category.html"
-                                class="d-flex text-decoration-none flex-column justify-content-center align-items-center">
-                                <span class="btn btn-dark btn-icon mb-3"><i
-                                        class="ri-arrow-right-line ri-lg lh-1"></i></span>
-                                <span class="lead fw-bolder">See All</span>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
 
                     <!-- Buttons-->
@@ -582,7 +243,7 @@
         <!-- / Staff Picks-->
 
         <!-- Image Hotspot Banner-->
-        <section class="my-10 position-relative">
+        {{-- <section class="my-10 position-relative">
             <!-- SVG Shape Divider-->
             <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
                 <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
@@ -675,13 +336,11 @@
                 </svg>
             </div>
             <!-- /SVG Shape Divider-->
-        </section>
+        </section> --}}
         <!-- / Image Hotspot Banner-->
 
-
-
         <!-- Linked Product Carousels-->
-        <section class="py-5" data-aos="fade-in">
+        {{-- <section class="py-5" data-aos="fade-in">
             <div class="container">
                 <div class="row g-5">
                     <div class="col-12 col-md-7" data-aos="fade-right">
@@ -819,7 +478,8 @@
                                                 <div class="card-header">
                                                     <picture class="position-relative overflow-hidden d-block bg-light">
                                                         <img class="w-100 img-fluid position-relative z-index-10"
-                                                            title="" src="{{ asset('frontend/images/products/product-13.jpg') }}"
+                                                            title=""
+                                                            src="{{ asset('frontend/images/products/product-13.jpg') }}"
                                                             alt="Bootstrap 5 Template by Pixel Rocket">
                                                     </picture>
                                                     <div class="card-actions">
@@ -1519,10 +1179,8 @@
                                                                     <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                                                     <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                                                     <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                                    <i
-                                                                        class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                                                    <i
-                                                                        class="ri-star-fill mr-1 text-muted opacity-25"></i>
+                                                                    <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
+                                                                    <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
                                                                 </div>
                                                             </div> <span class="small fw-bolder ms-2 text-muted"> 4.7
                                                                 (1669)</span>
@@ -1545,19 +1203,17 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- / Linked Product Carousels-->
 
-
         <!-- Sale Banner -->
-        <section class="position-relative my-5 my-md-7 my-lg-9 bg-dark" data-aos="fade-in">
+        {{-- <section class="position-relative my-5 my-md-7 my-lg-9 bg-dark" data-aos="fade-in">
             <!-- SVG Shape Divider-->
             <div class="position-absolute text-white z-index-50 top-0 end-0 start-0">
                 <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
                     <polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0" />
                 </svg>
             </div>
-            <!-- /SVG Shape Divider-->
 
             <div class="py-7 py-lg-10">
                 <div class="container text-white py-4 py-md-6">
@@ -1593,18 +1249,16 @@
                 </div>
             </div>
 
-            <!-- SVG Shape Divider-->
             <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
                 <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
                     <polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25" />
                 </svg>
             </div>
-            <!-- /SVG Shape Divider-->
-        </section>
+        </section> --}}
         <!-- /Sale Banner -->
 
         <!-- Reviews-->
-        <section>
+        {{-- <section>
             <div class="container" data-aos="fade-in">
                 <h2 class="fs-1 fw-bold mb-3 text-center mb-5">Customer Reviews</h2>
                 <div class="row g-3">
@@ -1616,7 +1270,7 @@
                                 items always as
                                 described. Never had to return any item. Good value.</p>
                             <small class="text-muted d-block mb-2 fw-bolder">John Doe, London</small>
-                            <!-- Review Stars Small-->
+
                             <div class="rating position-relative d-table">
                                 <div class="position-absolute stars" style="width: 75%">
                                     <i class="ri-star-fill text-dark mr-1"></i>
@@ -1716,7 +1370,7 @@
                     <a href="#" class="btn btn-dark rounded-0 mt-4">Read 4,215 more reviews</a>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- /Reviews-->
 
         <!-- /Page Content -->
@@ -1726,9 +1380,7 @@
 
 
 @section('css')
-
 @endsection
 
 @section('js')
-
 @endsection

@@ -38,9 +38,9 @@
                                         </div>
 
                                         <div class="mt-3 text-center">
-                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                             <x:form::button.link class="btn-secondary" href="/backend/product/image">取消
                                             </x:form::button.link>
+                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                         </div>
 
                                     </x:form::form>

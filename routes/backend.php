@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\NewsAdminController;
 use App\Http\Controllers\Backend\ProductImageController;
+use App\Http\Controllers\Backend\BannerController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -30,6 +31,9 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/product/image/{product_id}/{product_image_id}/edit', [ProductImageController::class, 'edit'])->name('product_image.edit');
     route::match(['PUT', 'PATCH'], '/product/image/{product_image_id}', [ProductImageController::class, 'update'])->name('product_image.update');
     route::get('/product/image/delete/{product_image_id}', [ProductImageController::class, 'delete'])->name('product_image.delete');
+
+    // Banner 管理
+    route::resource('/banner', BannerController::class);
 
 });
 

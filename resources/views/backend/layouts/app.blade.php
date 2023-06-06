@@ -59,9 +59,9 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="/backend/menu-images">
+                <a class="nav-link" href="/backend/banner">
                     <i class="fa-solid fa-folder"></i>
-                    <span>選單圖檔管理</span>
+                    <span>Banner 管理</span>
                 </a>
             </li>
 
