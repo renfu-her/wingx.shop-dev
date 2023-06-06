@@ -181,9 +181,9 @@
                         <li class="nav-item w-100 mb-2 mb-sm-0 w-sm-auto mx-sm-3" role="presentation">
                             <a class="nav-link fs-5 fw-bolder nav-link-underline mx-sm-3 px-0 active" id="details-tab"
                                 data-bs-toggle="tab" href="#details" role="tab" aria-controls="details"
-                                aria-selected="true">The Details</a>
+                                aria-selected="true">詳細資料</a>
                         </li>
-                        <li class="nav-item w-100 mb-2 mb-sm-0 w-sm-auto mx-sm-3" role="presentation">
+                        {{-- <li class="nav-item w-100 mb-2 mb-sm-0 w-sm-auto mx-sm-3" role="presentation">
                             <a class="nav-link fs-5 fw-bolder nav-link-underline mx-sm-3 px-0" id="reviews-tab"
                                 data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
                                 aria-selected="false">Reviews</a>
@@ -197,7 +197,7 @@
                             <a class="nav-link fs-5 fw-bolder nav-link-underline mx-sm-3 px-0" id="returns-tab"
                                 data-bs-toggle="tab" href="#returns" role="tab" aria-controls="returns"
                                 aria-selected="false">Returns</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!-- / Tab Nav-->
 
@@ -209,23 +209,8 @@
                             aria-labelledby="details-tab">
                             <div class="col-12 col-lg-10 mx-auto">
                                 <div class="row g-5">
-                                    <div class="col-12 col-md-6">
-                                        <p>Soft, stretchy - the most flattering product of the season! What could be easier?
-                                            Beautifully soft and
-                                            light cotton-modal jersey, with the extra advantage of stretch, cut in an A-line
-                                            - the universally
-                                            flattering shape for every body. We promise you, once you've tried these lovely
-                                            products - you'll be
-                                            hooked..</p>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <ul>
-                                            <li>Stretchy cotton-modal jersey stripe</li>
-                                            <li>Garment washed</li>
-                                            <li>Flat, covered elastic waistband</li>
-                                            <li>58% pima cotton/38% viscose </li>
-                                            <li>Modal/4% Lycra® elastane</li>
-                                        </ul>
+                                    <div class="col-12 col-md-9 offset-md-3 ">
+                                        <p>{!! nl2br($product->description) !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +218,7 @@
                         <!-- Tab Details Content-->
 
                         <!-- Review Tab Content-->
-                        <div class="tab-pane fade py-5" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        {{-- <div class="tab-pane fade py-5" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <!-- Customer Reviews-->
                             <section class="reviews">
                                 <div class="col-lg-12 text-center pb-5">
@@ -544,11 +529,11 @@
                                 <p class="text-muted text-center fw-bolder">Showing 3 of 1234</p>
 
                             </section>
-                        </div>
+                        </div> --}}
                         <!-- / Review Tab Content-->
 
                         <!-- Delivery Tab Content-->
-                        <div class="tab-pane fade py-5" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                        {{-- <div class="tab-pane fade py-5" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
                             <div class="col-12 col-md-10 col-lg-8 mx-auto">
                                 <p>We are now offering contact-free delivery so that you can still receive your parcels
                                     safely without requiring a
@@ -590,11 +575,11 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- / Delivery Tab Content-->
 
                         <!-- Returns Tab Content-->
-                        <div class="tab-pane fade py-5" id="returns" role="tabpanel" aria-labelledby="returns-tab">
+                        {{-- <div class="tab-pane fade py-5" id="returns" role="tabpanel" aria-labelledby="returns-tab">
                             <div class="col-12 col-md-10 col-lg-8 mx-auto">
                                 <p>We believe you will completely happy with your item, however if you aren't, there's no
                                     need to worry. We've
@@ -625,7 +610,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- / Returns Tab Content-->
 
                     </div>
@@ -637,7 +622,7 @@
         </section>
 
         <!-- Related Products-->
-        <div class="container my-8">
+        {{-- <div class="container my-8">
             <h3 class="fs-4 fw-bold mb-5 text-center">You May Also Like</h3>
             <!-- Swiper Latest -->
             <div class="swiper-container overflow-visible" data-swiper
@@ -1078,7 +1063,7 @@
 
             </div>
             <!-- / Swiper Latest-->
-        </div>
+        </div> --}}
         <!--/ Related Products-->
 
 
