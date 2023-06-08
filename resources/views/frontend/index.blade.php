@@ -4,7 +4,7 @@
     <!-- Main Section-->
     <section class="mt-0 ">
 
-        <section class="position-relative bg-overlay-dark " style="height: 550px">
+        <section class="position-relative " style="height: 550px">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($banners as $key => $value)
