@@ -35,7 +35,8 @@
 
                         <!-- Product Name, Review, Brand, Price-->
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">{{ $product_category->name }}</p>
+                            <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">
+                                {{ $product_category->name }}</p>
                             {{-- <div class="d-flex justify-content-start align-items-center">
                                 <!-- Review Stars Small-->
                                 <div class="rating position-relative d-table">
@@ -79,37 +80,23 @@
 
                         <!-- Product Options-->
                         <div class="border-top mt-4 mb-3">
-                            {{-- <div class="product-option mb-4 mt-4">
+                            <div class="product-option mb-4 mt-4 ">
                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Colour : <span class="selected-option fw-bold">Crimson Blue</span>
+                                    產品組合 :
                                 </small>
-                                <div class="d-flex justify-content-start">
-                                    <div
-                                        class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom">
-                                        <input type="radio" class="form-check-color-input" id="option-colour-1"
-                                            name="option-colour" value="Dark Black">
-                                        <label class="form-check-label" for="option-colour-1"></label>
-                                    </div>
-                                    <div
-                                        class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-warning">
-                                        <input type="radio" class="form-check-color-input" id="option-colour-2"
-                                            name="option-colour" value="Sun Yellow">
-                                        <label class="form-check-label" for="option-colour-2"></label>
-                                    </div>
-                                    <div
-                                        class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-info">
-                                        <input type="radio" class="form-check-color-input" id="option-colour-3"
-                                            name="option-colour" value="Crimson Blue" checked>
-                                        <label class="form-check-label" for="option-colour-3"></label>
-                                    </div>
-                                    <div
-                                        class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-danger">
-                                        <input type="radio" class="form-check-color-input" id="option-colour-4"
-                                            name="option-colour" value="Cherry Red">
-                                        <label class="form-check-label" for="option-colour-4"></label>
-                                    </div>
+                                <div class="">
+                                    @foreach ($productMix as $k => $v)
+                                        <div clas="buts btns d-flex justify-content-start flex-wrap blue">
+                                            <div class="checkbox_resource resource-top">
+                                                <label>
+                                                    <input type="radio" name="product_mix" value="{{ $v->price }}">
+                                                    <span class="round button">{{ $v->product_name }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div> --}}
+                            </div>
                             {{-- <div class="product-option">
                                 <small class="text-uppercase d-block fw-bolder mb-2">
                                     Size (UK) : <span class="selected-option fw-bold"></span>
@@ -138,8 +125,7 @@
                         <div class="my-4">
                             <div class="d-flex justify-content-start align-items-center">
                                 <p class="fw-bolder lh-1 mb-0 me-3">分享</p>
-                                <ul
-                                    class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
+                                <ul class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
                                                 class="ri-facebook-box-fill"></i></a></li>
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
@@ -1074,6 +1060,11 @@
 
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <style>
+        input[type="radio"] {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('js')

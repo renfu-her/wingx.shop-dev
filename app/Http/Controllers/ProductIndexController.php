@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
+use App\Models\ProductMix;
 
 class ProductIndexController extends Controller
 {
@@ -26,11 +27,25 @@ class ProductIndexController extends Controller
             }
         }
 
+        $productMix = ProductMix::where('product_id', $product_id)->orderBy('sort')->get();
+        foreach ($productMix as $key => $value) {
+            $product_name = [];
+            $product_name[0] = $product->name;
+            $product_mix1 = Product::find($value->product_mix1);
+            $product_mix2 = Product::find($value->product_mix2);
+            $product_name[1] = $product_mix1->name;
+            if($product_mix2){
+                $product_name[2] = $product_mix2->name;
+            }
+            $productMix[$key]->product_name = implode(' ＋ ', $product_name);
+        }
+
         return view('frontend.product', [
             'product' => $product,
             'product_category' => $product_category,
             'product_images' => $product_images,
             'product_categories' => $product_categories,
+            'productMix' => $productMix,
         ]);
     }
 }

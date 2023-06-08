@@ -1,0 +1,275 @@
+.checkbox_resource input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox_resource input:checked + .button {
+    background-color: #62c4e3;
+    color: white !important;
+}
+
+.checkbox_resource .button {
+    /* display: inline-block; */
+    color: #31353d !important;
+    cursor: pointer;
+    /* border: 1px solid #b4d7ec; */
+    padding: 5px 3px;
+    width: 89px !important;
+    background-color: transparent;
+    transition: 0.3s;
+    margin: 3px;
+    text-align: center;
+    font-size: 12px !important;
+    background-color: #f0f0f0;
+}
+
+.checkbox_resource .button:hover {
+    background-color: #62c4e3;
+    color: white !important;
+}
+
+.checkbox_resource .round {
+    border-radius: 15px;
+    font-size: 15px !important;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+label {
+    margin-bottom: .35rem;
+    padding-bottom: 5px;
+}
+/* transcript */
+
+.transcript header {
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+    margin-top: -26px !important;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.transcript > .container {
+    margin-top: 20px;
+}
+
+.transcript .btns {
+    background-color: #ffffff !important;
+    padding: 20px 0 !important;
+}
+
+.transcript header::before {
+    content: "";
+    background-color: #ffffff52;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.transcript header .titl {
+    background-color: #0000004d;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    left: 0;
+    overflow: hidden;
+    width: 685px;
+    height: 190px;
+    border-radius: 0 20px 20px 0;
+}
+
+.transcript header .titl .container {
+    margin: auto !important;
+    display: block;
+    height: 100%;
+    position: absolute;
+    padding-left: 295px !important;
+    padding-top: 50px !important;
+}
+
+.transcript header .titl .container h1 {
+    color: white;
+    text-align: left;
+    font-size: 40px;
+}
+
+.transcript header .titl .container h2 {
+    color: white;
+    font-size: 30px;
+    text-align: left;
+}
+
+.transcript header .titl .container h3 {
+    color: white;
+    text-align: left;
+    font-size: 20px;
+}
+
+.transcript header .input {
+    z-index: 1000 !important;
+    position: absolute;
+    top: 78%;
+    transform: translateY(-50%);
+    margin-left: 285px;
+    background-color: white;
+    border: 1px solid #afd4e7;
+    border-radius: 6px !important;
+    width: 305px !important;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.transcript header .input input {
+    border: none;
+    outline: none;
+    color: #00a6ff;
+    width: 90%;
+}
+
+.transcript header .input input::placeholder {
+    color: #bebfc0;
+}
+
+.transcript header .input .bx {
+    color: #b7b7b6;
+    font-size: 20px;
+}
+
+.transcript > .container .button-zone {
+    flex-wrap: nowrap !important;
+}
+
+.transcript .container .button-zone span {
+    display: block;
+    width: 8%;
+    color: #919191;
+    font-size: 15px;
+}
+
+.transcript .container .button-zone .buts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.transcript .container .button-zone .buts button {
+    font-size: 12px;
+    color: #31353d;
+    padding: 5px 3px;
+    width: 89px;
+    transition: 0.2s;
+    border: none;
+    margin: 3px;
+    outline: none;
+    border-radius: 50px;
+}
+
+.transcript .container .button-zone .buts button:hover {
+    font-size: 12px;
+    color: white;
+    background-color: #5dbbd7;
+    width: 89px;
+    border: none;
+    outline: none;
+    padding: 5px 3px;
+    border-radius: 50px;
+}
+
+.transcript .container .button-zone .blue {
+    width: 10%;
+}
+
+.transcript .container .button-zone .blue button {
+    font-size: 12px;
+    color: white;
+    background-color: #5dbbd7;
+    width: 89px;
+    border: none;
+    outline: none;
+    padding: 5px 3px;
+    border-radius: 50px;
+}
+
+.transcript .container .persons:nth-of-type(1) {
+    margin-top: 35px !important;
+}
+
+.transcript .container .persons .person .hearts {
+    text-align: right !important;
+    justify-content: flex-end !important;
+    right: 10px !important;
+    z-index: 1000000 !important;
+    left: 180px !important;
+}
+
+.transcript .container .persons:nth-of-type(2) {
+    margin-bottom: 35px !important;
+    transition: 0.2s;
+}
+
+.transcript .container .persons:nth-of-type(2) .person .image {
+    padding: 10px;
+    border: 1px solid #ececec;
+    width: 120px !important;
+    height: 120px !important;
+    margin: 18px auto !important;
+}
+
+.transcript .container .persons:nth-of-type(2) .person .image img {
+    border-radius: 0px !important;
+    width: 100%;
+}
+
+.transcript .container .persons:nth-of-type(2) .person h4 {
+    color: black !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    display: block;
+    margin: 20px 0 20px 0 !important;
+}
+
+.transcript .container .persons .person-bar {
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.transcript .container .persons .personBar {
+    overflow: hidden;
+    margin: auto;
+    transition: 0.2s;
+    width: 950px;
+}
+
+.transcript .container .persons-2 .arrs {
+    width: 100% !important;
+    display: flex !important;
+    top: 50%;
+    transform: translateY(-50%);
+    justify-content: space-between !important;
+}
+
+.transcript .container .persons-2 .arrs .bx {
+    font-size: 65px;
+    color: #bcf1e5;
+}
+
+.transcript .container .persons-2 .arrs .left {
+    transform: translateX(-80%);
+}
+
+.transcript .container .persons-2 .arrs .right {
+    transform: translateX(80%);
+}
+
+.transcript .title {
+    margin-top: 30px !important;
+}
+
+.transcript .title h2 {
+    font-size: 23px !important;
+    font-weight: 600 !important;
+    color: #31353d !important;
+}
