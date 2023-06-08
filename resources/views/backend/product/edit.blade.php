@@ -59,7 +59,7 @@
 
                                         <div class="mt-3">
                                             <x:form::select class="form-control" name="status" label="啓用狀態"
-                                                :options="[1 => '啓用', 0 => '停用']" :selected="[1]" />
+                                                :options="[1 => '啓用', 0 => '停用']" :selected="[$product->status]" />
                                         </div>
 
                                         <div class="mt-3 text-center">

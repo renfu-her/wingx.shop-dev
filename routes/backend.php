@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\NewsAdminController;
 use App\Http\Controllers\Backend\ProductImageController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Backend\ProductMixController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -31,6 +32,14 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/product/image/{product_id}/{product_image_id}/edit', [ProductImageController::class, 'edit'])->name('product_image.edit');
     route::match(['PUT', 'PATCH'], '/product/image/{product_image_id}', [ProductImageController::class, 'update'])->name('product_image.update');
     route::get('/product/image/delete/{product_image_id}', [ProductImageController::class, 'delete'])->name('product_image.delete');
+
+    // 產生產品組合
+    route::get('/product/mix/{product_id}', [ProductMixController::class, 'index'])->name('product_mix.index');
+    route::get('/product/mix/{product_id}/create', [ProductMixController::class, 'create'])->name('product_mix.create');
+    route::post('/product/mix/{product_id}', [ProductMixController::class, 'store'])->name('product_mix.store');
+    route::get('/product/mix/{product_id}/{product_mix_id}/edit', [ProductMixController::class, 'edit'])->name('product_mix.edit');
+    route::match(['PUT', 'PATCH'], '/product/mix/{product_mix_id}', [ProductMixController::class, 'update'])->name('product_mix.update');
+    route::get('/product/mix/delete/{product_mix_id}', [ProductMixController::class, 'delete'])->name('product_mix.delete');
 
     // Banner 管理
     route::resource('/banner', BannerController::class);

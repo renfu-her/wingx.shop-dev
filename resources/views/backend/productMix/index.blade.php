@@ -6,8 +6,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">產品管理</h1>
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <h1 class="h3 mb-0 w-100 text-gray-800">產品組合管理</h1>
+        </div>
+
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <h5 class="my-3 w-100">產品：{{ $product->name }}</h5>
         </div>
 
         <button onclick="add_row()" class="btn btn-success mb-3">
@@ -23,41 +27,29 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%">ID</th>
-                                <th style="width: 15%">標題</th>
-                                <th style="width: 15%">封面圖檔</th>
-                                <th style="width: 10%">價格</th>
-                                <th style="width: 10%">產品組合</th>
-                                <th style="width: 10%">圖檔維護</th>
+                                <th style="width: 15%">產品組合 1</th>
+                                <th style="width: 15%">產品組合 2</th>
+                                <th style="width: 10%">金額</th>
+                                <th style="width: 10%">排序</th>
                                 <th style="width: 8%">編輯</th>
                                 <th style="width: 8%">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $key => $value)
+                            @foreach($productMixes as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>
-                                    <img src="{!! $value->image_url !!}" class="w-100" alt="">
-                                </td>
-                                <td>{{ number_format($value->price) }}</td>
-                                <td>
-                                    <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-success" onclick="edit_image_row({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
+                                <td>{{ $value->product_mix1_name }}</td>
+                                <td>{{ $value->product_mix2_name }}</td>
+                                <td>{{ $value->price }}</td>
+                                <td>{{ $value->sort }}</td>
                                 <td>
                                     <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger" onclick="delete_row({{ $value->id }})">
+                                    <button class="btn btn-danger" onclick="delete_row({{ $value->id }}, {{ $product_id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
@@ -89,25 +81,19 @@
 
     })
 
+    let product_id = '{{ $product_id }}'
+
     const edit_row = (id) => {
-        location.href = '/backend/product/' + id + '/edit';
+        location.href = '/backend/product/mix/' + product_id + '/' + id + '/edit';
     }
 
     const add_row = () => {
-        location.href = '/backend/product/create';
+        location.href = '/backend/product/mix/' + product_id + '/create';
     }
 
-    const edit_image_row = (id) => {
-        location.href = '/backend/product/image/' + id ;
-    }
-
-    const edit_mix = (product_id) => {
-        location.href = '/backend/product/mix/' + product_id;
-    }
-
-    const delete_row = (id) => {
+    const delete_row = (id, product_id) => {
         if(confirm('確定刪除？')){
-            location.href = '/backend/product/delete/' + id;
+            location.href = '/backend/product/mix/delete/' + id + '/' + product_id;
         }
     }
 </script>
