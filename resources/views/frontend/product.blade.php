@@ -97,20 +97,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            {{-- <div class="product-option">
-                                <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Size (UK) : <span class="selected-option fw-bold"></span>
-                                </small>
-                                <div class="form-group">
-                                    <select name="selectSize" class="form-control" data-choices>
-                                        <option value="">Please Select Size</option>
-                                        <option value="Extra Small">XS</option>
-                                        <option value="Medium">M</option>
-                                        <option value="Large">L</option>
-                                        <option value="Extra Large">XL</option>
-                                    </select>
-                                </div>
-                            </div> --}}
                         </div>
                         <!-- /Product Options-->
 
