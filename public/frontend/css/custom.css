@@ -273,3 +273,8 @@ label {
     font-weight: 600 !important;
     color: #31353d !important;
 }
+
+.close-modal {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
