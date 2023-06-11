@@ -764,7 +764,8 @@
     </div>
 
     <!-- register, login form -->
-    <div class="modal fade login" id="loginModal" style="display: none; z-index: 1000000000000000000 !important" aria-hidden="true">
+    <div class="modal fade login" id="loginModal" style="display: none; z-index: 1000000000000000000 !important"
+        aria-hidden="true">
         <div class="modal-dialog login animated modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -1195,6 +1196,12 @@
             })
 
         })
+    </script>
+
+    <script>
+        @if (Session::has('message'))
+            alert("{{ Session::get('message') }}");
+        @endif
     </script>
 
     @yield('js')
