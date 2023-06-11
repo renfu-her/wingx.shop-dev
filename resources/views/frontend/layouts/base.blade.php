@@ -330,13 +330,13 @@
                                         </div>
                                     </div>
 
-                                    <hr>
+                                    {{-- <hr>
                                     <div class="btn btn-primary"
                                         onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='/facebook/auth'"
                                         style="width: 100%; margin: 5px 0 5px 0 0; border-radius: 6px"
                                         data-cf-modified-b4a47e509e2e693a0474629e-="">
                                         Facebook 登入
-                                    </div>
+                                    </div> --}}
 
 
                                 </form>
