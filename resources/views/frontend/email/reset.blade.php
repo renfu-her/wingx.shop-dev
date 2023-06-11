@@ -1,0 +1,49 @@
+<table align="center"
+    style="width: 100%; background: #EAF0F6;
+border-collapse:collapse; border:0; text-align: center; border: 0; "
+    cellpadding="0" border="0">
+    <tbody>
+        <tr style="border: 0;" cellpadding="0">
+            <td style="border: 0;" cellpadding="0" align="center" valign="center">
+                <table
+                    style="width: max-width: 600px; width: 600px; background-color: #ffffff; border-collapse:collapse; border: 0;"
+                    border="0" cellpadding="0">
+                    <tbody>
+                        <tr style="border: 0;">
+                            <td style="border: 0;">
+                                @include('frontend.email.mail_header')
+
+                                <table style="width: 100%; background-color: #ffffff" border="0" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                        <tr style="width: 600px;">
+                                            <td
+                                            style="color:black;
+                                            font-weight: 600; font-size: 20px; padding: 20px">
+                                                重置密碼
+                                            </td>
+                                        </tr>
+                                        <tr style="width: 600px;">
+                                            <td style="padding: 20px">
+                                                請按下<a href="{{ config('app.url') }}/reset_password?verify={{ $email_verify }}">連結</a><br>
+                                                或者複製連結，貼在瀏覽器去執行 {{ config('app.url') }}/reset_password?verify={{ $email_verify }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                        @include('frontend.email.mail_footer')
+
+                    </tbody>
+                </table>
+                <div style="padding-bottom: 20px"></div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div style="margin-bottom: 20px">&nbsp;</div>
+</td>
+</tr>
+</tbody>
+</table>
