@@ -358,7 +358,7 @@
                                     <input id="confirm_password" class="form-control" type="password"
                                         placeholder="確認密碼" name="confirm_password">
                                     <p>
-                                        <img src="/captcha" alt="點擊刷新" onclick="this.src='{{ url('captcha/default') }}?s='+Math.random()">
+                                        <img src="/captcha" alt="點擊刷新" style="cursor: pointer; width: 180px; height: 36px" onclick="this.src='{{ url('captcha/default') }}?s='+Math.random()">
                                     </p>
                                     <input class="form-control" type="text" placeholder="輸入驗證碼" id="captcha"
                                         name="captcha">
