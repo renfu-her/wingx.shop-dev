@@ -23,7 +23,7 @@
                                 <div class="sbp-preview-content">
                                     <x:form::form method="PUT" id="form_post"
                                         enctype="multipart/form-data"
-                                        :action="route('mail_notify.update', $mailNotify->id)" :bind="$mailNotify">
+                                        :action="route('mail_notify.update', $mail_notify->id)" :bind="$mail_notify">
 
                                         <div class="mt-3">
                                             <x:form::input name="title" label="標題" />

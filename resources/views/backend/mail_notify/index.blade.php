@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($mailNotify as $key => $value)
+                            @foreach($mail_notifies as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
                                 <td>{{ $valie->title }}</td>
