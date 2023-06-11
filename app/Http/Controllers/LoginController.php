@@ -4,20 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Member;
 use App\Models\Product;
-use App\Models\ProductImage;
 use App\Models\ProductCategory;
 use App\Models\Banner;
 
-class IndexController extends Controller
+class LoginController extends Controller
 {
-
-    // 首頁
-    public function index()
-    {
-
-
-        $product_images = ProductImage::all();
+    // 登入頁面，檢查是否有登入過
+    public function index(){
 
         $products = [];
         $product_categories = ProductCategory::orderBy('sort')->get();
@@ -41,14 +36,9 @@ class IndexController extends Controller
 
         $banners = Banner::orderByDesc('id')->get();
 
-        return view(
-            'frontend.index',
-            compact(
-                'products',
-                'product_images',
-                'product_categories',
-                'banners',
-            )
-        );
+        if(auth()->check()){
+            return redirect('/');
+        }
+        return view('frontend.login', compact('products', 'product_categories', 'banners'));
     }
 }

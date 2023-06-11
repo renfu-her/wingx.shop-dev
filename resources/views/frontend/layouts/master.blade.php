@@ -30,6 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('frontend/css/login-register.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css?t=' . time()) }}" />
 
@@ -54,119 +55,124 @@
 
 <body class="">
 
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mx-0 p-0 flex-column  border-0">
-            <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
-                <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mx-0 p-0 flex-column  border-0">
+        <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
+            <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
 
-                    <!-- Logo-->
-                    <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="/">
-                        <!-- Start of Logo-->
-                        <div class="d-flex align-items-center">
-                            <div class="w-50 d-flex align-items-center me-2 lh-1">
-                                <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100%"  alt="">
-                            </div>
+                <!-- Logo-->
+                <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="/">
+                    <!-- Start of Logo-->
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 d-flex align-items-center me-2 lh-1">
+                            <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100%"
+                                alt="">
                         </div>
-                        <!-- / Logo-->
-
-                    </a>
+                    </div>
                     <!-- / Logo-->
 
-                    <!-- Main Navigation-->
-                    <div class="ms-5 flex-shrink-0 collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1"
-                        id="navbarNavDropdown">
+                </a>
+                <!-- / Logo-->
 
-                        <!-- Mobile Nav Toggler-->
-                        <button
-                            class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2"
-                            data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="ri-close-circle-line ri-2x"></i>
-                        </button>
-                        <!-- / Mobile Nav Toggler-->
+                <!-- Main Navigation-->
+                <div class="ms-5 flex-shrink-0 collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1"
+                    id="navbarNavDropdown">
 
+                    <!-- Mobile Nav Toggler-->
+                    <button
+                        class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ri-close-circle-line ri-2x"></i>
+                    </button>
+                    <!-- / Mobile Nav Toggler-->
+
+                    <ul class="navbar-nav py-lg-2 mx-auto">
                         <ul class="navbar-nav py-lg-2 mx-auto">
-                            <ul class="navbar-nav py-lg-2 mx-auto">
-                                <li class="nav-item dropdown me-lg-4">
-                                    <a class="nav-link fw-bolder dropdown-toggle py-lg-4" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        全系列商品
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        @foreach ($product_categories as $product_category)
-                                            <li><a class="dropdown-item"
-                                                    href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown me-lg-4">
-                                    <a class="nav-link fw-bolder py-lg-4" href="#">
-                                        聯絡我們
-                                    </a>
-                                </li>
-                            </ul>
+                            <li class="nav-item dropdown me-lg-4">
+                                <a class="nav-link fw-bolder dropdown-toggle py-lg-4" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    全系列商品
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($product_categories as $product_category)
+                                        <li><a class="dropdown-item"
+                                                href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown me-lg-4">
+                                <a class="nav-link fw-bolder py-lg-4" href="#">
+                                    聯絡我們
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                    <!-- / Main Navigation-->
-
-                    <!-- Navbar Icons-->
-                    <ul class="list-unstyled mb-0 d-flex align-items-center">
-
-                        <!-- Navbar Toggle Icon-->
-                        <li class="d-inline-block d-lg-none">
-                            <button
-                                class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center"
-                                data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <i class="ri-menu-line ri-lg align-middle"></i>
-                            </button>
-                        </li>
-                        <!-- /Navbar Toggle Icon-->
-
-                        <!-- Navbar Search-->
-                        <li class="ms-1 d-inline-block">
-                            <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search>
-                                <i class="ri-search-2-line ri-lg align-middle"></i>
-                            </button>
-                        </li>
-                        <!-- /Navbar Search-->
-
-                        <!-- Navbar Wishlist-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
-                                <i class="ri-heart-line ri-lg align-middle"></i>
-                            </a>
-                        </li>
-                        <!-- /Navbar Wishlist-->
-
-                        <!-- Navbar Login-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#">
-                                <i class="ri-user-line ri-lg align-middle"></i>
-                            </a>
-                        </li>
-                        <!-- /Navbar Login-->
-
-                        <!-- Navbar Cart-->
-                        <li class="ms-1 d-inline-block position-relative">
-                            <button
-                                class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
-                                <span
-                                    class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">2</span>
-                            </button>
-                        </li>
-                        <!-- /Navbar Cart-->
-
                     </ul>
-                    <!-- Navbar Icons-->
-
                 </div>
+                <!-- / Main Navigation-->
+
+                <!-- Navbar Icons-->
+                <ul class="list-unstyled mb-0 d-flex align-items-center">
+
+                    <!-- Navbar Toggle Icon-->
+                    <li class="d-inline-block d-lg-none">
+                        <button
+                            class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center"
+                            data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="ri-menu-line ri-lg align-middle"></i>
+                        </button>
+                    </li>
+                    <!-- /Navbar Toggle Icon-->
+
+                    <!-- Navbar Search-->
+                    <li class="ms-1 d-inline-block">
+                        <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search>
+                            <i class="ri-search-2-line ri-lg align-middle"></i>
+                        </button>
+                    </li>
+                    <!-- /Navbar Search-->
+
+                    <!-- Navbar Wishlist-->
+                    {{-- <li class="ms-1 d-none d-lg-inline-block">
+                        <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
+                            <i class="ri-heart-line ri-lg align-middle"></i>
+                        </a>
+                    </li> --}}
+                    <!-- /Navbar Wishlist-->
+
+                    <!-- Navbar Login-->
+                    <li class="ms-1 d-none d-lg-inline-block">
+                        <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
+                            style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="ri-user-line ri-lg align-middle"></i>
+                        </a>
+                    </li>
+                    <!-- /Navbar Login-->
+
+                    <!-- Navbar Cart-->
+                    <li class="ms-1 d-inline-block position-relative">
+                        <button
+                            class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                            <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+
+                            <span
+                                class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">
+                                2
+                            </span>
+                        </button>
+                    </li>
+                    <!-- /Navbar Cart-->
+
+                </ul>
+                <!-- Navbar Icons-->
+
             </div>
-        </nav>
-        <!-- / Navbar-->
+        </div>
+    </nav>
+    <!-- / Navbar-->
 
 
     @yield('content')
@@ -184,11 +190,11 @@
                     <nav class="col-6 col-md mb-4 mb-md-0">
                         <h6 class="mb-4 fw-bolder fs-6">全系列商品</h6>
                         <ul class="list-unstyled">
-                            @foreach($product_categories as $product_category)
-                            <li class="mb-2">
-                                <a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
-                            </li>
+                            @foreach ($product_categories as $product_category)
+                                <li class="mb-2">
+                                    <a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                        href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </nav>
@@ -380,44 +386,44 @@
                             <ul class="list-unstyled list-default-text">
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Waterproof
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Waterproof
                                             Jackets</span> <span class="text-muted ms-4">(21)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Down
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Down
                                             Jackets</span> <span class="text-muted ms-4">(13)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Windproof
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Windproof
                                             Jackets</span> <span class="text-muted ms-4">(18)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Hiking
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Hiking
                                             Jackets</span> <span class="text-muted ms-4">(25)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Climbing
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Climbing
                                             Jackets</span> <span class="text-muted ms-4">(11)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Trekking
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Trekking
                                             Jackets</span> <span class="text-muted ms-4">(19)</span></a>
                                 </li>
                                 <li class="mb-2"><a
                                         class="text-decoration-none text-body text-secondary-hover transition-all d-flex justify-content-between align-items-center"
-                                        href="#"><span><i
-                                                class="ri-arrow-right-s-line align-bottom ms-n1"></i> Allround
+                                        href="#"><span><i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
+                                            Allround
                                             Jackets</span> <span class="text-muted ms-4">(24)</span></a>
                                 </li>
                             </ul>
@@ -436,14 +442,12 @@
                             <div class="filter-price mt-6"></div>
                             <div class="d-flex justify-content-between align-items-center mt-7">
                                 <div class="input-group mb-0 me-2 border">
-                                    <span
-                                        class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
                                     <input type="number" min="00" max="1000" step="1"
                                         class="filter-min form-control-sm border flex-grow-1 text-muted border-0">
                                 </div>
                                 <div class="input-group mb-0 ms-2 border">
-                                    <span
-                                        class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
                                     <input type="number" min="00" max="1000" step="1"
                                         class="filter-max form-control-sm flex-grow-1 text-muted border-0">
                                 </div>
@@ -470,80 +474,70 @@
                             <div class="simplebar-wrapper">
                                 <div class="filter-options" data-pixr-simplebar>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-0">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-0">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-0">Adidas <span
                                                 class="text-muted">(21)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-1">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-1">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-1">Asics <span
                                                 class="text-muted">(13)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-2">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-2">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-2">Canterbury <span
                                                 class="text-muted">(18)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-3">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-3">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-3">Converse <span
                                                 class="text-muted">(25)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-4">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-4">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-4">Donnay <span
                                                 class="text-muted">(11)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-5">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-5">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-5">Nike <span
                                                 class="text-muted">(19)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-6">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-6">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-6">Millet <span
                                                 class="text-muted">(24)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-7">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-7">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-7">Puma <span
                                                 class="text-muted">(11)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-8">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-8">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-8">Reebok <span
                                                 class="text-muted">(19)</span></label>
                                     </div>
                                     <div class="form-group form-check mb-0">
-                                        <input type="checkbox" class="form-check-input"
-                                            id="filter-brands-modal-9">
+                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-9">
                                         <label
                                             class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between"
                                             for="filter-brands-modal-9">Under Armour <span
@@ -558,8 +552,8 @@
                     <!-- Type Filter -->
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
-                            data-bs-toggle="collapse" href="#filter-modal-type" role="button"
-                            aria-expanded="false" aria-controls="filter-modal-type">
+                            data-bs-toggle="collapse" href="#filter-modal-type" role="button" aria-expanded="false"
+                            aria-controls="filter-modal-type">
                             Type
                         </a>
                         <div id="filter-modal-type" class="collapse">
@@ -655,8 +649,7 @@
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-8">
-                                    <label class="form-check-label fw-normal"
-                                        for="filter-sizes-modal-8">10.5</label>
+                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-8">10.5</label>
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-9">
@@ -664,8 +657,7 @@
                                 </div>
                                 <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
                                     <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-10">
-                                    <label class="form-check-label fw-normal"
-                                        for="filter-sizes-modal-10">11.5</label>
+                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-10">11.5</label>
                                 </div>
                             </div>
                         </div>
@@ -770,6 +762,139 @@
             <!-- / Review Form-->
         </div>
     </div>
+
+    <!-- register, login form -->
+    <div class="modal fade login" id="loginModal" style="display: none; z-index: 1000000000000000000 !important" aria-hidden="true">
+        <div class="modal-dialog login animated modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 id="login_title" class="modal-title w-100">登入</h4>
+                    <button type="button" class="close close-modal" data-bs-dismiss="modal"
+                        aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox" style="display: block;">
+                                <form method="post" action="/login" id="form_login">
+                                    <input id="email" class="form-control" type="text" placeholder="Email"
+                                        name="email">
+                                    <div
+                                        style="height:33px;max-width:33px;vertical-align:top; position:absolute;
+                                top:148.55397727272728px;left:265.2551319648094px;cursor:pointer;resize: both;z-index:2147483646;">
+
+                                    </div>
+                                    <input id="password" class="form-control" type="password" placeholder="密碼"
+                                        name="password">
+
+                                    <div
+                                        style="height:33px;max-width:33px;vertical-align:top; position:absolute; top:199.55397727272728px;left:265.2551319648094px;cursor:pointer;resize: both;z-index:2147483646;">
+                                    </div>
+                                    <input id="submit_login" class="btn btn-default btn-login" type="button"
+                                        value="登入">
+
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" id="showForgotForm">忘記密碼</a></span>
+                                        </div>
+                                        <div class="login-footer p-2 bd-highlight" style="display: block;">
+                                            <span><a href="#" id="showRegisterForm">註冊帳號</a></span>
+                                        </div>
+                                        <div class="login-footer p-2 bd-highlight" style="display: block;">
+                                            <span><a href="#" id="showVerify">重發驗證信</a></span>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="btn btn-primary"
+                                        onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='/facebook/auth'"
+                                        style="width: 100%; margin: 5px 0 5px 0 0; border-radius: 6px"
+                                        data-cf-modified-b4a47e509e2e693a0474629e-="">
+                                        Facebook 登入
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-signup" method="post" action="/sign-up">
+                                    <input id="signup_username" class="form-control" type="text"
+                                        placeholder="會員名稱" name="signup_username">
+                                    <input id="signup_email" class="form-control" type="text" placeholder="Email"
+                                        name="signup_email">
+                                    <input id="signup_password" class="form-control" type="password"
+                                        placeholder="密碼" name="signup_password">
+                                    <span class="text-danger"
+                                        style="font-size:12px;color:#333;">(設定密碼請輸入英文大小寫+數字，共6位數以上)</span>
+                                    <input id="confirm_password" class="form-control" type="password"
+                                        placeholder="確認密碼" name="confirm_password">
+                                    <p>
+                                        <img src="/captcha" alt="點擊刷新"
+                                            onclick="if (!window.__cfRLUnblockHandlers) return false; this.src='https://circlewe.dev-laravel.co/captcha/default?s='+Math.random()"
+                                            data-cf-modified-b4a47e509e2e693a0474629e-="">
+                                    </p>
+                                    <input class="form-control" type="text" placeholder="輸入驗證碼" id="captcha"
+                                        name="captcha">
+                                    <input id="sign-up" class="btn btn-default btn-register" type="button"
+                                        value="註冊">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content forgotBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-reset" method="post" action="/reset_password">
+                                    <input id="reset_email" class="form-control" type="text" placeholder="Email"
+                                        name="reset_email">
+                                    <input id="reset_submit" class="btn btn-default btn-register" type="button"
+                                        value="重置密碼">
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" class="showLoginForm">我要登入</a></span>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content verifyBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-verify" method="post" action="/email_verify">
+                                    <input id="verify_email" class="form-control" type="text" placeholder="Email"
+                                        name="verify_email">
+                                    <input id="verify_submit" class="btn btn-default btn-register" type="button"
+                                        value="重發驗證信">
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" class="showLoginForm">我要登入</a></span>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot register-footer" style="display: none;">
+                        <span>已經有帳號，我要 </span>
+                        <a href="#" class="showLoginForm">登入</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Search Overlay-->
     <section class="search-overlay">
         <div class="container search-container">
@@ -895,6 +1020,183 @@
     <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor.bundle.js') }}"></script>
     <script src="{{ asset('frontend/js/theme.bundle.js') }}"></script>
+
+    <script>
+        $(function() {
+
+            $('#showRegisterForm').on('click', function() {
+                $('.registerBox').show();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').show()
+                $('.forgotBox').hide();
+                $('.verifyBox').hide();
+                $('#login_title').html('註冊')
+            })
+
+            $('.showLoginForm').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').show()
+                $('.login-footer').show()
+                $('.register-footer').hide()
+                $('.forgotBox').hide();
+                $('.verifyBox').hide();
+                $('#login_title').html('登入')
+            })
+
+            $('#showForgotForm').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').hide()
+                $('.verifyBox').hide();
+                $('.forgotBox').show();
+                $('#login_title').html('忘記密碼')
+            })
+
+
+            $('#showVerify').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').hide()
+                $('.forgotBox').hide();
+                $('.verifyBox').show();
+                $('#login_title').html('重發驗證信')
+            })
+
+            $('#sign-up').on('click', function() {
+                let error_msg = []
+                let signup_username = $('#signup_username').val()
+                let signup_email = $('#signup_email').val()
+                let signup_password = $('#signup_password').val()
+                let confirm_password = $('#confirm_password').val()
+
+                if ($.trim(signup_username) == '') {
+                    error_msg.push('會員名稱不能為空')
+                }
+
+                if ($.trim(signup_email) == '') {
+                    error_msg.push("Email 一定要輸入")
+                } else {
+                    emailRule = /(\W|^)[\w.+\-]*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/i;
+                    if (!signup_email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if ($.trim(signup_password) == '') {
+                    error_msg.push("密碼一定要輸入")
+                }
+
+                if ($.trim(confirm_password) == '') {
+                    error_msg.push("確認密碼一定要輸入")
+                }
+
+                if (signup_password != confirm_password) {
+                    error_msg.push('密碼以及確認密碼不一致')
+                }
+
+                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+
+                if (signup_password.search(password_regex) == -1) {
+                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $.post('/check_email', {
+                        'email': signup_email,
+                    }, function(item) {
+                        if (item.code == 200) {
+                            alert('Email 已經存在，請重新輸入')
+                            $('#signup_username').val('')
+                            $('#signup_email').val('')
+                            $('#signup_password').val('')
+                            $('#confirm_password').val('')
+                        } else {
+                            $('#form-signup').submit()
+                        }
+                    })
+                }
+            })
+
+            $('#submit_login').on('click', function() {
+                let error_msg = []
+                let email = $('#email').val()
+                let password = $('#password').val()
+
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                }
+
+                if ($.trim(password) == '') {
+                    error_msg.push('密碼一定要輸入')
+                } else {
+                    emailRule = /(\W|^)[\w.+\-]*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+
+                if (password.search(password_regex) == -1) {
+                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form_login').submit()
+                }
+            })
+
+            $('#reset_submit').on('click', function(event) {
+                let error_msg = []
+                let email = $('#reset_email').val()
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                } else {
+                    emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form-reset').submit()
+                }
+            })
+
+            $('#verify_submit').on('click', function(event) {
+                let error_msg = []
+                let email = $('#verify_email').val()
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                } else {
+                    emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form-verify').submit()
+                }
+            })
+
+        })
+    </script>
+
     @yield('js')
 </body>
 

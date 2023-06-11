@@ -30,6 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('frontend/css/login-register.css') }}">
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
@@ -62,7 +63,8 @@
                         <!-- Start of Logo-->
                         <div class="d-flex align-items-center">
                             <div class="w-50 d-flex align-items-center me-2 lh-1">
-                                <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100% " alt="">
+                                <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100% "
+                                    alt="">
                             </div>
                         </div>
                         <!-- / Logo-->
@@ -129,17 +131,18 @@
                         <!-- /Navbar Search-->
 
                         <!-- Navbar Wishlist-->
-                        <li class="ms-1 d-none d-lg-inline-block">
+                        {{-- <li class="ms-1 d-none d-lg-inline-block">
                             <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
                                 href="#">
                                 <i class="ri-heart-line ri-lg align-middle"></i>
                             </a>
-                        </li>
+                        </li> --}}
                         <!-- /Navbar Wishlist-->
 
                         <!-- Navbar Login-->
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#">
+                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="ri-user-line ri-lg align-middle"></i>
                             </a>
                         </li>
@@ -183,11 +186,11 @@
                     <nav class="col-6 col-md mb-4 mb-md-0">
                         <h6 class="mb-4 fw-bolder fs-6">全系列商品</h6>
                         <ul class="list-unstyled">
-                            @foreach($product_categories as $product_category)
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
-                            </li>
+                            @foreach ($product_categories as $product_category)
+                                <li class="mb-2"><a
+                                        class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                        href="./category/{{ $product_category->id }}">{{ $product_category->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </nav>
@@ -280,6 +283,139 @@
     <!-- / Footer-->
     <!-- / Footer-->
 
+
+    <!-- register, login form -->
+    <div class="modal fade login" id="loginModal" style="display: none; z-index: 1000000000000000000 !important"
+        aria-hidden="true">
+        <div class="modal-dialog login animated modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 id="login_title" class="modal-title w-100">登入</h4>
+                    <button type="button" class="close close-modal" data-bs-dismiss="modal"
+                        aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox" style="display: block;">
+                                <form method="post" action="/login" id="form_login">
+                                    <input id="email" class="form-control" type="text" placeholder="Email"
+                                        name="email">
+                                    <div
+                                        style="height:33px;max-width:33px;vertical-align:top; position:absolute;
+                                top:148.55397727272728px;left:265.2551319648094px;cursor:pointer;resize: both;z-index:2147483646;">
+
+                                    </div>
+                                    <input id="password" class="form-control" type="password" placeholder="密碼"
+                                        name="password">
+
+                                    <div
+                                        style="height:33px;max-width:33px;vertical-align:top; position:absolute; top:199.55397727272728px;left:265.2551319648094px;cursor:pointer;resize: both;z-index:2147483646;">
+                                    </div>
+                                    <input id="submit_login" class="btn btn-default btn-login" type="button"
+                                        value="登入">
+
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" id="showForgotForm">忘記密碼</a></span>
+                                        </div>
+                                        <div class="login-footer p-2 bd-highlight" style="display: block;">
+                                            <span><a href="#" id="showRegisterForm">註冊帳號</a></span>
+                                        </div>
+                                        <div class="login-footer p-2 bd-highlight" style="display: block;">
+                                            <span><a href="#" id="showVerify">重發驗證信</a></span>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="btn btn-primary"
+                                        onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='/facebook/auth'"
+                                        style="width: 100%; margin: 5px 0 5px 0 0; border-radius: 6px"
+                                        data-cf-modified-b4a47e509e2e693a0474629e-="">
+                                        Facebook 登入
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-signup" method="post" action="/sign-up">
+                                    <input id="signup_username" class="form-control" type="text"
+                                        placeholder="會員名稱" name="signup_username">
+                                    <input id="signup_email" class="form-control" type="text" placeholder="Email"
+                                        name="signup_email">
+                                    <input id="signup_password" class="form-control" type="password"
+                                        placeholder="密碼" name="signup_password">
+                                    <span class="text-danger"
+                                        style="font-size:12px;color:#333;">(設定密碼請輸入英文大小寫+數字，共6位數以上)</span>
+                                    <input id="confirm_password" class="form-control" type="password"
+                                        placeholder="確認密碼" name="confirm_password">
+                                    <p>
+                                        <img src="/captcha" alt="點擊刷新"
+                                            onclick="if (!window.__cfRLUnblockHandlers) return false; this.src='https://circlewe.dev-laravel.co/captcha/default?s='+Math.random()"
+                                            data-cf-modified-b4a47e509e2e693a0474629e-="">
+                                    </p>
+                                    <input class="form-control" type="text" placeholder="輸入驗證碼" id="captcha"
+                                        name="captcha">
+                                    <input id="sign-up" class="btn btn-default btn-register" type="button"
+                                        value="註冊">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content forgotBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-reset" method="post" action="/reset_password">
+                                    <input id="reset_email" class="form-control" type="text" placeholder="Email"
+                                        name="reset_email">
+                                    <input id="reset_submit" class="btn btn-default btn-register" type="button"
+                                        value="重置密碼">
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" class="showLoginForm">我要登入</a></span>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content verifyBox" style="display: none;">
+                            <div class="form">
+                                <form id="form-verify" method="post" action="/email_verify">
+                                    <input id="verify_email" class="form-control" type="text" placeholder="Email"
+                                        name="verify_email">
+                                    <input id="verify_submit" class="btn btn-default btn-register" type="button"
+                                        value="重發驗證信">
+                                    <div class="d-flex justify-content-around bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight">
+                                            <span><a href="#" class="showLoginForm">我要登入</a></span>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot register-footer" style="display: none;">
+                        <span>已經有帳號，我要 </span>
+                        <a href="#" class="showLoginForm">登入</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Offcanvas Imports-->
     <!-- Cart Offcanvas-->

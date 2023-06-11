@@ -91,7 +91,7 @@
                                             <label>
                                                 <input type="radio" name="product_mix" value="{{ $product->price }}">
                                                 <span class="round button"
-                                                    onclick="cart('products', {{ $product->id }}, {{ $product->price }})">{{ $product->name }}</span>
+                                                    onclick="selectItem('products', {{ $product->id }}, {{ $product->price }})">{{ $product->name }}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                                 <label>
                                                     <input type="radio" name="product_mix" value="{{ $v->price }}">
                                                     <span class="round button"
-                                                        onclick="cart('product_mixes', {{ $v->id }}, {{ $v->price }})">{{ $v->product_name }}</span>
+                                                        onclick="selectItem('product_mixes', {{ $v->id }}, {{ $v->price }})">{{ $v->product_name }}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -111,9 +111,27 @@
                         </div>
                         <!-- /Product Options-->
 
+                        <div class="border-top mt-4 mb-3">
+                            <div class="product-option mb-4 mt-4 ">
+                                <small class="text-uppercase d-block fw-bolder mb-2">
+                                    數量 :
+                                </small>
+                                <div class="">
+                                    <select name="product-qty" class="form-select product-qty">
+                                        @for ($i = 1; $i <= 50; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Add To Cart-->
                         <div class="d-flex justify-content-between mt-3">
-                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white">加入購物車</button>
+                            <input type="hidden" id="dataBase">
+                            <input type="hidden" id="price">
+                            <input type="hidden" id="prod_id">
+                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white" onclick="cart()">加入購物車</button>
                             <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
                         </div>
                         <!-- /Add To Cart-->
@@ -1071,17 +1089,34 @@
 
         })
 
-        let cart = (dataBase, id, price) => {
+        const selectItem = (dataBase, prod_id, price) => {
 
-            $('.product-cart').text('$ ' + price)
+            $('#dataBase').val(dataBase)
+            $('#prod_id').val(prod_id)
+            $('#price').val(price)
 
-            $.post('/cart/order', {
-                dataBase: dataBase,
-                id: id,
-                price: price
-            }, function(data){
-                console.log(data)
-            })
+        }
+
+        const cart = () => {
+            let qty = $('.product-qyt').val()
+            let price = $('#price').val()
+            let prod_id = $('#prod_id').val()
+            let dataBase = $('#dataBase').val()
+
+            if(prod_id == '' ) {
+                alert('目前沒有選擇商品')
+                return
+            } else {
+                $.post('/cart/order', {
+                    dataBase: dataBase,
+                    id: id,
+                    price: price,
+                    qty: qty
+                }, function(data) {
+                    console.log(data)
+                })
+            }
+
 
         }
     </script>
