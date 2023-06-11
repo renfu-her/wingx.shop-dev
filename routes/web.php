@@ -22,9 +22,19 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/order', [CartController::class, 'order']);
 
-
+// 登入
 route::get('login', [LoginController::class, 'index']);
 route::post('login', [LoginController::class, 'login']);
+Route::post('/sign-up', [LoginController::class, 'signUp']);
+Route::post('/forgot-password', [LoginController::class, 'forgot_password']);
+Route::post('/check_email', [LoginController::class, 'check_email']);
+Route::post('/reset_password', [LoginController::class, 'reset_password']);
+Route::get('/reset_password', [LoginController::class, 'reset_verify_password']);
+Route::post('/verify_password', [LoginController::class, 'verify_password']);
+Route::post('/email_verify', [LoginController::class, 'email_verify']);
+route::get('/captcha', function () {
+    return captcha();
+});
 
 route::get('/logout', function(){
     auth()->logout();
@@ -32,6 +42,3 @@ route::get('/logout', function(){
     return redirect('/');
 });
 
-Route::get('/captcha', function () {
-    return captcha();
-});
