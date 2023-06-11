@@ -57,6 +57,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/backend/mail_notify">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>Mail 樣板管理</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="/backend/banner">
