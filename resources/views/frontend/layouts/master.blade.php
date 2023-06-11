@@ -806,7 +806,7 @@
                                             <span><a href="#" id="showVerify">重發驗證信</a></span>
                                         </div>
                                     </div>
-{{-- 
+{{--
                                     <hr>
                                     <div class="btn btn-primary"
                                         onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='/facebook/auth'"
@@ -835,9 +835,7 @@
                                     <input id="confirm_password" class="form-control" type="password"
                                         placeholder="確認密碼" name="confirm_password">
                                     <p>
-                                        <img src="/captcha" alt="點擊刷新"
-                                            onclick="if (!window.__cfRLUnblockHandlers) return false; this.src='https://circlewe.dev-laravel.co/captcha/default?s='+Math.random()"
-                                            data-cf-modified-b4a47e509e2e693a0474629e-="">
+                                        <img src="/captcha" alt="點擊刷新" onclick="this.src='{{ url('captcha/default') }}?s='+Math.random()">
                                     </p>
                                     <input class="form-control" type="text" placeholder="輸入驗證碼" id="captcha"
                                         name="captcha">
