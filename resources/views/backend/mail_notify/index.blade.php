@@ -23,8 +23,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%">ID</th>
-                                <th style="width: 20%">標題</th>
-                                <th style="width: 10%">狀態</th>
+                                <th style="width: 74%">標題</th>
                                 <th style="width: 8%">編輯</th>
                                 <th style="width: 8%">刪除</th>
                             </tr>
@@ -34,7 +33,6 @@
                             <tr>
                                 <td>{{ $value->id }}</td>
                                 <td>{{ $value->title }}</td>
-                                <td>{{ $value->status_name }}</td>
 
                                 <td>
                                     <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
@@ -64,7 +62,7 @@
     $(function(){
         $('#dataTable').DataTable({
             columnDefs: [{
-                targets: [3, 4],
+                targets: [2, 3],
                 orderable: false
             }],
             "language": {
