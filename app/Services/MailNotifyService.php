@@ -119,7 +119,7 @@ class MailNotifyService
         $data = [
             'email' => trim($member->email),
             'content' => $content,
-            'subject' => $mailNotify->name,
+            'subject' => $mailNotify->subject,
         ];
 
         Mail::send('frontend.email.email_verify', $data, function ($message) use ($data) {

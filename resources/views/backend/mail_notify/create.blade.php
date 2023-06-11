@@ -29,6 +29,10 @@
                                         </div>
 
                                         <div class="mt-3">
+                                            <x:form::input name="subject" label="主旨" />
+                                        </div>
+
+                                        <div class="mt-3">
                                             <x:form::textarea name="content" label="內容" rows="10" />
                                         </div>
 
@@ -66,6 +70,10 @@
 
                 if ($('input[name=title]').val() == '') {
                     error_msg.push('請輸入標題')
+                }
+
+                if ($('textarea[name=subject]').val() == '') {
+                    error_msg.push('請輸入主旨')
                 }
 
                 if ($('textarea[name=content]').val() == '') {
