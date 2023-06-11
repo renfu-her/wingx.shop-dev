@@ -32,3 +32,6 @@ route::get('/logout', function(){
     return redirect('/');
 });
 
+Route::get('/captcha', function () {
+    return captcha();
+});

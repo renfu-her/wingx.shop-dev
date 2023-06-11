@@ -160,7 +160,11 @@ return [
          * Package Service Providers...
          */
 
-         Intervention\Image\ImageServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -187,6 +191,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ])->toArray(),
 
 ];
