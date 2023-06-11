@@ -1019,6 +1019,183 @@
 
     <!-- Theme JS -->
     <script src="{{ asset('frontend/js/theme.bundle.js') }}"></script>
+
+    <script>
+        $(function() {
+
+            $('#showRegisterForm').on('click', function() {
+                $('.registerBox').show();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').show()
+                $('.forgotBox').hide();
+                $('.verifyBox').hide();
+                $('#login_title').html('註冊')
+            })
+
+            $('.showLoginForm').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').show()
+                $('.login-footer').show()
+                $('.register-footer').hide()
+                $('.forgotBox').hide();
+                $('.verifyBox').hide();
+                $('#login_title').html('登入')
+            })
+
+            $('#showForgotForm').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').hide()
+                $('.verifyBox').hide();
+                $('.forgotBox').show();
+                $('#login_title').html('忘記密碼')
+            })
+
+
+            $('#showVerify').on('click', function() {
+                $('.registerBox').hide();
+                $('.loginBox').hide()
+                $('.login-footer').hide()
+                $('.register-footer').hide()
+                $('.forgotBox').hide();
+                $('.verifyBox').show();
+                $('#login_title').html('重發驗證信')
+            })
+
+            $('#sign-up').on('click', function() {
+                let error_msg = []
+                let signup_username = $('#signup_username').val()
+                let signup_email = $('#signup_email').val()
+                let signup_password = $('#signup_password').val()
+                let confirm_password = $('#confirm_password').val()
+
+                if ($.trim(signup_username) == '') {
+                    error_msg.push('會員名稱不能為空')
+                }
+
+                if ($.trim(signup_email) == '') {
+                    error_msg.push("Email 一定要輸入")
+                } else {
+                    emailRule = /(\W|^)[\w.+\-]*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/i;
+                    if (!signup_email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if ($.trim(signup_password) == '') {
+                    error_msg.push("密碼一定要輸入")
+                }
+
+                if ($.trim(confirm_password) == '') {
+                    error_msg.push("確認密碼一定要輸入")
+                }
+
+                if (signup_password != confirm_password) {
+                    error_msg.push('密碼以及確認密碼不一致')
+                }
+
+                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+
+                if (signup_password.search(password_regex) == -1) {
+                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $.post('/check_email', {
+                        'email': signup_email,
+                    }, function(item) {
+                        if (item.code == 200) {
+                            alert('Email 已經存在，請重新輸入')
+                            $('#signup_username').val('')
+                            $('#signup_email').val('')
+                            $('#signup_password').val('')
+                            $('#confirm_password').val('')
+                        } else {
+                            $('#form-signup').submit()
+                        }
+                    })
+                }
+            })
+
+            $('#submit_login').on('click', function() {
+                let error_msg = []
+                let email = $('#email').val()
+                let password = $('#password').val()
+
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                }
+
+                if ($.trim(password) == '') {
+                    error_msg.push('密碼一定要輸入')
+                } else {
+                    emailRule = /(\W|^)[\w.+\-]*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+
+                if (password.search(password_regex) == -1) {
+                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form_login').submit()
+                }
+            })
+
+            $('#reset_submit').on('click', function(event) {
+                let error_msg = []
+                let email = $('#reset_email').val()
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                } else {
+                    emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form-reset').submit()
+                }
+            })
+
+            $('#verify_submit').on('click', function(event) {
+                let error_msg = []
+                let email = $('#verify_email').val()
+
+                if ($.trim(email) == '') {
+                    error_msg.push('Email 一定要輸入')
+                } else {
+                    emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!email.match(emailRule)) {
+                        error_msg.push("Email 格式不正確")
+                    }
+                }
+
+                if (error_msg.length > 0) {
+                    alert(error_msg.join("\n"))
+                } else {
+                    $('#form-verify').submit()
+                }
+            })
+
+        })
+    </script>
+
 </body>
 
 </html>
