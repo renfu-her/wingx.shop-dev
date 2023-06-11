@@ -54,48 +54,35 @@ class LoginController extends Controller
 
         $req = $request->all();
 
-        try {
-            $validator = validator($req, [
-                'signup_email' => 'required|email',
-                'signup_username' => 'required|string',
-                'signup_password' => 'required|string',
-                'captcha' => 'required|captcha',
-            ]);
+        $validator = validator($req, [
+            'signup_email' => 'required|email',
+            'signup_username' => 'required|string',
+            'signup_password' => 'required|string',
+            'captcha' => 'required|captcha',
+        ]);
 
-            if ($validator->fails()) {
-                return redirect('/')->with(['message' => '驗證碼輸入錯誤，請重新註冊']);
-            }
-            $email = trim($req['signup_email']);
-            $username = trim($req['signup_username']);
-            $password = trim($req['signup_password']);
-
-            // Log::info('=== recommend_code ==='.$recommend_code);
-            $member_data['username'] = $username;
-            $member_data['email'] = $email;
-            $member_data['password'] = Hash::make($password);
-            $member_data['status'] = 0;
-            $member_data['verify_email'] = $this->generator_email_verify();
-            $member = Member::create([
-                'username' => $member_data['username'],
-                'email' => $member_data['email'],
-                'password' => Hash::make($password),
-                'status' => $member_data['status'],
-                'verify_email' => $member_data['verify_email'],
-            ]);
-
-            $member_id = $member->id;
-
-            $mailNotifyService = new MailNotifyService();
-            $mailNotifyService->email_verify($member_id);
-
-            return redirect('/')->with(['message' => '請至信箱收信認證你的E-mail，才算完成註冊，謝謝！(備註：若未收到認證信，請至垃圾郵件查看或至登入頁重發認證信)']);
-        } catch (\Exception $e) {
-            $message = mb_convert_encoding($e->getMessage(), 'utf-8', 'auto');
-            $response['message'] = $message;
-            Log::error('=== signup ===');
-            Log::error($message);
-            return redirect('/')->with(['message' => '註冊失敗']);
+        if ($validator->fails()) {
+            return redirect('/')->with(['message' => '驗證碼輸入錯誤，請重新註冊']);
         }
+        $email = trim($req['signup_email']);
+        $name = trim($req['signup_username']);
+        $password = trim($req['signup_password']);
+        $status = 0;
+        $verify_email = $this->generator_email_verify();
+        $member = Member::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'status' => $status,
+            'verify_email' => $verify_email,
+        ]);
+
+        $member_id = $member->id;
+
+        $mailNotifyService = new MailNotifyService();
+        $mailNotifyService->email_verify($member_id);
+
+        return redirect('/')->with(['message' => '請至信箱收信認證你的E-mail，才算完成註冊，謝謝！(備註：若未收到認證信，請至垃圾郵件查看或至登入頁重發認證信)']);
     }
 
     // check email exist

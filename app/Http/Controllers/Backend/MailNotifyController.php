@@ -29,6 +29,7 @@ class MailNotifyController extends Controller
 
         $mail_notify = new MailNotify;
         $mail_notify->title = $req['title'];
+        $mail_notify->subject = $req['subject'];
         $mail_notify->content = $req['content'];
         $mail_notify->save();
 
@@ -49,6 +50,7 @@ class MailNotifyController extends Controller
 
         $mail_notify = MailNotify::find($mail_notify_id);
         $mail_notify->title = $req['title'];
+        $mail_notify->subject = $req['subject'];
         $mail_notify->content = $req['content'];
         $mail_notify->save();
 
