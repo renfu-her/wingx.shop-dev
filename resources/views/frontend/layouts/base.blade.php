@@ -1013,11 +1013,9 @@
             </div>
         </div>
     </section>
-    <!-- Theme JS -->
-    <!-- Vendor JS -->
-    <script src="{{ asset('frontend/js/vendor.bundle.js') }}"></script>
 
-    <!-- Theme JS -->
+    <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/vendor.bundle.js') }}"></script>
     <script src="{{ asset('frontend/js/theme.bundle.js') }}"></script>
 
     <script>
