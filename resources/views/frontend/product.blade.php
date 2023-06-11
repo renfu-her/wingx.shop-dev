@@ -59,7 +59,8 @@
                         </div>
                         <h1 class="mb-2 fs-2 fw-bold">{{ $product->name }}</h1>
                         <div class="d-flex justify-content-start align-items-center">
-                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">$ {{ $product->price }}</p>
+                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2 product-cart">$ {{ $product->price }}
+                            </p>
                             {{-- <s class="lh-1 me-2"><span class="fw-bolder m-0">$94.99</span></s>
                             <p class="lead fw-bolder m-0 fs-6 lh-1 text-success">Save $10.00</p> --}}
                         </div>
@@ -85,12 +86,22 @@
                                     產品組合 :
                                 </small>
                                 <div class="">
+                                    <div clas="buts btns d-flex justify-content-start flex-wrap blue">
+                                        <div class="checkbox_resource resource-top">
+                                            <label>
+                                                <input type="radio" name="product_mix" value="{{ $product->price }}">
+                                                <span class="round button"
+                                                    onclick="cart('products', {{ $product->id }}, {{ $product->price }})">{{ $product->name }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
                                     @foreach ($productMix as $k => $v)
                                         <div clas="buts btns d-flex justify-content-start flex-wrap blue">
                                             <div class="checkbox_resource resource-top">
                                                 <label>
                                                     <input type="radio" name="product_mix" value="{{ $v->price }}">
-                                                    <span class="round button">{{ $v->product_name }}</span>
+                                                    <span class="round button"
+                                                        onclick="cart('product_mixes', {{ $v->id }}, {{ $v->price }})">{{ $v->product_name }}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -1055,4 +1066,23 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+    <script>
+        $(function() {
+
+        })
+
+        let cart = (dataBase, id, price) => {
+
+            $('.product-cart').text('$ ' + price)
+
+            $.post('/cart/order', {
+                dataBase: dataBase,
+                id: id,
+                price: price
+            }, function(data){
+                console.log(data)
+            })
+
+        }
+    </script>
 @endsection
