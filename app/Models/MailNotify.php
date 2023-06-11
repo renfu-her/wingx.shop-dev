@@ -11,6 +11,7 @@ class MailNotify extends Model
 
     protected $fillable = [
         'title',
+        'subject',
         'content'
     ];
 }

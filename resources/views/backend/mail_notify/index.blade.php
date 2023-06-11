@@ -33,7 +33,7 @@
                             @foreach($mail_notifies as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $valie->title }}</td>
+                                <td>{{ $value->title }}</td>
                                 <td>{{ $value->status_name }}</td>
 
                                 <td>
