@@ -179,6 +179,8 @@ class LoginController extends Controller
             $member->enabled = 1;
             $member->save();
 
+            dd($member);
+
             return redirect('/')->with(['message' => '驗證成功，請回到首頁重新登入']);
         } else {
 
