@@ -169,12 +169,12 @@ class LoginController extends Controller
     public function verify_email(Request $request)
     {
 
-        $input = $request->all();
-        $code = $input['code'];
-        $email = $input['email'];
+        $req = $request->all();
+        $code = $req['code'];
+        $email = $req['email'];
 
 
-        $member = Member::where('email', $email)->where('verify_email', $code)->first();
+        $member = Member::where('email', $email)->where('email_verify', $code)->first();
 
         if ($member) {
             $member->enabled = 1;
