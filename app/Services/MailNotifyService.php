@@ -109,7 +109,7 @@ class MailNotifyService
 
         $member = Member::find($member_id);
         $content = $mailNotify->content;
-        $website =  config('app.url') . '/members/verify_email?email=' . urlencode($member->email) . '&code=' . $member->verify_email;
+        $website =  config('app.url') . '/verify_email?email=' . urlencode($member->email) . '&code=' . $member->verify_email;
         $content = str_replace(
             ["\n", '{name}', '{website}'],
             ["<br>", $member->username, $website],

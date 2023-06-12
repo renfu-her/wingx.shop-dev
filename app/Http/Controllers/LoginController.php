@@ -187,7 +187,7 @@ class LoginController extends Controller
         }
     }
 
-
+    // 產生 member email 驗證碼
     public function email_verify(Request $request)
     {
 
