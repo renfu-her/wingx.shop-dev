@@ -17,7 +17,7 @@ use Str;
 class MailNotifyService extends BaseService
 {
     private $bcc_list = ['renfu.her@gmail.com'];
-    public $to_email = 'renfu.her@gmai.com';
+    public $to_email = 'renfu.her+register@gmai.com';
 
     /**
      * Email 驗證
