@@ -70,7 +70,6 @@ class LoginController extends Controller
         $status = 0;
         $email_verify = $this->generator_email_verify();
 
-        dd($email, $name, $password, $status, $email_verify);
         $member = Member::create([
             'name' => $name,
             'email' => $email,
@@ -80,6 +79,8 @@ class LoginController extends Controller
         ]);
 
         $member_id = $member->id;
+
+        dd($member);
 
         $mailNotifyService = new MailNotifyService();
         $mailNotifyService->email_verify($member_id);
