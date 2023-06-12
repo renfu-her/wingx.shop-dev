@@ -80,8 +80,7 @@ class LoginController extends Controller
 
         $member_id = $member->id;
 
-        $mailNotifyService = new MailNotifyService();
-        $mailNotifyService->email_verify($member_id);
+        $mailNotifyService = (new MailNotifyService())->email_verify($member_id);
 
         return redirect('/')->with(['message' => '請至信箱收信認證你的E-mail，才算完成註冊，謝謝！(備註：若未收到認證信，請至垃圾郵件查看或至登入頁重發認證信)']);
     }
