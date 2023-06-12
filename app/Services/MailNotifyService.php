@@ -30,7 +30,7 @@ class MailNotifyService extends BaseService
 
         $member = Member::find($member_id);
         $content = $mailNotify->content;
-        $website =  config('app.url') . '/email_verify?email=' . urlencode($member->email) . '&code=' . $member->email_verify;
+        $website =  config('app.url') . '/verify_email?email=' . urlencode($member->email) . '&code=' . $member->email_verify;
         $content = str_replace(
             ["\n", '{name}', '{website}'],
             ["<br>", $member->username, $website],

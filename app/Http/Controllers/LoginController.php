@@ -193,7 +193,7 @@ class LoginController extends Controller
 
         $input = $request->all();
 
-        $email = $input['verify_email'];
+        $email = $input['email_verify'];
 
         if (!$email) {
             return redirect('/')->with(['message' => 'E-mail 不存在']);
