@@ -61,6 +61,8 @@ class LoginController extends Controller
             'captcha' => 'required|captcha',
         ]);
 
+        dd($validator, $req);
+
         if ($validator->fails()) {
             return redirect('/')->with(['message' => '驗證碼輸入錯誤，請重新註冊']);
         }
