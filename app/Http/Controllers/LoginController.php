@@ -176,11 +176,9 @@ class LoginController extends Controller
         $member = Member::where('email', $email)->where('email_verify', $code)->first();
 
         if ($member) {
-            $member->enabled = 1;
+            $member->status = 1;
             $member->save();
-
-            dd($member);
-
+            
             return redirect('/')->with(['message' => '驗證成功，請回到首頁重新登入']);
         } else {
 
