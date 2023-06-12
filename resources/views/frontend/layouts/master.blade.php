@@ -143,7 +143,7 @@
                     <!-- /Navbar Wishlist-->
 
                     <!-- Navbar Login-->
-                    <li class="ms-1 d-none d-lg-inline-block">
+                    <li class="ms-1 d-lg-inline-block">
                         <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
                             style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#loginModal">
                             <i class="ri-user-line ri-lg align-middle"></i>
