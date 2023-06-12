@@ -68,13 +68,13 @@ class LoginController extends Controller
         $name = trim($req['signup_username']);
         $password = trim($req['signup_password']);
         $status = 0;
-        $verify_email = $this->generator_email_verify();
+        $email_verify = $this->generator_email_verify();
         $member = Member::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
             'status' => $status,
-            'verify_email' => $verify_email,
+            'email_verify' => $email_verify,
         ]);
 
         $member_id = $member->id;
