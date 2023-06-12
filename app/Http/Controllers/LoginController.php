@@ -61,8 +61,6 @@ class LoginController extends Controller
             'captcha' => 'required|captcha',
         ]);
 
-        dd($validator, $req);
-
         if ($validator->fails()) {
             return redirect('/')->with(['message' => '驗證碼輸入錯誤，請重新註冊']);
         }
@@ -71,6 +69,8 @@ class LoginController extends Controller
         $password = trim($req['signup_password']);
         $status = 0;
         $email_verify = $this->generator_email_verify();
+
+        dd($email, $name, $password, $status, $email_verify);
         $member = Member::create([
             'name' => $name,
             'email' => $email,
