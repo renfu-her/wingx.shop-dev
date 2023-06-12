@@ -38,7 +38,7 @@ route::get('/captcha', function () {
 
 route::get('/logout', function(){
     auth()->logout();
-    session()->forget('cart');
+    session()->forget(['cart', 'member_id', 'member_name', 'member_email']);
     return redirect('/');
 });
 

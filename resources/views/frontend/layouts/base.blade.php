@@ -30,6 +30,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{ asset('frontend/css/login-register.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css?t=' . time()) }}" />
@@ -60,22 +64,12 @@
             <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
                 <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
 
-                    <!-- Logo-->
-                    <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="/">
-                        <!-- Start of Logo-->
-                        <div class="d-flex align-items-center">
-                            <div class="w-50 d-flex align-items-center me-2 lh-1">
-                                <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100% "
-                                    alt="">
-                            </div>
-                        </div>
-                        <!-- / Logo-->
-
-                    </a>
-                    <!-- / Logo-->
+                    <div class="d-flex align-items-center me-2 lh-1 width-percent" style="cursor: pointer" onclick="location.href='/'">
+                        <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100% " alt="">
+                    </div>
 
                     <!-- Main Navigation-->
-                    <div class="ms-5 flex-shrink-0 collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1"
+                    <div class="flex-shrink-0 collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1"
                         id="navbarNavDropdown">
 
                         <!-- Mobile Nav Toggler-->
@@ -121,46 +115,44 @@
                                 <i class="ri-menu-line ri-lg align-middle"></i>
                             </button>
                         </li>
-                        <!-- /Navbar Toggle Icon-->
 
-                        <!-- Navbar Search-->
                         <li class="ms-1 d-inline-block">
                             <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
                                 data-pr-search>
                                 <i class="ri-search-2-line ri-lg align-middle"></i>
                             </button>
                         </li>
-                        <!-- /Navbar Search-->
 
-                        <!-- Navbar Wishlist-->
-                        {{-- <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
-                                href="#">
-                                <i class="ri-heart-line ri-lg align-middle"></i>
-                            </a>
-                        </li> --}}
-                        <!-- /Navbar Wishlist-->
+                        @if (Session::has('member_id'))
+                            <li class="ms-1 d-lg-inline-block">
+                                <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
+                                    href="/logout">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                </a>
+                            </li>
+                        @endif
 
-                        <!-- Navbar Login-->
                         <li class="ms-1 d-lg-inline-block">
                             <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
                                 data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="ri-user-line ri-lg align-middle"></i>
                             </a>
                         </li>
-                        <!-- /Navbar Login-->
 
                         <!-- Navbar Cart-->
-                        <li class="ms-1 d-inline-block position-relative">
-                            <button
-                                class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                                aria-controls="offcanvasCart">
-                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
-                                <span
-                                    class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">2</span>
-                            </button>
-                        </li>
+                        @if (Session::has('member_id'))
+                            <li class="ms-1 d-inline-block position-relative">
+                                <button
+                                    class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                    aria-controls="offcanvasCart">
+                                    <i
+                                        class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+                                    <span
+                                        class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">2</span>
+                                </button>
+                            </li>
+                        @endif
                         <!-- /Navbar Cart-->
 
                     </ul>
@@ -358,7 +350,9 @@
                                     <input id="confirm_password" class="form-control" type="password"
                                         placeholder="確認密碼" name="confirm_password">
                                     <p>
-                                        <img src="/captcha" alt="點擊刷新" style="cursor: pointer; width: 180px; height: 36px" onclick="this.src='{{ url('captcha/default') }}?s='+Math.random()">
+                                        <img src="/captcha" alt="點擊刷新"
+                                            style="cursor: pointer; width: 180px; height: 36px"
+                                            onclick="this.src='{{ url('captcha/default') }}?s='+Math.random()">
                                     </p>
                                     <input class="form-control" type="text" placeholder="輸入驗證碼" id="captcha"
                                         name="captcha">
