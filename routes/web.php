@@ -31,7 +31,7 @@ Route::post('/check_email', [LoginController::class, 'check_email']);
 Route::post('/reset_password', [LoginController::class, 'reset_password']);
 Route::get('/reset_password', [LoginController::class, 'reset_verify_password']);
 Route::post('/verify_password', [LoginController::class, 'verify_password']);
-Route::get('/verify_email', [LoginController::class, 'verify_email']);
+Route::get('/email_verify', [LoginController::class, 'email_verify']);
 route::get('/captcha', function () {
     return Captcha::create();
 });
