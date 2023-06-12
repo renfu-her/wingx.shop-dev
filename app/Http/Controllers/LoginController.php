@@ -173,10 +173,7 @@ class LoginController extends Controller
         $code = $req['code'];
         $email = $req['email'];
 
-
         $member = Member::where('email', $email)->where('email_verify', $code)->first();
-
-        dd($member);
 
         if ($member) {
             $member->enabled = 1;
