@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Services\CartService;
+
 class CartController extends Controller
 {
     // cart
@@ -14,18 +16,13 @@ class CartController extends Controller
     // cart order
     public function order(Request $request){
 
+        $member_id = session()->get('member_id');
+
         $req = $request->all();
+        $req['member_id'] = $member_id;
 
-        $cart = [
-            'dataBase' => $req['dataBase'],
-            'prod_id' => $req['prod_id'],
-            'price' => $req['price'],
-            'qty' => $req['qty'],
-        ];
+        $cartService = (new CartService())->cart($req);
 
-        session()->put('cart', $cart);
-        
-
-        //return redirect('/cart')->with(['success' => '已經加入購物車']);
+        return redirect('/cart')->with(['success' => '已經加入購物車']);
     }
 }

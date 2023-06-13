@@ -21,6 +21,7 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/order', [CartController::class, 'order']);
+route::get('/orderList', [CartController::class, 'orderList']);
 
 // 登入
 route::get('login', [LoginController::class, 'index']);

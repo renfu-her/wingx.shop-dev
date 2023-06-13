@@ -16,12 +16,26 @@ use App\Models\Product;
 class CartService extends BaseService
 {
 
+    public function cart($req){
+
+        $cart = [
+            'dataBase' => $req['dataBase'],
+            'prod_id' => $req['prod_id'],
+            'price' => $req['price'],
+            'qty' => $req['qty'],
+        ];
+
+        session()->put('cart', $cart);
+
+    }
+
     public function order(){
 
+        $member_id = session()->get('member_id');
+
         $order = Order::create([
-            'user_id' => auth()->user()->id,
-            'status' => 'pending',
-            'total' => 0
+            'member_id' => $member_id,
+            'status' => 0,
         ]);
 
         $cart = session()->get('cart');
@@ -30,14 +44,14 @@ class CartService extends BaseService
 
         foreach($cart as $id => $details){
 
-            $product = Product::find($id);
+            $product = Product::find($details->prod_id);
 
-            $total += $product->price * $details['quantity'];
+            $total += $product->price * $details['qty'];
 
             OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $id,
-                'quantity' => $details['quantity'],
+                'order_no' => $order->id,
+                'prod_id' => $id,
+                'qty' => $details['qty'],
                 'price' => $product->price
             ]);
         }

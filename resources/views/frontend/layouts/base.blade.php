@@ -12,6 +12,10 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
 
+        <!-- Page Title -->
+        <title>WingX 翼優 - 後臺系統</title>
+
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/favicon/favicon-32x32.png') }}">
@@ -49,8 +53,6 @@
         </style>
     </noscript>
 
-    <!-- Page Title -->
-    <title>🦜BR 麗鸚坊 - 後臺系統</title>
 
 </head>
 
@@ -64,7 +66,8 @@
             <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
                 <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
 
-                    <div class="d-flex align-items-center me-2 lh-1 width-percent" style="cursor: pointer" onclick="location.href='/'">
+                    <div class="d-flex align-items-center me-2 lh-1 width-percent" style="cursor: pointer"
+                        onclick="location.href='/'">
                         <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100% " alt="">
                     </div>
 
@@ -124,6 +127,7 @@
                         </li>
 
                         @if (Session::has('member_id'))
+                            <!-- 使用者登登出 -->
                             <li class="ms-1 d-lg-inline-block">
                                 <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
                                     href="/logout">
@@ -132,15 +136,26 @@
                             </li>
                         @endif
 
-                        <li class="ms-1 d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
-                                data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="ri-user-line ri-lg align-middle"></i>
-                            </a>
-                        </li>
-
-                        <!-- Navbar Cart-->
                         @if (Session::has('member_id'))
+                            <!-- 直接導向購物車列表以頁面 -->
+                            <li class="ms-1 d-lg-inline-block">
+                                <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
+                                    href="/orderList">
+                                    <i class="ri-user-line ri-lg align-middle"></i>
+                                </a>
+                            </li>
+                        @else
+                            <!-- 使用者登入, modal -->
+                            <li class="ms-1 d-lg-inline-block">
+                                <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
+                                    href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <i class="ri-user-line ri-lg align-middle"></i>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (Session::has('member_id'))
+                            <!-- 購物車-->
                             <li class="ms-1 d-inline-block position-relative">
                                 <button
                                     class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
@@ -153,7 +168,6 @@
                                 </button>
                             </li>
                         @endif
-                        <!-- /Navbar Cart-->
 
                     </ul>
                     <!-- Navbar Icons-->

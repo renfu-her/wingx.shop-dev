@@ -19,6 +19,9 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- Page Title -->
+    <title>WingX 翼優</title>
+
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/libs.bundle.css') }}" />
 
@@ -52,9 +55,6 @@
         </style>
     </noscript>
 
-    <!-- Page Title -->
-    <title>🦜BR 麗鸚坊 寵物用品旗艦</title>
-
 </head>
 
 <body class="">
@@ -65,7 +65,8 @@
             <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
 
 
-                <div class="d-flex align-items-center me-2 lh-1 width-percent" style="cursor: pointer" onclick="location.href='/'">
+                <div class="d-flex align-items-center me-2 lh-1 width-percent" style="cursor: pointer"
+                    onclick="location.href='/'">
                     <img src="{{ asset('frontend/images/logos/logo_c.svg') }}" style="width: 100%" alt="">
                 </div>
 
@@ -130,6 +131,7 @@
                     <!-- /Navbar Search-->
 
                     @if (Session::has('member_id'))
+                        <!-- 使用者登出-->
                         <li class="ms-1 d-lg-inline-block">
                             <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
                                 href="/logout">
@@ -138,29 +140,40 @@
                         </li>
                     @endif
 
-                    <!-- Navbar Login-->
-                    <li class="ms-1 d-lg-inline-block">
-                        <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
-                            style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            <i class="ri-user-line ri-lg align-middle"></i>
-                        </a>
-                    </li>
-                    <!-- /Navbar Login-->
+                    @if (Session::has('member_id'))
+                        <!-- 直接導向購物車列表以頁面 -->
+                        <li class="ms-1 d-lg-inline-block">
+                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
+                                href="/orderList">
+                                <i class="ri-user-line ri-lg align-middle"></i>
+                            </a>
+                        </li>
+                    @else
+                        <!-- 使用者登入, modal-->
+                        <li class="ms-1 d-lg-inline-block">
+                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="ri-user-line ri-lg align-middle"></i>
+                            </a>
+                        </li>
+                    @endif
 
-                    <!-- Navbar Cart-->
-                    <li class="ms-1 d-inline-block position-relative">
-                        <button
-                            class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                            <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+                    @if (Session::has('member_id'))
+                        <!-- 購物車-->
+                        <li class="ms-1 d-inline-block position-relative">
+                            <button
+                                class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                aria-controls="offcanvasCart">
+                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
 
-                            <span
-                                class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">
-                                2
-                            </span>
-                        </button>
-                    </li>
-                    <!-- /Navbar Cart-->
+                                <span
+                                    class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">
+                                    2
+                                </span>
+                            </button>
+                        </li>
+                    @endif
 
                 </ul>
                 <!-- Navbar Icons-->
