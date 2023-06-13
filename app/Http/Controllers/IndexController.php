@@ -48,7 +48,8 @@ class IndexController extends Controller
         $cart = (new CartService())->getCartAll();
         foreach($cart as $key => $value){
             $total += $value['prod_price'] * $value['qty'];
-            $tax +=  ($value['prod_price'] * $value['qty']) * 0.5;
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            $cart[$key]['sub_total'] = $value['prod_price'] * $value['qty'];
         }
 
         return view(

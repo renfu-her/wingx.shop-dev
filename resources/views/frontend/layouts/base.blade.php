@@ -457,7 +457,7 @@
                                 </h6>
                                 <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
                             </div>
-                            <p class="fw-bolder text-end m-0">$ {{ $value['price'] }}</p>
+                            <p class="fw-bolder text-end m-0">$ {{ $value['sub_total'] }}</p>
                         </div>
                     </div>
                     @endforeach
