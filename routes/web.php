@@ -20,11 +20,14 @@ route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
 route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']);
 
+// 購物車寫入 session cart
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/order', [CartController::class, 'order']);
 route::get('/orderList', [CartController::class, 'orderList']);
-
 route::post('/cart/count', [OrderController::class, 'cartCount']);
+
+// 購物車詳細資料
+route::get('/checkout', [CartController::class, 'checkout']);
 
 // 登入
 route::get('login', [LoginController::class, 'index']);

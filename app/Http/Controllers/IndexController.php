@@ -21,25 +21,8 @@ class IndexController extends Controller
 
         $product_images = ProductImage::all();
 
-        $products = [];
-        $product_categories = ProductCategory::orderBy('sort')->get();
-        foreach ($product_categories as $key => $value) {
-
-            $products[$key] = [];
-
-            $pd = Product::inRandomOrder()->where('category_id', $value->id)->take(20)->get();
-            if(count($pd) > 0){
-                foreach ($pd as $k => $v) {
-                    $products[$key][$k] = $v;
-                    if ($v->define_image == 0) {
-                        $products[$key][$k]['image_url'] = 'https://down-tw.img.susercontent.com/file/' . $v->image;
-                    } else {
-                        $products[$key][$k]['image_url'] = asset('upload/images/' . $v->id . '/' . $v->image);
-                    }
-                }
-            }
-
-        }
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
 
         $banners = Banner::orderByDesc('id')->get();
 
@@ -49,7 +32,6 @@ class IndexController extends Controller
         foreach($cart as $key => $value){
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
-            $cart[$key]['sub_total'] = $value['prod_price'] * $value['qty'];
         }
 
         return view(

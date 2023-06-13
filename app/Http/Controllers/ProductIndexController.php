@@ -48,7 +48,6 @@ class ProductIndexController extends Controller
         foreach($cart as $key => $value){
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
-            $cart[$key]['sub_total'] = $value['prod_price'] * $value['qty'];
         }
 
         return view('frontend.product',

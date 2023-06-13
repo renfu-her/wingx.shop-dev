@@ -89,6 +89,7 @@ class CartService extends BaseService
             $product = Product::find($value['prod_id']);
             $cart[$key]['prod_name'] = $product->name;
             $cart[$key]['prod_price'] = $product->price * $value['qty'];
+            $cart[$key]['sub_total'] = ($product->price * $value['qty']) * $value['qty'];
             if($value['dataBase'] == 'products'){
                 $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
             } else {
