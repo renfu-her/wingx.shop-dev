@@ -9,6 +9,8 @@ use App\Models\ProductImage;
 use App\Models\ProductCategory;
 use App\Models\Banner;
 
+use App\Services\CartService;
+
 class IndexController extends Controller
 {
 
@@ -41,6 +43,14 @@ class IndexController extends Controller
 
         $banners = Banner::orderByDesc('id')->get();
 
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach($cart as $key => $value){
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.5;
+        }
+
         return view(
             'frontend.index',
             compact(
@@ -48,6 +58,9 @@ class IndexController extends Controller
                 'product_images',
                 'product_categories',
                 'banners',
+                'cart',
+                'total',
+                'tax',
             )
         );
     }

@@ -23,6 +23,10 @@ class CartController extends Controller
 
         $cartService = (new CartService())->cart($req);
 
-        return redirect('/cart')->with(['success' => '已經加入購物車']);
+        return response()->json([
+            'status' => 'success',
+            'message' => '已經加入購物車',
+        ]);
+        
     }
 }

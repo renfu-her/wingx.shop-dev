@@ -16,19 +16,22 @@ use App\Models\Product;
 class CartService extends BaseService
 {
 
+    // cart item
     public function cart($req){
 
-        $cart = [
+        $item = [
+            'id' => $req['id'],
             'dataBase' => $req['dataBase'],
             'prod_id' => $req['prod_id'],
             'price' => $req['price'],
             'qty' => $req['qty'],
         ];
 
-        session()->put('cart', $cart);
+        session()->push('cart', $item);
 
     }
 
+    // order detail
     public function order(){
 
         $member_id = session()->get('member_id');
@@ -60,6 +63,39 @@ class CartService extends BaseService
         $order->save();
 
         return $order;
+    }
 
+    // session cart get
+    public function getCart(){
+
+        $cart = session()->get('cart');
+        if(!$cart){
+            $cart = [];
+        }
+        return response()->json([
+            'cart_count' => count($cart)
+        ]);
+    }
+
+    // 所有的 cart session 轉為 cart
+    public function getCartAll(){
+
+        $cart = session()->get('cart');
+        if(!$cart){
+            $cart = [];
+        }
+
+        foreach($cart as $key => $value){
+            $product = Product::find($value['prod_id']);
+            $cart[$key]['prod_name'] = $product->name;
+            $cart[$key]['prod_price'] = $product->price * $value['qty'];
+            if($value['dataBase'] == 'products'){
+                $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
+            } else {
+                $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
+            }
+        }
+
+        return $cart;
     }
 }

@@ -9,6 +9,8 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductMix;
 
+use App\Services\CartService;
+
 class ProductIndexController extends Controller
 {
     // 產品細項，購買訊息的頁面
@@ -40,12 +42,24 @@ class ProductIndexController extends Controller
             $productMix[$key]->product_name = implode(' ＋ ', $product_name);
         }
 
-        return view('frontend.product', [
-            'product' => $product,
-            'product_category' => $product_category,
-            'product_images' => $product_images,
-            'product_categories' => $product_categories,
-            'productMix' => $productMix,
-        ]);
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach($cart as $key => $value){
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.5;
+        }
+        
+        return view('frontend.product',
+            compact(
+                'products',
+                'product_images',
+                'product_categories',
+                'banners',
+                'cart',
+                'total',
+                'tax',
+            )
+        );
     }
 }

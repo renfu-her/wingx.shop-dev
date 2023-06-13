@@ -36,26 +36,8 @@
                         <!-- Product Name, Review, Brand, Price-->
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">
-                                {{ $product_category->name }}</p>
-                            {{-- <div class="d-flex justify-content-start align-items-center">
-                                <!-- Review Stars Small-->
-                                <div class="rating position-relative d-table">
-                                    <div class="position-absolute stars" style="width: 80%">
-                                        <i class="ri-star-fill text-dark mr-1"></i>
-                                        <i class="ri-star-fill text-dark mr-1"></i>
-                                        <i class="ri-star-fill text-dark mr-1"></i>
-                                        <i class="ri-star-fill text-dark mr-1"></i>
-                                        <i class="ri-star-fill text-dark mr-1"></i>
-                                    </div>
-                                    <div class="stars">
-                                        <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                        <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                        <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                        <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                        <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                    </div>
-                                </div> <small class="text-muted d-inline-block ms-2 fs-bolder">(1288)</small>
-                            </div> --}}
+                                {{ $product_category->name }}
+                            </p>
                         </div>
                         <h1 class="mb-2 fs-2 fw-bold">{{ $product->name }}</h1>
                         <div class="d-flex justify-content-start align-items-center">
@@ -117,7 +99,7 @@
                                     數量 :
                                 </small>
                                 <div class="">
-                                    <select name="product-qty" class="form-select product-qty">
+                                    <select class="form-select product-qty">
                                         @for ($i = 1; $i <= 50; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
@@ -1098,7 +1080,7 @@
         }
 
         const cart = () => {
-            let qty = $('.product-qyt').val()
+            let qty = $('.product-qty').val()
             let price = $('#price').val()
             let prod_id = $('#prod_id').val()
             let dataBase = $('#dataBase').val()
@@ -1108,16 +1090,20 @@
                 return
             } else {
                 $.post('/cart/order', {
+                    id: prod_id,
                     dataBase: dataBase,
-                    id: id,
+                    prod_id: prod_id,
                     price: price,
                     qty: qty
                 }, function(data) {
-                    console.log(data)
+                    if(data.status == 'success') {
+                        alert('加入購物車成功')
+                        location.reload()
+                    } else {
+                        alert('加入購物車失敗')
+                    }
                 })
             }
-
-
         }
     </script>
 @endsection

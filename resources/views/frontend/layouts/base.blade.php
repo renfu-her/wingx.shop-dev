@@ -163,8 +163,11 @@
                                     aria-controls="offcanvasCart">
                                     <i
                                         class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+
                                     <span
-                                        class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white">2</span>
+                                        class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white cart-count">
+
+                                    </span>
                                 </button>
                             </li>
                         @endif
@@ -429,7 +432,7 @@
     <!-- Cart Offcanvas-->
     <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasCart">
         <div class="offcanvas-header d-flex align-items-center">
-            <h5 class="offcanvas-title" id="offcanvasCartLabel">Your Cart</h5>
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">購物車</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         </div>
@@ -437,69 +440,38 @@
             <div class="d-flex flex-column justify-content-between w-100 h-100">
                 <div>
 
-                    <div class="mt-4 mb-5">
-                        <p class="mb-2 fs-6"><i class="ri-truck-line align-bottom me-2"></i> <span
-                                class="fw-bolder">$22</span> away
-                            from free delivery</p>
-                        <div class="progress f-h-1">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-
                     <!-- Cart Product-->
+                    @foreach ($cart as $key => $value )
                     <div class="row mx-0 pb-4 mb-4 border-bottom">
                         <div class="col-3">
                             <picture class="d-block bg-light">
-                                <img class="img-fluid" src="./assets/images/products/product-1.jpg"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
+                                <img class="img-fluid" src="{{ $value['prod_image'] }}"
+                                    alt="{{ $value['prod_name'] }}">
                             </picture>
                         </div>
                         <div class="col-9">
                             <div>
                                 <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                    Mens StormBreaker Jacket
+                                    {{ $value['prod_name'] }}
                                     <i class="ri-close-line"></i>
                                 </h6>
-                                <small class="d-block text-muted fw-bolder">Size: Medium</small>
-                                <small class="d-block text-muted fw-bolder">Qty: 1</small>
+                                <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
                             </div>
-                            <p class="fw-bolder text-end m-0">$85.00</p>
+                            <p class="fw-bolder text-end m-0">$ {{ $value['price'] }}</p>
                         </div>
                     </div>
-
-                    <!-- Cart Product-->
-                    <div class="row mx-0 pb-4 mb-4 border-bottom">
-                        <div class="col-3">
-                            <picture class="d-block bg-light">
-                                <img class="img-fluid" src="./assets/images/products/product-2.jpg"
-                                    alt="Bootstrap 5 Template by Pixel Rocket">
-                            </picture>
-                        </div>
-                        <div class="col-9">
-                            <div>
-                                <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                    Mens Torrent Terrain Jacket
-                                    <i class="ri-close-line"></i>
-                                </h6>
-                                <small class="d-block text-muted fw-bolder">Size: Medium</small>
-                                <small class="d-block text-muted fw-bolder">Qty: 1</small>
-                            </div>
-                            <p class="fw-bolder text-end m-0">$99.00</p>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div>
                 <div class="border-top pt-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="m-0 fw-bolder">Subtotal</p>
-                        <p class="m-0 fw-bolder">$233.33</p>
+                        <p class="m-0 fw-bolder">總金額</p>
+                        <p class="m-0 fw-bolder">$ {{ $total }}</p>
                     </div>
-                    <a href="./checkout.html"
-                        class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">Checkout</a>
-                    <a href="./cart.html"
-                        class="btn btn-dark fw-bolder d-block text-center transition-all opacity-50-hover">View
-                        Cart</a>
+                    <a href="/checkout"
+                        class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
+                    <a href="/cart"
+                        class="btn btn-dark fw-bolder d-block text-center transition-all opacity-50-hover">瀏覽購物車</a>
                 </div>
             </div>
         </div>
@@ -1206,6 +1178,15 @@
         @if (Session::has('message'))
             alert("{{ Session::get('message') }}");
         @endif
+
+        $(function(){
+
+            $(window).on('load', function(){
+                $.post('/cart/count', function(data){
+                    $('.cart-count').html(data.cart_count)
+                })
+            })
+        })
     </script>
 
 </body>

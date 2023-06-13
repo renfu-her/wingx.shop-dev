@@ -6,6 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductIndexController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\Api\ImportDataController;
@@ -22,6 +23,8 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/order', [CartController::class, 'order']);
 route::get('/orderList', [CartController::class, 'orderList']);
+
+route::post('/cart/count', [OrderController::class, 'cartCount']);
 
 // 登入
 route::get('login', [LoginController::class, 'index']);
