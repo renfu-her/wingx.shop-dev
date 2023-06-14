@@ -50,7 +50,7 @@
                         <div class="col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="firstName" class="form-label">你的姓名</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="{{ $member->name }}">
                             </div>
                         </div>
 
