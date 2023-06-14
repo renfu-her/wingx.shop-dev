@@ -20,9 +20,10 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="email" class="form-label">送貨方式</label>
-                                <select name="" id="" class="form-select">
-                                    <option value="1">中華郵政</option>
-                                    <option value="2">宅配</option>
+                                <select name="ship_id" id="ship_id" class="form-select">
+                                    @foreach ($ships as $ship)
+                                        <option value="{{ $ship->id }}">{{ $ship->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

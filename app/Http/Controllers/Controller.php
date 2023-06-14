@@ -8,17 +8,20 @@ use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Ship;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    // get product category
     public function getProductCategory(){
         $product_categories = ProductCategory::orderBy('sort')->get();
 
         return $product_categories;
     }
 
+    // get product
     public function getProduct(){
         $products = [];
         $product_categories = ProductCategory::orderBy('sort')->get();
@@ -41,5 +44,12 @@ class Controller extends BaseController
         }
 
         return $products;
+    }
+
+    // get ship all
+    public function getShipAll()
+    {
+        $ships = Ship::all();
+        return $ships;
     }
 }
