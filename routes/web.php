@@ -27,6 +27,8 @@ route::post('/cart/order', [CartController::class, 'order']);
 route::get('/orderList', [CartController::class, 'orderList']);
 route::post('/cart/count', [OrderController::class, 'cartCount']);
 
+route::post('/order/store', [OrderController::class, 'store']);
+
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
 

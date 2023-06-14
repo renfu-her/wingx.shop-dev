@@ -7,4 +7,3 @@ use App\Http\Controllers\Api\ShipController;
 use App\Http\Controllers\Api\OrderApiController;
 
 route::post('/ship/price', [ShipController::class, 'getPrice']);
-route::post('/order/store', [OrderApiController::class, 'store']);
