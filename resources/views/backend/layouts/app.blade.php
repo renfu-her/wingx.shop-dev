@@ -58,6 +58,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="/backend/ship">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>運送方式管理</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="/backend/mail_notify">
                     <i class="fa-solid fa-folder"></i>
                     <span>Mail 樣板管理</span>

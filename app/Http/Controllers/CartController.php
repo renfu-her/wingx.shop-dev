@@ -49,8 +49,11 @@ class CartController extends Controller
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
 
+        $ships = $this->getShipAll();
+
         return view('frontend.checkout',
-            compact('products','product_categories', 'cart', 'total', 'tax')
+            compact('products','product_categories',
+                    'cart', 'total', 'tax', 'ships')
         );
 
 

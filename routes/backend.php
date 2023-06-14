@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ProductImageController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ProductMixController;
 use App\Http\Controllers\Backend\MailNotifyController;
+use App\Http\Controllers\Backend\ShipController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -41,6 +42,8 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/product/mix/{product_id}/{product_mix_id}/edit', [ProductMixController::class, 'edit'])->name('product_mix.edit');
     route::match(['PUT', 'PATCH'], '/product/mix/{product_mix_id}', [ProductMixController::class, 'update'])->name('product_mix.update');
     route::get('/product/mix/delete/{product_mix_id}', [ProductMixController::class, 'delete'])->name('product_mix.delete');
+
+    route::resource('/ship', ShipController::class);
 
     // MailNotify 管理
     route::resource('/mail_notify', MailNotifyController::class);
