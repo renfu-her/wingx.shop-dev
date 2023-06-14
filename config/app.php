@@ -193,6 +193,7 @@ return [
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'NewebPay' => MingJSHK\NewebPay\Facades\NewebPay::class,
     ])->toArray(),
 
 ];

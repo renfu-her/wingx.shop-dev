@@ -24,7 +24,7 @@
      * 串接版本
      */
 
-    'Version' => '1.5',
+    'Version' => '2.0',
     'PeriodVersion' => '1.0',
 
     /*
@@ -160,13 +160,13 @@
         'UNIONPAY' => false,
 
         // WEBATM支付 (default: false)
-        'WEBATM' => false,
+        'WEBATM' => true,
 
         // ATM支付 (default: false)
-        'VACC' => false,
+        'VACC' => true,
 
         // 超商代碼繳費支付 (default: false)
-        'CVS' => false,
+        'CVS' => true,
 
         // 條碼繳費支付 (default: false)
         'BARCODE' => false,

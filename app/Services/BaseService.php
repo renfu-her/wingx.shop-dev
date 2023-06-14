@@ -17,4 +17,5 @@ class BaseService
         $ships = Ship::all();
         return $ships;
     }
+    
 }

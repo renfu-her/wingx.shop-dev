@@ -99,4 +99,19 @@ class CartService extends BaseService
 
         return $cart;
     }
+
+    // generate order no
+    public function generateOrderNo()
+    {
+
+        date_default_timezone_set('Asia/Taipei'); // CDT
+
+        list($usec, $sec) = explode(" ", microtime());
+        $msec = round($usec * 1000);
+        $millisecond = str_pad($msec, 3, '0', STR_PAD_RIGHT);
+
+        $ordre_no = date('YmdHis') . $millisecond;
+
+        return $ordre_no;
+    }
 }
