@@ -232,7 +232,7 @@
                     <!-- /Footer Nav-->
 
                     <!-- Footer Nav-->
-                    <nav class="d-none d-md-block col-md">
+                    {{-- <nav class="d-none d-md-block col-md">
                         <h6 class="mb-4 fw-bolder fs-6">Navigation</h6>
                         <ul class="list-unstyled">
                             <li class="mb-2"><a
@@ -248,11 +248,11 @@
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="#">Account</a></li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                     <!-- /Footer Nav-->
 
                     <!-- Footer Contact-->
-                    <div class="col-12 col-md-5">
+                    {{-- <div class="col-12 col-md-5">
                         <h6 class="mb-4 fw-bolder fs-6">Join Our Newsletter</h6>
                         <p class="opacity-75">Sign up to our newsletter and we'll email you a code worth 15%
                             off your first order. By subscribing to our mailing list you agree to our terms and
@@ -267,7 +267,7 @@
                                         class="ri-arrow-right-line align-middle"></i></span>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <!-- /Footer Contact-->
 
                 </div>

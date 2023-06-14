@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0 fw-bolder">
-                                        <span>$ {{ number_format($value['prod_price']) }}</span>
+                                        <span>$ {{ number_format($value['sub_total']) }}</span>
                                     </div>
                                 </div>
                             @endforeach
