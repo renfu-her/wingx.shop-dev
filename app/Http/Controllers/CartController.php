@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Services\CartService;
 
+use App\Models\Member;
+
 class CartController extends Controller
 {
     // cart
@@ -34,6 +36,7 @@ class CartController extends Controller
     public function checkout(Request $request){
 
         $member_id = session()->get('member_id');
+        $member = Member::find($member_id);
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
@@ -53,7 +56,7 @@ class CartController extends Controller
 
         return view('frontend.checkout',
             compact('products','product_categories',
-                    'cart', 'total', 'tax', 'ships')
+                    'cart', 'total', 'tax', 'ships', 'member')
         );
 
 
