@@ -34,6 +34,9 @@ class IndexController extends Controller
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
 
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
         return view(
             'frontend.index',
             compact(
@@ -44,6 +47,7 @@ class IndexController extends Controller
                 'cart',
                 'total',
                 'tax',
+                'cart_count'
             )
         );
     }

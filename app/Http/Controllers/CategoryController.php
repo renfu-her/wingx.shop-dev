@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductCategory;
 
+use App\Services\CartService;
+
 class CategoryController extends Controller
 {
 
@@ -39,6 +41,20 @@ class CategoryController extends Controller
                 $product_category->count = $product_count;
             }
 
-            return view('frontend.category', compact('products', 'product_categories'));
+            $total = 0;
+            $tax = 0;
+            $cart = (new CartService())->getCartAll();
+            foreach($cart as $key => $value){
+                $total += $value['prod_price'] * $value['qty'];
+                $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            }
+
+
+            $cart_count = (new CartService())->getCart();
+            $cart_count = json_decode($cart_count->getContent(), true);
+
+            return view('frontend.category',
+                compact('products', 'product_categories',
+                        'cart_count', 'cart', 'total', 'tax'));
         }
 }

@@ -7,12 +7,42 @@ use Illuminate\Http\Request;
 use App\Services\CartService;
 
 use App\Models\Member;
+use App\Models\Order;
+
+use MingJSHK\NewebPay\Facades\NewebPay;
 
 class CartController extends Controller
 {
     // cart
-    public function index(){
-        return view('cart');
+    public function index(Request $request){
+
+        $member_id = session()->get('member_id');
+        $member = Member::find($member_id);
+
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+        $req = $request->all();
+        $req['member_id'] = $member_id;
+
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach($cart as $key => $value){
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $ships = $this->getShipAll();
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
+
+        return view('frontend.cart',
+            compact('products','product_categories',
+                    'cart', 'total', 'tax', 'ships',
+                    'member','cart_count'));
     }
 
     // cart order
@@ -54,9 +84,13 @@ class CartController extends Controller
 
         $ships = $this->getShipAll();
 
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
         return view('frontend.checkout',
             compact('products','product_categories',
-                    'cart', 'total', 'tax', 'ships', 'member')
+                    'cart', 'total', 'tax', 'ships',
+                    'member','cart_count')
         );
 
 
@@ -67,11 +101,18 @@ class CartController extends Controller
 
         $req = $request->all();
 
-        dd($req);
+        $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
-        $order = (new CartService())->order($req);
+        if($neweb_pay['Status'] == 'SUCCESS'){
+            $order = Order::where('order_no', $neweb_pay['Result']['MerchantOrderNo'])->first();
+            $order->payment = $neweb_pay['Result']['PaymentType'];
+            $order->status = 1;
+            $order->save();
 
-        return view('frontend.thanks', compact('order'));
+            return view('frontend.thanks', compact('order'));
+        } else {
+
+        }
 
     }
 }

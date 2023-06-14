@@ -8,7 +8,7 @@
         <p class="text-center mx-auto">請填寫以下資訊
         </p>
 
-        <form action="/cart" method="post" id="form_post">
+        <form action="/order/store" method="post" id="form_post">
             <div class="row g-md-8 mt-4">
                 <!-- Checkout Panel Left -->
                 <div class="col-12 col-lg-6 col-xl-7">
@@ -49,9 +49,17 @@
 
                         <div class="col-sm-12 col-12">
                             <div class="form-group">
-                                <label for="firstName" class="form-label">你的姓名</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder=""
+                                <label for="username" class="form-label">你的姓名</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder=""
                                     value="{{ $member->username }}">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="mobile" class="form-label">手機號碼</label>
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder=""
+                                    value="{{ $member->mobile }}">
                             </div>
                         </div>
 
@@ -74,7 +82,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="address" class="form-label">地址</label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <input type="text" class="form-control" id="address" name="address" value="{{ $member->address }}">
                             </div>
                         </div>
 
@@ -106,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0 fw-bolder">
-                                        <span>$ {{ $value['prod_price'] }}</span>
+                                        <span>$ {{ number_format($value['prod_price']) }}</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -116,7 +124,7 @@
                         <div class="py-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <p class="m-0 fw-bolder fs-6">總金額</p>
-                                <p class="m-0 fs-6 fw-bolder total_price">$ {{ $total }}</p>
+                                <p class="m-0 fs-6 fw-bolder total_price">$ {{ number_format($total) }}</p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center ship_item"
                                 style="display: none !important">
@@ -126,10 +134,12 @@
                         </div>
                         <!-- Accept Terms Checkbox-->
                         <div class="form-group form-check my-4">
-                            <input type="checkbox" class="form-check-input" id="accept-terms" checked>
+                            <input type="checkbox" class="form-check-input" id="accept_terms" name="accept_terms" checked>
                             <label class="form-check-label fw-bolder" for="accept-terms">我同意 WinGx 的 <a
                                     href="#">付款條件</a></label>
                         </div>
+                        <input type="hidden" name="ship_price">
+                        <input type="hidden" name="total">
                         <button type="submit" class="btn btn-dark w-100" role="button">結 帳</button>
                     </div>
                 </div>
@@ -157,6 +167,8 @@
 
             const twzipcode = new TWzipcode();
 
+            twzipcode.set({{ $member->zipcode }})
+
             $('#ship_id').change(function() {
                 let ship_id = $(this).val();
                 $.post('/api/ship/price', {
@@ -170,14 +182,18 @@
             $('#form_post').on('submit', function() {
                 let ship_id = $('#ship_id').val();
                 let ship_price = $('.ship_price').text().replace('$ ', '');
-                let username = $('#username').val();
+                let name = $('#name').val();
                 let address = $('#address').val();
-                let county = $('.county').val();
-                let district = $('.district').val();
-                let zipcode = $('.zipcode').val();
+                let county = $('#county').val();
+                let district = $('#district').val();
+                let zipcode = $('#zipcode').val();
                 let email = $('#email').val();
                 let total = $('.total_price').text().replace('$ ', '');
                 let remark = $('#remark').val();
+                let mobile = $('#mobile').val();
+
+                $('input[name=ship_price]').val(ship_price);
+                $('input[name=total]').val(total);
 
                 let error_msg = []
 
@@ -185,7 +201,7 @@
                     error_msg.push('請填寫電子郵件');
                 }
 
-                if (username == '') {
+                if (name == '') {
                     error_msg.push('請填寫姓名');
                 }
 
@@ -205,7 +221,7 @@
                     error_msg.push('請選擇運送方式');
                 }
 
-                if ($('#accept-terms').prop('checked') == false) {
+                if ($('#accept_terms').prop('checked') == false) {
                     error_msg.push('請勾選同意付款條件');
                 }
 
@@ -213,24 +229,8 @@
                     alert(error_msg.join('\n'));
                     return false;
                 } else {
-                    $.post('/api/order/store', {
-                        ship_id: ship_id,
-                        username: username,
-                        county: county,
-                        district: district,
-                        address: address,
-                        zipcode: zipcode,
-                        email: email,
-                        total: total,
-                        remark: remark,
-                        ship_price: ship_price,
-                        accept_terms: $('#accept-terms').prop('checked')
-                    }, function(res) {
-                        if (res.status == 'ok') {
-                            alert('訂單已送出');
-                            // location.href = '/order';
-                        }
-                    })
+
+                    return true;
                 }
 
 
