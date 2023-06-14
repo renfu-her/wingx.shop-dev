@@ -61,4 +61,17 @@ class CartController extends Controller
 
 
     }
+
+    // order payment thanks
+    public function thanks(Request $request){
+
+        $req = $request->all();
+
+        dd($req);
+
+        $order = (new CartService())->order($req);
+
+        return view('frontend.thanks', compact('order'));
+
+    }
 }

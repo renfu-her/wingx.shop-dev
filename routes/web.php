@@ -22,6 +22,7 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 
 // 購物車寫入 session cart
 route::get('/cart', [CartController::class, 'index']);
+route::get('/cart/thanks', [CartController::class, 'thanks']);
 route::post('/cart/order', [CartController::class, 'order']);
 route::get('/orderList', [CartController::class, 'orderList']);
 route::post('/cart/count', [OrderController::class, 'cartCount']);

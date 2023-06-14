@@ -34,13 +34,14 @@ class OrderApiController extends Controller
 
         $order = Order::create([
             'order_no' => $order_no,
+            'username' => $req['username'],
             'member_id' => $member_id,
             'ship_id' => $req['ship_id'],
             'total' => $total,
             'status' => 0,
-            'email' => $member->email,
-            'ship_date' => date('Y-m-d'),
-            'ship_fee' => $req['ship_fee'],
+            'email' => $req['email'],
+            'ship_date' => date('Y-m-d H:i:s'),
+            'ship_price' => $req['ship_price'],
             'remark' => $req['remark'],
             'payment' => $req['payment'],
             'county' => $req['county'],
@@ -82,10 +83,5 @@ class OrderApiController extends Controller
         )->setClientBackURL(env('app.url'))
          ->submit();
 
-
-        return response()->json([
-            'message' => 'Order created successfully.',
-            'order_id' => $order->id,
-        ]);
     }
 }
