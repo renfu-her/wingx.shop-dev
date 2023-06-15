@@ -10,51 +10,48 @@
                             <h5>訂單列表</h5>
                         </div>
                         @foreach ($orders as $key => $value)
-                            <div class="container container-2">
+                            <div class="container container-2 hr-line">
                                 <div class="col-12">
-                                    <div class="col-12">
-                                        <span>訂單編號：{{ $value->order_no }}</span>
-                                    </div>
+                                    <span style="font-weight: 600">訂單編號：{{ $value->order_no }}</span>
                                 </div>
                                 <div class="col-12">
-                                    <div class="col-12 hr-line">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <span>訂單成立：{{ $value->created_at }}</span>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <span>付款方式：{{ $value->payment_name }}</span>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span>訂單成立：{{ $value->created_at }}</span>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span>付款方式：{{ $value->payment_name }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12 col-md-3">
-                                                運費：NT ${{ $value->ship_price }} <br>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                金額：NT ${{ $value->total }} <br>
+                                    <div class="row">
+                                        <div class="col-12 col-md-3" style="font-weight: 600">
+                                            運費：NT ${{ $value->ship_price }} <br>
+                                        </div>
+                                        <div class="col-12 col-md-3" style="font-weight: 600">
+                                            金額：NT ${{ $value->total }} <br>
 
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                實付金額：NT ${{ $value->ttl_price }} <br>
+                                        </div>
+                                        <div class="col-12 col-md-3" style="font-weight: 600">
+                                            實付金額：NT ${{ $value->ttl_price }} <br>
 
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                @if ($value->status == 0 || $value->status == 9)
-                                                    <span class="text-icon">待付款</span>
-                                                @elseif($value->status == 1)
-                                                    <span class="text-icon">完成付款</span>
-                                                @elseif($value->status == 2)
-                                                    <span class="text-icon">付款失敗</span>
-                                                @elseif($value->status == 3)
-                                                    <span class="text-icon">取消訂單</span>
-                                                @endif
-                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            @if ($value->status == 0 || $value->status == 9)
+                                                <span class="text-icon">待付款</span>
+                                            @elseif($value->status == 1)
+                                                <span class="text-icon">完成付款</span>
+                                            @elseif($value->status == 2)
+                                                <span class="text-icon">付款失敗</span>
+                                            @elseif($value->status == 3)
+                                                <span class="text-icon">取消訂單</span>
+                                            @endif
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12" style="font-weight: 600">
+                                    運送地址：{{ $value->zipcode }} {{ $value->county }}{{ $value->district }}{{ $value->address }}
                                 </div>
 
                                 @foreach ($value['order_detail'] as $dkey => $drow)
@@ -85,7 +82,13 @@
 @section('css')
     <style>
         .hr-line {
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 2px double #e0e0e0;
+            /* border-style: double; */
+        }
+
+        .container-2 {
+            padding-bottom: 20px;
+
         }
 
         .nt {
