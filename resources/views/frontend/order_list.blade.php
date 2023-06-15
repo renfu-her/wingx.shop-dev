@@ -37,15 +37,15 @@
                                             實付金額：NT ${{ $value->ttl_price }} <br>
 
                                         </div>
-                                        <div class="col-12 col-md-3">
+                                        <div class="col-12 col-md-3" style="font-weight: 600">
                                             @if ($value->status == 0 || $value->status == 9)
-                                                <span class="text-icon">待付款</span>
+                                                <span class="text-icon" style="color: green">待付款</span>
                                             @elseif($value->status == 1)
-                                                <span class="text-icon">完成付款</span>
+                                                <span class="text-icon" style="color: blue">完成付款</span>
                                             @elseif($value->status == 2)
-                                                <span class="text-icon">付款失敗</span>
+                                                <span class="text-icon" style="color: red">付款失敗</span>
                                             @elseif($value->status == 3)
-                                                <span class="text-icon">取消訂單</span>
+                                                <span class="text-icon" style="color: #aaa">取消訂單</span>
                                             @endif
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 @foreach ($value['order_detail'] as $dkey => $drow)
-                                    <div class="row">
+                                    <div class="row" style="align-items: center; justify-content: center;">
                                         <div class="col-6 col-md-3">
                                             <img src="{{ $drow->image_url }}" style="height: 150px" loading="lazy">
                                         </div>
