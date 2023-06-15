@@ -21,44 +21,45 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cart as $value)
-                            <tr>
-                                <!-- image -->
-                                <td class="d-none d-sm-table-cell">
-                                    <picture class="d-block bg-light p-3 f-w-20">
-                                        <img class="img-fluid" src="{{ $value['prod_image'] }}" alt="">
-                                    </picture>
-                                </td>
-                                <!-- image -->
+                            @foreach ($cart as $value)
+                                <tr>
+                                    <!-- image -->
+                                    <td class="d-none d-sm-table-cell">
+                                        <picture class="d-block bg-light p-3 f-w-20">
+                                            <img class="img-fluid" src="{{ $value['prod_image'] }}" alt="">
+                                        </picture>
+                                    </td>
+                                    <!-- image -->
 
-                                <!-- Details -->
-                                <td>
-                                    <div class="ps-sm-3">
-                                        <h6 class="mb-2 fw-bolder">
-                                            {{ $value['prod_name'] }}
-                                        </h6>
-                                    </div>
-                                </td>
-                                <!-- Details -->
+                                    <!-- Details -->
+                                    <td>
+                                        <div class="ps-sm-3">
+                                            <h6 class="mb-2 fw-bolder">
+                                                {{ $value['prod_name'] }}
+                                            </h6>
+                                        </div>
+                                    </td>
+                                    <!-- Details -->
 
-                                <!-- Qty -->
-                                <td>
-                                    <div class="px-3">
-                                        <span class="small text-muted mt-1">{{ $value['qty'] }} @ ${{ number_format($value['price']) }}</span>
-                                    </div>
-                                </td>
-                                <!-- /Qty -->
+                                    <!-- Qty -->
+                                    <td>
+                                        <div class="px-3">
+                                            <span class="small text-muted mt-1">{{ $value['qty'] }} @
+                                                ${{ number_format($value['price']) }}</span>
+                                        </div>
+                                    </td>
+                                    <!-- /Qty -->
 
-                                <!-- Actions -->
-                                <td class="f-h-0">
-                                    <div class="d-flex justify-content-between flex-column align-items-end h-100">
-                                        <i class="ri-close-circle-line ri-lg"></i>
-                                        <p class="fw-bolder mt-3 m-sm-0">${{ number_format($value['sub_total']) }}</p>
-                                    </div>
-                                </td>
-                                <!-- /Actions -->
+                                    <!-- Actions -->
+                                    <td class="f-h-0">
+                                        <div class="d-flex justify-content-between flex-column align-items-end h-100">
+                                            <i class="ri-close-circle-line ri-lg"></i>
+                                            <p class="fw-bolder mt-3 m-sm-0">${{ number_format($value['sub_total']) }}</p>
+                                        </div>
+                                    </td>
+                                    <!-- /Actions -->
 
-                            </tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -96,8 +97,13 @@
                     <!-- Checkout Button-->
                     <a href="/category/1" class="btn btn-white w-100 text-center mt-3" role="button"><i
                             class="ri-secure-payment-line align-bottom"></i> 繼續購物</a>
-                    <a href="/checkout" class="btn btn-orange w-100 text-center mt-3" role="button"><i
-                            class="ri-paypal-line align-bottom"></i> 結帳</a>
+                    @if (Session::has('member_id'))
+                        <a href="/checkout" class="btn btn-orange w-100 text-center mt-3" role="button"><i
+                                class="ri-paypal-line align-bottom"></i> 結帳</a>
+                    @else
+                        <a href="#" onclick="loginOnSystem()" class="btn btn-orange w-100 text-center mt-3" role="button"><i
+                                class="ri-paypal-line align-bottom"></i> 結帳</a>
+                    @endif
                     <!-- Checkout Button-->
                 </div>
 

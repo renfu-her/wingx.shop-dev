@@ -144,7 +144,7 @@
                         <!-- 直接導向購物車列表以頁面 -->
                         <li class="ms-1 d-lg-inline-block">
                             <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
-                                href="/orderList">
+                                href="/order/list">
                                 <i class="ri-user-line ri-lg align-middle"></i>
                             </a>
                         </li>
@@ -158,23 +158,24 @@
                         </li>
                     @endif
 
-                    @if (Session::has('member_id'))
-                        <!-- 購物車-->
-                        <li class="ms-1 d-inline-block position-relative">
-                            <button
-                                class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                                aria-controls="offcanvasCart">
-                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
-                                @if($cart_count['cart_count'] > 0)
+
+                    <!-- 購物車-->
+                    <li class="ms-1 d-inline-block position-relative">
+                        <button
+                            class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                            <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+
+                            @if ($cart_count['cart_count'] > 0)
                                 <span
                                     class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white cart-count">
 
                                 </span>
-                                @endif
-                            </button>
-                        </li>
-                    @endif
+                            @endif
+
+                        </button>
+                    </li>
+
 
                 </ul>
                 <!-- Navbar Icons-->
@@ -311,35 +312,41 @@
                 <div>
 
                     <!-- Cart Product-->
-                    @foreach ($cart as $key => $value )
-                    <div class="row mx-0 pb-4 mb-4 border-bottom">
-                        <div class="col-3">
-                            <picture class="d-block bg-light">
-                                <img class="img-fluid" src="{{ $value['prod_image'] }}"
-                                    alt="{{ $value['prod_name'] }}">
-                            </picture>
-                        </div>
-                        <div class="col-9">
-                            <div>
-                                <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                    {{ $value['prod_name'] }}
-                                    <i class="ri-close-line"></i>
-                                </h6>
-                                <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
+                    @if (!empty($cart))
+                        @foreach ($cart as $key => $value)
+                            <div class="row mx-0 pb-4 mb-4 border-bottom">
+                                <div class="col-3">
+                                    <picture class="d-block bg-light">
+                                        <img class="img-fluid" src="{{ $value['prod_image'] }}"
+                                            alt="{{ $value['prod_name'] }}">
+                                    </picture>
+                                </div>
+                                <div class="col-9">
+                                    <div>
+                                        <h6 class="justify-content-between d-flex align-items-start mb-2">
+                                            {{ $value['prod_name'] }}
+                                            <i class="ri-close-line"></i>
+                                        </h6>
+                                        <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
+                                    </div>
+                                    <p class="fw-bolder text-end m-0">$ {{ $value['sub_total'] }}</p>
+                                </div>
                             </div>
-                            <p class="fw-bolder text-end m-0">$ {{ $value['sub_total'] }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-
+                        @endforeach
+                    @endif
                 </div>
                 <div class="border-top pt-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="m-0 fw-bolder">總金額</p>
                         <p class="m-0 fw-bolder">$ {{ $total }}</p>
                     </div>
-                    <a href="/checkout"
-                        class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
+                    @if (Session::has('member_id'))
+                        <a href="/checkout"
+                            class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
+                    @else
+                        <a href="#" onclick="loginOnSystem()"
+                            class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
+                    @endif
                     <a href="/cart"
                         class="btn btn-dark fw-bolder d-block text-center transition-all opacity-50-hover">瀏覽購物車</a>
                 </div>
@@ -1173,8 +1180,11 @@
                     $('#form-verify').submit()
                 }
             })
-
         })
+
+        const loginOnSystem = () => {
+            $('#loginModal').modal('show')
+        }
     </script>
 
     <script>

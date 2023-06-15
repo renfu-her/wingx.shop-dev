@@ -24,9 +24,9 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/thanks', [CartController::class, 'thanks']);
 route::post('/cart/order', [CartController::class, 'order']);
-route::get('/orderList', [CartController::class, 'orderList']);
 route::post('/cart/count', [OrderController::class, 'cartCount']);
 
+route::get('/order/list', [OrderController::class, 'list']);
 route::post('/order/store', [OrderController::class, 'store']);
 
 // 購物車詳細資料

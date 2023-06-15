@@ -35,7 +35,9 @@ class OrderController extends Controller
         $member = Member::find($member_id);
 
         $email = $member->email;
-        $total = $req['total'];
+        $total = intval(str_replace(',', '', $req['total']));
+
+        $ttl_total = $total + $req['ship_price'];
 
         $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
@@ -49,7 +51,7 @@ class OrderController extends Controller
             'member_id' => $member_id,
             'ship_id' => $req['ship_id'],
             'total' => $total,
-            'status' => 0,
+            'status' => 9,
             'email' => $req['email'],
             'ship_date' => date('Y-m-d H:i:s'),
             'ship_price' => $req['ship_price'],
@@ -100,16 +102,92 @@ class OrderController extends Controller
                 'zipcode' => $req['zipcode'],
                 'address' => $req['address'],
                 'mobile' => $req['mobile'],
-            ]);
+            ]
+        );
 
         // 藍新金流的寫入方式
         return NewebPay::payment(
             $order_no, // 訂單編號
-            $total, // 交易金額
+            $ttl_total, // 交易金額
             $desc, // 交易描述
             $email // 付款人信箱
         )->setClientBackURL(env('app.url'))
          ->submit();
 
+    }
+
+    // order list
+    public function list(Request $request)
+    {
+        $member_id = session()->get('member_id');
+        $member = Member::find($member_id);
+
+        $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
+
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach ($cart as $key => $value) {
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $ships = $this->getShipAll();
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
+        $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
+        foreach($orders as $key => $value){
+
+            $payment = $value->payment;
+            if($payment == 'CREDIT'){
+                $payment_name = '信用卡';
+            }
+            if($payment == 'WEBATM'){
+                $payment_name = 'WebATM';
+            }
+            if($payment == 'VACC'){
+                $payment_name = 'ATM 轉帳';
+            }
+            if($payment == 'CVS'){
+                $payment_name = '超商代碼繳費';
+            }
+
+            $orders[$key]['payment_name'] = $payment_name;
+            $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
+
+            $order_details = OrderDetail::where('order_id', $value->id)->get();
+            foreach($order_details as $k => $v){
+                $product = Product::find($v->product_id);
+                if($v->data_base == 'products'){
+                    $order_details[$k]['image_url'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
+                } else {
+                    $order_details[$k]['image_url'] = asset('upload/images/' . $product->id . '/' . $product->image);
+                }
+                $order_details[$k]['ttl_price'] = intval(str_replace(',', '', $v->total)) + $v->ship_price;
+            }
+            $orders[$key]['order_detail'] = $order_details;
+        }
+
+
+        return view(
+            'frontend.order_list',
+            compact(
+                'products',
+                'product_categories',
+                'orders',
+                'member',
+                'cart_count',
+                'total',
+                'tax',
+                'ships',
+                'cart_count',
+                'orders'
+            )
+        );
     }
 }

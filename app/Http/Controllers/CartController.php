@@ -14,7 +14,8 @@ use MingJSHK\NewebPay\Facades\NewebPay;
 class CartController extends Controller
 {
     // cart
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $member_id = session()->get('member_id');
         $member = Member::find($member_id);
@@ -28,7 +29,7 @@ class CartController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
@@ -39,14 +40,24 @@ class CartController extends Controller
         $cart_count = json_decode($cart_count->getContent(), true);
 
 
-        return view('frontend.cart',
-            compact('products','product_categories',
-                    'cart', 'total', 'tax', 'ships',
-                    'member','cart_count'));
+        return view(
+            'frontend.cart',
+            compact(
+                'products',
+                'product_categories',
+                'cart',
+                'total',
+                'tax',
+                'ships',
+                'member',
+                'cart_count'
+            )
+        );
     }
 
     // cart order
-    public function order(Request $request){
+    public function order(Request $request)
+    {
 
         $member_id = session()->get('member_id');
 
@@ -59,11 +70,11 @@ class CartController extends Controller
             'status' => 'success',
             'message' => '已經加入購物車',
         ]);
-
     }
 
     // cart checkout
-    public function checkout(Request $request){
+    public function checkout(Request $request)
+    {
 
         $member_id = session()->get('member_id');
         $member = Member::find($member_id);
@@ -77,7 +88,7 @@ class CartController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
@@ -87,32 +98,60 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        return view('frontend.checkout',
-            compact('products','product_categories',
-                    'cart', 'total', 'tax', 'ships',
-                    'member','cart_count')
+        return view(
+            'frontend.checkout',
+            compact(
+                'products',
+                'product_categories',
+                'cart',
+                'total',
+                'tax',
+                'ships',
+                'member',
+                'cart_count'
+            )
         );
-
-
     }
 
     // order payment thanks
-    public function thanks(Request $request){
+    public function thanks(Request $request)
+    {
 
         $req = $request->all();
 
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach ($cart as $key => $value) {
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $ships = $this->getShipAll();
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
         $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
-        if($neweb_pay['Status'] == 'SUCCESS'){
+        if ($neweb_pay['Status'] == 'SUCCESS') {
             $order = Order::where('order_no', $neweb_pay['Result']['MerchantOrderNo'])->first();
             $order->payment = $neweb_pay['Result']['PaymentType'];
             $order->status = 1;
             $order->save();
 
-            return view('frontend.thanks', compact('order'));
+            $status = 'success';
+
+            return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         } else {
 
-        }
+            $status = 'fail';
 
+            return view('frontend.thanks', compact('status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
+
+        }
     }
 }
