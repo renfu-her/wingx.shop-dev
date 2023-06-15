@@ -88,7 +88,7 @@
 
         .container-2 {
             padding-bottom: 20px;
-
+            margin-bottom: 20px;
         }
 
         .nt {
