@@ -68,6 +68,8 @@ class OrderController extends Controller
         $desc = '';
 
         foreach($cart as $order_detail){
+
+
             $order_detail['order_id'] = $order->id;
             if($order_detail['dataBase'] == 'products'){
                 $product = Product::find($order_detail['prod_id']);
@@ -75,8 +77,8 @@ class OrderController extends Controller
                 $name = $product->name;
             } else {
                 $product = ProductMix::find($order_detail['prod_id']);
-                $desc .= $product->description;
-                $name = $product->description;
+                $desc .= $product->description ?? '商品組合';
+                $name = $product->description ?? '商品組合';
             }
 
             OrderDetail::create([
