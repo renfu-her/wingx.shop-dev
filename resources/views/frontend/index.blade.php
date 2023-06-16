@@ -16,6 +16,16 @@
 
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </section>
 
         @foreach ($product_categories as $key => $value)
@@ -82,9 +92,10 @@
                                     <!--/ Card Product-->
                                 </div>
                             @empty
-                            <div class="swiper-slide text-center w-100" style="height: 150px; border: 1px solid; line-height: 150px;" >
-                                尚未有商品
-                            </div>
+                                <div class="swiper-slide text-center w-100"
+                                    style="height: 150px; border: 1px solid; line-height: 150px;">
+                                    尚未有商品
+                                </div>
                             @endforelse
                         </div>
 
