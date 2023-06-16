@@ -18,14 +18,15 @@
                     <table class="table table-bordered" data-order='[[ 0, "desc" ]]' id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th style="width: 6%">ID</th>
+                                <th style="width: 5%">ID</th>
                                 <th style="width: 15%">訂單編號</th>
                                 <th style="width: 10%">訂購者</th>
-                                <th style="width: 10%">金額</th>
-                                <th style="width: 10%">運費</th>
-                                <th style="width: 10%">總金額</th>
-                                <th style="width: 10%">付款類別</th>
-                                <th style="width: 10%">付款狀態</th>
+                                <th style="width: 15%">E-mail</th>
+                                <th style="width: 8%">金額</th>
+                                <th style="width: 8%">運費</th>
+                                <th style="width: 8%">總金額</th>
+                                <th style="width: 8%">付款類別</th>
+                                <th style="width: 8%">付款狀態</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                                 <td>{{ $value->id }}</td>
                                 <td>{{ $value->order_no }}</td>
                                 <td>{{ $value->member_name }}</td>
+                                <td>{{ $value->member_email }}</td>
                                 <td>{{ $value->total }}</td>
                                 <td>{{ $value->ship_price }}</td>
                                 <td>{{ $value->ttl_price }}</td>

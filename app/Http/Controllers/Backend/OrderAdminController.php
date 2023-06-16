@@ -56,6 +56,7 @@ class OrderAdminController extends Controller
 
             $member = Member::find($value->member_id);
             $orders[$key]['member_name'] = $member->name;
+            $orders[$key]['member_email'] = $member->email;
             $orders[$key]['status_name'] = $status_name;
             $orders[$key]['payment_name'] = $payment_name;
             $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
