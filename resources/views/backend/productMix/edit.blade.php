@@ -42,7 +42,7 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::textarea name="description" label="詳細內容" rows="10" />
+                                            <x:form::input name="description" label="組合說明" />
                                         </div>
 
                                         <div class="mt-3">
@@ -90,6 +90,11 @@
 
                 if($('input[name=price]').val() == ''){
                     error_msg.push('請輸入金額')
+                }
+
+
+                if($('input[name=description]').val() == ''){
+                    error_msg.push('請輸入組合說明')
                 }
 
                 if($('input[name=sort]').val() == ''){
