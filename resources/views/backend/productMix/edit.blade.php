@@ -25,7 +25,7 @@
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
                                     <x:form::form method="PUT" id="form_post" enctype="multipart/form-data"
-                                        :action="route('product_mix.update', $productMix->id)" :bind="$productMax">
+                                        :action="route('product_mix.update', $productMix->id)" :bind="$productMix">
 
                                         <div class="mt-3">
                                             <x:form::select name="product_mix1" label="組合商品 1" class="form-control"
@@ -56,7 +56,7 @@
 
                                         <div class="mt-3 text-center">
                                             <x:form::input type="hidden" name="product_id" value="{{ $product_id }}" />
-                                            <x:form::button.link class="btn-secondary" href="/backend/product/mix/{{ $productMax->id }}">取消
+                                            <x:form::button.link class="btn-secondary" href="/backend/product/mix/{{ $productMix->id }}">取消
                                             </x:form::button.link>
                                             <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
                                         </div>

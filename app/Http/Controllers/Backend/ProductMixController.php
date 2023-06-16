@@ -73,13 +73,13 @@ class ProductMixController extends Controller
     }
 
     // 產品組合編輯頁面
-    public function edit(Request $request, $product_id)
+    public function edit(Request $request, $product_id, $product_mix_id)
     {
         $req = $request->all();
 
         $product = Product::find($product_id);
 
-        $productMix = ProductMix::find($product_id);
+        $productMix = ProductMix::find($product_mix_id);
 
         $product_mix1 = Product::all();
         $product_mix2 = Product::all();
@@ -114,7 +114,7 @@ class ProductMixController extends Controller
             'status' => $req['status'],
         ]);
 
-        return redirect('/backend/product/mix/' . $product_id);
+        return redirect('/backend/product/mix/' . $req['product_id']);
     }
 
     // 產品組合刪除
