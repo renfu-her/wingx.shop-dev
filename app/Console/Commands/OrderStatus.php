@@ -17,7 +17,7 @@ class OrderStatus extends Command
     public function handle()
     {
 
-        Log::info('=== 訂單狀態更新 Log ===');
+        Log::info('=== 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
         $orders = Order::whereIn('status', [0, 9])->get();
         foreach ($orders as $key => $value) {
 
