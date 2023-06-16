@@ -123,11 +123,11 @@
                     <!-- /Navbar Toggle Icon-->
 
                     <!-- Navbar Search-->
-                    <li class="ms-1 d-inline-block">
+                    {{-- <li class="ms-1 d-inline-block">
                         <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search>
                             <i class="ri-search-2-line ri-lg align-middle"></i>
                         </button>
-                    </li>
+                    </li> --}}
                     <!-- /Navbar Search-->
 
                     @if (Session::has('member_id'))
@@ -135,7 +135,7 @@
                         <li class="ms-1 d-lg-inline-block">
                             <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
                                 href="/logout">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> 登出
                             </a>
                         </li>
                     @endif
@@ -153,7 +153,7 @@
                         <li class="ms-1 d-lg-inline-block">
                             <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
                                 data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="ri-user-line ri-lg align-middle"></i>
+                                <i class="ri-user-line ri-lg align-middle"></i> 使用者登入
                             </a>
                         </li>
                     @endif
@@ -164,7 +164,7 @@
                         <button
                             class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
                             data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                            <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+                            <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i> 購物車
 
                             @if ($cart_count['cart_count'] > 0)
                                 <span

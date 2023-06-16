@@ -119,19 +119,19 @@
                             </button>
                         </li>
 
-                        <li class="ms-1 d-inline-block">
+                        {{-- <li class="ms-1 d-inline-block">
                             <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
                                 data-pr-search>
                                 <i class="ri-search-2-line ri-lg align-middle"></i>
                             </button>
-                        </li>
+                        </li> --}}
 
                         @if (Session::has('member_id'))
                             <!-- 使用者登登出 -->
                             <li class="ms-1 d-lg-inline-block">
                                 <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center"
                                     href="/logout">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> 登出
                                 </a>
                             </li>
                         @endif
@@ -149,7 +149,7 @@
                             <li class="ms-1 d-lg-inline-block">
                                 <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
                                     href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                    <i class="ri-user-line ri-lg align-middle"></i>
+                                    <i class="ri-user-line ri-lg align-middle"></i> 使用者登入
                                 </a>
                             </li>
                         @endif
@@ -161,7 +161,7 @@
                                 class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                                 aria-controls="offcanvasCart">
-                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i>
+                                <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i> 購物車
                                 @if ($cart_count['cart_count'] > 0)
                                     <span
                                         class="fs-xs fw-bolder f-w-5 f-h-5 bg-orange rounded-lg d-block lh-1 pt-1 position-absolute top-0 end-0 z-index-20 mt-2 text-white cart-count">
@@ -215,38 +215,8 @@
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="#">關於我們</a>
                             </li>
-                            {{-- <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Our Blog</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">FAQs</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Contact</a></li> --}}
                         </ul>
                     </nav>
-                    <!-- /Footer Nav-->
-
-                    <!-- Footer Nav-->
-                    {{-- <nav class="d-none d-md-block col-md">
-                        <h6 class="mb-4 fw-bolder fs-6">Navigation</h6>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Register</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Cart</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Checkout</a></li>
-                            <li class="mb-2"><a
-                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">Account</a></li>
-                        </ul>
-                    </nav> --}}
-                    <!-- /Footer Nav-->
 
                     <!-- Footer Contact-->
                     <div class="col-12 col-md-5">
