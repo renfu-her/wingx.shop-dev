@@ -22,9 +22,9 @@ class CategoryController extends Controller
             // category_id = 0，代表全部
             $category_id = $category_id == 0 ? 0 : $category_id;
             if($category_id == 0) {
-                $products = Product::paginate(12);
+                $products = Product::paginate(24);
             } else{
-                $products = Product::where('category_id', $category_id)->paginate(12);
+                $products = Product::where('category_id', $category_id)->paginate(24);
             }
 
             foreach ($products as $product) {
