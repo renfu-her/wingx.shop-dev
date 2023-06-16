@@ -333,7 +333,7 @@
                                     <input id="signup_password" class="form-control" type="password"
                                         placeholder="密碼" name="signup_password">
                                     <span class="text-danger"
-                                        style="font-size:12px;color:#333;">(設定密碼請輸入英文大小寫+數字，共6位數以上)</span>
+                                        style="font-size:12px;color:#333;">(設定密碼請輸入英文+數字，共6位數以上)</span>
                                     <input id="confirm_password" class="form-control" type="password"
                                         placeholder="確認密碼" name="confirm_password">
                                     <p>
