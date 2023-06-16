@@ -64,6 +64,21 @@
                 </a>
             </li>
 
+            <div class="sidebar-heading">
+                訂單管理
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/backend/order">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>訂單管理</span>
+                </a>
+            </li>
+
+            <div class="sidebar-heading">
+                內容管理
+            </div>
+
             <li class="nav-item">
                 <a class="nav-link" href="/backend/mail_notify">
                     <i class="fa-solid fa-folder"></i>
@@ -79,7 +94,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="/backend/news">
                     <i class="fa-solid fa-folder"></i>
                     <span>最新消息管理</span>
@@ -91,7 +106,7 @@
                     <i class="fa-solid fa-folder"></i>
                     <span>關於我們</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

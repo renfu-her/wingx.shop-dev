@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ProductMixController;
 use App\Http\Controllers\Backend\MailNotifyController;
 use App\Http\Controllers\Backend\ShipController;
+use App\Http\Controllers\Backend\OrderAdminController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -51,6 +52,9 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
 
     // Banner 管理
     route::resource('/banner', BannerController::class);
+
+    // 訂單管理
+    route::resource('/order', OrderAdminController::class);
 
 });
 
