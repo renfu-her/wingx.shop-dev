@@ -1195,12 +1195,11 @@
 
         $(function() {
 
-            $(window).on('load', function() {
-                $.post('/cart/count', function(data) {
-                    console.log(data)
-                    $('.cart-count').html(data.cart_count)
-                })
+            $.post('/cart/count', function(data) {
+                console.log(data)
+                $('.cart-count').html(data.cart_count)
             })
+
         })
     </script>
 
