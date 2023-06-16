@@ -10,6 +10,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\Api\ImportDataController;
+use App\Http\Controllers\Test\TestController;
+
 use Illuminate\Auth\Events\Login;
 
 route::get('/', [IndexController::class, 'index']);
@@ -51,4 +53,6 @@ route::get('/logout', function(){
     session()->forget(['cart', 'member_id', 'member_name', 'member_email']);
     return redirect('/');
 });
+
+route::get('/test/order', [TestController::class, 'orderStatus']);
 
