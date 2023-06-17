@@ -37,5 +37,11 @@ class Order extends Model
         'zipcode',
         'accept_terms',
         'username',
+        'type',
+        'company_name',
+        'company_uid',
+        'company_address',
+        'amount',
+        'tax',
     ];
 }
