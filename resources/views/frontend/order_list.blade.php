@@ -12,7 +12,16 @@
                         @foreach ($orders as $key => $value)
                             <div class="container container-2 hr-line">
                                 <div class="col-12">
-                                    <span style="font-weight: 600">訂單編號：{{ $value->order_no }}</span>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span style="font-weight: 600">訂單編號：{{ $value->order_no }}</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <span style="font-weight: 600">電子發票：{{ $value->invoice_no ?? '尚未付款' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="row">
