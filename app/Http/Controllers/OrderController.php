@@ -38,6 +38,8 @@ class OrderController extends Controller
         $total = intval(str_replace(',', '', $req['total']));
 
         $ttl_total = $total + $req['ship_price'];
+        $tax = round($ttl_total * 0.05);
+        $amount = $ttl_total - $tax;
 
         $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
@@ -62,6 +64,12 @@ class OrderController extends Controller
             'address' => $req['address'],
             'mobile' => $req['mobile'],
             'accept_terms' => $req['accept_terms'],
+            'type' => $req['type'],
+            'company_name' => $req['company_name'] ?? '',
+            'company_uid' => $req['company_uid'] ?? '',
+            'company_address' => $req['company_address'] ?? '',
+            'amount' => $amount,
+            'tax' => $tax,
         ]);
 
         $order_id = $order->id;
@@ -163,11 +171,16 @@ class OrderController extends Controller
             $order_details = OrderDetail::where('order_id', $value->id)->get();
             foreach($order_details as $k => $v){
                 $product = Product::find($v->product_id);
-                if($v->data_base == 'products'){
-                    $order_details[$k]['image_url'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
-                } else {
-                    $order_details[$k]['image_url'] = asset('upload/images/' . $product->id . '/' . $product->image);
+
+                $order_details[$k]['image_url'] = '';
+                if($product){
+                    if($product->define_image == 0){
+                        $order_details[$k]['image_url'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
+                    } else {
+                        $order_details[$k]['image_url'] = asset('upload/images/' . $product->id . '/' . $product->image);
+                    }
                 }
+
                 $order_details[$k]['ttl_price'] = intval(str_replace(',', '', $v->total)) + $v->ship_price;
             }
             $orders[$key]['order_detail'] = $order_details;

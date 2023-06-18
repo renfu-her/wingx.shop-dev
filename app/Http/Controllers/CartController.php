@@ -9,6 +9,8 @@ use App\Services\CartService;
 use App\Models\Member;
 use App\Models\Order;
 
+use App\Services\EzPayService;
+
 use MingJSHK\NewebPay\Facades\NewebPay;
 
 class CartController extends Controller
@@ -138,12 +140,28 @@ class CartController extends Controller
         $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
         if ($neweb_pay['Status'] == 'SUCCESS') {
-            $order = Order::where('order_no', $neweb_pay['Result']['MerchantOrderNo'])->first();
+            $merchantOrderNo = $neweb_pay['Result']['MerchantOrderNo'];
+            $order = Order::where('order_no', $merchantOrderNo)->first();
             $order->payment = $neweb_pay['Result']['PaymentType'];
             $order->status = 1;
             $order->save();
 
             $status = 'success';
+
+            // 發票開立 ezpay
+            $ezpay = (new EzPayService())->invoice($order);
+
+            if ($ezpay['Success'] == 'SUCCESS' ) {
+                $ezpayResult = $ezpay['Result'];
+                $order = Order::where('order_no', $merchantOrderNo)->first();
+                $order->invoice_no = $ezpayResult['InvoiceNumber'];
+                $order->invoice_trans_no = $ezpayResult['InvoiceTransNo'];
+                $order->invoice_date = $ezpayResult['CreateTime'];
+                $order->invoice_random_no = $ezpayResult['RandomNum'];
+                $order->invoice_checkcode = $ezpayResult['CheckCode'];
+                $order->invoice_total_amt = $ezpayResult['TotalAmt'];
+                $order->save();
+            }
 
             return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         } else {

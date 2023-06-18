@@ -30,8 +30,56 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                    <div class="checkout-panel">
+                        <h5 class="title-checkout">選擇發票類型</h5>
+                        <div class="row">
+
+                            <!-- Email-->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="type" class="form-label">電子發票類型</label>
+                                    <select name="type" id="type" class="form-select">
+                                        <option value="">請選擇</option>
+                                        <option value="1">二連式發票(個人)</option>
+                                        <option value="2">三聯式發票(公司行號)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-panel company-form" style="display: none">
+                        <h5 class="title-checkout">三聯式發票(公司行號)</h5>
+                        <div class="row">
+
+                            <!-- Email-->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="type" class="form-label">公司行號抬頭 <span
+                                            style="color: red">*</span></label>
+                                    <input type="text" name="company_name" id="company_name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="type" class="form-label">統一發票 <span style="color: red">*</span></label>
+                                    <input type="text" name="company_uid" id="company_uid" class="form-control"
+                                        maxlength="8" oninput="validateUIDInput(this)">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="type" class="form-label">公司地址 <span style="color: red">*</span></label>
+                                    <input type="text" name="company_address" id="company_address" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="checkout-panel">
                         <h5 class="title-checkout">填寫個人資訊</h5>
@@ -68,10 +116,12 @@
                             <div class="twzipcode">
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
-                                        <select class="form-select" name="county" id="county" data-role="county"></select>
+                                        <select class="form-select" name="county" id="county"
+                                            data-role="county"></select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <select class="form-select" name="district" id="district" data-role="district"></select>
+                                        <select class="form-select" name="district" id="district"
+                                            data-role="district"></select>
                                     </div>
                                 </div>
                                 <input type="hidden" id="zipcode" name="zipcode" data-role="zipcode" />
@@ -82,7 +132,8 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="address" class="form-label">地址</label>
-                                <input type="text" class="form-control" id="address" name="address" value="{{ $member->address }}">
+                                <input type="text" class="form-control" id="address" name="address"
+                                    value="{{ $member->address }}">
                             </div>
                         </div>
 
@@ -107,7 +158,8 @@
                                     <div class="d-flex flex-grow-1 justify-content-start align-items-start">
                                         <div class="position-relative f-w-20 border p-2 me-4">
                                             <span class="checkout-item-qty">{{ $value['qty'] }}</span>
-                                            <img src="{{ $value['prod_image'] }}" alt="" class="rounded img-fluid">
+                                            <img src="{{ $value['prod_image'] }}" alt=""
+                                                class="rounded img-fluid">
                                         </div>
                                         <div>
                                             <p class="mb-1 fs-6 fw-bolder">{{ $value['prod_name'] }}</p>
@@ -134,7 +186,8 @@
                         </div>
                         <!-- Accept Terms Checkbox-->
                         <div class="form-group form-check my-4">
-                            <input type="checkbox" class="form-check-input" id="accept_terms" name="accept_terms" checked>
+                            <input type="checkbox" class="form-check-input" id="accept_terms" name="accept_terms"
+                                checked>
                             <label class="form-check-label fw-bolder" for="accept-terms">我同意 WinGx 的 <a
                                     href="#">付款條件</a></label>
                         </div>
@@ -191,11 +244,35 @@
                 let total = $('.total_price').text().replace('$ ', '');
                 let remark = $('#remark').val();
                 let mobile = $('#mobile').val();
+                let type = $('#type').val();
+                let company_name = $('#company_name').val();
+                let company_uid = $('#company_uid').val();
+                let company_address = $('#company_address').val();
 
                 $('input[name=ship_price]').val(ship_price);
                 $('input[name=total]').val(total);
 
                 let error_msg = []
+
+                if (ship_id == '') {
+                    error_msg.push('請選擇運送方式');
+                }
+
+                if (type == '') {
+                    error_msg.push('請填寫電子發票類別');
+                } else {
+                    if (type == '2') {
+                        if (company_name == '') {
+                            error_msg.push('請填寫公司抬頭');
+                        }
+                        if (company_uid == '') {
+                            error_msg.push('請填寫統一編號');
+                        }
+                        if (company_address == '') {
+                            error_msg.push('請填寫公司地址');
+                        }
+                    }
+                }
 
                 if (email == '') {
                     error_msg.push('請填寫電子郵件');
@@ -217,10 +294,6 @@
                     error_msg.push('請填寫地址');
                 }
 
-                if (ship_id == '') {
-                    error_msg.push('請選擇運送方式');
-                }
-
                 if ($('#accept_terms').prop('checked') == false) {
                     error_msg.push('請勾選同意付款條件');
                 }
@@ -237,6 +310,28 @@
                 return false;
             })
 
+            $('#type').on('change', function() {
+                let type = $(this).val();
+
+                if (type == '2') {
+                    $('.company-form').show();
+                } else {
+                    $('.company-form').hide();
+                }
+            })
+
         })
+
+        function validateUIDInput(input) {
+            // 移除非數字字符
+            input.value = input.value.replace(/[^0-9]/g, '');
+
+            // 檢查長度是否為 8 位數
+            if (input.value.length !== 8) {
+                input.setCustomValidity('請輸入 8 位數字');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
     </script>
 @endsection
