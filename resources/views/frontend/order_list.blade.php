@@ -16,12 +16,23 @@
                                         <div class="col-12 col-md-6">
                                             <span style="font-weight: 600">訂單編號：{{ $value->order_no }}</span>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <span style="font-weight: 600">電子發票：{{ $value->invoice_no ?? '尚未付款' }}</span>
-                                            </div>
+                                        <div class="col-12 col-md-6">
+                                            <span style="font-weight: 600">電子發票：{{ $value->invoice_no ?? '尚未付款' }}</span>
                                         </div>
                                     </div>
+                                    @if($value->company_name)
+                                    <div class="row">
+                                        <div class="col-12 col-md-3">
+                                            <span>公司抬頭：{{ $value->company_name }}</span>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <span>統一編號：{{ $value->company_uid }}</span>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span>公司地址：{{ $value->company_address }}</span>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="col-12">
                                     <div class="row">
