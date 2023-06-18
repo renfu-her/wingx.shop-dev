@@ -105,8 +105,6 @@ class EzPayService
 
         $reponse = $this->curl_work($url, $transaction_data_str);
 
-        dd($reponse);
-
         return $reponse;;
     }
 
@@ -140,7 +138,7 @@ class EzPayService
         $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_error = curl_errno($ch);
         curl_close($ch);
-        
+
         return json_decode($result, true);
     }
 }
