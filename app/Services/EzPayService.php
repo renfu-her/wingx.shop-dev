@@ -96,6 +96,8 @@ class EzPayService
             $hashIV
         )));
 
+        dd($postDataEncrypt, $merchantID, $hashIV, $hashKey);
+
         $transaction_data_array = array(
             'MerchantID_' => $merchantID,
             'PostData_' => $postDataEncrypt
