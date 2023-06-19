@@ -99,13 +99,6 @@ class OrderController extends Controller
             ]);
         }
 
-        $desc = implode('+', $desc);
-        $desc = substr($desc, 0, 50);
-
-        if(!$desc){
-            $desc = '商品組合';
-        }
-
         // 使用者寫入資料
         Member::where('id', $member_id)->update(
             [
@@ -118,6 +111,13 @@ class OrderController extends Controller
                 'mobile' => $req['mobile'],
             ]
         );
+
+        $desc = implode('+', $desc);
+        $desc = substr($desc, 0, 50);
+
+        if(!$desc || empty($desc) == ''){
+            $desc = '商品組合';
+        }
 
         // 藍新金流的寫入方式
         return NewebPay::payment(
