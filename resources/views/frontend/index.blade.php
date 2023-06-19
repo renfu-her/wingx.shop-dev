@@ -52,7 +52,7 @@
                     <div class="col-12 col-md-8 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-3.jpg') }}) 0% 0% / cover no-repeat;">
                             <h5 style="color: white">{{ $product_categories[2]['name'] }}</h5>
-                            <a href="/category/1" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/3" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
@@ -60,7 +60,7 @@
                     <div class="col-12 col-md-4 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-4.jpg') }}) 0% 0% / cover no-repeat">
                             <h5 style="color: white">{{ $product_categories[3]['name'] }}</h5>
-                            <a href="/category/2" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/4" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
@@ -70,7 +70,7 @@
                     <div class="col-12 col-md-4 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-4.jpg') }}) 0% 0% / cover no-repeat;">
                             <h5 style="color: white">{{ $product_categories[4]['name'] }}</h5>
-                            <a href="/category/1" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/5" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
@@ -78,7 +78,7 @@
                     <div class="col-12 col-md-8 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-5.jpg') }}) 0% 0% / cover no-repeat">
                             <h5 style="color: white">{{ $product_categories[5]['name'] }}</h5>
-                            <a href="/category/2" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/6" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
@@ -88,7 +88,7 @@
                     <div class="col-12 col-md-8 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-6.jpg') }}) 0% 0% / cover no-repeat;">
                             <h5 style="color: white">{{ $product_categories[6]['name'] }}</h5>
-                            <a href="/category/1" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/7" class="btn btn-dar" style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
@@ -96,7 +96,7 @@
                     <div class="col-12 col-md-4 pt-6">
                         <div class="p-8" style="background: url({{ asset('frontend/images/home/index-slide-7.jpg') }}) 0% 0% / cover no-repeat">
                             <h5 style="color: white">{{ $product_categories[7]['name'] }}</h5>
-                            <a href="/category/2" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
+                            <a href="/category/8" class="btn btn-dark"  style="background-color: #FF5F42 !important">購物去</a>
                         </div>
                     </div>
                 @endif
