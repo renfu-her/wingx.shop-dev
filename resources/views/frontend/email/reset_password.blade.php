@@ -1,4 +1,4 @@
-@extends('frontend.layouts.base')
+@extends('frontend.layouts.master')
 
 @section('title', '重置密碼 - ')
 
@@ -38,6 +38,7 @@
     <script>
         $(function(){
             $('#submit_verify').on('click', function(){
+
                 let error_msg = []
                 let password = $('#password').val()
                 let confirm_password = $('#confirm_password').val()
@@ -52,7 +53,7 @@
                     error_msg.push("密碼以及確認密碼不符")
                 }
 
-                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+                password_regex = /^[a-zA-Z0-9]{6,}$/i
 
                 if(password.search(password_regex) == -1){
                     error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")

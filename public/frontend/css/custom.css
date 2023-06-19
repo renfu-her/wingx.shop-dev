@@ -285,6 +285,130 @@ label {
     width: 120px !important;
 }
 
+/* reset password */
+.reset-password header {
+    height: 330px;
+    background-image: url("../images/contact_us.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -29px;
+    background-position: center center;
+}
+
+.reset-password .container .contact-form {
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.reset-password .container .contact-form .content h1 {
+    font-size: 23px;
+    color: #31353d;
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+.reset-password .container .contact-form .content label {
+    font-size: 15px;
+    color: #737373;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.reset-password .container .contact-form .col-md-6 {
+    margin-bottom: 35px;
+}
+
+.reset-password .container .contact-form .col-md-12 {
+    margin-bottom: 35px;
+}
+
+.reset-password .container .contact-form .col-md-6:nth-of-type(1) {
+    padding-right: 34px !important;
+}
+
+.reset-password .container .contact-form .col-md-6:nth-of-type(3) {
+    padding-right: 34px !important;
+}
+
+.reset-password .container .contact-form .col-md-6:nth-of-type(2) {
+    padding-left: 34px !important;
+}
+
+.reset-password .container .contact-form .col-md-6:nth-of-type(4) {
+    padding-left: 34px !important;
+}
+
+.reset-password .container .contact-form .col-md-12 {
+    padding-left: 34px !important;
+}
+
+.reset-password .container .contact-form .col-md-6 input,
+.reset-password .container .contact-form .col-md-6 select,
+.reset-password .container .contact-form .col-md-12 textarea {
+    border: 1px solid #afd4e7;
+    border-radius: 3px;
+    padding: 10px 13px;
+    width: 100%;
+    display: block;
+    color: #00a6ff;
+}
+
+.reset-password .container .contact-form .col-md-6 select {
+    color: #142e3a;
+}
+
+.reset-password .container .contact-form .col-md-12 textarea {
+    height: 160px;
+}
+
+.reset-password .container .contact-form .col-md-6 input:hover {
+    background-color: #eaf7ff;
+}
+
+.reset-password .container .contact-form button {
+    color: white;
+    background-color: #5dbbd7;
+    padding: 9px;
+    border-radius: 5px;
+    width: 98%;
+    border: 1px solid #5dbbd7;
+    text-align: center;
+    transition: 0.3s;
+    font-size: 14px;
+    display: block;
+    margin: 35px auto 0 auto;
+}
+
+.reset-password .container .contact-form button:hover {
+    border: 1px solid #5dbbd7;
+    background-color: white;
+    color: #5dbbd7;
+}
+
+.reset-password .container .contact-form .col-md-12 input,
+.reset-password .container .contact-form .col-md-12 select,
+.reset-password .container .contact-form .col-md-12 textarea {
+    border: 1px solid #afd4e7;
+    border-radius: 3px;
+    padding: 10px 13px;
+    width: 100%;
+    display: block;
+    color: #00a6ff;
+}
+
+.reset-password .container .contact-form .col-md-12 select {
+    color: #142e3a;
+}
+
+.reset-password .container .contact-form .col-md-12 input:hover {
+    background-color: #eaf7ff;
+}
+
+.position-relative {
+    border: 0;
+}
+
+
 @media (max-width: 768px) {
     .width-percent {
         width: 100px !important;
