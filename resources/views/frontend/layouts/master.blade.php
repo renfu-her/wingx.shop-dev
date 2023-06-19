@@ -272,8 +272,7 @@
                 </div>
                 <div
                     class="border-top-white-opacity justify-content-between flex-column flex-md-row align-items-center d-flex pt-6 mt-6 px-0">
-                    <p class="small opacity-75">&copy; 2021 Alpine All Rights Reserved. Template by <a
-                            class="text-white" href="https://www.pixelrocket.store">Pixel Rocket</a></p>
+                    <p class="small opacity-75">&copy; 2023 WingX All Rights Reserved.</p>
                     <nav>
                         <ul class="list-unstyled">
                             <li class="d-inline-block me-1 bg-white rounded px-2 pt-1"><i
