@@ -17,7 +17,7 @@
                             <img src="{{ config('app.url') }}/frontend/images/circlewe-logo2.png"
                                 style="width: 30px; max-width: 30px; vertical-align:middle" alt="">
                             </span><br>
-                            <span style="font-size: 12px">圈圈官網</span>
+                            <span style="font-size: 12px">WingX 官網</span>
 
                         </a>
                     </td>
