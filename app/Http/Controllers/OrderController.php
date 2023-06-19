@@ -31,6 +31,7 @@ class OrderController extends Controller
     {
         $req = $request->all();
 
+
         $member_id = $request->session()->get('member_id');
         $member = Member::find($member_id);
 
@@ -40,6 +41,8 @@ class OrderController extends Controller
         $ttl_total = $total + $req['ship_price'];
         $tax = round($ttl_total * 0.05);
         $amount = $ttl_total - $tax;
+
+        dd($req, $total, $ttl_total, $tax, $amount);
 
         $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
