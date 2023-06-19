@@ -139,8 +139,6 @@ class CartController extends Controller
 
         $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
-        dd($neweb_pay, $req);
-
         if ($neweb_pay['Status'] == 'SUCCESS') {
             $merchantOrderNo = $neweb_pay['Result']['MerchantOrderNo'];
             $order = Order::where('order_no', $merchantOrderNo)->first();
@@ -152,6 +150,8 @@ class CartController extends Controller
 
             // 發票開立 ezpay
             $ezpay = (new EzPayService())->invoice($order);
+
+            dd($ezpay);
 
             if ($ezpay['Status'] == 'SUCCESS' ) {
                 $ezpayResult = json_decode($ezpay['Result'], true);
