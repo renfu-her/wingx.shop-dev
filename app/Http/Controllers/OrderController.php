@@ -102,7 +102,9 @@ class OrderController extends Controller
         $desc = implode('+', $desc);
         $desc = substr($desc, 0, 50);
 
-        dd($desc);
+        if(!$desc){
+            $desc = '商品組合';
+        }
 
         // 使用者寫入資料
         Member::where('id', $member_id)->update(
