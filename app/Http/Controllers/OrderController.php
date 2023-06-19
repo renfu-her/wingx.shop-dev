@@ -76,9 +76,11 @@ class OrderController extends Controller
         $order_id = $order->id;
         $desc = '';
 
+        dd($cart);
+
         foreach($cart as $order_detail){
             $order_detail['order_id'] = $order->id;
-            if($order_detail['dataBase'] == 'products'){
+            if($order_detail['data_base'] == 'products'){
                 $product = Product::find($order_detail['prod_id']);
                 $desc .= $product->name;
                 $name = $product->name;
