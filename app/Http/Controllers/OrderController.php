@@ -74,19 +74,17 @@ class OrderController extends Controller
         ]);
 
         $order_id = $order->id;
-        $desc = '';
-
-        dd($cart);
+        $desc = [];
 
         foreach($cart as $order_detail){
             $order_detail['order_id'] = $order->id;
             if($order_detail['data_base'] == 'products'){
                 $product = Product::find($order_detail['prod_id']);
-                $desc .= $product->name;
+                array_push($desc, $product->name);
                 $name = $product->name;
             } else {
                 $product = ProductMix::find($order_detail['prod_id']);
-                $desc .= $product->description ?? '商品組合';
+                array_push($desc, $product->description ?? '商品組合');
                 $name = $product->description ?? '商品組合';
             }
 
@@ -101,7 +99,10 @@ class OrderController extends Controller
             ]);
         }
 
+        $desc = implode('+', $desc);
         $desc = substr($desc, 0, 50);
+
+        dd($desc);
 
         // 使用者寫入資料
         Member::where('id', $member_id)->update(
