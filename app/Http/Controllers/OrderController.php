@@ -42,8 +42,6 @@ class OrderController extends Controller
         $tax = round($ttl_total * 0.05);
         $amount = $ttl_total - $tax;
 
-        dd($req, $total, $ttl_total, $tax, $amount);
-
         $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
         $cart = session()->get('cart');
@@ -80,7 +78,7 @@ class OrderController extends Controller
 
         foreach($cart as $order_detail){
             $order_detail['order_id'] = $order->id;
-            if($order_detail['dataBase'] == 'products'){
+            if($order_detail['data_base'] == 'products'){
                 $product = Product::find($order_detail['prod_id']);
                 $desc .= $product->name;
                 $name = $product->name;
