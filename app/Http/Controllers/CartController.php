@@ -150,9 +150,7 @@ class CartController extends Controller
 
             // 發票開立 ezpay
             $ezpay = (new EzPayService())->invoice($order);
-
-            dd($ezpay);
-
+            
             if ($ezpay['Status'] == 'SUCCESS' ) {
                 $ezpayResult = json_decode($ezpay['Result'], true);
                 $order = Order::where('order_no', $merchantOrderNo)->first();
