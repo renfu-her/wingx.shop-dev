@@ -13,7 +13,7 @@
     <meta name="keywords" content="">
 
     <!-- Page Title -->
-    <title>WingX 翼優 - 後臺系統</title>
+    <title>WingX 翼優</title>
 
 
     <!-- Favicon -->
