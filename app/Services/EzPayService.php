@@ -20,9 +20,9 @@ class EzPayService
     // ezpay order
     public function invoice($request)
     {
-        $merchantID = env('EZPAY_MERCHANT_ID');
-        $hashKey = env('EZPAY_HASH_KEY');
-        $hashIV = env('EZPAY_HASH_IV');
+        $merchantID = config('ezpay.EZPAY_MERCHANT_ID');
+        $hashKey = config('ezpay.EZPAY_HASH_KEY');
+        $hashIV = config('ezpay.EZPAY_HASH_IV');
 
         // order
         $order = Order::where('order_no', $request->order_no)->first();
