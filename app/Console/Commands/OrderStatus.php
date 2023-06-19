@@ -27,7 +27,7 @@ class OrderStatus extends Command
             $check_value = $this->check_value($amt, $mno);
 
             $url = "https://core.newebpay.com/API/QueryTradeInfo";
-            if (env('APP_ENV') == 'dev') {
+            if (config('config.APP_ENV') == 'dev') {
                 $url = "https://ccore.newebpay.com/API/QueryTradeInfo";
             }
 
