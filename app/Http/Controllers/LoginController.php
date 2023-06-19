@@ -14,6 +14,7 @@ use App\Models\ProductCategory;
 use App\Models\Banner;
 
 use App\Services\MailNotifyService;
+use App\Services\CartService;
 
 class LoginController extends Controller
 {
@@ -142,13 +143,30 @@ class LoginController extends Controller
         $input = $request->all();
         $verify = $input['verify'];
 
+
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+        $banners = Banner::orderByDesc('id')->get();
+
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach($cart as $key => $value){
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
         $member = Member::where('email_verify', $verify)
             ->first();
         if ($member) {
 
             return view(
                 'frontend.email.reset_password',
-                compact('verify')
+                compact('verify', 'products', 'product_categories', 'banners', 'total', 'tax', 'cart_count')
             );
         } else {
             return redirect('/')->with(['message' => 'Email或者驗證碼輸入錯誤']);
