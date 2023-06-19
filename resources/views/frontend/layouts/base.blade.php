@@ -1051,7 +1051,7 @@
                 password_regex = /^[a-zA-Z0-9]{6,}$/i
 
                 if (signup_password.search(password_regex) == -1) {
-                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                    error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
                 }
 
                 if (error_msg.length > 0) {
@@ -1092,10 +1092,10 @@
                     }
                 }
 
-                password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/
+                password_regex = /^[a-zA-Z0-9]{6,}$/i
 
                 if (password.search(password_regex) == -1) {
-                    error_msg.push("請輸入6 位以上，密碼必須包含大小寫字母以及數字組成")
+                    error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
                 }
 
                 if (error_msg.length > 0) {
