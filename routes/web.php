@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductIndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Api\ImportDataController;
 use App\Http\Controllers\Test\TestController;
@@ -30,6 +31,10 @@ route::post('/cart/count', [OrderController::class, 'cartCount']);
 
 route::get('/order/list', [OrderController::class, 'list']);
 route::post('/order/store', [OrderController::class, 'store']);
+
+// 會員個人資料
+route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+route::put('/profile/update/{member_id}', [ProfileController::class, 'update'])->name('profile.update');
 
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);

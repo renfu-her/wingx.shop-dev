@@ -16,5 +16,9 @@ class Member extends Model
         'email_verify',
         'mobile',
         'status',
+        'county',
+        'district',
+        'zipcode',
+        'address',
     ];
 }

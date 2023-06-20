@@ -4,7 +4,12 @@
     <section class="mt-5 container ">
         <section class="replica" id="replica">
             <div class="container">
-                <div class="row">
+                <div class="row gy-5">
+                    <div class="col-12 text-center">
+                        <button class="btn btn-primary" onclick="location.href='/order/list'">訂單列表</button>
+                        <button class="btn btn-primary" onclick="location.href='/profile'">個人資料</button>
+
+                    </div>
                     <div class="col-md-12">
                         <div class="text-center">
                             <h5>訂單列表</h5>

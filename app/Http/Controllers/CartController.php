@@ -20,6 +20,10 @@ class CartController extends Controller
     {
 
         $member_id = session()->get('member_id');
+        if(!$member_id){
+            redirect('/')->with(['message' => '請先登入會員']);
+        }
+
         $member = Member::find($member_id);
 
         $products = $this->getProduct();
@@ -79,6 +83,10 @@ class CartController extends Controller
     {
 
         $member_id = session()->get('member_id');
+        if(empty($member_id)){
+            return redirect('/')->with(['message' => '請先登入會員']);
+        }
+
         $member = Member::find($member_id);
 
         $products = $this->getProduct();
@@ -150,7 +158,7 @@ class CartController extends Controller
 
             // 發票開立 ezpay
             $ezpay = (new EzPayService())->invoice($order);
-            
+
             if ($ezpay['Status'] == 'SUCCESS' ) {
                 $ezpayResult = json_decode($ezpay['Result'], true);
                 $order = Order::where('order_no', $merchantOrderNo)->first();
