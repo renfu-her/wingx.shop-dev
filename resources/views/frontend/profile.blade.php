@@ -81,7 +81,7 @@
     <script>
         $(function() {
 
-            $('.password-input').find('label').text('密碼 <span style="color: red">(保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
+            $('.password-input').find('label').html('密碼 <span style="color: red">(保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
 
             const twzipcode = new TWzipcode();
 
