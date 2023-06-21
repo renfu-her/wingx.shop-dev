@@ -50,6 +50,10 @@
                                     <x:form::input name="address" label="地址" />
                                 </div>
 
+                                <div class="mt-3">
+                                    <x:form::input name="password" label="密碼 (保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)" value="" />
+                                </div>
+
                                 <div class="mt-3 text-center">
                                     <x:form::button.link class="btn-secondary" href="/">
                                         取消

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Member;
 
@@ -68,7 +69,6 @@ class ProfileController extends Controller
 
         $member = Member::find($member_id);
 
-
         $member->update([
             'name' => $req['name'],
             'email' => $req['email'],
@@ -78,6 +78,12 @@ class ProfileController extends Controller
             'zipcode' => $req['zipcode'],
             'address' => $req['address'],
         ]);
+
+        if(trim($req['password']) != ''){
+            $member->update([
+                'password' => Hash::make($req['password']),
+            ]);
+        }
 
         return redirect('/profile')->with(['message' => '會員資料更新成功']);
     }
