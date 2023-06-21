@@ -81,7 +81,7 @@
     <script>
         $(function() {
 
-            $('input[name=password-input]').find('label').text('密碼 <span style="color: red">(保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
+            $('.password-input').find('label').text('密碼 <span style="color: red">(保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
 
             const twzipcode = new TWzipcode();
 
@@ -96,15 +96,17 @@
                 let mobile = $('input[name=mobile]').val()
                 let name = $('input[name=name]').val()
 
-                if($.trim(password) != ''){
-                    password_regex = /^[a-zA-Z0-9]{6,}$/i
+                console.log(password)
 
-                    consoe.log(password)
+                // if($.trim(password) != ''){
+                //     password_regex = /^[a-zA-Z0-9]{6,}$/i
 
-                    if(password.search(password_regex) == -1){
-                        error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
-                    }
-                }
+                //     consoe.log(password)
+
+                //     if(password.search(password_regex) == -1){
+                //         error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
+                //     }
+                // }
 
                 if($.trim(name) == ''){
                     error_msg.push("請輸入名稱")
