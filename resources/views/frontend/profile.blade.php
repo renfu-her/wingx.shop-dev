@@ -108,11 +108,17 @@
                     error_msg.push("請輸入地址");
                 }
 
-                password_regex = /^[a-zA-Z0-9]{6,}$/i
+                if(password.length > 0){
+                    password_regex = /^[a-zA-Z0-9]{6,}$/i
 
-                if(password.search(password_regex) == -1){
-                    error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
+                    console.log(password.search(password_regex))
+
+                    if(password.search(password_regex) == -1){
+                        error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
+                    }
                 }
+
+
 
                 if(error_msg.length > 0){
                     alert(error_msg.join("\n"));
