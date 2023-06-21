@@ -89,43 +89,42 @@
 
             $('#form_post').on('submit', function(){
 
-                let error_msg = []
+                let error_msg = [];
 
-                let password = $('input[name=password]').val()
-                let address = $('input[name=address]').val()
-                let mobile = $('input[name=mobile]').val()
-                let name = $('input[name=name]').val()
+                let password = $('input[name=password]').val();
+                let address = $('input[name=address]').val();
+                let mobile = $('input[name=mobile]').val();
+                let name = $('input[name=name]').val();
 
-                console.log(password)
+                console.log(password);
 
                 if($.trim(password) != ''){
-                    password_regex = /^[a-zA-Z0-9]{6,}$/i
+                    password_regex = /^[a-zA-Z0-9]{6,}$/i;
 
-                    consoe.log(password)
+                    consoe.log(password);
 
                     if(password.search(password_regex) == -1){
-                        error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
+                        error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成");
                     }
                 }
 
                 if($.trim(name) == ''){
-                    error_msg.push("請輸入名稱")
+                    error_msg.push("請輸入名稱");
                 }
 
                 if($.trim(mobile) == ''){
-                    error_msg.push("請輸入手機號碼")
+                    error_msg.push("請輸入手機號碼");
                 }
 
                 if($.trim(address) == ''){
-                    error_msg.push("請輸入地址")
+                    error_msg.push("請輸入地址");
                 }
 
                 if(error_msg.length > 0){
-                    alert(error_msg.join("\n"))
-                    return false
+                    alert(error_msg.join("\n"));
+                    return false;
                 }
 
-                return false
             })
         })
     </script>
