@@ -84,6 +84,42 @@
             const twzipcode = new TWzipcode();
 
             twzipcode.set({{ $member->zipcode }})
+
+            $('#form_post').on('submit', function(){
+
+                let error_msg = []
+
+                let password = $('#password').val()
+                let address = $('#address').val()
+                let mobile = $('#mobile').val()
+                let name = $('#name').val()
+
+                if($.trim(password) != ''){
+                    password_regex = /^[a-zA-Z0-9]{6,}$/i
+
+                    if(password.search(password_regex) == -1){
+                        error_msg.push("請輸入6 位以上，密碼必須包含字母以及數字組成")
+                    }
+                }
+
+                if($.trim(name) == ''){
+                    error_msg.push("請輸入名稱")
+                }
+
+                if($.trim(mobile) == ''){
+                    error_msg.push("請輸入手機號碼")
+                }
+
+                if($.trim(address) == ''){
+                    error_msg.push("請輸入地址")
+                }
+
+                if(error_msg.length > 0){
+                    alert(error_msg.join("\n"))
+                    return false
+                }
+
+            })
         })
     </script>
 @endsection
