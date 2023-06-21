@@ -89,10 +89,10 @@
 
                 let error_msg = []
 
-                let password = $('#password').val()
-                let address = $('#address').val()
-                let mobile = $('#mobile').val()
-                let name = $('#name').val()
+                let password = $('input[name=password]').val()
+                let address = $('input[name=address]').val()
+                let mobile = $('input[name=mobile]').val()
+                let name = $('input[name=name]').val()
 
                 if($.trim(password) != ''){
                     password_regex = /^[a-zA-Z0-9]{6,}$/i
