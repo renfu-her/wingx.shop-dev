@@ -32,8 +32,8 @@
                                             <x:form::input type="email" name="email" label="E-mail" required />
                                         </div>
 
-                                        <div class="mt-3">
-                                            <x:form::input type="password" name="password" label="密碼(保持原來方式，請保持空白)" value="" />
+                                        <div class="mt-3 password-input">
+                                            <x:form::input type="password" name="password" label="密碼" value="" />
                                         </div>
 
                                         <div class="mt-3">
@@ -66,6 +66,8 @@
 @section('js')
     <script>
         $(function() {
+
+            $('.password-input').find('label').html('密碼 <span style="color: red">(保留密碼，請留下空白；更改密碼，請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
 
             $('#form_post').on('submit', function(){
                 let error_msg = [];

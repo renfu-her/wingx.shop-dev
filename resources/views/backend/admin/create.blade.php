@@ -31,7 +31,7 @@
                                             <x:form::input type="email" name="email" label="E-mail" required />
                                         </div>
 
-                                        <div class="mt-3">
+                                        <div class="mt-3 password-input">
                                             <x:form::input type="password" name="password" label="密碼" required/>
                                         </div>
 
@@ -66,6 +66,8 @@
 
     <script>
         $(function() {
+
+            $('.password-input').find('label').html('密碼 <span style="color: red">(請輸入6 位以上，密碼必須包含字母以及數字組成)</span>')
 
             $('#form_post').on('submit', function(){
                 let error_msg = [];
