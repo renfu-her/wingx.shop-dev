@@ -181,10 +181,10 @@ class OrderController extends Controller
             if($payment == 'Credit_CreditCard'){
                 $payment_name = '信用卡';
             }
-            if($payment == 'WEBATM'){
+            if($payment == 'WebATM'){
                 $payment_name = 'WebATM';
             }
-            if($payment == 'VACC'){
+            if($payment == 'ATM'){
                 $payment_name = 'ATM 轉帳';
             }
             if($payment == 'CVS'){
