@@ -178,7 +178,7 @@ class OrderController extends Controller
         foreach($orders as $key => $value){
 
             $payment = $value->payment;
-            if($payment == 'CREDIT'){
+            if($payment == 'Credit_CreditCard'){
                 $payment_name = '信用卡';
             }
             if($payment == 'WEBATM'){
