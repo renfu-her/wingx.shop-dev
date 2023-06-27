@@ -12,10 +12,18 @@ use App\Models\ProductMix;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Member;
-use MingJSHK\NewebPay\Facades\NewebPay;
+// use MingJSHK\NewebPay\Facades\NewebPay;
+use TsaiYiHua\ECPay\Checkout;
 
 class OrderController extends Controller
 {
+
+    protected $checkout;
+
+    public function __construct(Checkout $checkout)
+    {
+        $this->checkout = $checkout;
+    }
 
     // 訂單數量
     public function cartCount(Request $request){
@@ -123,13 +131,22 @@ class OrderController extends Controller
         }
 
         // 藍新金流的寫入方式
-        return NewebPay::payment(
-            $order_no, // 訂單編號
-            $ttl_total, // 交易金額
-            $desc, // 交易描述
-            $email // 付款人信箱
-        )->setClientBackURL(env('app.url'))
-         ->submit();
+        // return NewebPay::payment(
+        //     $order_no, // 訂單編號
+        //     $ttl_total, // 交易金額
+        //     $desc, // 交易描述
+        //     $email // 付款人信箱
+        // )->setClientBackURL(env('app.url'))
+        //  ->submit();
+
+        $formData = [
+            'CustomField1' => $order_no,
+            'ItemDescription' => $desc,
+            'ItemName' => $desc,
+            'TotalAmount' => $ttl_total,
+            'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
+        ];
+        return $this->checkout->setReturnUrl(env('APP_URL') . '/cart/thanks')->setPostData($formData)->send();
 
     }
 

@@ -129,6 +129,7 @@ class CartController extends Controller
 
         $req = $request->all();
 
+
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
 
@@ -145,32 +146,32 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        $neweb_pay = NewebPay::decode($req['TradeInfo']);
+        // $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
-        if ($neweb_pay['Status'] == 'SUCCESS') {
-            $merchantOrderNo = $neweb_pay['Result']['MerchantOrderNo'];
+        if($req['RtnCode'] == 1){
+
+            $merchantOrderNo = $req['CustomField1'];
             $order = Order::where('order_no', $merchantOrderNo)->first();
-            $order->payment = $neweb_pay['Result']['PaymentType'];
+            $order->payment = $req['PaymentType'];
             $order->status = 1;
             $order->save();
 
-            $status = 'success';
-
             // 發票開立 ezpay
-            $ezpay = (new EzPayService())->invoice($order);
+            // $ezpay = (new EzPayService())->invoice($order);
 
-            if ($ezpay['Status'] == 'SUCCESS' ) {
-                $ezpayResult = json_decode($ezpay['Result'], true);
-                $order = Order::where('order_no', $merchantOrderNo)->first();
-                $order->invoice_no = $ezpayResult['InvoiceNumber'];
-                $order->invoice_trans_no = $ezpayResult['InvoiceTransNo'];
-                $order->invoice_date = $ezpayResult['CreateTime'];
-                $order->invoice_random_no = $ezpayResult['RandomNum'];
-                $order->invoice_checkcode = $ezpayResult['CheckCode'];
-                $order->invoice_total_amt = $ezpayResult['TotalAmt'];
-                $order->save();
-            }
+            // if ($ezpay['Status'] == 'SUCCESS' ) {
+            //     $ezpayResult = json_decode($ezpay['Result'], true);
+            //     $order = Order::where('order_no', $merchantOrderNo)->first();
+            //     $order->invoice_no = $ezpayResult['InvoiceNumber'];
+            //     $order->invoice_trans_no = $ezpayResult['InvoiceTransNo'];
+            //     $order->invoice_date = $ezpayResult['CreateTime'];
+            //     $order->invoice_random_no = $ezpayResult['RandomNum'];
+            //     $order->invoice_checkcode = $ezpayResult['CheckCode'];
+            //     $order->invoice_total_amt = $ezpayResult['TotalAmt'];
+            //     $order->save();
+            // }
 
+            $status = 'success';
             return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         } else {
 
