@@ -59,6 +59,5 @@ route::get('/logout', function(){
     return redirect('/');
 });
 
-// Test
+// Test route
 route::get('/test/order', [TestController::class, 'orderStatus']);
-
