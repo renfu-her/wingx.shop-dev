@@ -27,11 +27,10 @@ jobs:
           php artisan config:cache
 
   push_to_server:
-    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Push to server
-      uses: appleboy/scp-action@master
+      uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ secrets.SERVER_HOST_BUILD }}
         username: ${{ secrets.SERVER_USER_BUILD }}
