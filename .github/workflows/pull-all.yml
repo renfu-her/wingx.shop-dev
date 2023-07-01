@@ -38,6 +38,7 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           cd ~/htdocs/wingx.shop
+          git config --global --add safe.directory /home/wingx/htdocs/wingx.shop
           git pull
           composer install
           echo "yes" | php artisan migrate
