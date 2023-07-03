@@ -187,7 +187,7 @@ class OrderController extends Controller
                 $payment_name = '超商代碼繳費';
             }
 
-            $orders[$key]['payment_name'] = $payment_name ?? '';
+            $orders[$key]['payment_name'] = $payment_name ?? '尚未選擇付款方式';
             $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
 
             $order_details = OrderDetail::where('order_id', $value->id)->get();
