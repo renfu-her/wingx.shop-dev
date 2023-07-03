@@ -138,7 +138,7 @@ class OrderController extends Controller
             'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
         ];
 
-        
+
 
         return $this->checkout->setReturnUrl(env('APP_URL') . '/cart/thanks')->setPostData($formData)->send();
 
@@ -147,6 +147,11 @@ class OrderController extends Controller
     // order list
     public function list(Request $request)
     {
+
+
+        $req = $request->all();
+        dd($req);
+
         $member_id = session()->get('member_id');
         $member = Member::find($member_id);
 
