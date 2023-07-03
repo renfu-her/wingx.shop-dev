@@ -149,9 +149,6 @@ class OrderController extends Controller
     {
 
 
-        $req = $request->all();
-        dd($req);
-
         $member_id = session()->get('member_id');
         $member = Member::find($member_id);
 
@@ -190,7 +187,7 @@ class OrderController extends Controller
                 $payment_name = '超商代碼繳費';
             }
 
-            $orders[$key]['payment_name'] = $payment_name;
+            $orders[$key]['payment_name'] = $payment_name ?? '';
             $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
 
             $order_details = OrderDetail::where('order_id', $value->id)->get();
