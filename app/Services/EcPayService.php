@@ -60,12 +60,14 @@ class EcPayService extends BaseService
         $data_str = strtoupper(urlencode(json_encode($data)));
 
         $cipher = "aes-128-cbc";
-        $encrypted = trim(bin2hex(openssl_encrypt($data_str, $cipher, $hashKey, OPENSSL_RAW_DATA, $hashIV)));
+        $encrypted = base64_encode(openssl_encrypt($data_str,
+                $cipher, $hashKey, OPENSSL_RAW_DATA, $hashIV));
 
         $invoice = Http::post($url, [
             'MerchantID' => $merchantId,
             'RqHeader' => [
                 'Timestamp' => time(),
+                'Revision' => '3.0.0',
             ],
             'Data' => strtoupper($encrypted),
         ]);
