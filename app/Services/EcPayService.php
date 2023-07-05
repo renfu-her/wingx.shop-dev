@@ -57,7 +57,7 @@ class EcPayService extends BaseService
             $data['Print'] = 0;
         }
 
-        $data_str = strtoupper(urlencode(json_encode($data)));
+        $data_str = urlencode(json_encode($data));
 
         $cipher = "aes-128-cbc";
         $encrypted = base64_encode(openssl_encrypt($data_str,
@@ -72,7 +72,7 @@ class EcPayService extends BaseService
             'Data' => strtoupper($encrypted),
         ]);
 
-        dd($invoice->body(), $encrypted);
+        dd($invoice->body(), $data_str, $encrypted);
 
     }
 
