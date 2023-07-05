@@ -14,6 +14,7 @@ use App\Models\OrderDetail;
 class TestController extends Controller
 {
 
+
     // 檢查訂單狀態
     public function queryOrderStatus(){
         Log::info('=== Test 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
@@ -46,6 +47,7 @@ class TestController extends Controller
             ]);
 
             Log::info($orderStatus->body());
+            sleep(5);
 
         }
         Log::info('=== Test 訂單狀態更新完成 ===');
