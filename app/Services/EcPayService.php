@@ -53,6 +53,7 @@ class EcPayService extends BaseService
             'CarrierNum' => '',
             'TaxType' => 1,
             'SalesAmount' => $order_price,
+            'InvType' => '07',
             'vat' => 1,
         ];
 
