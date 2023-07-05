@@ -24,7 +24,7 @@ class OrderStatus extends Command
 
             // $order_status = (new QueryTradeInfo())->getData($value->order_no)->query();
             // Log::info($order_status);
-
+            sleep(5);
         }
         Log::info('=== 訂單狀態更新完成 ===');
     }
