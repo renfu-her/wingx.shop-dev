@@ -48,11 +48,11 @@ class EcPayService extends BaseService
             'CustomerAddr' => $order->company_address,
             'CustomerPhone' => $order->mobile,
             'CustomerEmail' => $order->email,
-            'Donation' => 0,
+            'Donation' => "0",
             'CarrierType' => '',
             'CarrierNum' => '',
             'TaxType' => 1,
-            'SalesAmount' => $order_price,
+            'SalesAmount' => (int)$order_price,
             'InvType' => '07',
             'vat' => 1,
         ];
@@ -78,6 +78,8 @@ class EcPayService extends BaseService
                 'ItemRemark' => '',
             ],
         ];
+
+        dd($data);
 
         $input = [
             'MerchantID' => $merchantId,
