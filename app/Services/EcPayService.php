@@ -57,7 +57,7 @@ class EcPayService extends BaseService
             $data['Print'] = 0;
         }
 
-        $data_str = urlencode(http_build_query($data));
+        $data_str = urlencode(json_encode($data));
 
         dd($data_str);
 
