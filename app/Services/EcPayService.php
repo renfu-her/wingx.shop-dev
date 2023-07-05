@@ -59,7 +59,7 @@ class EcPayService extends BaseService
 
         $data_str = urlencode(json_encode($data));
 
-        $cipher = "aes-128-cbc";
+        $cipher = "AES-128-CBC";
         $encrypted = base64_encode(openssl_encrypt($data_str,
                 $cipher, $hashKey, OPENSSL_RAW_DATA, $hashIV));
 
