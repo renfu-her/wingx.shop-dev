@@ -57,50 +57,22 @@ class EcPayService extends BaseService
             $data['Print'] = 0;
         }
 
-        // 依照英文字母順序排序，再串接為字串
-        ksort($data);
-        $data_json = json_encode($data, JSON_UNESCAPED_UNICODE);
-        $data_json = str_replace('{','',$data_json);
-        $data_json = str_replace('}','',$data_json);
-        $data_json = str_replace('"','',$data_json);
-        $data_json = str_replace(':','=',$data_json);
-        $data_json = str_replace(',','&',$data_json);
+        $data_str = urlencode(http_build_query($data));
 
-        //  塞入HashKey以及HashIV
-        $originStr = 'HashKey=' . $hashKey . '&' .$data_json. '&HashIV=' . $hashIv;
+        dd($data_str);
 
-        //  以urlencode做URI(Uniform Resource Identifier)的轉換
-        $originStr = urlencode($originStr);
 
-        //  轉為小寫
-        $originStr = strtolower($originStr);
+        // $invoice = Http::post($url, [
+        //     'MerchantID' => $merchantId,
+        //     'RqHeader' => [
+        //         'Timestamp' => time(),
+        //     ],
+        //     'Data' => strtoupper($data_post),
+        // ]);
 
-        //  利用str_replace以其他字符替换字符串中的一些字符
-        $originStr = str_replace('%20', '+', $originStr);
-        $originStr = str_replace('%21', '!', $originStr);
-        $originStr = str_replace('%2a', '*', $originStr);
-        $originStr = str_replace('%2d', '-', $originStr);
-        $originStr = str_replace('%2e', '.', $originStr);
-        $originStr = str_replace('%28', '(', $originStr);
-        $originStr = str_replace('%29', ')', $originStr);
-        $originStr = str_replace('%5f', '_', $originStr);
-
-        //  MD5加密方式
-        $hashed = hash("md5", $originStr);
-
-        //  轉為大寫
-        $checkMacValue = strtoupper($hashed);
-
-        $invoice = Http::post($url, [
-            'MerchantID' => $merchantId,
-            'RqHeader' => [
-                'Timestamp' => time(),
-            ],
-            'Data' => strtoupper($hashed),
-        ]);
-
-        dd($invoice->body(), $checkMacValue);
+        // dd($invoice->body(), $data_post);
 
     }
+
 
 }
