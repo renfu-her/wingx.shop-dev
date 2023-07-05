@@ -46,7 +46,9 @@ class TestController extends Controller
                 'CheckMacValue' => $checkMacValue,
             ]);
 
-            Log::info($orderStatus->body());
+            parse_str($orderStatus->body(), $orderStatusArray);
+
+            Log::info($orderStatusArray);
             sleep(5);
 
         }
