@@ -48,7 +48,10 @@ class EcPayService extends BaseService
             'CustomerAddr' => $order->company_address,
             'CustomerPhone' => $order->mobile,
             'CustomerEmail' => $order->email,
+            "ClearanceMark" => "1",
+            "Print" => "1",
             'Donation' => "0",
+            'LoveCode' => '',
             'CarrierType' => '',
             'CarrierNum' => '',
             'TaxType' => 1,
@@ -60,10 +63,9 @@ class EcPayService extends BaseService
         if(!empty($order->company_uid)){
             $data['CustomerIdentifier'] = $order->company_id;
             $data['CustomerName'] = $order->company_name;
-            $data['Print'] = 1;
         } else {
+            $data["CustomerIdentifier"] = "";
             $data['CustomerName'] = $order->name;
-            $data['Print'] = 0;
         }
 
         $data['Items'] = [
