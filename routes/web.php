@@ -39,6 +39,7 @@ route::put('/profile/update/{member_id}', [ProfileController::class, 'update'])-
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
 
+
 // 登入
 route::get('login', [LoginController::class, 'index']);
 route::post('login', [LoginController::class, 'login']);
@@ -63,5 +64,6 @@ route::get('/logout', function(){
 route::group(['prefix' => 'test'], function(){
     route::get('/order', [TestController::class, 'orderStatus']);
     route::get('/queryOrderStatus', [TestController::class, 'queryOrderStatus']);
+    route::get('/eInvoice/{order_no}', [TestController::class, 'eInvoice']);
 });
 

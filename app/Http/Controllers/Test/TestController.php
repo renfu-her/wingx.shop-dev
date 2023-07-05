@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Order;
 use App\Models\OrderDetail;
 
+use App\Services\EcPayService;
+
 class TestController extends Controller
 {
 
@@ -63,6 +65,16 @@ class TestController extends Controller
 
         }
         Log::info('=== Test 訂單狀態更新完成 ===');
+    }
+
+    // 檢查電子發票
+    public function eInvoice(Request $request, $order_no){
+
+        $ecpayService = new EcPayService();
+        $ecpayService->ecpayInvoice($order_no);
+
+        dd($ecpayService);
+
     }
 
 
