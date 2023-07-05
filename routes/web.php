@@ -60,5 +60,8 @@ route::get('/logout', function(){
 });
 
 // Test route
-route::get('/test/order', [TestController::class, 'orderStatus']);
+route::group(['prefix' => 'test'], function(){
+    route::get('/order', [TestController::class, 'orderStatus']);
+    route::get('/queryOrderStatus', [TestController::class, 'queryOrderStatus']);
+});
 

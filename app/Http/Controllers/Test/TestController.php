@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Test;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use TsaiYiHua\ECPay\QueryTradeInfo;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -73,4 +74,19 @@ class TestController extends Controller
 
         return $hash;
     }
+
+    // 檢查訂單狀態
+    public function queryOrderStatus(){
+        Log::info('=== Test 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
+        $orders = Order::whereIn('status', [0, 9])->get();
+        foreach ($orders as $key => $value) {
+
+            $order_status = (new QueryTradeInfo())->getData($value->order_no)->query();
+            Log::info($order_status);
+
+        }
+        Log::info('=== Test 訂單狀態更新完成 ===');
+    }
+
+
 }
