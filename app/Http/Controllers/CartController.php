@@ -150,6 +150,7 @@ class CartController extends Controller
 
         if($req['RtnCode'] == 1){
 
+            dd($req);
             $merchantOrderNo = $req['CustomField1'];
             $order = Order::where('order_no', $merchantOrderNo)->first();
             $order->payment = $req['PaymentType'];
