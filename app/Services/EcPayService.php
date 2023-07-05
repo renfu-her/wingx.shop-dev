@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Services\BaseService;
 
-use App\Models\Order;
 use Illuminate\Support\Facades\Http;
+use Ecpay\Sdk\Factories\Factory;
+
+use App\Models\Order;
 
 /**
  * Class EcPayService
@@ -28,6 +30,13 @@ class EcPayService extends BaseService
             $hashIV = config('config.INVOCE_HASH_IV');
         }
 
+        $factory = new Factory([
+            'hashKey' => $hashKey,
+            'hashIv' => $hashIV,
+        ]);
+
+        $postService = $factory->create('PostWithAesJsonResponseService');
+
         $order = Order::where('order_no', $order_no)->first();
 
         $order_price = $order->amount + $order->tax;
@@ -43,8 +52,7 @@ class EcPayService extends BaseService
             'CarrierType' => '',
             'CarrierNum' => '',
             'TaxType' => 1,
-            'SalesAmount' => $order->amount + $order->tax,
-            'InvType' => '07',
+            'SalesAmount' => $order_price,
             'vat' => 1,
         ];
 
@@ -62,29 +70,24 @@ class EcPayService extends BaseService
                 'ItemName' => '商品',
                 'ItemCount' => 1,
                 'ItemWord' => '個',
-                'ItemPrice' => $order->amount + $order->tax,
+                'ItemPrice' => $order_price,
                 'ItemTaxType' => 1,
-                'ItemAmount' => $order->amount + $order->tax,
+                'ItemAmount' => $order_price,
                 'ItemRemark' => '',
             ],
         ];
 
-        $data_str = urlencode(json_encode($data));
-
-        $cipher = "AES-128-CBC";
-        $encrypted = base64_encode(openssl_encrypt($data_str,
-                $cipher, $hashKey, OPENSSL_RAW_DATA, $hashIV));
-
-        $invoice = Http::post($url, [
+        $input = [
             'MerchantID' => $merchantId,
             'RqHeader' => [
                 'Timestamp' => time(),
-                'Revision' => '3.0.0',
+                'Revision' => '1.0.0',
             ],
-            'Data' => strtoupper($encrypted),
-        ]);
+            'Data' => $data,
+        ];
 
-        dd($invoice->body(), $data_str, $encrypted);
+        $response = $postService->post($input, $url);
+        var_dump($response);
 
     }
 
