@@ -39,16 +39,22 @@ class TestController extends Controller
                 'TimeStamp' => time(),
             ], $hashKey, $hashIv);
 
-            $orderStatus = Http::post($url, [
+            $status = Http::post($url, [
                 'MerchantID' => $merchantId,
                 'MerchantTradeNo' => $value->order_no,
                 'TimeStamp' => time(),
                 'CheckMacValue' => $checkMacValue,
             ]);
 
-            parse_str($orderStatus->body(), $orderStatusArray);
+            parse_str($status->body(), $orderStatusArray);
 
-            Log::info($orderStatusArray);
+            if($orderStatusArray['TradeStatus'] == 1){
+                $order = Order::where('order_no', $value->order_no)->first();
+                $order->status = 1;
+                $order->save();
+            }
+
+            Log::info($merchantId, $value->order_no, $orderStatusArray['TradeStatus']);
             sleep(5);
 
         }
