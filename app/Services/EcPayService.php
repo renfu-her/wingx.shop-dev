@@ -74,15 +74,4 @@ class EcPayService extends BaseService
 
     }
 
-
-
-    // ecpay addpadding
-    private function addpadding($string, $blocksize = 32)
-    {
-        $len = strlen($string);
-        $pad = $blocksize - ($len % $blocksize);
-        $string .= str_repeat(chr($pad), $pad);
-        return $string;
-    }
-
 }
