@@ -95,12 +95,11 @@ class EcPayService extends BaseService
             'MerchantID' => $merchantId,
             'ReqHeader' => [
                 'Timestamp' => time(),
-                'Revision' => '3.0.0',
             ],
             'Data' => $checkMacValue,
         ]);
 
-        dd($invoice, $checkMacValue);
+        dd($invoice->body(), $checkMacValue);
 
     }
 
