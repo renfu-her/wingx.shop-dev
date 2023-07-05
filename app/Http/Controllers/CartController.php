@@ -153,7 +153,6 @@ class CartController extends Controller
             // 更新訂單
             $merchantOrderNo = $req['CustomField1'];
             $order = Order::where('order_no', $merchantOrderNo)->first();
-            dd($order, $req['PaymentType']);
             $order->payment = $req['PaymentType'];
             $order->status = 1;
             $order->save();
