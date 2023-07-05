@@ -68,6 +68,7 @@ class EcPayService extends BaseService
 
         $data['Items'] = [
             [
+                'ItemSeq' => 1,
                 'ItemName' => '商品',
                 'ItemCount' => 1,
                 'ItemWord' => '個',
