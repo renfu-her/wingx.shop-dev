@@ -92,7 +92,7 @@ class EcPayService extends BaseService
         $checkMacValue = strtoupper($hashed);
 
         $invoice = Http::post($url, [
-            'MerchantID_' => $merchantId,
+            'MerchantID' => $merchantId,
             'ReqHeader' => [
                 'Timestamp' => time(),
                 'Revision' => '3.0.0',
