@@ -138,9 +138,9 @@ class OrderController extends Controller
             'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
         ];
 
-        dd(env('APP_ENV'));
+        dd(config('config.APP_ENV'));
 
-        if(env('APP_ENV') == 'dev'){
+        if(config('config.APP_ENV') == 'dev'){
             $url = "https://e-commerce.dev-laravel.co/cart/thanks";
         } else {
             $url = "https://wingx.shop/cart/thanks";
