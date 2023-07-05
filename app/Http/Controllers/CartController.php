@@ -150,9 +150,10 @@ class CartController extends Controller
 
         if($req['RtnCode'] == 1){
 
-            dd($req);
+            // 更新訂單
             $merchantOrderNo = $req['CustomField1'];
             $order = Order::where('order_no', $merchantOrderNo)->first();
+            dd($order, $req['PaymentType']);
             $order->payment = $req['PaymentType'];
             $order->status = 1;
             $order->save();
