@@ -61,7 +61,7 @@ class EcPayService extends BaseService
 
         $hash = trim(bin2hex(openssl_encrypt(
             $this->addpadding($data_str),
-            'AES-256-CBC',
+            'AES-128-CBC',
             $hashKey,
             OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING,
             $hashIV
