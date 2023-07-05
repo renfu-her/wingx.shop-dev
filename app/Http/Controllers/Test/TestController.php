@@ -54,11 +54,11 @@ class TestController extends Controller
                 $order->save();
             }
 
-            Log::info('=== order status start ===');
+            Log::info('= order status start =');
             Log::info('merchant id: ' . $merchantId);
             Log::info('order no: ' . $value->order_no);
             Log::info('status: ' . $orderStatusArray['TradeStatus']);
-            Log::info('=== order status end ===');
+            Log::info('= order status end =');
             sleep(5);
 
         }
