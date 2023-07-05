@@ -67,7 +67,7 @@ class EcPayService extends BaseService
         $data_json = str_replace(',','&',$data_json);
 
         //  塞入HashKey以及HashIV
-        $originStr = 'HashKey=ejCk326UnaZWKisg&' .$data_json. '&HashIV=q9jcZX8Ib9LM8wYk';
+        $originStr = 'HashKey=' . $hashKey . '&' .$data_json. '&HashIV=' . $hashIv;
 
         //  以urlencode做URI(Uniform Resource Identifier)的轉換
         $originStr = urlencode($originStr);
@@ -91,9 +91,11 @@ class EcPayService extends BaseService
         //  轉為大寫
         $checkMacValue = strtoupper($hashed);
 
+
+
         $invoice = Http::post($url, [
             'MerchantID' => $merchantId,
-            'ReqHeader' => [
+            'RqHeader' => [
                 'Timestamp' => time(),
             ],
             'Data' => $checkMacValue,
