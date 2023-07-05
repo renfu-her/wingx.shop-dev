@@ -22,12 +22,12 @@ class OrderStatus extends Command
         $orders = Order::whereIn('status', [0, 9])->get();
         foreach ($orders as $key => $value) {
 
-            $order_status = (new QueryTradeInfo())->getData($value->order_no)->query();
-            Log::info($order_status);
+            // $order_status = (new QueryTradeInfo())->getData($value->order_no)->query();
+            // Log::info($order_status);
 
         }
         Log::info('=== 訂單狀態更新完成 ===');
     }
 
-    
+
 }
