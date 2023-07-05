@@ -81,7 +81,6 @@ class EcPayService extends BaseService
             ],
         ];
 
-        dd($data);
 
         $input = [
             'MerchantID' => $merchantId,
