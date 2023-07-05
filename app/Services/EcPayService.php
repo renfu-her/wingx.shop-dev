@@ -62,6 +62,8 @@ class EcPayService extends BaseService
         $cipher = "aes-128-cbc";
         $encrypted = openssl_encrypt($data_str, $cipher, $hashKey, OPENSSL_RAW_DATA, $hashIV);
 
+        dd($encrypted);
+
         $invoice = Http::post($url, [
             'MerchantID' => $merchantId,
             'RqHeader' => [
