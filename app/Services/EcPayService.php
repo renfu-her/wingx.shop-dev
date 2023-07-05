@@ -86,19 +86,17 @@ class EcPayService extends BaseService
         $originStr = str_replace('%5f', '_', $originStr);
 
         //  MD5加密方式
-        $hashed = hash("md5",$originStr);
+        $hashed = hash("md5", $originStr);
 
         //  轉為大寫
         $checkMacValue = strtoupper($hashed);
-
-
 
         $invoice = Http::post($url, [
             'MerchantID' => $merchantId,
             'RqHeader' => [
                 'Timestamp' => time(),
             ],
-            'Data' => $checkMacValue,
+            'Data' => strtoupper($hashed),
         ]);
 
         dd($invoice->body(), $checkMacValue);
