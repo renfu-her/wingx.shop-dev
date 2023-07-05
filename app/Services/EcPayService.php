@@ -59,7 +59,7 @@ class EcPayService extends BaseService
 
         $data_str = strtoupper(urlencode(json_encode($data)));
 
-        $hash = trim(bin2hex(openssl_encrypt(
+        $hash = trim((openssl_encrypt(
             $data_str,
             'AES-128-CBC',
             $hashKey,
