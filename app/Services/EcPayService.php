@@ -43,7 +43,7 @@ class EcPayService extends BaseService
             'CarrierType' => '',
             'CarrierNum' => '',
             'TaxType' => 1,
-            'SalesAmount' => $order_price,
+            'SalesAmount' => $order->amount + $order->tax,
             'InvType' => '07',
             'vat' => 1,
         ];
@@ -56,6 +56,18 @@ class EcPayService extends BaseService
             $data['CustomerName'] = $order->name;
             $data['Print'] = 0;
         }
+
+        $data['Items'] = [
+            [
+                'ItemName' => '商品',
+                'ItemCount' => 1,
+                'ItemWord' => '個',
+                'ItemPrice' => $order->amount + $order->tax,
+                'ItemTaxType' => 1,
+                'ItemAmount' => $order->amount + $order->tax,
+                'ItemRemark' => '',
+            ],
+        ];
 
         $data_str = urlencode(json_encode($data));
 
