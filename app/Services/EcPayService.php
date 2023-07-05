@@ -100,7 +100,7 @@ class EcPayService extends BaseService
             'Data' => $checkMacValue,
         ]);
 
-        return $invoice;
+        dd($invoice, $checkMacValue);
 
     }
 
