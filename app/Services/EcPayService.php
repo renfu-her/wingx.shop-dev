@@ -20,12 +20,12 @@ class EcPayService extends BaseService
             $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue";
             $merchantId = config('config.INVOICE_ID_DEV');
             $hashKey = config('config.INVOICE_HASH_KEY_DEV');
-            $hashIv = config('config.INVOCE_HASH_IV_DEV');
+            $hashIV = config('config.INVOCE_HASH_IV_DEV');
         } else {
             $url = "https://einvoice.ecpay.com.tw/B2CInvoice/Issue";
             $merchantId = config('config.INVOICE_ID');
             $hashKey = config('config.INVOICE_HASH_KEY');
-            $hashIv = config('config.INVOCE_HASH_IV');
+            $hashIV = config('config.INVOCE_HASH_IV');
         }
 
         $order = Order::where('order_no', $order_no)->first();
@@ -57,9 +57,17 @@ class EcPayService extends BaseService
             $data['Print'] = 0;
         }
 
-        $data_str = urlencode(json_encode($data));
+        $data_str = strtoupper(urlencode(json_encode($data)));
 
-        dd($data_str);
+        $hash = trim(bin2hex(openssl_encrypt(
+            $this->addpadding($data_str),
+            'AES-256-CBC',
+            $hashKey,
+            OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING,
+            $hashIV
+        )));
+
+        dd($hash);
 
 
         // $invoice = Http::post($url, [
@@ -74,5 +82,15 @@ class EcPayService extends BaseService
 
     }
 
+
+
+    // ecpay addpadding
+    private function addpadding($string, $blocksize = 32)
+    {
+        $len = strlen($string);
+        $pad = $blocksize - ($len % $blocksize);
+        $string .= str_repeat(chr($pad), $pad);
+        return $string;
+    }
 
 }
