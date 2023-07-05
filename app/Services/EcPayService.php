@@ -67,18 +67,15 @@ class EcPayService extends BaseService
             $hashIV
         )));
 
-        dd($hash);
+        $invoice = Http::post($url, [
+            'MerchantID' => $merchantId,
+            'RqHeader' => [
+                'Timestamp' => time(),
+            ],
+            'Data' => strtoupper($hash),
+        ]);
 
-
-        // $invoice = Http::post($url, [
-        //     'MerchantID' => $merchantId,
-        //     'RqHeader' => [
-        //         'Timestamp' => time(),
-        //     ],
-        //     'Data' => strtoupper($data_post),
-        // ]);
-
-        // dd($invoice->body(), $data_post);
+        dd($invoice->body(), $hash);
 
     }
 
