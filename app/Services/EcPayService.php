@@ -43,7 +43,7 @@ class EcPayService extends BaseService
             $itemPrice = $order->amount;
             $itemAmount = ($itemPrice * $itemCount);
             $saleAmount = $itemAmount;
-            $taxAmount = $order->tax;
+            $taxAmount = round(($saleAmount * 0.05), 0);
             $data = [
                 'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV-' . time(),
@@ -112,6 +112,9 @@ class EcPayService extends BaseService
             $url = 'https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue';
 
         }
+
+
+        // dd($data, $input, $url);
 
         $response = $postService->post($input, $url);
         var_dump($response);
