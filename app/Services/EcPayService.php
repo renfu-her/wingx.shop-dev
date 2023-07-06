@@ -127,8 +127,10 @@ class EcPayService extends BaseService
         ]);
         $postService = $factory->create('PostWithAesJsonResponseService');
 
-        $itemCount = 3;
-        $itemPriceIncludeTax = 100;
+        $order = Order::where('order_no', $order_no)->first();
+
+        $itemCount = 1;
+        $itemPriceIncludeTax = $order->amount + $order->tax;
         $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
         $saleAmount = $itemAmount;
         $data = [
