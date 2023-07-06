@@ -78,7 +78,7 @@ class TestController extends Controller
             $e_invoice = $eInvoice['Data'];
 
             $order = Order::where('order_no', $order_no)->first();
-            $order->invoice_no = $e_invoice['InvoiceNumber'];
+            $order->invoice_no = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
             $order->invoice_random_no = $e_invoice['RandomNumber'];
             $order->save();
         };
