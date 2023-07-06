@@ -75,8 +75,8 @@ class EcPayService extends BaseService
             ];
             $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
         } else {
-            $itemCount = 3;
-            $itemPriceIncludeTax = 10.5;
+            $itemCount = 1;
+            $itemPriceIncludeTax = 100;
             $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
             $saleAmount = $itemAmount;
             $data = [
