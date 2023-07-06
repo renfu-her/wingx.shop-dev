@@ -164,7 +164,7 @@ class EcPayService extends BaseService
         ];
         $url = 'https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue';
 
-        dd($data, $input, $url);
+        // dd($data, $input, $url);
 
         $response = $postService->post($input, $url);
         var_dump($response);
