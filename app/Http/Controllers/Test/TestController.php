@@ -73,7 +73,16 @@ class TestController extends Controller
         $ecpayService = new EcPayService();
         $eInvoice = $ecpayService->ecpayInvoice($order_no);
 
-        dd($eInvoice);
+        if($eInvoice['TransCode'] == 1){
+
+            $e_invoice = $eInvoice['Data'];
+
+            $order = Order::where('order_no', $order_no)->first();
+            $order->invoice_no = $e_invoice['InvoiceNumber'];
+            $order->invoice_random_no = $e_invoice['RandomNumber'];
+            $order->save();
+        };
+
 
     }
 
