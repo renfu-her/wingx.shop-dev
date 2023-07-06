@@ -104,7 +104,7 @@ class EcPayService extends BaseService
                 'MerchantID' => $merchantId,
                 'RqHeader' => [
                     'Timestamp' => time(),
-                    'Revision' => '1.0.0',
+                    'Revision' => '3.0.0',
                 ],
                 'Data' => $data,
             ];
@@ -112,7 +112,7 @@ class EcPayService extends BaseService
 
         }
 
-        // dd($data, $input, $url);
+        dd($data, $input, $url);
 
         $response = $postService->post($input, $url);
 
