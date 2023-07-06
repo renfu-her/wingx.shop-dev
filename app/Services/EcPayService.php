@@ -43,7 +43,7 @@ class EcPayService extends BaseService
             $itemPrice = $order->amount;
             $itemAmount = ($itemPrice * $itemCount);
             $saleAmount = $itemAmount;
-            $taxAmount = round(($saleAmount * 0.05), 0);
+            $taxAmount = $order->tax;
             $data = [
                 'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV-' . time(),
