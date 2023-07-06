@@ -75,8 +75,8 @@ class EcPayService extends BaseService
             ];
             $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
         } else {
-            $itemCount = 1;
-            $itemPriceIncludeTax = $order->amount + $order->tax;;
+            $itemCount = 3;
+            $itemPriceIncludeTax = 100;
             $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
             $saleAmount = $itemAmount;
             $data = [
@@ -104,7 +104,6 @@ class EcPayService extends BaseService
                 'MerchantID' => $merchantId,
                 'RqHeader' => [
                     'Timestamp' => time(),
-                    'Revision' => '3.0.0',
                 ],
                 'Data' => $data,
             ];
@@ -112,7 +111,7 @@ class EcPayService extends BaseService
 
         }
 
-        dd($data, $input, $url);
+        // dd($data, $input, $url);
 
         $response = $postService->post($input, $url);
 
