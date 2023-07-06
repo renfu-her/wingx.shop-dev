@@ -128,12 +128,12 @@ class EcPayService extends BaseService
         $postService = $factory->create('PostWithAesJsonResponseService');
 
         $itemCount = 3;
-        $itemPriceIncludeTax = 10.5;
+        $itemPriceIncludeTax = 100;
         $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
         $saleAmount = $itemAmount;
         $data = [
             'MerchantID' => '2000132',
-            'RelateNumber' => 'Test' . time(),
+            'RelateNumber' => 'INV-' . time(),
             'CustomerPhone' => '0911222333',
             'Print' => '0',
             'Donation' => '0',
@@ -142,7 +142,7 @@ class EcPayService extends BaseService
             'SalesAmount' => $saleAmount,
             'Items' => [
                 [
-                    'ItemName' => '測試商品01',
+                    'ItemName' => '商品',
                     'ItemCount' => $itemCount,
                     'ItemWord' => '個',
                     'ItemPrice' => $itemPriceIncludeTax,
