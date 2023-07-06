@@ -148,11 +148,9 @@ class EcPayService extends BaseService
 
         }
 
-
-        dd($data, $input, $url);
-
         $response = $postService->post($input, $url);
-        var_dump($response);
+
+        return $response;
 
     }
 
