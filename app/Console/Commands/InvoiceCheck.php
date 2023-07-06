@@ -28,7 +28,7 @@ class InvoiceCheck extends Command
                 $e_invoice = $eInvoice['Data'];
                 $invoiceNo = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
                 $order = Order::where('order_no', $value->order_no)->first();
-                $order->invoice_no = $invoiceNo
+                $order->invoice_no = $invoiceNo;
                 $order->invoice_random_no = $e_invoice['RandomNumber'];
                 $order->save();
 
