@@ -46,7 +46,7 @@ class EcPayService extends BaseService
             $taxAmount = round(($saleAmount * 0.05), 0);
             $data = [
                 'MerchantID' => $merchantId,
-                'RelateNumber' => 'INV' . time(),
+                'RelateNumber' => 'INV-' . time(),
                 'CustomerIdentifier' => $order->company_uid,
                 'CustomerEmail' => $order->email,
                 'InvType' => '07',
@@ -75,41 +75,45 @@ class EcPayService extends BaseService
             ];
             $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
         } else {
-            $itemCount = 1;
-            $itemPriceIncludeTax = $order->amount + $order->tax;
-            $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
-            $saleAmount = $itemAmount;
-            $data = [
-                'MerchantID' => $merchantId,
-                'RelateNumber' => 'INV' . time(),
-                'CustomerPhone' => $order->mobile,
-                'Print' => '0',
-                'Donation' => '0',
-                'CarrierType' => '1',
-                'TaxType' => '1',
-                'SalesAmount' => $saleAmount,
-                'Items' => [
-                    [
-                        'ItemName' => '商品',
-                        'ItemCount' => $itemCount,
-                        'ItemWord' => '個',
-                        'ItemPrice' => $itemPriceIncludeTax,
-                        'ItemTaxType' => '1',
-                        'ItemAmount' => $itemAmount,
-                    ],
-                ],
-                'InvType' => '07'
-            ];
-            $input = [
-                'MerchantID' => $merchantId,
-                'RqHeader' => [
-                    'Timestamp' => time(),
-                    'Revision' => '3.0.0',
-                ],
-                'Data' => $data,
-            ];
-            $url = 'https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue';
+
         }
+
+        $itemCount = 1;
+        $itemPriceIncludeTax = 100 + 100;
+        $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
+        $saleAmount = $itemAmount;
+        $data = [
+            'MerchantID' => $merchantId,
+            'RelateNumber' => 'INV' . time(),
+            'CustomerPhone' => '0911222333',
+            'Print' => '0',
+            'Donation' => '0',
+            'CarrierType' => '1',
+            'TaxType' => '1',
+            'SalesAmount' => $saleAmount,
+            'Items' => [
+                [
+                    'ItemName' => '商品',
+                    'ItemCount' => $itemCount,
+                    'ItemWord' => '個',
+                    'ItemPrice' => $itemPriceIncludeTax,
+                    'ItemTaxType' => '1',
+                    'ItemAmount' => $itemAmount,
+                ],
+            ],
+            'InvType' => '07'
+        ];
+        $input = [
+            'MerchantID' => $merchantId,
+            'RqHeader' => [
+                'Timestamp' => time(),
+                'Revision' => '3.0.0',
+            ],
+            'Data' => $data,
+        ];
+        $url = 'https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue';
+
+        dd($data, $input, $url, $merchantId, $hashKey, $hashIV);
 
         $response = $postService->post($input, $url);
 
