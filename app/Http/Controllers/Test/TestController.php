@@ -71,9 +71,9 @@ class TestController extends Controller
     public function eInvoice(Request $request, $order_no){
 
         $ecpayService = new EcPayService();
-        $ecpayService->ecpayInvoice($order_no);
+        $eInvoice = $ecpayService->ecpayInvoice($order_no);
 
-        dd($ecpayService);
+        dd($eInvoice);
 
     }
 
