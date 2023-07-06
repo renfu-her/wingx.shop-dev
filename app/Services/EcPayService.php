@@ -83,6 +83,7 @@ class EcPayService extends BaseService
                 'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV-' . time(),
                 'CustomerPhone' => $order->mobile,
+                'CustomerEmail' => $order->email,
                 'Print' => '0',
                 'Donation' => '0',
                 'CarrierType' => '1',
