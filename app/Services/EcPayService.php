@@ -76,14 +76,13 @@ class EcPayService extends BaseService
             $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
         } else {
             $itemCount = 1;
-            $itemPriceIncludeTax = $order->amount + $order->tax;
+            $itemPriceIncludeTax = $order->amount + $order->tax;;
             $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
             $saleAmount = $itemAmount;
             $data = [
                 'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV-' . time(),
                 'CustomerPhone' => $order->mobile,
-                'CustomerEmail' => $order->email,
                 'Print' => '0',
                 'Donation' => '0',
                 'CarrierType' => '1',
@@ -91,7 +90,7 @@ class EcPayService extends BaseService
                 'SalesAmount' => $saleAmount,
                 'Items' => [
                     [
-                        'ItemName' => '商品',
+                        'ItemName' => '測試商品01',
                         'ItemCount' => $itemCount,
                         'ItemWord' => '個',
                         'ItemPrice' => $itemPriceIncludeTax,
@@ -112,8 +111,6 @@ class EcPayService extends BaseService
             $url = 'https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue';
 
         }
-
-        dd($input, $data, $url);
 
         $response = $postService->post($input, $url);
 
