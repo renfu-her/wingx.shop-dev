@@ -181,11 +181,11 @@ class OrderController extends Controller
             if(str_contains($payment, 'Credit')){
                 $payment_name = '信用卡';
             }
-            if(str_contains($payment, 'WebATM')){
-                $payment_name = 'WebATM';
-            }
             if(str_contains($payment, 'ATM')){
                 $payment_name = 'ATM 轉帳';
+            }
+            if(str_contains($payment, 'WebATM')){
+                $payment_name = 'WebATM';
             }
             if(str_contains($payment, 'CVS')){
                 $payment_name = '超商代碼繳費';
