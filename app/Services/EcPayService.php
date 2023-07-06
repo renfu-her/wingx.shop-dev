@@ -40,7 +40,7 @@ class EcPayService extends BaseService
 
         if($order->company_uid){
             $itemCount = 1;
-            $itemPrice = $order->total + $order->ship_price;
+            $itemPrice = $order->amount;
             $itemAmount = ($itemPrice * $itemCount);
             $saleAmount = $itemAmount;
             $taxAmount = round(($saleAmount * 0.05), 0);
