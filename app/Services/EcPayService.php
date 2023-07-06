@@ -104,6 +104,7 @@ class EcPayService extends BaseService
                 'MerchantID' => $merchantId,
                 'RqHeader' => [
                     'Timestamp' => time(),
+                    'Revision' => '1.0.0',
                 ],
                 'Data' => $data,
             ];
