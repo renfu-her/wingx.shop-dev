@@ -34,6 +34,7 @@ class InvoiceCheck extends Command
 
                 Log::info('=== 發票成功 : ' . $invoiceNo . ' ==');
             };
+            sleep(2);
         }
         Log::info('=== 發票 End ==');
     }
