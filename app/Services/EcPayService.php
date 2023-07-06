@@ -148,8 +148,6 @@ class EcPayService extends BaseService
 
         $response = $postService->post($input, $url);
 
-        $response = $postService->post($input, $url);
-
         return $response;
     }
 }
