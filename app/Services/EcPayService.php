@@ -64,7 +64,7 @@ class EcPayService extends BaseService
                 ],
                 'SalesAmount' => $saleAmount,
                 'TaxAmount' => $taxAmount,
-                'TotalAmount' => ($saleAmount + $taxAmount),\
+                'TotalAmount' => ($saleAmount + $taxAmount),
             ];
             $input = [
                 'MerchantID' => $merchantId,
