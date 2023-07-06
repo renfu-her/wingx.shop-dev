@@ -90,7 +90,7 @@ class EcPayService extends BaseService
                 'SalesAmount' => $saleAmount,
                 'Items' => [
                     [
-                        'ItemName' => '測試商品01',
+                        'ItemName' => '商品',
                         'ItemCount' => $itemCount,
                         'ItemWord' => '個',
                         'ItemPrice' => $itemPriceIncludeTax,
