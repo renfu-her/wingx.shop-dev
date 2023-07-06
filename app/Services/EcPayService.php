@@ -81,8 +81,8 @@ class EcPayService extends BaseService
             $saleAmount = $itemAmount;
             $data = [
                 'MerchantID' => $merchantId,
-                'RelateNumber' => 'Test' . time(),
-                'CustomerPhone' => '0911222333',
+                'RelateNumber' => 'Test-' . time(),
+                'CustomerPhone' => $order->mobile,
                 'Print' => '0',
                 'Donation' => '0',
                 'CarrierType' => '1',
