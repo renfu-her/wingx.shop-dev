@@ -39,22 +39,58 @@ class EcPayService extends BaseService
         $order = Order::where('order_no', $order_no)->first();
 
         if($order->company_uid){
-            $itemCount = 1;
-            $itemPrice = $order->amount;
+            // $itemCount = 1;
+            // $itemPrice = $order->amount;
+            // $itemAmount = ($itemPrice * $itemCount);
+            // $saleAmount = $itemAmount;
+            // $taxAmount = round(($saleAmount * 0.05), 0);
+            // $data = [
+            //     'MerchantID' => $merchantId,
+            //     'RelateNumber' => 'INV-' . time(),
+            //     'CustomerIdentifier' => $order->company_uid,
+            //     'CustomerEmail' => $order->email,
+            //     'InvType' => '07',
+            //     'TaxType' => '1',
+            //     'Items' => [
+            //         [
+            //             'ItemSeq' => 1,
+            //             'ItemName' => '商品',
+            //             'ItemCount' => $itemCount,
+            //             'ItemPrice' => $itemPrice,
+            //             'ItemTaxType' => '1',
+            //             'ItemAmount' => $itemAmount,
+            //         ],
+            //     ],
+            //     'SalesAmount' => $saleAmount,
+            //     'TaxAmount' => $taxAmount,
+            //     'TotalAmount' => ($saleAmount + $taxAmount),
+            // ];
+            // $input = [
+            //     'MerchantID' => $merchantId,
+            //     'RqHeader' => [
+            //         'Timestamp' => time(),
+            //         'Revision' => '1.0.0',
+            //     ],
+            //     'Data' => $data,
+            // ];
+            // $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
+
+            $itemCount = 3;
+            $itemPrice = 10;
             $itemAmount = ($itemPrice * $itemCount);
             $saleAmount = $itemAmount;
             $taxAmount = round(($saleAmount * 0.05), 0);
             $data = [
-                'MerchantID' => $merchantId,
+                'MerchantID' => '2000132',
                 'RelateNumber' => 'INV-' . time(),
-                'CustomerIdentifier' => $order->company_uid,
-                'CustomerEmail' => $order->email,
+                'CustomerIdentifier' => '23165448',
+                'CustomerEmail' => 'test-buyer@ecpay.com.tw',
                 'InvType' => '07',
                 'TaxType' => '1',
                 'Items' => [
                     [
                         'ItemSeq' => 1,
-                        'ItemName' => '商品',
+                        'ItemName' => '測試商品01',
                         'ItemCount' => $itemCount,
                         'ItemPrice' => $itemPrice,
                         'ItemTaxType' => '1',
@@ -66,7 +102,7 @@ class EcPayService extends BaseService
                 'TotalAmount' => ($saleAmount + $taxAmount),
             ];
             $input = [
-                'MerchantID' => $merchantId,
+                'MerchantID' => '2000132',
                 'RqHeader' => [
                     'Timestamp' => time(),
                     'Revision' => '1.0.0',
