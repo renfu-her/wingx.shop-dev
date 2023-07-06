@@ -47,7 +47,6 @@ class EcPayService extends BaseService
             $data = [
                 'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV-' . time(),
-                'CustomerName' => $order->company_name,
                 'CustomerIdentifier' => $order->company_uid,
                 'CustomerEmail' => $order->email,
                 'InvType' => '07',
