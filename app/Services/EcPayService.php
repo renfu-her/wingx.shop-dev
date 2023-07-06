@@ -38,7 +38,7 @@ class EcPayService extends BaseService
 
         $order = Order::where('order_no', $order_no)->first();
 
-        if ($order->company_uid) {
+        if (!empty($order->company_uid)) {
             $itemCount = 1;
             $itemPrice = $order->amount;
             $itemAmount = ($itemPrice * $itemCount);
@@ -112,7 +112,7 @@ class EcPayService extends BaseService
         }
 
         $itemCount = 3;
-        $itemPriceIncludeTax = 10.5;
+        $itemPriceIncludeTax = 100;
         $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
         $saleAmount = $itemAmount;
         $data = [
