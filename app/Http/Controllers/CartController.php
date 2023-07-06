@@ -9,7 +9,7 @@ use App\Services\CartService;
 use App\Models\Member;
 use App\Models\Order;
 
-use App\Services\EzPayService;
+use App\Services\EcPayService;
 
 use MingJSHK\NewebPay\Facades\NewebPay;
 
@@ -20,7 +20,7 @@ class CartController extends Controller
     {
 
         $member_id = session()->get('member_id');
-        if(!$member_id){
+        if (!$member_id) {
             redirect('/')->with(['message' => '請先登入會員']);
         }
 
@@ -83,7 +83,7 @@ class CartController extends Controller
     {
 
         $member_id = session()->get('member_id');
-        if(empty($member_id)){
+        if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }
 
@@ -148,7 +148,7 @@ class CartController extends Controller
 
         // $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
-        if($req['RtnCode'] == 1){
+        if ($req['RtnCode'] == 1) {
 
             // 更新訂單
             $merchantOrderNo = $req['CustomField1'];
@@ -157,20 +157,17 @@ class CartController extends Controller
             $order->status = 1;
             $order->save();
 
-            // 發票開立 ezpay
-            // $ezpay = (new EzPayService())->invoice($order);
+            // 更新發票
+            $ecpayService = new EcPayService();
+            $eInvoice = $ecpayService->ecpayInvoice($merchantOrderNo);
 
-            // if ($ezpay['Status'] == 'SUCCESS' ) {
-            //     $ezpayResult = json_decode($ezpay['Result'], true);
-            //     $order = Order::where('order_no', $merchantOrderNo)->first();
-            //     $order->invoice_no = $ezpayResult['InvoiceNumber'];
-            //     $order->invoice_trans_no = $ezpayResult['InvoiceTransNo'];
-            //     $order->invoice_date = $ezpayResult['CreateTime'];
-            //     $order->invoice_random_no = $ezpayResult['RandomNum'];
-            //     $order->invoice_checkcode = $ezpayResult['CheckCode'];
-            //     $order->invoice_total_amt = $ezpayResult['TotalAmt'];
-            //     $order->save();
-            // }
+            if ($eInvoice['TransCode'] == 1) {
+                $e_invoice = $eInvoice['Data'];
+                $order = Order::where('order_no', $merchantOrderNo)->first();
+                $order->invoice_no = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
+                $order->invoice_random_no = $e_invoice['RandomNumber'];
+                $order->save();
+            };
 
             $status = 'success';
             return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
@@ -179,7 +176,6 @@ class CartController extends Controller
             $status = 'fail';
 
             return view('frontend.thanks', compact('status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
-
         }
     }
 }
