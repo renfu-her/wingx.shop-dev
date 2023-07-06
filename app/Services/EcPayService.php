@@ -30,6 +30,7 @@ class EcPayService extends BaseService
             $hashIV = config('config.INVOCE_HASH_IV');
         }
 
+
         $factory = new Factory([
             'hashKey' => $hashKey,
             'hashIv' => $hashIV,
@@ -117,6 +118,8 @@ class EcPayService extends BaseService
             ],
             'Data' => $data,
         ];
+
+        dd($input, $data, $merchantId, $hashKey, $hashIV);
 
         $response = $postService->post($input, $url);
         var_dump($response);
