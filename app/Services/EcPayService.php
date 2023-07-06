@@ -81,7 +81,7 @@ class EcPayService extends BaseService
             $saleAmount = $itemAmount;
             $data = [
                 'MerchantID' => $merchantId,
-                'RelateNumber' => 'Test-' . time(),
+                'RelateNumber' => 'INV-' . time(),
                 'CustomerPhone' => $order->mobile,
                 'Print' => '0',
                 'Donation' => '0',
@@ -90,7 +90,7 @@ class EcPayService extends BaseService
                 'SalesAmount' => $saleAmount,
                 'Items' => [
                     [
-                        'ItemName' => '測試商品01',
+                        'ItemName' => '商品',
                         'ItemCount' => $itemCount,
                         'ItemWord' => '個',
                         'ItemPrice' => $itemPriceIncludeTax,
