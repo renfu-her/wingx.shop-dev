@@ -55,7 +55,7 @@ class EcPayService extends BaseService
                 'Items' => [
                     [
                         'ItemSeq' => 1,
-                        'ItemName' => '測試商品01',
+                        'ItemName' => '商品',
                         'ItemCount' => $itemCount,
                         'ItemPrice' => $itemPrice,
                         'ItemTaxType' => '1',
