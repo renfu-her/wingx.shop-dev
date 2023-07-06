@@ -119,7 +119,7 @@ class EcPayService extends BaseService
             'Data' => $data,
         ];
 
-        dd($input, $data, $merchantId, $hashKey, $hashIV);
+        dd($input, $data, $merchantId, $hashKey, $hashIV, $url);
 
         $response = $postService->post($input, $url);
         var_dump($response);
