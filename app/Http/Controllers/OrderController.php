@@ -50,8 +50,8 @@ class OrderController extends Controller
         $total = intval(str_replace(',', '', $req['total']));
 
         $ttl_total = $total + $req['ship_price'];
-        $tax = round($ttl_total * 0.05);
-        $amount = $ttl_total - $tax;
+        $amount = round($ttl_total / 1.05);
+        $tax = $ttl_total - $amount;
 
         $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
