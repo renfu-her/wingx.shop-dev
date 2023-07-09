@@ -21,6 +21,7 @@
         "mingjshk/laravel-newebpay": "^1.0",
         "nesbot/carbon": "^2.67",
         "okipa/laravel-form-components": "^1.2",
+        "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/line": "^4.1",
         "tsaiyihua/laravel-ecpay": "^3.1"
     },
