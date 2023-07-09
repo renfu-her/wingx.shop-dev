@@ -385,7 +385,12 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ asset('auth/line') }}" class="btn mt-5" style="background-color: #06C755" >LINE 登入</a>
+                <div class="box">
+                    <div class="content">
+                        <a href="{{ asset('auth/line') }}" class="btn mt-5" style="background-color: #06C755">LINE
+                            登入</a>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <div class="forgot register-footer" style="display: none;">
                         <span>已經有帳號，我要 </span>
