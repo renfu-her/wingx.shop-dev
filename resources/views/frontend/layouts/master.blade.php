@@ -868,11 +868,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="box">
-                    <div class="content">
-                        <a href="{{ asset('auth/line') }}" class="btn mt-5" style="background-color: #06C755">LINE
-                            登入</a>
+                    <div class="box">
+                        <div class="content">
+                            <div clss="w-100">
+                                <a href="{{ asset('auth/line') }}" class="btn" style="background-color: #06C755">LINE 登入</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
