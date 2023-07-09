@@ -60,6 +60,10 @@ route::get('/logout', function(){
     return redirect('/');
 });
 
+// facebook 登入
+Route::get('/facebook/auth', [SocialiteController::class, 'fbLogin'])->name('/auth/facebook');
+Route::get('/facebook/auth/callback', [FBSocialiteController::class, 'fbLoginCallback'])->name('/auth/facebook/callback');
+
 // Test route
 route::group(['prefix' => 'test'], function(){
     route::get('/order', [TestController::class, 'orderStatus']);
