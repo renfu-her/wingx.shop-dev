@@ -9,6 +9,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\LineController;
 
 use App\Http\Controllers\Api\ImportDataController;
 use App\Http\Controllers\Test\TestController;
@@ -61,8 +63,11 @@ route::get('/logout', function(){
 });
 
 // facebook 登入
-Route::get('/facebook/auth', [SocialiteController::class, 'fbLogin'])->name('/auth/facebook');
-Route::get('/facebook/auth/callback', [FBSocialiteController::class, 'fbLoginCallback'])->name('/auth/facebook/callback');
+Route::get('/auth/facebook', [SocialiteController::class, 'fbLogin'])->name('/auth/facebook');
+Route::get('/auth/facebook/callback', [FBSocialiteController::class, 'fbLoginCallback'])->name('/auth/facebook/callback');
+
+Route::get('/auth/line', [LineController::class, 'lineLogin']);
+Route::get('/auth/line/callback', [LineController::class, 'lineLoginCallback']);
 
 // Test route
 route::group(['prefix' => 'test'], function(){

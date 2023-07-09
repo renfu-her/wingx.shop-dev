@@ -11,7 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Hash;
 use Validator;
 
-class SocialiteController extends Controller
+class FacebookController extends Controller
 {
     public function fbLogin()
     {

@@ -20,5 +20,7 @@ class Member extends Model
         'district',
         'zipcode',
         'address',
+        'line_id',
+        'facebook_id',
     ];
 }
