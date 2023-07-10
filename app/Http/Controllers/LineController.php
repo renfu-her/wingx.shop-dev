@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class LineController extends Controller
 {
@@ -28,7 +29,7 @@ class LineController extends Controller
             [
                 'name' => $user->name,
                 'nick_name' => $user->nickname,
-                'email' => $user->email,
+                'email' => $user->email ?? Str::uuid(),
                 'password' => Hash::make('Qq123456'),
                 'status' => 1,
             ]
