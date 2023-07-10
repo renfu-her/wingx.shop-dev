@@ -66,7 +66,7 @@ class OrderController extends Controller
             'ship_id' => $req['ship_id'],
             'total' => $total,
             'status' => 9,
-            'email' => $req['email'],
+            'email' => $req['email'] ?? '',
             'ship_date' => date('Y-m-d H:i:s'),
             'ship_price' => $req['ship_price'],
             'remark' => $req['remark'],
