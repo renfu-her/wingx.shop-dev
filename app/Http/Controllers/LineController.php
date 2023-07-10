@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class LineController extends Controller
 {
@@ -21,7 +22,21 @@ class LineController extends Controller
     public function lineLoginCallback()
     {
         $user = Socialite::driver('line')->user();
-        dd($user);
+
+        $member = Member::updateOrCreate(
+            ['line_id' => $user->id],
+            [
+                'username' => $user->name,
+                'email' => $user->email,
+                'password' => Hash::make('Qq123456'),
+                'status' => 1,
+            ]
+        );
+
+        // 登入 member id
+        session()->put('member_id', $member->id);
+
+        return redirect('/');
 
     }
 
