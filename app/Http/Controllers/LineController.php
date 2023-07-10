@@ -23,7 +23,7 @@ class LineController extends Controller
     {
         $user = Socialite::driver('line')->user();
 
-        $member = Member::updateOrCreate(
+        $obj = Member::updateOrCreate(
             ['line_id' => $user->id],
             [
                 'username' => $user->name,
@@ -32,6 +32,8 @@ class LineController extends Controller
                 'status' => 1,
             ]
         );
+
+        $member = Member::find($obj->id);
 
         // 登入 member id
         session()->put('member_id', $member->id);
