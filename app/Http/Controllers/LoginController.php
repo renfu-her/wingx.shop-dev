@@ -137,6 +137,7 @@ class LoginController extends Controller
         }
     }
 
+    // 重發認證信
     public function reset_verify_password(Request $request)
     {
 
@@ -173,6 +174,7 @@ class LoginController extends Controller
         }
     }
 
+    // 驗證密碼
     public function verify_password(Request $request)
     {
 
@@ -217,7 +219,7 @@ class LoginController extends Controller
         return redirect('/')->with(['message' => '重置密碼信件已經寄出，請收信']);
     }
 
-
+    // email 驗證碼驗證
     public function verify_email(Request $request)
     {
 
@@ -274,7 +276,7 @@ class LoginController extends Controller
         }
     }
 
-
+    // 產生 email 驗證碼
     private function generator_email_verify()
     {
         $str = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
@@ -282,5 +284,13 @@ class LoginController extends Controller
         $random = substr(str_shuffle($str), 26, 20);
 
         return $random;
+    }
+
+    // LINE 合併 Email 的驗證
+    public function lineCombine(Request $request){
+
+        $req = $request->all();
+
+        
     }
 }
