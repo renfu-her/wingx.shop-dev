@@ -148,6 +148,8 @@ class CartController extends Controller
 
         // $neweb_pay = NewebPay::decode($req['TradeInfo']);
 
+        dd($req);
+
         if ($req['RtnCode'] == 1) {
 
             // 更新訂單
