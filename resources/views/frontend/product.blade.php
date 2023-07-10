@@ -110,13 +110,14 @@
                                 <ul class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
                                     <li class="me-2">
                                         <a class="text-decoration-none" href="https://www.facebook.com/sharer.php?u={{ url('/product/' . $product_id) }}" role="button">
-                                        <i class="ri-facebook-box-fill"></i></a></li>
-                                    <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
-                                                class="ri-instagram-fill"></i></a></li>
-                                    <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
-                                                class="ri-pinterest-fill"></i></a></li>
-                                    <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i
-                                                class="ri-twitter-fill"></i></a></li>
+                                            <i class="fa-brands fa-facebook"></i></a>
+                                    </li>
+                                    <li class="me-2"><a class="text-decoration-none" href="http://line.naver.jp/R/msg/text/?{{ url('/product/' . $product_id) }}" role="button">
+                                        <i class="fa-brands fa-line"></i></a>
+                                    </li>
+                                    <li class="me-2"><a class="text-decoration-none" href="https://twitter.com/share?text={{ $product->name }}&url={{ url('/product/' . $product_id) }}" role="button">
+                                        <i class="fa-brands fa-twitter"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
