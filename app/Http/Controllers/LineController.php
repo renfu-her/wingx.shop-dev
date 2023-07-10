@@ -29,7 +29,7 @@ class LineController extends Controller
             [
                 'name' => $user->name,
                 'nick_name' => $user->nickname,
-                'email' => $user->email,
+                // 'email' => $user->email,
                 'password' => Hash::make('Qq123456'),
                 'status' => 1,
             ]
