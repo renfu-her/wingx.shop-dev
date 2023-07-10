@@ -26,7 +26,8 @@ class LineController extends Controller
         $obj = Member::updateOrCreate(
             ['line_id' => $user->id],
             [
-                'username' => $user->name,
+                'name' => $user->name,
+                'nick_name' => $user->nickname,
                 'email' => $user->email,
                 'password' => Hash::make('Qq123456'),
                 'status' => 1,
