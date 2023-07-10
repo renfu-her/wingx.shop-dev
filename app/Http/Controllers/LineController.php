@@ -29,7 +29,7 @@ class LineController extends Controller
             [
                 'name' => $user->name,
                 'nick_name' => $user->nickname,
-                'email' => $user->email ?? Str::uuid(),
+                'email' => $user->email,
                 'password' => Hash::make('Qq123456'),
                 'status' => 1,
             ]
@@ -41,7 +41,5 @@ class LineController extends Controller
         session()->put('member_id', $member->id);
 
         return redirect('/');
-
     }
-
 }
