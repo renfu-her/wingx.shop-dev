@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <label for="email" class="form-label">Email <span>*(請一定要填寫，方便我們通知您購物狀況)</span></label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ Session::get('member_email') }}">
+                                        value="{{ $member->email }}">
                                 </div>
                             </div>
                         </div>
