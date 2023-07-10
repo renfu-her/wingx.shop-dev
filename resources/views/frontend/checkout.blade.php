@@ -86,11 +86,11 @@
                         <div class="row">
 
                             <!-- Email-->
-                            <div class="col-12" style="display: none">
+                            <div class="col-12" >
                                 <div class="form-group">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label">Email <span>*(請一定要填寫，方便我們通知您購物狀況)</span></label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ Session::get('member_email') }}" readonly>
+                                        value="{{ Session::get('member_email') }}">
                                 </div>
                             </div>
                         </div>
@@ -274,9 +274,9 @@
                     }
                 }
 
-                // if (email == '') {
-                //     error_msg.push('請填寫電子郵件');
-                // }
+                if (email == '') {
+                    error_msg.push('請填寫電子郵件');
+                }
 
                 if (name == '') {
                     error_msg.push('請填寫姓名');
