@@ -23,7 +23,7 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <x:form::input name="email" label="E-mail" readonly />
+                                    <x:form::input type="email" name="email" label="E-mail" readonly />
                                 </div>
 
                                 <div class="mt-3">
