@@ -86,7 +86,7 @@
                         <div class="row">
 
                             <!-- Email-->
-                            <div class="col-12">
+                            <div class="col-12" style="display: none">
                                 <div class="form-group">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email" name="email"
@@ -274,9 +274,9 @@
                     }
                 }
 
-                if (email == '') {
-                    error_msg.push('請填寫電子郵件');
-                }
+                // if (email == '') {
+                //     error_msg.push('請填寫電子郵件');
+                // }
 
                 if (name == '') {
                     error_msg.push('請填寫姓名');
