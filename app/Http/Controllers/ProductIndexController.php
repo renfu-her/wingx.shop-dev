@@ -58,6 +58,7 @@ class ProductIndexController extends Controller
             'product_category',
             'product_images',
             'product_categories',
+            'product_id',
             'productMix',
             'cart' ,
             'total',
