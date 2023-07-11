@@ -5,8 +5,7 @@
         <!-- Page Content Goes Here -->
 
         <h1 class="mb-4 display-5 fw-bold text-center">結帳</h1>
-        <p class="text-center mx-auto">請填寫以下資訊
-        </p>
+        <p class="text-center mx-auto">請填寫以下資訊</p>
 
         <form action="/order/store" method="post" id="form_post">
             <div class="row g-md-8 mt-4">

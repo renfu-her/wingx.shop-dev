@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductIndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FacebookController;
@@ -25,6 +26,8 @@ route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
 route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']);
 
+route::get('/contact-us', [ContactController::class, 'index']);
+
 // 購物車寫入 session cart
 route::get('/cart', [CartController::class, 'index']);
 route::post('/cart/thanks', [CartController::class, 'thanks']);
@@ -40,7 +43,6 @@ route::put('/profile/update/{member_id}', [ProfileController::class, 'update'])-
 
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
-
 
 // 登入
 route::get('login', [LoginController::class, 'index']);

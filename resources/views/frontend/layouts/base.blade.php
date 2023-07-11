@@ -96,7 +96,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown me-lg-4">
-                                <a class="nav-link fw-bolder py-lg-4" href="#">
+                                <a class="nav-link fw-bolder py-lg-4" href="/contact-us">
                                     聯絡我們
                                 </a>
                             </li>

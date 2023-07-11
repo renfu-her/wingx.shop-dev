@@ -27,7 +27,19 @@
                         <ul class="list-unstyled">
                             <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="#">關於我們</a>
+                                    href="#">商店介紹</a>
+                            </li>
+                            <li class="mb-2"><a
+                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                    href="#">購物流程</a>
+                            </li>
+                            <li class="mb-2"><a
+                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                    href="#">會員制度</a>
+                            </li>
+                            <li class="mb-2"><a
+                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                    href="#">退換貨方式</a>
                             </li>
                         </ul>
                     </nav>
