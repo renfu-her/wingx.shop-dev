@@ -4,7 +4,7 @@
     <section class="mt-5 container ">
         <h1 class="mb-4 display-6 fw-bold text-center">聯絡我們</h1>
         <div class="row">
-            <div class="col-6 mx-auto">
+            <div class="col-6 mx-auto contact-us">
                 <ul>
                     <li>統編：42937613</li>
                     <li>電話：0976153071</li>
@@ -19,11 +19,11 @@
 
 @section('css')
     <style>
-        ul {
+        .contact-us ul {
             list-style-type: none;
         }
 
-        ul li {
+        .contact-us ul li {
             font-size: 22px;
             margin-bottom: 10px;
         }
