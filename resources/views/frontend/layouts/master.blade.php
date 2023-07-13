@@ -18,7 +18,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- Page Title -->
-    <title>WingX 翼優</title>
+    <title>WingX 翼優寵物用品旗艦店</title>
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/libs.bundle.css') }}" />

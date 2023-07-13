@@ -13,7 +13,7 @@
     <meta name="keywords" content="">
 
     <!-- Page Title -->
-    <title>WingX 翼優</title>
+    <title>WingX 翼優寵物用品旗艦店</title>
 
 
     <!-- Favicon -->
