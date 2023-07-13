@@ -158,16 +158,16 @@ class CartController extends Controller
             $order->save();
 
             // 更新發票
-            $ecpayService = new EcPayService();
-            $eInvoice = $ecpayService->ecpayInvoice($merchantOrderNo);
+            // $ecpayService = new EcPayService();
+            // $eInvoice = $ecpayService->ecpayInvoice($merchantOrderNo);
 
-            if ($eInvoice['TransCode'] == 1) {
-                $e_invoice = $eInvoice['Data'];
-                $order = Order::where('order_no', $merchantOrderNo)->first();
-                $order->invoice_no = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
-                $order->invoice_random_no = $e_invoice['RandomNumber'];
-                $order->save();
-            };
+            // if ($eInvoice['TransCode'] == 1) {
+            //     $e_invoice = $eInvoice['Data'];
+            //     $order = Order::where('order_no', $merchantOrderNo)->first();
+            //     $order->invoice_no = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
+            //     $order->invoice_random_no = $e_invoice['RandomNumber'];
+            //     $order->save();
+            // };
 
             $status = 'success';
             return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
