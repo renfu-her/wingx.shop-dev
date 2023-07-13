@@ -22,7 +22,7 @@
                     <h2 class="accordion-header" id="heading-{{ $key + 1 }}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse-{{ $key + 1 }}" aria-expanded="true" aria-controls="collapse-{{ $key + 1 }}">
-                            {{ $value->question } }}
+                            {{ $value->question }}
                         </button>
                     </h2>
                     <div id="collapse-{{ $key + 1 }}" class="accordion-collapse collapse" aria-labelledby="heading_{{ $key + 1 }}"
