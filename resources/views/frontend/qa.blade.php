@@ -45,7 +45,9 @@
 
 @section('css')
     <style>
-
+        .accordion {
+            border: 1px solid #333;
+        }
     </style>
 @endsection
 
