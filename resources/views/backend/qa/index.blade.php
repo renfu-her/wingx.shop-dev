@@ -23,21 +23,19 @@
                         <thead>
                             <tr>
                                 <th style="width: 10%">ID</th>
-                                <th style="width: 30%">名稱</th>
-                                <th style="width: 30%">圖片</th>
+                                <th style="width: 60%">問題</th>
+
                                 <th style="width: 10%">狀態</th>
                                 <th style="width: 10%">編輯</th>
                                 <th style="width: 10%">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($news as $key => $value)
+                            @foreach($qas as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->title }}</td>
-                                <td>
-                                    <img src="{{ asset('upload/news/images/' . $value->id . '/' . $value->image) }}" alt="" style="width: 100%">
-                                </td>
+                                <td>{{ $value->qustion }}</td>
+
                                 <td>{{ $value->status_name }}</td>
                                 <td>
                                     <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">

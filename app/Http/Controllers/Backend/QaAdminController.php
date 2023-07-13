@@ -15,6 +15,9 @@ class QaAdminController extends Controller
         $req = $request->all();
 
         $qas = Qa::orderByDesc('order')->get();
+        foreach($qas as $key => $value){
+            $qas[$key]['status_name'] = $value->status == 1 ? '啟用' : '停用';
+        }
 
         return view('backend.qa.index', compact('qas'));
     }
