@@ -13,5 +13,6 @@ class Qa extends Model
         'question',
         'answer',
         'status',
+        'order',
     ];
 }

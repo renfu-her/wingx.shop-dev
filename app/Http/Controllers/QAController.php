@@ -36,6 +36,7 @@ class QAController extends Controller
         $cart_count = json_decode($cart_count->getContent(), true);
 
         $qas = Qa::orderByDesc('order')->get();
+        
         return view('frontend.qa',
             compact('qas', 'products', 'product_categories', 'cart_count', 'total', 'tax', 'ships'));
     }
