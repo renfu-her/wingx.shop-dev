@@ -20,7 +20,7 @@
                 @forelse($qas as $key => $value)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading-{{ $key + 1 }}">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse-{{ $key + 1 }}" aria-expanded="true" aria-controls="collapse-{{ $key + 1 }}">
                             {{ $value->question }}
                         </button>
