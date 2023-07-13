@@ -34,7 +34,7 @@
                             @foreach($qas as $key => $value)
                             <tr>
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->qustion }}</td>
+                                <td>{{ $value->question }}</td>
 
                                 <td>{{ $value->status_name }}</td>
                                 <td>
