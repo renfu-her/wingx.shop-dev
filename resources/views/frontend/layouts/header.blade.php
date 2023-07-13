@@ -18,8 +18,8 @@
                     <!-- Mobile Nav Toggler-->
                     <button
                         class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2"
-                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ri-close-circle-line ri-2x"></i>
                     </button>
                     <!-- / Mobile Nav Toggler-->
@@ -93,8 +93,8 @@
                     @else
                         <!-- 使用者登入, modal -->
                         <li class="ms-1 d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center"
-                                href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="ri-user-line ri-lg align-middle"></i> 使用者登入
                             </a>
                         </li>
@@ -105,8 +105,7 @@
                     <li class="ms-1 d-inline-block position-relative">
                         <button
                             class="btn btn-link px-2 text-decoration-none d-flex align-items-center disable-child-pointer"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                            aria-controls="offcanvasCart">
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                             <i class="ri-shopping-cart-2-line ri-lg align-middle position-relative z-index-10"></i> 購物車
                             @if ($cart_count['cart_count'] > 0)
                                 <span

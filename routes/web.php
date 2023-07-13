@@ -12,6 +12,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\LineController;
+use App\Http\Controllers\QAController;
 
 use App\Http\Controllers\Api\ImportDataController;
 use App\Http\Controllers\Test\TestController;
@@ -43,6 +44,9 @@ route::put('/profile/update/{member_id}', [ProfileController::class, 'update'])-
 
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
+
+// Q&A 列表
+route::get('/qa', [QAController::class, 'index']);
 
 // 登入
 route::get('login', [LoginController::class, 'index']);

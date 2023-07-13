@@ -187,7 +187,8 @@
                     <div class="box">
                         <div class="content">
                             <div clss="w-100">
-                                <a href="{{ asset('auth/line') }}" class="btn w-100" style="background-color: #06C755; color: white">LINE 登入</a>
+                                <a href="{{ asset('auth/line') }}" class="btn w-100"
+                                    style="background-color: #06C755; color: white">LINE 登入</a>
                             </div>
                         </div>
                     </div>
