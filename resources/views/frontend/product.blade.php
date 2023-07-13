@@ -20,13 +20,13 @@
         <section class="container">
 
             <!-- Breadcrumbs-->
-            <nav aria-label="breadcrumb">
+            {{-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">首頁</a></li>
                     <li class="breadcrumb-item"><a
                             href="/category/{{ $product_category->id }}">{{ $product_category->name }}</a></li>
                 </ol>
-            </nav> <!-- /Breadcrumbs-->
+            </nav> <!-- /Breadcrumbs--> --}}
 
             <div class="row g-5">
 

@@ -9,7 +9,7 @@
             <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
                 <div class="col-12 col-md-6">
                     <p class="lead text-white mb-0">
-                        商品介紹
+
                     </p>
                 </div>
             </div>

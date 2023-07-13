@@ -57,7 +57,7 @@
 
 <body class="">
 
-    @include('frontend.layouts.header')
+    @include('frontend.layouts.header_light')
 
     @yield('content')
 
