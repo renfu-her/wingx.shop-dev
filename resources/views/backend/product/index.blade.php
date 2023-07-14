@@ -25,10 +25,9 @@
                                 <th style="width: 10%">ID</th>
                                 <th style="width: 15%">標題</th>
                                 <th style="width: 15%">封面圖檔</th>
-                                <th style="width: 8%">價格</th>
-                                <th style="width: 6%">免運費</th>
-                                <th style="width: 8%">產品組合</th>
-                                <th style="width: 8%">圖檔維護</th>
+                                <th style="width: 10%">價格</th>
+                                <th style="width: 10%">產品組合</th>
+                                <th style="width: 10%">圖檔維護</th>
                                 <th style="width: 8%">編輯</th>
                                 <th style="width: 8%">刪除</th>
                             </tr>
@@ -42,7 +41,6 @@
                                     <img src="{!! $value->image_url !!}" class="w-100" alt="">
                                 </td>
                                 <td>{{ number_format($value->price) }}</td>
-                                <td>{{ $value->is_free_ship_name }}</td>
                                 <td>
                                     <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
                                         <i class="fa-solid fa-pen-to-square"></i>
