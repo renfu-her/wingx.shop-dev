@@ -22,6 +22,8 @@ class ProductController extends Controller
                 $product->image_url = asset('upload/images/' . $product->id . '/' . $product->image);
             else
                 $product->image_url = 'https://down-tw.img.susercontent.com/file/' .$product->image;
+
+            $product->is_free_ship_name = $product->is_free_ship == 1 ? '啟用' : '停用';
         }
 
         $product_categories = ProductCategory::orderBy('id')->get();
