@@ -13,7 +13,10 @@ class ProductOrderController extends Controller
     // product 以及 product_category 的資料
     public function index()
     {
-        $product = Product::with('product_category')->get();
-        return response()->json($product);
+        $product_category = ProductCategory::get();
+        foreach ($product_category as $key => $value) {
+            $product_category[$key]['product'] = Product::where('category_id', $value['id'])->get();
+        }
+        return response()->json($product_category);
     }
 }
