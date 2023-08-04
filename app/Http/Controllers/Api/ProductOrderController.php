@@ -13,9 +13,9 @@ class ProductOrderController extends Controller
     // product 以及 product_category 的資料
     public function index()
     {
-        $product_category = ProductCategory::get();
+        $product_category = ProductCategory::on('mysql_second')->get();
         foreach ($product_category as $key => $value) {
-            $product_category[$key]['product'] = Product::where('category_id', $value['id'])->get();
+            $product_category[$key]['product'] = Product::on('mysql_second')->where('category_id', $value['id'])->get();
         }
         return response()->json($product_category);
     }
