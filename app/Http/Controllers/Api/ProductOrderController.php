@@ -15,7 +15,11 @@ class ProductOrderController extends Controller
     {
         $product_category = ProductCategory::on('mysql_second')->get();
         foreach ($product_category as $key => $value) {
-            $product_category[$key]['product'] = Product::on('mysql_second')->where('category_id', $value['id'])->get();
+            $product_category[$key]['product'] =
+                Product::on('mysql_second')
+                ->where('category_id', $value['id'])
+                ->where('status', 1)
+                ->get();
         }
         return response()->json($product_category);
     }
