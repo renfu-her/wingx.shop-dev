@@ -31,6 +31,9 @@ class ProductOrderController extends Controller
         $product_image = ProductImage::on('mysql_second')
             ->where('product_id', $id)
             ->get();
+        foreach ($product_image as $key => $value) {
+            $product_image[$key]['image'] = "https://down-tw.img.susercontent.com/file/" . $value['image'];
+        }
         return response()->json($product_image);
     }
 }
