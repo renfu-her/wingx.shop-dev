@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 
 class ProductOrderController extends Controller
 {
@@ -22,5 +23,14 @@ class ProductOrderController extends Controller
                 ->get();
         }
         return response()->json($product_category);
+    }
+
+    // product 的圖檔
+    public function productImage($id)
+    {
+        $product_image = ProductImage::on('mysql_second')
+            ->where('product_id', $id)
+            ->get();
+        return response()->json($product_image);
     }
 }
