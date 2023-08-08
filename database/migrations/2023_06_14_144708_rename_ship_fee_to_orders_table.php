@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\DB;
+
 return new class extends Migration
 {
     /**
@@ -12,7 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->renameColumn('ship_fee', 'ship_price');
+            // $table->renameColumn('ship_fee', 'ship_price');
+            DB::statement("ALTER TABLE orders
+            CHANGE COLUMN subtotal sub_total DATATYPE;");
         });
     }
 
