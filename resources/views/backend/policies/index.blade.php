@@ -22,7 +22,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th style="width: 20%">標題</th>
+                                <th style="width: 80%">標題</th>
                                 <th>編輯</th>
                                 <th>刪除</th>
                             </tr>
@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($policies as $key => $value)
                                 <tr>
-                                    <td>{{ $value->title }}</td>
+                                    <td>{{ $value->name }}</td>
 
                                     <td>
                                         <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
