@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             // $table->renameColumn('invoice', 'invoice_no');
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN invoice invoice_no DATAT-YPE;");
+            CHANGE COLUMN invoice invoice_no varchar(255);");
         });
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             // $table->renameColumn('ship_fee', 'ship_price');
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN subtotal sub_total DATAT-YPE;");
+            CHANGE COLUMN subtotal sub_total numeric;");
         });
     }
 

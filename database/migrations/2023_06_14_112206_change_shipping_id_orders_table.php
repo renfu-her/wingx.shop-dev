@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             // $table->renameColumn('shipping_id', 'ship_id');
             DB::statement("ALTER TABLE orders
-                CHANGE COLUMN shipping_id ship_id DATAT-YPE;");
+                CHANGE COLUMN shipping_id ship_id integer;");
         });
     }
 
