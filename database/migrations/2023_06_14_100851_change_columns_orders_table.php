@@ -22,17 +22,17 @@ return new class extends Migration
             // $table->renameColumn('shipping_discount', 'ship_discount');
             // $table->renameColumn('payment_id', 'payment');
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN shipping_no ship_no DATATYPE;");
+            CHANGE COLUMN shipping_no ship_no DATA-TYPE;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN shipping_remark ship_remark DATATYPE;");
+            CHANGE COLUMN shipping_remark ship_remark DATA-TYPE;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN shipping_date ship_date DATATYPE;");
+            CHANGE COLUMN shipping_date ship_date DATA-TYPE;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN shipping_fee ship_fee DATATYPE;");
+            CHANGE COLUMN shipping_fee ship_fee DATAT-YPE;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN shipping_discount ship_discount DATATYPE;");
+            CHANGE COLUMN shipping_discount ship_discount DATAT-YPE;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN payment_id ship_discount DATATYPE;");
+            CHANGE COLUMN payment_id ship_discount DATAT-YPE;");
 
             $table->dropColumn('shipping_time');
         });
