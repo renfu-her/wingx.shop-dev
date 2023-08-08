@@ -101,6 +101,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/backend/policies">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>政策管理</span>
+                </a>
+            </li>
+
             {{-- <li class="nav-item">
                 <a class="nav-link" href="/backend/news">
                     <i class="fa-solid fa-folder"></i>
@@ -214,14 +221,16 @@
 
     @yield('js')
 
-    @if(Session::has('message'))
+    @if (Session::has('message'))
         <script>
             alert('{{ Session::get('message') }}')
         </script>
     @endif
 
     <style>
-        [x-cloak] { display: none !important; }
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 
 </body>
