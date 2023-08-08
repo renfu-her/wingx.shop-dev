@@ -49,7 +49,7 @@ class PolicyAdminController extends Controller
         if (!$data) {
             return response()->json(['message' => '文章不存在'], 404);
         }
-        return view('backend.policies.edit', compact('data'));
+        return view('backend.policies.edit', compact('data', 'id'));
     }
 
     // update
