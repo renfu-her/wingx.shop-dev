@@ -13,7 +13,7 @@ use App\Http\Controllers\Backend\MailNotifyController;
 use App\Http\Controllers\Backend\ShipController;
 use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\QaAdminController;
-use App\Http\Controllers\Api\PolicyAdminController;
+use App\Http\Controllers\Backend\PolicyAdminController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
