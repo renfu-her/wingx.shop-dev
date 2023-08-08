@@ -32,7 +32,7 @@ return new class extends Migration
             DB::statement("ALTER TABLE orders
             CHANGE COLUMN shipping_discount ship_discount numeric;");
             DB::statement("ALTER TABLE orders
-            CHANGE COLUMN payment_id ship_discount numeric;");
+            CHANGE COLUMN payment_id payment numeric;");
 
             $table->dropColumn('shipping_time');
         });
