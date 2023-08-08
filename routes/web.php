@@ -15,7 +15,7 @@ use App\Http\Controllers\LineController;
 use App\Http\Controllers\QAController;
 
 use App\Http\Controllers\Api\ImportDataController;
-use App\Http\Controllers\Api\PolicyAdminController;
+
 use App\Http\Controllers\Test\TestController;
 
 use Illuminate\Auth\Events\Login;
@@ -39,8 +39,6 @@ route::post('/cart/count', [OrderController::class, 'cartCount']);
 route::get('/order/list', [OrderController::class, 'list']);
 route::post('/order/store', [OrderController::class, 'store']);
 
-route::get('/policies/delete/{id}', [PolicyAdminController::class, 'delete']);
-route::resource('/policies', PolicyAdminController::class);
 
 // 會員個人資料
 route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

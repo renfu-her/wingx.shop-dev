@@ -13,8 +13,9 @@ use App\Http\Controllers\Backend\MailNotifyController;
 use App\Http\Controllers\Backend\ShipController;
 use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\QaAdminController;
+use App\Http\Controllers\Api\PolicyAdminController;
 
-route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
+route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
 
     // 管理者管理
@@ -60,9 +61,10 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     // 訂單管理
     route::resource('/order', OrderAdminController::class);
 
+    route::get('/policies/delete/{id}', [PolicyAdminController::class, 'delete']);
+    route::resource('/policies', PolicyAdminController::class);
 });
 
 route::get('/backend/login', [AuthController::class, 'login'])->name('backend_login');
 route::post('/backend/login_verify', [AuthController::class, 'login_verify'])->name('login_verify');
 route::get('/backend/logout', [AuthController::class, 'logout']);
-
