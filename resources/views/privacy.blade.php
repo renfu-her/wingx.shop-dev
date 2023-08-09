@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/github-markdown-light.css') }}">
     <style>
         .div-height {
-            margin-top: 120px;
+            padding-top: 120px;
         }
     </style>
 @endsection
