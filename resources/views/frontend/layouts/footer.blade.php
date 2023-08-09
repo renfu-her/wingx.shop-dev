@@ -43,7 +43,7 @@
                             </li>
                             <li class="mb-2"><a
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
-                                    href="{{ url('privacy') }}">隱私權註冊</a>
+                                    href="{{ url('privacy') }}">隱私權政策</a>
                             </li>
 
                         </ul>
