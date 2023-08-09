@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="mb-3"></div>
+        <div class="div-height"></div>
         <div class="mt-2 markdown-body" id="show_md">
             {!! $content_markdown !!}
         </div>
@@ -15,4 +15,9 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/github-markdown-light.css') }}">
+    <style>
+        .div-height {
+            height: 60px;
+        }
+    </style>
 @endsection
