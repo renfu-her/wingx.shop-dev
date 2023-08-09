@@ -10,3 +10,4 @@ use App\Http\Controllers\Api\ProductOrderController;
 route::post('/ship/price', [ShipController::class, 'getPrice']);
 route::get('/product/order', [ProductOrderController::class, 'index']);
 route::get('/product/order/image/{id}', [ProductOrderController::class, 'productImage']);
+route::get('/get_policy/{policy_id}', [PolicyAdminController::class, 'getPolicy']);
