@@ -41,6 +41,11 @@
                                     class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
                                     href="#">退換貨方式</a>
                             </li>
+                            <li class="mb-2"><a
+                                    class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all"
+                                    href="{{ url('privacy') }}">隱私權註冊</a>
+                            </li>
+
                         </ul>
                     </nav>
 
