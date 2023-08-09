@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "ecpay/sdk": "^1.2",
+        "erusev/parsedown": "^1.7",
         "getsolaris/laravel-make-service": "^1.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "*",
