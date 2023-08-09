@@ -20,7 +20,7 @@ class PolicyController extends Controller
         $content_markdown = $parser->text($data->content);
 
         return view(
-            'frontend.privacy',
+            'privacy',
             compact('data', 'content_markdown')
         );
     }
