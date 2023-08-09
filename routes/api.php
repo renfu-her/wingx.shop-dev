@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ShipController;
 use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\ProductOrderController;
+use App\Http\Controllers\Api\PolicyAdminController;
 
 route::post('/ship/price', [ShipController::class, 'getPrice']);
 route::get('/product/order', [ProductOrderController::class, 'index']);
