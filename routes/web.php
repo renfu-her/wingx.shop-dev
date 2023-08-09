@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\QAController;
+use App\Http\Controllers\PolicyController;
 
 use App\Http\Controllers\Api\ImportDataController;
 
@@ -62,6 +63,8 @@ route::post('/verify_password', [LoginController::class, 'verify_password']);
 route::get('/verify_email', [LoginController::class, 'verify_email']);
 // LINE 合併 Email
 route::get('/line-combine', [LoginController::class, 'lineCombine']);
+
+route::get('/privacy', [PolicyController::class, 'privacy_policy']);
 
 route::get('/captcha', function () {
     return Captcha::create();
