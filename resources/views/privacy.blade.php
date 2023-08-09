@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <div class="mb-3"></div>
         <div class="mt-2 markdown-body" id="show_md">
             {!! $content_markdown !!}
         </div>
