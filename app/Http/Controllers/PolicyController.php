@@ -33,7 +33,7 @@ class PolicyController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
@@ -44,7 +44,17 @@ class PolicyController extends Controller
 
         return view(
             'privacy',
-            compact('data', 'content_markdown')
+            compact(
+                'data',
+                'content_markdown',
+                'product_images',
+                'products',
+                'product_categories',
+                'banners',
+                'total',
+                'tax',
+                'cart_count'
+            )
         );
     }
 }
