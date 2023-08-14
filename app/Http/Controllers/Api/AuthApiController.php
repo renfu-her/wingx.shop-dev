@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\UserToken;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class AuthApiController extends Controller
@@ -41,28 +42,44 @@ class AuthApiController extends Controller
             return response()->json(['result' => '401', 'data' => ['message' => 'login email incorrect']], 401);
         }
 
+
+
         // 檢查 token 是否過期
-        $user_token = UserToken::where('user_id', $user->id)->first();
+        $user_token = UserToken::where('user_id', $user->id)->where('expired_at', '>', time())->first();
         if ($user_token) {
-            if ($user_token->expired_at > Carbon::now()) {
-                return response()->json(['result' => '401', 'data' => ['message' => 'token expired']], 401);
-            }
+            return response()->json(['result' => '401', 'data' => ['token' => $user_token->token, 'expired_at' => $user_token->expired_at]], 401);
         } else {
-            $token_time = time();
+
             // 產生 token
-            $token = $user->createToken($token_time)->plainTextToken;
-
-            // 回傳 token
-            UserToken::create([
-                'user_id' => $user->id,
-                'token' => $token,
-                'expired_at' => Carbon::now()->addHours(24),
-            ]);
-
-
-            return response()->json(['result' => '200', 'data' => ['token' => $token]]);
+            $token = $this->createToken($user);
+            return response()->json(['result' => '200', 'data' => ['token' => $token['token'], 'expired_at' => $token['expired_at']]]);
         }
     }
+
+    // user create token
+    public function createToken($user)
+    {
+
+        $token_time = Str::uuid()->toString();
+        $token_time = str_replace('-', '', $token_time);
+        // 產生 token
+        $token = $user->createToken($token_time)->plainTextToken;
+
+        // 回傳 token
+        UserToken::create([
+            'user_id' => $user->id,
+            'token' => $token,
+            'expired_at' => Carbon::now()->addHours(24)->timestamp,
+        ]);
+
+        $data = [
+            'token' => $token,
+            'expired_at' => Carbon::now()->addHours(24)->timestamp,
+        ];
+
+        return $data;
+    }
+
 
     public function user(Request $request)
     {
