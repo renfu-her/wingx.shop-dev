@@ -26,5 +26,6 @@ route::post('/login', [AuthApiController::class, 'login'])->name('api.login');
 route::middleware('auth:sanctum')->group(function () {
     // 其他需要認證的 API 路由
     route::get('/user', [AuthApiController::class, 'user'])->name('api.user');
+    route::get('/order', [OrderApiController::class, 'index'])->name('api.order');
     route::post('logout', [AuthApiController::class, 'logout'])->name('api.logout');
 });

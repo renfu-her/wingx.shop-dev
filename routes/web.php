@@ -14,6 +14,7 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\QAController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\InvoiceLotteryController;
 
 use App\Http\Controllers\Api\ImportDataController;
 
@@ -82,6 +83,8 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'fbLoginCallba
 
 Route::get('/auth/line', [LineController::class, 'lineLogin']);
 Route::get('/auth/line/callback', [LineController::class, 'lineLoginCallback']);
+
+route::get('/xmlToJson', [InvoiceLotteryController::class, 'readXmlToJson']);
 
 // Test route
 route::group(['prefix' => 'test'], function(){
