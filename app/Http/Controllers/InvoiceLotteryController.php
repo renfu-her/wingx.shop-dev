@@ -46,4 +46,17 @@ class InvoiceLotteryController extends Controller
             echo "Failed to load XML.";
         }
     }
+
+    public function getInvoiceLottery(Request $request) {
+        $year = $request->input('year');
+        $month = $request->input('month');
+
+        $lotteries = InvoiceLottery::when($year, function($query) use ($year) {
+            return $query->where('year', $year);
+        })->when($month, function($query) use ($month) {
+            return $query->where('month', $month);
+        })->get();
+
+        return response()->json($lotteries);
+    }
 }
