@@ -47,7 +47,8 @@ class InvoiceLotteryController extends Controller
         }
     }
 
-    public function getInvoiceLottery(Request $request) {
+    // get invoice lottery by year and month
+    public function getInvoiceLotteryByYearMonth(Request $request) {
         $year = $request->input('year');
         $month = $request->input('month');
 
@@ -56,6 +57,13 @@ class InvoiceLotteryController extends Controller
         })->when($month, function($query) use ($month) {
             return $query->where('month', $month);
         })->get();
+
+        return response()->json($lotteries);
+    }
+
+    // get invoice lottery
+    public function getInvoiceLotteryMenu() {
+        $lotteries = InvoiceLottery::all();
 
         return response()->json($lotteries);
     }

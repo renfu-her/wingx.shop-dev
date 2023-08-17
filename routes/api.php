@@ -15,7 +15,8 @@ route::get('/product/order', [ProductOrderController::class, 'index']);
 route::get('/product/order/image/{id}', [ProductOrderController::class, 'productImage']);
 route::get('/get_policy/{policy_id}', [PolicyAdminController::class, 'getPolicy']);
 
-route::get('/invoice-lotteries', [InvoiceLotteryController::class, 'getInvoiceLottery']);
+route::get('/invoice-lotteries/menu', [InvoiceLotteryController::class, 'getInvoiceLotteryMenu']);
+route::get('/invoice-lotteries', [InvoiceLotteryController::class, 'getInvoiceLotteryByYearMonth']);
 
 
 // 登入路由
