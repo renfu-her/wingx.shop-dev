@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('OrderStatus')->everyTenMinutes();
         $schedule->command('InvoiceCheck')->everyTenMinutes();
+        $schedule->command('XmlToJson')->everyTenMinutes();
     }
 
     /**
