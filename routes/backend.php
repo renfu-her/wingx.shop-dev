@@ -16,7 +16,7 @@ use App\Http\Controllers\Backend\QaAdminController;
 use App\Http\Controllers\Backend\PolicyAdminController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
-    route::get('/', [AdminController::class, 'backendTo']);
+    route::get('/', [AdminController::class, 'backendTo'])->name('backendTo');
 
     // 管理者管理
     route::resource('/admin', AdminController::class);
