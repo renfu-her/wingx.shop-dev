@@ -153,7 +153,7 @@ class LoginController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
@@ -265,7 +265,7 @@ class LoginController extends Controller
                 $member_id = $member->id;
 
                 $member_data = Member::find($member_id);
-                $member_data->verify_email = $this->generator_email_verify();
+                $member_data->email_verify = $this->generator_email_verify();
                 $member_data->save();
 
                 $mailNotifyService = new MailNotifyService();
@@ -287,10 +287,9 @@ class LoginController extends Controller
     }
 
     // LINE 合併 Email 的驗證
-    public function lineCombine(Request $request){
+    public function lineCombine(Request $request)
+    {
 
         $req = $request->all();
-
-        
     }
 }
