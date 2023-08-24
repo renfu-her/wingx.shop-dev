@@ -662,7 +662,7 @@
 
         $('#verify_submit').on('click', function(event) {
             let error_msg = []
-            let email = $('#verify_email').val()
+            let email = $('input[name=email_verify]').val()
 
             if ($.trim(email) == '') {
                 error_msg.push('Email 一定要輸入')

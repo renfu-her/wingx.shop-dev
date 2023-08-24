@@ -169,8 +169,8 @@
                         <div class="content verifyBox" style="display: none;">
                             <div class="form">
                                 <form id="form-verify" method="post" action="/email_verify">
-                                    <input id="verify_email" class="form-control" type="text" placeholder="Email"
-                                        name="verify_email">
+                                    <input class="form-control" type="text" placeholder="Email"
+                                        name="email_verify">
                                     <input id="verify_submit" class="btn btn-default btn-register" type="button"
                                         value="重發驗證信">
                                     <div class="d-flex justify-content-around bd-highlight mb-3">
