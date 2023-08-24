@@ -7,12 +7,12 @@ use App\Services\BaseService;
 use App\Models\MailNotify;
 use App\Models\Member;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Mail;
 
 use DB;
 use Log;
-use Str;
 
 class MailNotifyService extends BaseService
 {
