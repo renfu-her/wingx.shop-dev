@@ -33,7 +33,7 @@ class MailNotifyService extends BaseService
         $website =  config('app.url') . '/verify_email?email=' . urlencode($member->email) . '&code=' . $member->email_verify;
         $content = str_replace(
             ["\n", '{name}', '{website}'],
-            ["<br>", $member->username, $website],
+            ["<br>", $member->name, $website],
             $content
         );
 
