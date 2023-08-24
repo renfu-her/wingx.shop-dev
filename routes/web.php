@@ -62,7 +62,7 @@ route::post('/reset_password', [LoginController::class, 'reset_password']);
 route::get('/reset_password', [LoginController::class, 'reset_verify_password']);
 route::post('/verify_password', [LoginController::class, 'verify_password']);
 route::get('/verify_email', [LoginController::class, 'verify_email']);
-route::get('/email_verify', [LoginController::class, 'email_verify']);
+route::post('/email_verify', [LoginController::class, 'email_verify']);
 
 // LINE 合併 Email
 route::get('/line-combine', [LoginController::class, 'lineCombine']);
