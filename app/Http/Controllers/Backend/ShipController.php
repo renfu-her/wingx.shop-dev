@@ -71,7 +71,7 @@ class ShipController extends Controller
     }
 
     // ship destroy
-    public function destroy(Ship $ship)
+    public function delete(Ship $ship)
     {
 
         $ship = Ship::find($ship)->delete();
