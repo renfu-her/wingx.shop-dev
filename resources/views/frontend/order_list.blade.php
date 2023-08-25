@@ -24,6 +24,7 @@
                     <div class="col-md-12">
                         <div class="text-center">
                             <h5>訂單列表</h5>
+                            <h3 style="color: red">如果使用信用卡結帳，請確認狀態是否“完成付款“狀態，謝謝！</h3>
                         </div>
                         @foreach ($orders as $key => $value)
                             <div class="container container-2 hr-line">
@@ -93,7 +94,7 @@
                                 @foreach ($value['order_detail'] as $dkey => $drow)
                                     <div class="row" style="align-items: center; justify-content: center;">
                                         <div class="col-6 col-md-3">
-                                            <img src="{{ $drow->image_url }}" style="height: 150px" loading="lazy">
+                                            <img src="{{ $drow->image_url }}" style="width: 120px" loading="lazy">
                                         </div>
                                         <div class="col-6 col-md-3">
                                             <span>{{ $drow->name }}</span>
