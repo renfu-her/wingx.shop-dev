@@ -63,7 +63,7 @@ class OrderController extends Controller
             'order_no' => $order_no,
             'name' => $req['name'],
             'member_id' => $member_id,
-            'ship_id' => $req['ship_id'],
+            'ship_id' => $req['ship_id'] ?? 0,
             'total' => $total,
             'status' => 9,
             'email' => $req['email'],

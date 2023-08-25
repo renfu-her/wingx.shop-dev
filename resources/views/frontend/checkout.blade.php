@@ -43,8 +43,6 @@
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <input type="hidden" name="ship_id" id="ship_id" value="0">
                     @endif
 
                     <div class="checkout-panel">
