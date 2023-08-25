@@ -23,8 +23,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class="text-center">
-                            <h5>訂單列表</h5>
-                            <h3 style="color: red">如果使用信用卡結帳，請確認狀態是否“完成付款“狀態，謝謝！</h3>
+                            <h4>訂單列表</h4>
+                            <h6 style="color: red">如果使用信用卡結帳，請確認狀態是否“完成付款“狀態，謝謝！</h6>
                         </div>
                         @foreach ($orders as $key => $value)
                             <div class="container container-2 hr-line">
