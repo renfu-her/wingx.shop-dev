@@ -74,6 +74,10 @@ class OrderApiController extends Controller
         $order->manual_status = $req['manual_status'];
         $order->save();
 
-        return redirect()->back()->with('message', '設定手動訂單狀態成功');
+        return response()->json([
+            'status' => 'success',
+            'message' => '設定手動訂單狀態成功',
+            'data' => $order
+        ]);
     }
 }
