@@ -57,7 +57,13 @@ class ShipController extends Controller
             'ship_price' => 'required'
         ]);
 
-        $ship->update($request->all());
+        $req = $request->all();
+
+        $ship->update([
+            'name' => $req['name'],
+            'status' => $req['status'],
+            'ship_price' => $req['ship_price']
+        ]);
 
         return redirect()->route('ship.index')->with('success', 'Ship updated successfully.');
     }
