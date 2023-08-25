@@ -17,7 +17,7 @@ jobs:
           cd /home/cloudpanel/htdocs/wingx.shop
           git pull
           php8.1 /usr/local/bin/composer install
-          echo "yes" | php8.1 artisan migrate
+          php8.1 artisan migrate --force
           php8.1 artisan config:cache
           php8.1 artisan view:cache
           php8.1 artisan route:cache
