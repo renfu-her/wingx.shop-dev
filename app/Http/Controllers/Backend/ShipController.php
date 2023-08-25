@@ -13,7 +13,7 @@ class ShipController extends Controller
     public function index()
     {
         $ships = Ship::all();
-        foreach($ships as $ship){
+        foreach ($ships as $ship) {
             $ship['status_name'] = $ship->status == 1 ? '啓用' : '停用';
         }
         return view('backend.ship.index', compact('ships'));
@@ -71,10 +71,10 @@ class ShipController extends Controller
     }
 
     // ship destroy
-    public function delete(Ship $ship)
+    public function delete(Request $request, $ship_id)
     {
 
-        $ship = Ship::find($ship)->delete();
+        $ship = Ship::find($ship_id)->delete();
 
         return redirect()->route('ship.index')->with('success', 'Ship deleted successfully.');
     }
