@@ -49,7 +49,7 @@ class ShipController extends Controller
     }
 
     // ship update
-    public function update(Request $request, $ship)
+    public function update(Request $request, $ship_id)
     {
         $request->validate([
             'name' => 'required',
@@ -58,6 +58,8 @@ class ShipController extends Controller
         ]);
 
         $req = $request->all();
+
+        $ship = Ship::find($ship_id);
 
         $ship->update([
             'name' => $req['name'],
