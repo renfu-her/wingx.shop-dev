@@ -252,6 +252,11 @@
                         $('.ship_price').text('$ ' + res);
                     })
                 })
+            } else {
+                let ship_price = '$ 0';
+                $('.ship_item').css('display', 'block');
+                $('input[name=ship_price]').val(0);
+                $('.ship_price').text('$ 0');
             }
 
             $('#form_post').on('submit', function() {
@@ -283,13 +288,6 @@
                     if (ship_id == '') {
                         error_msg.push('請選擇運送方式');
                     }
-
-                } else {
-                    alert('test')
-                    let ship_price = '$ 0';
-                    $('.ship_item').css('display', 'block');
-                    $('input[name=ship_price]').val(0);
-                    $('.ship_price').text('$ 0');
                 }
 
                 if (type == '') {
