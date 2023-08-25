@@ -27,6 +27,7 @@
                                 <th style="width: 8%">總金額</th>
                                 <th style="width: 8%">付款類別</th>
                                 <th style="width: 8%">付款狀態</th>
+                                <th style="width: 8%">手動付款狀態</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,7 @@
                                 <td>{{ $value->ttl_price }}</td>
                                 <td>{{ $value->payment_name }}</td>
                                 <td>{!! $value->status_name !!}</td>
+                                <td>{!! $value->manual_status_name !!}</td>
                             </tr>
                             @endforeach
                         </tbody>
