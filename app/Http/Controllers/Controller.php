@@ -50,7 +50,7 @@ class Controller extends BaseController
     // get ship all
     public function getShipAll()
     {
-        $ships = Ship::where('status', 1)->all();
+        $ships = Ship::where('status', 1)->get();
         return $ships;
     }
 
