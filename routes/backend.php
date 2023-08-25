@@ -50,6 +50,7 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     route::resource('/qa', QaAdminController::class);
 
     route::resource('/ship', ShipController::class);
+    route::get('/ship/delete/{ship_id}', [ShipController::class, 'delete']);
 
     // MailNotify 管理
     route::resource('/mail_notify', MailNotifyController::class);

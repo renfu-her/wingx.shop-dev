@@ -22,10 +22,3 @@ jobs:
           php8.1 artisan view:cache
           php8.1 artisan route:cache
           php8.1 artisan config:cache
-
-
-
-
-
-
-
