@@ -21,13 +21,13 @@
                                 <th style="width: 5%">ID</th>
                                 <th style="width: 15%">訂單編號</th>
                                 <th style="width: 10%">訂購者</th>
-                                <th style="width: 15%">E-mail</th>
-                                <th style="width: 8%">金額</th>
-                                <th style="width: 8%">運費</th>
-                                <th style="width: 8%">總金額</th>
-                                <th style="width: 8%">付款類別</th>
-                                <th style="width: 8%">付款狀態</th>
-                                <th style="width: 8%">手動付款狀態</th>
+                                <th style="width: 13%">E-mail</th>
+                                <th style="width: 6%">金額</th>
+                                <th style="width: 6%">運費</th>
+                                <th style="width: 6%">總金額</th>
+                                <th style="width: 6%">付款類別</th>
+                                <th style="width: 6%">付款狀態</th>
+                                <th style="width: 10%">手動付款狀態</th>
                             </tr>
                         </thead>
                         <tbody>
