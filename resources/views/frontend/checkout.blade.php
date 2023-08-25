@@ -24,7 +24,7 @@
 
                 <div class="col-12 col-lg-6 col-xl-7">
                     <!-- Checkout Panel Contact -->
-                    @if ($ships)
+                    @if ($ships->count() > 0)
                         <div class="checkout-panel">
                             <h5 class="title-checkout">選擇送貨方式</h5>
                             <div class="row">
@@ -235,7 +235,7 @@
             const twzipcode = new TWzipcode();
 
             let ships = 0;
-            @if ($ships)
+            @if ($ships->count() > 0)
                 ships = {{ $ships->count() }};
             @endif
 
