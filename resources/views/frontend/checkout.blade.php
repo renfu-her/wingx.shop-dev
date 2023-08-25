@@ -21,26 +21,29 @@
         <form action="/order/store" method="post" id="form_post">
             <div class="row g-md-8 mt-4">
                 <!-- Checkout Panel Left -->
+
                 <div class="col-12 col-lg-6 col-xl-7">
                     <!-- Checkout Panel Contact -->
-                    <div class="checkout-panel">
-                        <h5 class="title-checkout">選擇送貨方式</h5>
-                        <div class="row">
+                    @if ($ships)
+                        <div class="checkout-panel">
+                            <h5 class="title-checkout">選擇送貨方式</h5>
+                            <div class="row">
 
-                            <!-- Email-->
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="email" class="form-label">送貨方式</label>
-                                    <select name="ship_id" id="ship_id" class="form-select">
-                                        <option value="">請選擇</option>
-                                        @foreach ($ships as $ship)
-                                            <option value="{{ $ship->id }}">{{ $ship->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <!-- Email-->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">送貨方式</label>
+                                        <select name="ship_id" id="ship_id" class="form-select">
+                                            <option value="">請選擇</option>
+                                            @foreach ($ships as $ship)
+                                                <option value="{{ $ship->id }}">{{ $ship->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="checkout-panel">
                         <h5 class="title-checkout">選擇發票類型</h5>
@@ -96,9 +99,10 @@
                         <div class="row">
 
                             <!-- Email-->
-                            <div class="col-12" >
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label for="email" class="form-label">Email <span>*(請一定要填寫，方便我們通知您購物狀況)</span></label>
+                                    <label for="email" class="form-label">Email
+                                        <span>*(請一定要填寫，方便我們通知您購物狀況)</span></label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         value="{{ $member->email }}">
                                 </div>
@@ -230,21 +234,28 @@
 
             const twzipcode = new TWzipcode();
 
+            let ships = 0;
+            @if ($ships)
+                ships = {{ $ships->count() }};
+            @endif
+
             twzipcode.set({{ $member->zipcode }})
 
-            $('#ship_id').change(function() {
-                let ship_id = $(this).val();
-                $.post('/api/ship/price', {
-                    ship_id: ship_id
-                }, function(res) {
-                    $('.ship_item').show();
-                    $('.ship_price').text('$ ' + res);
+
+            if (ships > 0) {
+                $('#ship_id').change(function() {
+                    let ship_id = $(this).val();
+                    $.post('/api/ship/price', {
+                        ship_id: ship_id
+                    }, function(res) {
+                        $('.ship_item').show();
+                        $('.ship_price').text('$ ' + res);
+                    })
                 })
-            })
+            }
 
             $('#form_post').on('submit', function() {
-                let ship_id = $('#ship_id').val();
-                let ship_price = $('.ship_price').text().replace('$ ', '');
+
                 let name = $('#name').val();
                 let address = $('#address').val();
                 let county = $('#county').val();
@@ -259,13 +270,23 @@
                 let company_uid = $('#company_uid').val();
                 let company_address = $('#company_address').val();
 
-                $('input[name=ship_price]').val(ship_price);
+
                 $('input[name=total]').val(total);
 
                 let error_msg = []
 
-                if (ship_id == '') {
-                    error_msg.push('請選擇運送方式');
+                if (ships > 0) {
+                    let ship_id = $('#ship_id').val();
+                    let ship_price = $('.ship_price').text().replace('$ ', '');
+                    $('input[name=ship_price]').val(ship_price);
+
+                    if (ship_id == '') {
+                        error_msg.push('請選擇運送方式');
+                    }
+
+                } else {
+                    $('.ship_item').show();
+                    let ship_price = '$ 0'
                 }
 
                 if (type == '') {
