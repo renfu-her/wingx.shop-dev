@@ -18,6 +18,8 @@ route::get('/get_policy/{policy_id}', [PolicyAdminController::class, 'getPolicy'
 route::get('/invoice-lotteries/menu', [InvoiceLotteryController::class, 'getInvoiceLotteryMenu']);
 route::get('/invoice-lotteries', [InvoiceLotteryController::class, 'getInvoiceLotteryByYearMonth']);
 
+route::post('/order/setManualStatus', [OrderApiController::class, 'setManualStatus']);
+
 
 // 登入路由
 route::post('/login', [AuthApiController::class, 'login'])->name('api.login');

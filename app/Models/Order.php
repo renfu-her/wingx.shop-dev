@@ -43,5 +43,6 @@ class Order extends Model
         'company_address',
         'amount',
         'tax',
+        'manual_status',
     ];
 }

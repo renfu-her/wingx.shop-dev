@@ -64,4 +64,16 @@ class OrderApiController extends Controller
             'data' => $order
         ]);
     }
+
+    // 設定手動訂單狀態
+    public function setManualStatus(Request $request)
+    {
+        $req = $request->all();
+
+        $order = Order::find($req['id']);
+        $order->manual_status = $req['manual_status'];
+        $order->save();
+
+        return redirect()->back()->with('message', '設定手動訂單狀態成功');
+    }
 }

@@ -42,7 +42,13 @@
                                 <td>{{ $value->ttl_price }}</td>
                                 <td>{{ $value->payment_name }}</td>
                                 <td>{!! $value->status_name !!}</td>
-                                <td>{!! $value->manual_status_name !!}</td>
+                                <td>
+                                    <select class="form-control" onchange="manualStatus({{ $value->id }}, this.value)">
+                                        <option value="0" @if($value->manual_status == 0) selected @endif>未設定</option>
+                                        <option value="1" @if($value->manual_status == 1) selected @endif>已付款</option>
+                                        <option value="2" @if($value->manual_status == 2) selected @endif>已取消</option>
+                                    </select>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -70,6 +76,19 @@
         })
 
     })
+
+    const manualStatus = (id, manual_status) => {
+        $.post('/api/order/setManualStatus', {
+            id: id,
+            manual_status: manual_status
+        }, function(data){
+            if(data.status == 'success'){
+                alert('更新成功')
+            }else{
+                alert('更新失敗')
+            }
+        })
+    }
 
 </script>
 @endsection
