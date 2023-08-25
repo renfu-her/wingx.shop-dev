@@ -235,6 +235,7 @@
             const twzipcode = new TWzipcode();
 
             let ships = 0;
+            test = '{{ $ships->count() }}'
             @if ($ships->count() > 0)
                 ships = {{ $ships->count() }};
             @endif
