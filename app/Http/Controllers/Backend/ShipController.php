@@ -40,7 +40,7 @@ class ShipController extends Controller
     }
 
     // ship edit
-    public function edit(Ship $ship)
+    public function edit(Request $request, $ship)
     {
 
         $ships = Ship::find($ship);
@@ -49,7 +49,7 @@ class ShipController extends Controller
     }
 
     // ship update
-    public function update(Request $request, Ship $ship)
+    public function update(Request $request, $ship)
     {
         $request->validate([
             'name' => 'required',
