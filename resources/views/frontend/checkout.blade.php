@@ -286,6 +286,9 @@
 
                 } else {
                     $('.ship_item').show();
+                    $('input[name=ship_price]').val(0);
+                    $('.ship_item').show();
+                    $('.ship_price').text('$ 0');
                     let ship_price = '$ 0'
                 }
 
