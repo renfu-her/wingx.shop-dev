@@ -12,9 +12,9 @@
             </div>
         </div>
     </div>
-    <section class="mt-5 container ">
+    <section class="mt-5 ">
         <section class="replica" id="replica">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row gy-5">
                     <div class="col-12 text-center">
                         <button class="btn btn-primary" onclick="location.href='/order/list'">訂單列表</button>
