@@ -21,7 +21,7 @@
                         <label class="m-1 col-form-label text-right">分類： </label>
                         <div class="m-1">
                             <select id="category_id" name="category_id" class="form-control col-12">
-                                <option value="">分類</option>
+                                <option value="">全部</option>
                                 @foreach ($product_categories as $value)
                                     <option value="{{ $value['id'] }}" @if ($category_id == $value['id']) selected @endif>
                                         {{ $value['name'] }}
