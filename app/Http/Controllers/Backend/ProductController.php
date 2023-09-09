@@ -38,7 +38,7 @@ class ProductController extends Controller
         $product_categories = ProductCategory::orderBy('id')->get();
 
 
-        return view('backend.product.index', compact('products', 'product_categories'));
+        return view('backend.product.index', compact('products', 'product_categories', 'req'));
     }
 
     // 產品新增頁面
