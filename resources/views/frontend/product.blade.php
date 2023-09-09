@@ -94,11 +94,9 @@
                                     數量 :
                                 </small>
                                 <div class="">
-                                    <select class="form-select product-qty">
-                                        @for ($i = 1; $i <= 50; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                    <button class="decrement">-</button>
+                                    <input type="number" min="1" value="1" class="product-qty">
+                                    <button class="increment">+</button>
                                 </div>
                             </div>
                         </div>
@@ -120,14 +118,20 @@
                                 <p class="fw-bolder lh-1 mb-0 me-3">分享</p>
                                 <ul class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
                                     <li class="me-2">
-                                        <a class="text-decoration-none" href="https://www.facebook.com/sharer.php?u={{ url('/product/' . $product_id) }}" role="button">
+                                        <a class="text-decoration-none"
+                                            href="https://www.facebook.com/sharer.php?u={{ url('/product/' . $product_id) }}"
+                                            role="button">
                                             <i class="fa-brands fa-facebook"></i></a>
                                     </li>
-                                    <li class="me-2"><a class="text-decoration-none" href="http://line.naver.jp/R/msg/text/?{{ url('/product/' . $product_id) }}" role="button">
-                                        <i class="fa-brands fa-line"></i></a>
+                                    <li class="me-2"><a class="text-decoration-none"
+                                            href="http://line.naver.jp/R/msg/text/?{{ url('/product/' . $product_id) }}"
+                                            role="button">
+                                            <i class="fa-brands fa-line"></i></a>
                                     </li>
-                                    <li class="me-2"><a class="text-decoration-none" href="https://twitter.com/share?text={{ $product->name }}&url={{ url('/product/' . $product_id) }}" role="button">
-                                        <i class="fa-brands fa-twitter"></i></a>
+                                    <li class="me-2"><a class="text-decoration-none"
+                                            href="https://twitter.com/share?text={{ $product->name }}&url={{ url('/product/' . $product_id) }}"
+                                            role="button">
+                                            <i class="fa-brands fa-twitter"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -207,7 +211,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     <script>
         $(function() {
+            $('.increment').click(function() {
+                var currentVal = parseInt($(this).siblings('.product-qty').val(), 10);
+                $(this).siblings('.product-qty').val(currentVal + 1);
+            });
 
+            $('.decrement').click(function() {
+                var currentVal = parseInt($(this).siblings('.product-qty').val(), 10);
+                if (currentVal > 1) { // Ensure the value doesn't go below 1
+                    $(this).siblings('.product-qty').val(currentVal - 1);
+                }
+            });
         })
 
         const selectItem = (dataBase, prod_id, price) => {
