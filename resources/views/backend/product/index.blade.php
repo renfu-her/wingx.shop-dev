@@ -14,12 +14,36 @@
             <i class="fa-solid fa-circle-plus"></i>
         </button>
 
+        <div class="row">
+            <form method="POST" id="search-form">
+                <div class="form-group row g-3" style="color: #000 !important">
+                    <div class="col-md-12 col-12">
+                        <div class="row no-gutters">
+                            <label class="m-1 col-form-label text-right">商品型號： </label>
+                            <div class="m-1">
+                                <select id="category_id" name="category_id" class="selectpicker" data-live-search="true">
+                                    <option value="">分類</option>
+                                    @foreach ($product_categories as $value)
+                                        <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="m-1 text-center">
+                                <button type="submit" class="btn btn-success">搜尋</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" data-order='[[ 0, "desc" ]]' id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" data-order='[[ 0, "desc" ]]' id="dataTable" width="100%"
+                        cellspacing="0">
                         <thead>
                             <tr>
                                 <th style="width: 10%">ID</th>
@@ -33,35 +57,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $key => $value)
-                            <tr>
-                                <td>{{ $value->id }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>
-                                    <img src="{!! $value->image_url !!}" class="w-100" alt="">
-                                </td>
-                                <td>{{ number_format($value->price) }}</td>
-                                <td>
-                                    <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-success" onclick="edit_image_row({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger" onclick="delete_row({{ $value->id }})">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach ($products as $key => $value)
+                                <tr>
+                                    <td>{{ $value->id }}</td>
+                                    <td>{{ $value->name }}</td>
+                                    <td>
+                                        <img src="{!! $value->image_url !!}" class="w-100" alt="">
+                                    </td>
+                                    <td>{{ number_format($value->price) }}</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="edit_image_row({{ $value->id }})">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" onclick="delete_row({{ $value->id }})">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -75,40 +99,45 @@
 
 
 @section('js')
-<script>
-    $(function(){
-        $('#dataTable').DataTable({
-            columnDefs: [{
-                targets: [4, 5],
-                orderable: false
-            }],
-            "language": {
-                "url": "/admin/zh-HANT.json"
-            }
+    <script>
+        $(function() {
+            $('#dataTable').DataTable({
+                columnDefs: [{
+                    targets: [4, 5],
+                    orderable: false
+                }],
+                "language": {
+                    "url": "/admin/zh-HANT.json"
+                }
+            })
+
+            $('#search-form').on('submit', function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
+                location.href = '/backend/product?' + data;
+            })
         })
 
-    })
-
-    const edit_row = (id) => {
-        location.href = '/backend/product/' + id + '/edit';
-    }
-
-    const add_row = () => {
-        location.href = '/backend/product/create';
-    }
-
-    const edit_image_row = (id) => {
-        location.href = '/backend/product/image/' + id ;
-    }
-
-    const edit_mix = (product_id) => {
-        location.href = '/backend/product/mix/' + product_id;
-    }
-
-    const delete_row = (id) => {
-        if(confirm('確定刪除？')){
-            location.href = '/backend/product/delete/' + id;
+        const edit_row = (id) => {
+            location.href = '/backend/product/' + id + '/edit';
         }
-    }
-</script>
+
+        const add_row = () => {
+            location.href = '/backend/product/create';
+        }
+
+        const edit_image_row = (id) => {
+            location.href = '/backend/product/image/' + id;
+        }
+
+        const edit_mix = (product_id) => {
+            location.href = '/backend/product/mix/' + product_id;
+        }
+
+        const delete_row = (id) => {
+            if (confirm('確定刪除？')) {
+                location.href = '/backend/product/delete/' + id;
+            }
+        }
+    </script>
 @endsection

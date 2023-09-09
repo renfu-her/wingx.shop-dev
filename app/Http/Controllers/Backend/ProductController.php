@@ -15,18 +15,28 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::orderByDesc('id')->get();
-        foreach($products as $product){
+        $req = $request->all();
+
+        $products = Product::orderByDesc('id');
+
+        if (isset($req['category_id']) && $req['category_id'] != '') {
+            $products = $products->where('category_id', $req['category_id']);
+        }
+
+        $products = $products->orderByDesc('id')->get();
+
+        foreach ($products as $product) {
             $product->category_name = ProductCategory::where('id', $product->category_id)->value('name');
-            if($product->define_image == 1)
+            if ($product->define_image == 1)
                 $product->image_url = asset('upload/images/' . $product->id . '/' . $product->image);
             else
-                $product->image_url = 'https://down-tw.img.susercontent.com/file/' .$product->image;
+                $product->image_url = 'https://down-tw.img.susercontent.com/file/' . $product->image;
 
             $product->is_free_ship_name = $product->is_free_ship == 1 ? '啟用' : '停用';
         }
 
         $product_categories = ProductCategory::orderBy('id')->get();
+
 
         return view('backend.product.index', compact('products', 'product_categories'));
     }
@@ -36,7 +46,7 @@ class ProductController extends Controller
     {
         $product_categories = ProductCategory::orderBy('id')->get();
         $product_category = [];
-        foreach($product_categories as $key => $value){
+        foreach ($product_categories as $key => $value) {
             $product_category[($key + 1)] = $value->name;
         }
 
@@ -65,7 +75,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $menuImage = Product::find($productId);
             $file = $request->file('image');
-            $imageName = time() .'.'.$file->extension();
+            $imageName = time() . '.' . $file->extension();
             $file->move(public_path('upload/images/' . $productId), $imageName);
             $menuImage->image = $imageName;
             $menuImage->save();
@@ -80,7 +90,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product_categories = ProductCategory::orderBy('id')->get();
         $product_category = [];
-        foreach($product_categories as $key => $value){
+        foreach ($product_categories as $key => $value) {
             $product_category[($key + 1)] = $value->name;
         }
 
@@ -107,7 +117,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $menuImage = Product::find($productId);
             $file = $request->file('image');
-            $imageName = time() .'.'.$file->extension();
+            $imageName = time() . '.' . $file->extension();
             $file->move(public_path('upload/images/' . $productId), $imageName);
             $menuImage->image = $imageName;
             $menuImage->save();
