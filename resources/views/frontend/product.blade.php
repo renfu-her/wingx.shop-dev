@@ -241,22 +241,27 @@
             if (prod_id == '') {
                 alert('目前沒有選擇商品')
                 return
-            } else {
-                $.post('/cart/order', {
-                    id: prod_id,
-                    dataBase: dataBase,
-                    prod_id: prod_id,
-                    price: price,
-                    qty: qty
-                }, function(data) {
-                    if (data.status == 'success') {
-                        alert('加入購物車成功')
-                        location.reload()
-                    } else {
-                        alert('加入購物車失敗')
-                    }
-                })
             }
+
+            if (qty == 0) {
+                alert('數量必須大於 0')
+                return
+            }
+
+            $.post('/cart/order', {
+                id: prod_id,
+                dataBase: dataBase,
+                prod_id: prod_id,
+                price: price,
+                qty: qty
+            }, function(data) {
+                if (data.status == 'success') {
+                    alert('加入購物車成功')
+                    location.reload()
+                } else {
+                    alert('加入購物車失敗')
+                }
+            })
         }
     </script>
 @endsection
