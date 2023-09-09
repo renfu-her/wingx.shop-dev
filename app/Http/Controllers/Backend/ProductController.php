@@ -16,10 +16,11 @@ class ProductController extends Controller
     {
 
         $req = $request->all();
+        $category_id = $req['category_id'] ?? '';
 
         $products = Product::orderByDesc('id');
 
-        if (isset($req['category_id']) && $req['category_id'] != '') {
+        if (isset($category_id) && $category_id != '') {
             $products = $products->where('category_id', $req['category_id']);
         }
 
@@ -38,7 +39,7 @@ class ProductController extends Controller
         $product_categories = ProductCategory::orderBy('id')->get();
 
 
-        return view('backend.product.index', compact('products', 'product_categories', 'req'));
+        return view('backend.product.index', compact('products', 'product_categories', 'category_id'));
     }
 
     // 產品新增頁面
