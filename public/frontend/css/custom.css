@@ -419,7 +419,7 @@ label {
 }
 
 .product-qty {
-    width: 20px;
+    width: 50px;
 }
 
 @media (max-width: 768px) {
