@@ -18,7 +18,7 @@
             <div class="form-group row g-3" style="color: #000 !important">
                 <div class="col-md-12 col-12">
                     <div class="row no-gutters">
-                        <label class="m-1 col-form-label text-right">商品型號： </label>
+                        <label class="m-1 col-form-label text-right">分類： </label>
                         <div class="m-1">
                             <select id="category_id" name="category_id" class="form-control col-12">
                                 <option value="">分類</option>
@@ -28,6 +28,10 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <label class="m-1 col-form-label text-right">標題(可以打部分文字)： </label>
+                        <div class="m-1">
+                            <input type="text" class="form-control" id="prod_name" name="prod_name" value="{{ $prod_name }}">
                         </div>
                         <div class="m-1 text-center">
                             <button type="submit" class="btn btn-success">搜尋</button>
