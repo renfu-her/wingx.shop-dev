@@ -422,7 +422,6 @@ label {
     width: 20px;
 }
 
-
 @media (max-width: 768px) {
     .width-percent {
         width: 100px !important;
