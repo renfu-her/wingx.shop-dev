@@ -59,8 +59,8 @@
                                         </div> --}}
 
                                         <div class="mt-3">
-                                            <x:form::checobox class="form-control" name="ships" label="運費方式"
-                                                :group="$ships" :checked="$ship_ids" multiple />
+                                            <x:form::checobox class="form-checkbox" name="ships" label="運費方式"
+                                                :group="$ships" :checked="$ship_ids" multiple inline/>
                                         </div>
 
                                         <div class="mt-3">
