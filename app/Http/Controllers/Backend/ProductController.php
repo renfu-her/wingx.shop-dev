@@ -73,7 +73,14 @@ class ProductController extends Controller
             $product_category[($key + 1)] = $value->name;
         }
 
-        return view('backend.product.create', compact('product_category'));
+        $ships = [];
+        $ship_arr = Ship::where('status', 1)->get();
+        foreach ($ship_arr as $ship) {
+            $ships[$ship->id] = $ship->name;
+        }
+
+
+        return view('backend.product.create', compact('product_category', 'ships'));
     }
 
     // 產品新增儲存
