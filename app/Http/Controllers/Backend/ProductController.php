@@ -148,7 +148,7 @@ class ProductController extends Controller
         $product->price_max = $request->price_max;
         $product->price_min = $request->price_min;
         $product->description = $request->description;
-        $product->define_image = 1;
+        // $product->define_image = 1;
         // $product->is_free_ship = $request->is_free_ship;
         $product->status = $request->status;
         if (!empty($request->ships)) {
