@@ -101,7 +101,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         // $product->is_free_ship = $request->is_free_ship;
 
-
+        $product->save();
         $productId = $product->id;
 
         $imageName = '';
@@ -111,11 +111,11 @@ class ProductController extends Controller
             $imageName = time() . '.' . $file->extension();
             $file->move(public_path('upload/images/' . $productId), $imageName);
             $menuImage->image = $imageName;
+            $menuImage->define_image = 1;
             $menuImage->save();
-            $product->define_image = 1;
         }
 
-        $product->save();
+
 
         return redirect('/backend/product');
     }
@@ -161,6 +161,7 @@ class ProductController extends Controller
         if (!empty($request->ships)) {
             $product->ships = implode(',', $request->ships);
         }
+        $product->save();
 
         $imageName = '';
         if ($request->hasFile('image')) {
@@ -169,10 +170,10 @@ class ProductController extends Controller
             $imageName = time() . '.' . $file->extension();
             $file->move(public_path('upload/images/' . $productId), $imageName);
             $menuImage->image = $imageName;
+            $menuImage->define_image = 1;
             $menuImage->save();
-            $product->define_image = 1;
         }
-        $product->save();
+
 
         return redirect('/backend/product');
     }
