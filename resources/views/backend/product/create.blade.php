@@ -50,11 +50,16 @@
                                         <div class="mt-3">
                                             <x:form::textarea name="description" label="詳細內容" rows="10" />
                                         </div>
-{{-- 
+{{--
                                         <div class="mt-3">
                                             <x:form::select class="form-control" name="is_free_ship" label="免運費"
                                                 :options="[0 => '停用', 1 => '啓用', ]" :selected="[0]" />
                                         </div> --}}
+
+                                        <div class="mt-3">
+                                            <x:form::select class="form-control" name="ships" label="運費方式"
+                                                :options="$ships" :selected="$ship_ids" multiple />
+                                        </div>
 
                                         <div class="mt-3">
                                             <x:form::select class="form-control" name="status" label="啓用狀態"

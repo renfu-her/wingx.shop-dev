@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
+use App\Models\Ship;
 
 class ProductController extends Controller
 {
@@ -42,8 +43,25 @@ class ProductController extends Controller
 
         $product_categories = ProductCategory::orderBy('id')->get();
 
+        $ships = [];
+        $ship_arr = Ship::where('status', 1)->get();
+        foreach ($ship_arr as $ship) {
+            $ships[$ship->id] = $ship->name;
+        }
 
-        return view('backend.product.index', compact('products', 'product_categories', 'category_id', 'prod_name'));
+        $ship_ids = explode(',', $product->ships);
+
+        return view(
+            'backend.product.index',
+            compact(
+                'products',
+                'product_categories',
+                'category_id',
+                'prod_name',
+                'ships',
+                'ship_ids'
+            )
+        );
     }
 
     // 產品新增頁面
@@ -70,6 +88,9 @@ class ProductController extends Controller
         $product->price_min = $request->price_min;
         $product->description = $request->description;
         $product->define_image = 1;
+        if (!empty($request->ships)) {
+            $product->ships = implode(',', $request->ships);
+        }
         $product->status = $request->status;
         // $product->is_free_ship = $request->is_free_ship;
         $product->save();
@@ -99,7 +120,18 @@ class ProductController extends Controller
             $product_category[($key + 1)] = $value->name;
         }
 
-        return view('backend.product.edit', compact('product', 'product_category'));
+        $ships = [];
+        $ship_arr = Ship::where('status', 1)->get();
+        foreach ($ship_arr as $ship) {
+            $ships[$ship->id] = $ship->name;
+        }
+
+        $ship_ids = explode(',', $product->ships);
+
+        return view(
+            'backend.product.edit',
+            compact('product', 'product_category', 'ships', 'ship_ids')
+        );
     }
 
     // 產品編輯儲存
@@ -116,6 +148,9 @@ class ProductController extends Controller
         $product->define_image = 1;
         // $product->is_free_ship = $request->is_free_ship;
         $product->status = $request->status;
+        if (!empty($request->ships)) {
+            $product->ships = implode(',', $request->ships);
+        }
         $product->save();
 
         $imageName = '';
