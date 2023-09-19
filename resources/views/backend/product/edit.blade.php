@@ -68,12 +68,12 @@
 
                                         <div class="mt-3">
                                             <x:form::select class="form-control" name="ships" label="運費方式"
-                                                :options="$ships" :selected="$ship_ids" multiple />
+                                                :group="$ships" :checked="$ship_ids" multiple />
                                         </div>
 
 
                                         <div class="mt-3">
-                                            <x:form::checkbox class="form-control" name="status" label="啓用狀態"
+                                            <x:form::select class="form-control" name="status" label="啓用狀態"
                                                 :options="[1 => '啓用', 0 => '停用']" :selected="$product->status" />
                                         </div>
 
