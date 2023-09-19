@@ -73,7 +73,7 @@
 
 
                                         <div class="mt-3">
-                                            <x:form::select class="form-control" name="status" label="啓用狀態"
+                                            <x:form::checkbox class="form-control" name="status" label="啓用狀態"
                                                 :options="[1 => '啓用', 0 => '停用']" :selected="$product->status" />
                                         </div>
 
