@@ -97,6 +97,8 @@ class ProductController extends Controller
 
         if (!empty($request->ships)) {
             $product->ships = implode(',', $request->ships);
+        } else {
+            $product->ships = '';
         }
         $product->status = $request->status;
         // $product->is_free_ship = $request->is_free_ship;
@@ -160,6 +162,8 @@ class ProductController extends Controller
         $product->status = $request->status;
         if (!empty($request->ships)) {
             $product->ships = implode(',', $request->ships);
+        } else {
+            $product->ships = '';
         }
         $product->save();
 
