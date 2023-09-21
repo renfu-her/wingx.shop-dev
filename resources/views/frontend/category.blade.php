@@ -38,7 +38,7 @@
                                                     <i class="ri-arrow-right-s-line align-bottom ms-n1"></i>
                                                     所有商品
                                                 </span>
-                                                <span class="text-muted ms-4">{{ $categoryCountAll }}</span>
+                                                <span class="text-muted ms-4">({{ $categoryCountAll }})</span>
                                             </a>
                                         </li>
                                         @foreach ($product_categories as $product_category)
