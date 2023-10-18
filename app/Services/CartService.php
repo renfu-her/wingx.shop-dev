@@ -89,9 +89,11 @@ class CartService extends BaseService
 
             if($value['dataBase'] == 'products'){
                 $product = Product::find($value['prod_id']);
-                $cart[$key]['prod_name'] = $product->name;
-                $cart[$key]['prod_price'] = $value['price'];
-                $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
+                if(!empty($product)){
+                    $cart[$key]['prod_name'] = $product->name;
+                    $cart[$key]['prod_price'] = $value['price'];
+                    $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
+                }
             } else {
                 $product_mix = ProductMix::find($value['prod_id']);
                 $product = Product::find($product_mix->product_id);
