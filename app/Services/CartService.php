@@ -114,6 +114,7 @@ class CartService extends BaseService
                 $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
             }
 
+            $cart[$key]['prod_image'] = '';
             if (!empty($product->define_image)) {
                 if ($product->define_image == 0) {
                     $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
