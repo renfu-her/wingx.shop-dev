@@ -17,7 +17,8 @@ class CartService extends BaseService
 {
 
     // cart item
-    public function cart($req){
+    public function cart($req)
+    {
 
         $item = [
             'id' => $req['id'],
@@ -28,11 +29,11 @@ class CartService extends BaseService
         ];
 
         session()->push('cart', $item);
-
     }
 
     // order detail
-    public function order(){
+    public function order()
+    {
 
         $member_id = session()->get('member_id');
 
@@ -45,7 +46,7 @@ class CartService extends BaseService
 
         $total = 0;
 
-        foreach($cart as $id => $details){
+        foreach ($cart as $id => $details) {
 
             $product = Product::find($details->prod_id);
 
@@ -66,10 +67,11 @@ class CartService extends BaseService
     }
 
     // session cart get
-    public function getCart(){
+    public function getCart()
+    {
 
         $cart = session()->get('cart');
-        if(!$cart){
+        if (!$cart) {
             $cart = [];
         }
         return response()->json([
@@ -78,18 +80,19 @@ class CartService extends BaseService
     }
 
     // 所有的 cart session 轉為 cart
-    public function getCartAll(){
+    public function getCartAll()
+    {
 
         $cart = session()->get('cart');
-        if(!$cart){
+        if (!$cart) {
             $cart = [];
         }
 
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
 
-            if($value['dataBase'] == 'products'){
+            if ($value['dataBase'] == 'products') {
                 $product = Product::find($value['prod_id']);
-                if(!empty($product)){
+                if (!empty($product)) {
                     $cart[$key]['prod_name'] = $product->name;
                     $cart[$key]['prod_price'] = $value['price'];
                     $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
@@ -99,10 +102,10 @@ class CartService extends BaseService
                 $product = Product::find($product_mix->product_id);
                 $prod_name = [];
                 array_push($prod_name, $product->name);
-                if(!empty($product_mix->product_mix2)){
+                if (!empty($product_mix->product_mix2)) {
                     array_push($prod_name, $product_mix->product_mix1);
                 }
-                if(!empty($product_mix->product_mix2)){
+                if (!empty($product_mix->product_mix2)) {
                     array_push($prod_name, $product_mix->product_mix2);
                 }
 
@@ -111,10 +114,12 @@ class CartService extends BaseService
                 $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
             }
 
-            if($product->define_image == 0){
-                $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
-            } else {
-                $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
+            if (!empty($product->define_image)) {
+                if ($product->define_image == 0) {
+                    $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
+                } else {
+                    $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
+                }
             }
         }
 
