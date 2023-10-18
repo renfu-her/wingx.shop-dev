@@ -85,8 +85,17 @@ class CartService extends BaseService
             $cart = [];
         }
 
+        $cart_array = [];
+        $kk = 0;
         foreach($cart as $key => $value){
+            $product = Product::find($value['prod_id']);
+            if(!empty($product)){
+                $cart_array[$kk] = $value;
+                $kk++;
+            }
+        }
 
+        foreach($cart_array as $key => $value){
             if($value['dataBase'] == 'products'){
                 $product = Product::find($value['prod_id']);
                 $cart[$key]['prod_name'] = $product->name;
@@ -114,6 +123,7 @@ class CartService extends BaseService
             } else {
                 $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
             }
+
         }
 
         return $cart;
