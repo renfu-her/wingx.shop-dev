@@ -43,9 +43,19 @@ class CartService extends BaseService
 
         $cart = session()->get('cart');
 
+        $cart_array = [];
+        $kk = 0;
+        foreach($cart as $key => $value){
+            $product = Product::find($value['prod_id']);
+            if(!empty($product)){
+                $cart_array[$kk] = $value;
+                $kk++;
+            }
+        }
+
         $total = 0;
 
-        foreach($cart as $id => $details){
+        foreach($cart_array as $id => $details){
 
             $product = Product::find($details->prod_id);
 
@@ -72,8 +82,19 @@ class CartService extends BaseService
         if(!$cart){
             $cart = [];
         }
+
+        $cart_array = [];
+        $kk = 0;
+        foreach($cart as $key => $value){
+            $product = Product::find($value['prod_id']);
+            if(!empty($product)){
+                $cart_array[$kk] = $value;
+                $kk++;
+            }
+        }
+    
         return response()->json([
-            'cart_count' => count($cart)
+            'cart_count' => count($cart_array)
         ]);
     }
 
