@@ -29,9 +29,11 @@ class IndexController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        foreach($cart as $key => $value){
-            $total += $value['prod_price'] * $value['qty'];
-            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        foreach ($cart as $key => $value) {
+            if (!empty($value['prod_price'])) {
+                $total += $value['prod_price'] * $value['qty'];
+                $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            }
         }
 
         $cart_count = (new CartService())->getCart();
