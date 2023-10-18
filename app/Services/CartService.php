@@ -126,7 +126,7 @@ class CartService extends BaseService
 
         }
 
-        return $cart;
+        return $cart_array;
     }
 
     // generate order no
