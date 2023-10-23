@@ -70,7 +70,7 @@
                                         <img src="{!! $value->image_url !!}" class="w-100" alt="">
                                     </td>
                                     <td style="color: blue">{{ number_format($value->price) }}</td>
-                                    <td style="color: red">{{ number_format($value->store) }}</td>
+                                    <td style="color: red">{{ number_format($value->store_number) }}</td>
                                     <td>
                                         <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
                                             <i class="fa-solid fa-pen-to-square"></i>
