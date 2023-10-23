@@ -106,8 +106,12 @@
                             <input type="hidden" id="dataBase">
                             <input type="hidden" id="price">
                             <input type="hidden" id="prod_id">
+                            @if($product->store_number <= 0)
+                            <div class="flex-grow-1 me-2 text-white" style="background-color: gray">無法訂購</div>
+                            @else    
                             <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white"
                                 onclick="cart()">加入購物車</button>
+                            @endif    
                             <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
                         </div>
                         <!-- /Add To Cart-->
