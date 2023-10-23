@@ -107,7 +107,7 @@
                             <input type="hidden" id="price">
                             <input type="hidden" id="prod_id">
                             @if($product->store_number <= 0)
-                            <div class="flex-grow-1 me-2 text-white" style="background-color: gray">無法訂購</div>
+                            <div class="flex-grow-1 me-2 text-white" style="background-color: gray; d-flex align-items-center justify-content-center">無法訂購</div>
                             @else    
                             <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white"
                                 onclick="cart()">加入購物車</button>
