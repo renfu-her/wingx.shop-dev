@@ -50,10 +50,11 @@
                         cellspacing="0">
                         <thead>
                             <tr>
-                                <th style="width: 10%">ID</th>
+                                <th style="width: 5%">ID</th>
                                 <th style="width: 15%">標題</th>
                                 <th style="width: 15%">封面圖檔</th>
-                                <th style="width: 10%">價格</th>
+                                <th style="width: 7%">價格</th>
+                                <th style="width: 8%">庫存</th>
                                 <th style="width: 10%">產品組合</th>
                                 <th style="width: 10%">圖檔維護</th>
                                 <th style="width: 8%">編輯</th>
@@ -69,6 +70,7 @@
                                         <img src="{!! $value->image_url !!}" class="w-100" alt="">
                                     </td>
                                     <td>{{ number_format($value->price) }}</td>
+                                    <td style="color: red">{{ number_format($value->store) }}</td>
                                     <td>
                                         <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
                                             <i class="fa-solid fa-pen-to-square"></i>
