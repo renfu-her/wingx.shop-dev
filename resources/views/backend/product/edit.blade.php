@@ -39,11 +39,7 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <x:form::input type="number" name="price_min" label="最低價格" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="price_max" label="最高價格" />
+                                            <x:form::input type="number" name="store_number" label="庫存" />
                                         </div>
 
                                         <div class="mt-3">

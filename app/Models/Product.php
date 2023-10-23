@@ -20,5 +20,6 @@ class Product extends Model
         'image',
         'status',
         'is_free_ship',
+        'store_number'
     ];
 }
