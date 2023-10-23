@@ -91,8 +91,9 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->price_max = $request->price_max;
-        $product->price_min = $request->price_min;
+        $product->store_number = $request->store_number;
+        // $product->price_max = $request->price_max;
+        // $product->price_min = $request->price_min;
         $product->description = $request->description;
 
         if (!empty($request->ships)) {
@@ -154,8 +155,9 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->price_max = $request->price_max;
-        $product->price_min = $request->price_min;
+        $product->store_number = $request->store_number;
+        // $product->price_max = $request->price_max;
+        // $product->price_min = $request->price_min;
         $product->description = $request->description;
         // $product->define_image = 1;
         // $product->is_free_ship = $request->is_free_ship;
