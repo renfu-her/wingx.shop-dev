@@ -146,7 +146,7 @@ class CartService extends BaseService
             if ($product->define_image == 0) {
                 $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
             } else {
-                $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
+                $cart[$key]['prod_image'] = asset('upload/images/' . $product->id . '/' . $product->image);
             }
         }
 
