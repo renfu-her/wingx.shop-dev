@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
 
         $ship_ids = [];
-        if (!empty($product->ships)) {
+        if (!empty($product)) {
             $ship_ids = explode(',', $product->ships);
         }
 
@@ -144,7 +144,7 @@ class ProductController extends Controller
 
 
         $ship_ids = [];
-        if (!empty($product->ships)) {
+        if (!empty($product)) {
             $ship_ids = explode(',', $product->ships);
         }
 
