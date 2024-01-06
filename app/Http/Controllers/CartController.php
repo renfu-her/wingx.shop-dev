@@ -36,8 +36,10 @@ class CartController extends Controller
         $tax = 0;
         $cart = (new CartService())->getCartAll();
         foreach ($cart as $key => $value) {
-            $total += $value['prod_price'] * $value['qty'];
-            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            if(!empty($value) && !empty($value['prod_price'])){
+                $total += $value['prod_price'] * $value['qty'];
+                $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            }
         }
 
         $ships = $this->getShipAll();
@@ -99,8 +101,10 @@ class CartController extends Controller
         $tax = 0;
         $cart = (new CartService())->getCartAll();
         foreach ($cart as $key => $value) {
-            $total += $value['prod_price'] * $value['qty'];
-            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            if(!empty($value) && !empty($value['prod_price'])){
+                $total += $value['prod_price'] * $value['qty'];
+                $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            }
         }
 
         $ships = $this->getShipAll();
@@ -137,8 +141,10 @@ class CartController extends Controller
         $tax = 0;
         $cart = (new CartService())->getCartAll();
         foreach ($cart as $key => $value) {
-            $total += $value['prod_price'] * $value['qty'];
-            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            if(!empty($value) && !empty($value['prod_price'])){
+                $total += $value['prod_price'] * $value['qty'];
+                $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+            }
         }
 
         $ships = $this->getShipAll();
