@@ -125,7 +125,6 @@ class CartService extends BaseService
                 $cart[$key]['prod_name'] = $product->name;
                 $cart[$key]['prod_price'] = $value['price'];
                 $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
-                dd($cart);
             } else {
                 $product_mix = ProductMix::find($value['prod_id']);
                 $product = Product::find($product_mix->product_id);
@@ -142,7 +141,6 @@ class CartService extends BaseService
                 $cart[$key]['prod_name'] = implode('+', $prod_name);
                 $cart[$key]['prod_price'] = $product_mix->price;
                 $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
-                dd($cart);
             }
 
             if ($product->define_image == 0) {
@@ -151,6 +149,8 @@ class CartService extends BaseService
                 $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
             }
         }
+
+        dd($cart_array);
 
         return $cart_array;
     }
