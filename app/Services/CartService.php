@@ -150,9 +150,9 @@ class CartService extends BaseService
             }
         }
 
-        dd($cart_array);
+        dd($cart);
 
-        return $cart_array;
+        return $cart;
     }
 
     // generate order no
