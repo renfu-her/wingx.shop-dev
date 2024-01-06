@@ -45,7 +45,7 @@ class CategoryController extends Controller
         $tax = 0;
         $cart = (new CartService())->getCartAll();
         foreach ($cart as $key => $value) {
-            $total += $value['prod_rice'] * $value['qty'];
+            $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
         }
 
