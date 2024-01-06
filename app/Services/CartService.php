@@ -17,7 +17,8 @@ class CartService extends BaseService
 {
 
     // cart item
-    public function cart($req){
+    public function cart($req)
+    {
 
         $item = [
             'id' => $req['id'],
@@ -28,11 +29,11 @@ class CartService extends BaseService
         ];
 
         session()->push('cart', $item);
-
     }
 
     // order detail
-    public function order(){
+    public function order()
+    {
 
         $member_id = session()->get('member_id');
 
@@ -45,9 +46,9 @@ class CartService extends BaseService
 
         $cart_array = [];
         $kk = 0;
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $product = Product::find($value['prod_id']);
-            if(!empty($product)){
+            if (!empty($product)) {
                 $cart_array[$kk] = $value;
                 $kk++;
             }
@@ -55,7 +56,7 @@ class CartService extends BaseService
 
         $total = 0;
 
-        foreach($cart_array as $id => $details){
+        foreach ($cart_array as $id => $details) {
 
             $product = Product::find($details->prod_id);
 
@@ -76,48 +77,50 @@ class CartService extends BaseService
     }
 
     // session cart get
-    public function getCart(){
+    public function getCart()
+    {
 
         $cart = session()->get('cart');
-        if(!$cart){
+        if (!$cart) {
             $cart = [];
         }
 
         $cart_array = [];
         $kk = 0;
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $product = Product::find($value['prod_id']);
-            if(!empty($product)){
+            if (!empty($product)) {
                 $cart_array[$kk] = $value;
                 $kk++;
             }
         }
-    
+
         return response()->json([
             'cart_count' => count($cart_array)
         ]);
     }
 
     // 所有的 cart session 轉為 cart
-    public function getCartAll(){
+    public function getCartAll()
+    {
 
         $cart = session()->get('cart');
-        if(!$cart){
+        if (!$cart) {
             $cart = [];
         }
 
         $cart_array = [];
         $kk = 0;
-        foreach($cart as $key => $value){
+        foreach ($cart as $key => $value) {
             $product = Product::find($value['prod_id']);
-            if(!empty($product)){
+            if (!empty($product)) {
                 $cart_array[$kk] = $value;
                 $kk++;
             }
         }
 
-        foreach($cart_array as $key => $value){
-            if($value['dataBase'] == 'products'){
+        foreach ($cart_array as $key => $value) {
+            if ($value['dataBase'] == 'products') {
                 $product = Product::find($value['prod_id']);
                 $cart[$key]['prod_name'] = $product->name;
                 $cart[$key]['prod_price'] = $value['price'];
@@ -127,24 +130,25 @@ class CartService extends BaseService
                 $product = Product::find($product_mix->product_id);
                 $prod_name = [];
                 array_push($prod_name, $product->name);
-                if(!empty($product_mix->product_mix2)){
+                if (!empty($product_mix->product_mix2)) {
                     array_push($prod_name, $product_mix->product_mix1);
                 }
-                if(!empty($product_mix->product_mix2)){
+                if (!empty($product_mix->product_mix2)) {
                     array_push($prod_name, $product_mix->product_mix2);
                 }
+
 
                 $cart[$key]['prod_name'] = implode('+', $prod_name);
                 $cart[$key]['prod_price'] = $product_mix->price;
                 $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
+                dd($cart);
             }
 
-            if($product->define_image == 0){
+            if ($product->define_image == 0) {
                 $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
             } else {
                 $cart[$key]['prod_image'] = asset('upload/images/' . $product->image);
             }
-
         }
 
         return $cart_array;
