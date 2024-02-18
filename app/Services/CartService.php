@@ -111,7 +111,7 @@ class CartService extends BaseService
         foreach ($cart as $key => $value) {
             $product = Product::find($value['prod_id']);
             if (!empty($product)) {
-                $tmpCart = $value;
+                array_push($tmpCart, $value);
             }
         }
 
