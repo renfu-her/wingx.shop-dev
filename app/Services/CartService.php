@@ -105,11 +105,11 @@ class CartService extends BaseService
     {
 
         $cart = session()->get('cart');
-        
+
         if (!$cart) {
-            $cart =[];
+            $cart = [];
         }
-        
+
         // get all products
         $tmpCart = [];
         foreach ($cart as $key => $value) {
@@ -119,8 +119,13 @@ class CartService extends BaseService
             }
         }
 
+        // session put again
         session()->put('cart', $tmpCart);
         $cart = session()->get('cart');
+
+        if (!$cart) {
+            $cart = [];
+        }
 
         $cart_array = [];
         $kk = 0;
