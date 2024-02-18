@@ -98,7 +98,7 @@ class CartController extends Controller
         $total = 0;
         $tax = 0;
         $cart = (new CartService())->getCartAll();
-        dd($cart);
+        
         foreach ($cart as $key => $value) {
             $total += $value['prod_price'] * $value['qty'];
             $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
