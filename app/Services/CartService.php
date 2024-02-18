@@ -105,9 +105,18 @@ class CartService extends BaseService
     {
 
         $cart = session()->get('cart');
-        if (!$cart) {
-            $cart = [];
+        
+        // get all products
+        $tmpCart = [];
+        foreach ($cart as $key => $value) {
+            $product = Product::find($value['prod_id']);
+            if (!empty($product)) {
+                $tmpCart = $value;
+            }
         }
+
+        session()->set('cart', $tmpCart);
+        $cart = session()->get('cart');
 
         $cart_array = [];
         $kk = 0;
