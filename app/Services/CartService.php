@@ -115,7 +115,7 @@ class CartService extends BaseService
             }
         }
 
-        session()->set('cart', $tmpCart);
+        session()->put('cart', $tmpCart);
         $cart = session()->get('cart');
 
         $cart_array = [];
