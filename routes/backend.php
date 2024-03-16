@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ShipController;
 use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\QaAdminController;
 use App\Http\Controllers\Backend\PolicyAdminController;
+use App\Http\Controllers\Backend\ProductDetailController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -64,6 +65,10 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
 
     route::get('/policies/delete/{id}', [PolicyAdminController::class, 'delete']);
     route::resource('/policies', PolicyAdminController::class);
+
+    // 商品管理細項
+    route::get('/product/{product_id}/detail', [ProductDetailController::class, "edit"])->name('product.detail.edit');
+    route::post('/product/detail/save', [ProductDetailController::class, "store"])->name('product.detail.save');
 });
 
 route::get('/backend/login', [AuthController::class, 'login'])->name('backend_login');
