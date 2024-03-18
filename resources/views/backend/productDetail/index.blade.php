@@ -116,7 +116,7 @@
             let options1Count = 0;
             let options2Count = 0;
 
-            init();
+            // init();
             initList();
 
             function init() {
@@ -170,6 +170,7 @@
                 makeNum = '';
                 if (num == 2) {
                     makeNum = '-2'
+
                 }
 
                 makeNumRow = '';
@@ -178,7 +179,8 @@
                 }
 
                 var html = '';
-                html += '<div class="input-group mb-3 col-4 ' + makeNumRow + '">';
+                html += '<div class="input-group mb-3 col-4 ' + makeNumRow + '" id="input-form-row' + makeNum +
+                    '">';
                 html +=
                     '<input type="text" name="options' + num +
                     '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
@@ -266,14 +268,14 @@
                 options1Count = countFilledInputs('input[name="options1[]"]',
                     options1Count);
                 makeOptione1();
-                console.log('Options1 filled count:', options1Count);
+                // console.log('Options1 filled count:', options1Count);
             });
 
             $(document).on('keyup', 'input[name="options2[]"]', function() {
                 options2Count = countFilledInputs('input[name="options2[]"]',
                     options2Count);
                 makeOptione2();
-                console.log('Options2 filled count:', options2Count);
+                // console.log('Options2 filled count:', options2Count);
             });
 
             $('input[name=title1]').on('keyup', function() {
