@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row spec-one">
                     <div class="input-group mb-3 col-4 newRow" id="input-form-row">
                         <input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項"
                             autocomplete="off">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row spec-two">
                     <div class="input-group mb-3 col-4 newRow-2" id="input-form-row-2">
                         <input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項"
                             autocomplete="off">
@@ -115,6 +115,81 @@
 
             let options1Count = 0;
             let options2Count = 0;
+            // init();
+
+            function init() {
+                // 第一項目
+                $.post('/product/spec', {
+                    'product_id': '{{ $product->id }}',
+                    'num': 1
+                }, function(item) {
+                    if (item != '') {
+                        $('.spec-one').html('');
+                        $('.spec-one').html(item);
+                    } else {
+                        $('.spec-one').html('');
+                        $('.spec-one').html(makeInit(1, 'add'));
+                    }
+
+                })
+
+                // 第二項目
+                $.post('/product/spec', {
+                    'product_id': '{{ $product->id }}',
+                    'num': 2
+                }, function(item) {
+
+                    if (item != '') {
+                        $('.spec-two').html('');
+                        $('.spec-two').html(item);
+                    } else {
+                        $('.spec-two').html('');
+                        $('.spec-two').html(makeInit(2, 'add'));
+                    }
+
+                })
+
+                // 產生列表
+                // $.post('/product/spec/list', {
+                //     'product_id': '{{ $product->id }}'
+                // }, function(item) {
+
+
+                // })
+
+
+            }
+
+            function makeInit(num, addOrDel) {
+
+                makeNum = '';
+                if (num == 2) {
+                    makeNum = '-2'
+                }
+
+                makeNumRow = '';
+                if (addOrDel == 'add') {
+                    makeNumRow = 'new-row'.$makeNum;
+                }
+
+                var html = '';
+                html += '<div class="input-group mb-3 col-4 ' + makeNumRow + '">';
+                html +=
+                    '<input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
+
+                if (addOrDel == 'add') {
+                    html += '<button class="btn btn-success" type="button" id="addRow' + makeNum + '">+</button>'
+                } else {
+                    html += '<button class="btn btn-danger" type="button" id="removeRow' + makeNum +
+                        '">-</button>';
+                }
+
+                html += '</div>';
+                return html;
+            }
+
+
+
 
             // 函數: 計算非空輸入的數量
             function countFilledInputs(selector, countVar) {
@@ -221,7 +296,7 @@
                 html +=
                     '<input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
                 html +=
-                    '<button class="btn btn-danger" type="button" id="remove-row">-</button>';
+                    '<button class="btn btn-danger" type="button" id="removeRow">-</button>';
                 html += '</div>';
 
                 $('.newRow').after(html);
@@ -233,17 +308,17 @@
                 html +=
                     '<input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
                 html +=
-                    '<button class="btn btn-danger" type="button" id="remove-row-2">-</button>';
+                    '<button class="btn btn-danger" type="button" id="removeRow-2">-</button>';
                 html += '</div>';
 
                 $('.newRow-2').after(html);
             });
 
             // 移除行
-            $(document).on('click', '#remove-row', function() {
+            $(document).on('click', '#removeRow', function() {
                 $(this).closest('#input-form-row').remove();
             });
-            $(document).on('click', '#remove-row-2', function() {
+            $(document).on('click', '#removeRow-2', function() {
                 $(this).closest('#input-form-row-2').remove();
             });
 
