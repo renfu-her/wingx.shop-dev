@@ -145,9 +145,9 @@ class ProductIndexController extends Controller
             $html = '';
             foreach ($details as $key => $detail) {
                 if ($key == 0) {
-                    $html .= $this->makeForm($detail, 'add', $num);
+                    $html .= $this->makeForm($detail, 'add', $num, $key);
                 } else {
-                    $html .= $this->makeForm($detail, 'delete', $num);
+                    $html .= $this->makeForm($detail, 'delete', $num, $key);
                 }
             }
 
@@ -155,20 +155,22 @@ class ProductIndexController extends Controller
         }
     }
 
-    private function makeForm($data, $addOrDel = 'delete', $num)
+    private function makeForm($data, $addOrDel = 'delete', $num, $key)
     {
         $makeNum = '';
+        $options = '1';
         if ($num == 2) {
             $makeNum = '-2';
+            $options = '2';
         }
 
         $makeNumRow = '';
         if ($addOrDel == 'add') {
-            $makeNumRow = 'new-row' . $makeNum;
+            $makeNumRow = 'newRow' . $makeNum;
         }
 
-        $html = '<div class="input-group mb-3 col-4 ' . $makeNumRow . '">';
-        $html .= '<input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '">';
+        $html = '<div class="input-group mb-3 col-4 ' . $makeNumRow . '" id="input-form-row' . $makeNum . '">';
+        $html .= '<input type="text" name="options' . $options . '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '">';
 
 
         if ($addOrDel == 'add') {
@@ -183,7 +185,97 @@ class ProductIndexController extends Controller
     }
 
     // 列表
-    public function specList()
+    public function specList(Request $request)
     {
+        $data = $request->all();
+
+        $product_id = $data['product_id'];
+
+        $titleOne = ProductTitleOne::where('product_id', $product_id)->first();
+        $titleTwo = ProductTitleTwo::where('product_id', $product_id)->first();
+
+        $header = '';
+        $col = '';
+        if (!empty($titleTwo)) {
+            $header .= '<div class="col bordered-div gray-div title1">' . $titleOne->name . '</div>
+               <div class="col bordered-div gray-div title2">' . $titleTwo->name . '</div>
+               <div class="col bordered-div gray-div">金額</div>
+               <div class="col bordered-div gray-div">數量</div>';
+
+            $detailOne = ProductDetailOne::where('product_id', $product_id)->get();
+            $detailTwo = ProductDetailTwo::where('product_id', $product_id)->get();
+            $detailTwo = ProductDetailTwo::where('product_id', $product_id)->get();
+
+            foreach ($detailOne as $key => $one) {
+                $col .= '<div class="row">
+                <div class="col bordered-div">' . $one['name'] . '</div>
+                <div class="col-9">';
+
+                $productDetail = ProductDetail::where('product_id', $product_id)
+                    ->where('title_one_id', $one['id'])
+                    ->get();
+
+                foreach ($productDetail as $key2 => $detail) {
+
+                    $two = ProductDetailTwo::find($detail['title_two_id']);
+
+                    $col .= '<div class="row">
+                    <div class="col bordered-div gray-div">' . $two['name'] . '</div>
+                    <div class="col bordered-div">
+                      <input class="form-control" name="price[]" value="' . $detail['price'] . '" />
+                    </div>
+                    <div class="col bordered-div">
+                      <input class="form-control" name="num[]" value="' . $detail['num'] . '" />
+                    </div>
+                    </div>';
+                }
+
+
+                $col .= '</div></div>';
+            }
+        } else {
+
+            $detailOne = ProductDetailOne::where('product_id', $product_id)->get();
+
+            $header .=
+                '<div class="col bordered-div gray-div title1">規格一</div>
+                    <div class="col bordered-div gray-div title2" style="display:none"></div>
+                    <div class="col bordered-div gray-div">金額</div>
+                <div class="col bordered-div gray-div">數量</div>';
+
+            if (!empty($titleOne)) {
+                $header = '';
+                $header .=
+                    '<div class="col bordered-div gray-div title1">' . $titleOne->name . '</div>
+                <div class="col bordered-div gray-div title2" style="display:none"></div>
+                <div class="col bordered-div gray-div">金額</div>
+               <div class="col bordered-div gray-div">數量</div>';
+
+                foreach ($detailOne as $key => $one) {
+                    $col .= '<div class="row">
+                <div class="col bordered-div">' . $one['name'] . '</div>';
+
+                    $productDetail = ProductDetail::where('product_id', $product_id)
+                        ->where('title_one_id', $one['id'])
+                        ->get();
+
+                    foreach ($productDetail as $key2 => $detail) {
+
+
+                        $col .= '<div class="col bordered-div">
+                      <input class="form-control" name="price[]" value="' . $detail['price'] . '" />
+                    </div>
+                    <div class="col bordered-div">
+                      <input class="form-control" name="num[]" value="' . $detail['num'] . '" />
+                    </div>';
+                    }
+
+
+                    $col .= '</div></div>';
+                }
+            }
+        }
+
+        return response()->json(['header' => $header, 'col' => $col]);
     }
 }

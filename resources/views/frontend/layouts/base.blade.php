@@ -123,8 +123,8 @@
                         <div class="content registerBox" style="display: none;">
                             <div class="form">
                                 <form id="form-signup" method="post" action="/sign-up">
-                                    <input id="signup_username" class="form-control" type="text"
-                                        placeholder="會員名稱" name="signup_username">
+                                    <input id="signup_username" class="form-control" type="text" placeholder="會員名稱"
+                                        name="signup_username">
                                     <input id="signup_email" class="form-control" type="text" placeholder="Email"
                                         name="signup_email">
                                     <input id="signup_password" class="form-control" type="password"
@@ -232,6 +232,7 @@
                                             {{ $value['prod_name'] }}
                                             <i class="ri-close-line"></i>
                                         </h6>
+                                        <small class="d-block fw-bolder">{{ $value['items'] }}</small>
                                         <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
                                     </div>
                                     <p class="fw-bolder text-end m-0">$ {{ $value['sub_total'] }}</p>

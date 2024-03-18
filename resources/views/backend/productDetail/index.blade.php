@@ -64,7 +64,7 @@
 
             <div class="spec">
                 <div class="container mt-5 row-change">
-                    <div class="row">
+                    <div class="row list-header">
                         <!-- Define each column with the col class -->
                         <div class="col bordered-div gray-div title1">規格一</div>
                         <div class="col bordered-div gray-div title2" style="display: none">規格二</div>
@@ -77,9 +77,9 @@
                 </div>
             </div>
 
-            <div class="row">
-                <button type="submit" class="btn btn-primary">存檔</button>
-                <button type="button" class="btn btn-secondary">取消</button>
+            <div class="row d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary m-3">存檔</button>
+                <button type="button" class="btn btn-secondary m-3">取消</button>
             </div>
         </form>
     </div>
@@ -115,7 +115,10 @@
 
             let options1Count = 0;
             let options2Count = 0;
+
             // init();
+
+            initList();
 
             function init() {
                 // 第一項目
@@ -149,14 +152,20 @@
 
                 })
 
+
+            }
+
+            function initList() {
                 // 產生列表
-                // $.post('/product/spec/list', {
-                //     'product_id': '{{ $product->id }}'
-                // }, function(item) {
+                $.post('/product/spec/list', {
+                    'product_id': '{{ $product->id }}'
+                }, function(items) {
+                    $('.list-header').html('');
+                    $('.list-header').html(items.header)
 
-
-                // })
-
+                    $('#row-dynamic-add').html('');
+                    $('#row-dynamic-add').html(items.col);
+                })
 
             }
 

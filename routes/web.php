@@ -27,6 +27,7 @@ route::get('/category/{category_id}', [CategoryController::class, 'index'])->nam
 route::get('/product/{product_id}', [ProductIndexController::class, 'index'])->name('product.index');
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
 route::post('/product/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
+route::post('/product/spec/list', [ProductIndexController::class, 'specList'])->name('product.spec.list');
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
