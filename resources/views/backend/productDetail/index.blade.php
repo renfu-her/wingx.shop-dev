@@ -12,7 +12,9 @@
                         <h5>商品名稱</h5>
                     </div>
                     <div class="input-group mb-3 col-12">
-                        <input label="標題" value="{{ $product->name }}" class="form-control-plaintext" readonly />
+                        <input label="標題" value="{{ $product->name }}" class="form-control-plaintext"
+                            style="font-weight: 600" readonly />
+                        <input type="hidden" value="{{ $product->id }}" name="product_id">
                     </div>
 
                     <div class="input-group mb-3 col-12">
@@ -20,7 +22,7 @@
                     </div>
                     <div class="input-group mb-3 col-4">
                         <input type="text" name="title1" class="form-control m-input" placeholder="範例：顔色"
-                            autocomplete="off">
+                            autocomplete="off" value="{{ $productTitleOneName }}">
                     </div>
                 </div>
 
@@ -44,7 +46,7 @@
                     </div>
                     <div class="input-group mb-3 col-4">
                         <input type="text" name="title2" class="form-control m-input" placeholder="範例：尺寸"
-                            autocomplete="off">
+                            autocomplete="off" value="{{ $productTitleTwoName }}">
                     </div>
                 </div>
 
