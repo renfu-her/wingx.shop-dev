@@ -116,8 +116,7 @@
             let options1Count = 0;
             let options2Count = 0;
 
-            // init();
-
+            init();
             initList();
 
             function init() {
