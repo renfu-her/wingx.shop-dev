@@ -169,8 +169,8 @@ class ProductIndexController extends Controller
             $makeNumRow = 'newRow' . $makeNum;
         }
 
-        $html = '<div class="input-group mb-3 col-4 ' . $makeNumRow . '" id="input-form-row' . $makeNum . '">';
-        $html .= '<input type="text" name="options' . $options . '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '">';
+        $html = '<div class="input-group mb-3 col-4 ' . $makeNumRow . '" id="input-form-row' . $makeNum . '" >';
+        $html .= '<input type="text" name="options' . $options . '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '" >';
 
 
         if ($addOrDel == 'add') {
@@ -222,10 +222,10 @@ class ProductIndexController extends Controller
                     $col .= '<div class="row">
                     <div class="col bordered-div gray-div">' . $two['name'] . '</div>
                     <div class="col bordered-div">
-                      <input class="form-control" name="price[]" value="' . $detail['price'] . '" />
+                      <input class="form-control" type="number" name="price[]" value="' . $detail['price'] . '" />
                     </div>
                     <div class="col bordered-div">
-                      <input class="form-control" name="num[]" value="' . $detail['num'] . '" />
+                      <input class="form-control" type="number" name="num[]" value="' . $detail['num'] . '" />
                     </div>
                     </div>';
                 }
@@ -263,10 +263,10 @@ class ProductIndexController extends Controller
 
 
                         $col .= '<div class="col bordered-div">
-                      <input class="form-control" name="price[]" value="' . $detail['price'] . '" />
+                      <input class="form-control" type="number" name="price[]" value="' . $detail['price'] . '" />
                     </div>
                     <div class="col bordered-div">
-                      <input class="form-control" name="num[]" value="' . $detail['num'] . '" />
+                      <input class="form-control" type="number" name="num[]" value="' . $detail['num'] . '" />
                     </div>';
                     }
 

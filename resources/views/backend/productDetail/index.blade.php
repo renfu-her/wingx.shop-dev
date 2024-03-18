@@ -78,7 +78,7 @@
             </div>
 
             <div class="row d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary m-3">存檔</button>
+                <button type="button" class="btn btn-primary m-3" onclick="submitForm()">存檔</button>
                 <button type="button" class="btn btn-secondary m-3">取消</button>
             </div>
         </form>
@@ -132,7 +132,6 @@
                         $('.spec-one').html('');
                         $('.spec-one').html(makeInit(1, 'add'));
                     }
-
                 })
 
                 // 第二項目
@@ -150,8 +149,6 @@
                     }
 
                 })
-
-
             }
 
             function initList() {
@@ -183,7 +180,8 @@
                 var html = '';
                 html += '<div class="input-group mb-3 col-4 ' + makeNumRow + '">';
                 html +=
-                    '<input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
+                    '<input type="text" name="options' + num +
+                    '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
 
                 if (addOrDel == 'add') {
                     html += '<button class="btn btn-success" type="button" id="addRow' + makeNum + '">+</button>'
@@ -195,8 +193,6 @@
                 html += '</div>';
                 return html;
             }
-
-
 
 
             // 函數: 計算非空輸入的數量
@@ -226,9 +222,9 @@
                         row += '<div class="row">'
                         row += '<div class="col bordered-div">' + $(this).val() + '</div>';
                         row +=
-                            '<div class="col bordered-div"><input class="form-control" name="price[]"></div>';
+                            '<div class="col bordered-div"><input type="number" class="form-control" name="price[]"></div>';
                         row +=
-                            '<div class="col bordered-div"><input class="form-control" name="num[]"></div>';
+                            '<div class="col bordered-div"><input type="number" class="form-control" name="num[]"></div>';
                         row += '</div>'
                     }
                 });
@@ -252,9 +248,9 @@
                                 row += '<div class="col bordered-div gray-div">' + $(this).val() +
                                     '</div>';
                                 row +=
-                                    '<div class="col bordered-div"><input class="form-control" name="price[]"></div>';
+                                    '<div class="col bordered-div"><input type="number" class="form-control" name="price[]"></div>';
                                 row +=
-                                    '<div class="col bordered-div"><input class="form-control" name="num[]"></div>';
+                                    '<div class="col bordered-div"><input type="number" class="form-control" name="num[]"></div>';
                                 row += '</div>'
                             }
                         })
@@ -264,8 +260,6 @@
                 });
                 $('#row-dynamic-add').html(row)
             }
-
-
 
             // 監聽輸入欄位的變化，並更新計數器
             $(document).on('keyup', 'input[name="options1[]"]', function() {
@@ -331,5 +325,23 @@
             });
 
         })
+
+        const submitForm = () => {
+
+            let allFilled = true;
+
+            $('#row-dynamic-add input').each(function() {
+                if ($(this).val() === '') {
+                    allFilled = false;
+                    return false; // break the loop
+                }
+            })
+
+            if (!allFilled) {
+                alert('請填寫金額以及數量');
+            } else {
+                $('#dynamic-form').submit();
+            }
+        }
     </script>
 @endsection

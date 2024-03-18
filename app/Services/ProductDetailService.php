@@ -149,7 +149,7 @@ class ProductDetailService extends BaseService
 
 
 
-        return $this;
+        return redirect('backend/product');
     }
 
     public function runValidate($method)

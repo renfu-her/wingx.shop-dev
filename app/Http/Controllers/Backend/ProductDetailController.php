@@ -22,8 +22,7 @@ class ProductDetailController extends Controller
     public function store(Request $request)
     {
         return (new Service($request))
-                ->store()
-                ->getResponse();
+                ->store();
     }
     // // update
     // public function update(Request $request, $id)
