@@ -25,13 +25,13 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-group mb-3 col-4 new-row" id="input-form-row">
+                    <div class="input-group mb-3 col-4 newRow" id="input-form-row">
                         <input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項"
                             autocomplete="off">
-                        <button class="btn btn-success" type="button" id="add-row">+</button>
+                        <button class="btn btn-success" type="button" id="addRow">+</button>
                     </div>
 
-                    {{-- <div id="new-row"></div> --}}
+                    {{-- <div id="newRow"></div> --}}
                 </div>
             </div>
             <p></p>
@@ -49,13 +49,13 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-group mb-3 col-4 new-row-2" id="input-form-row-2">
+                    <div class="input-group mb-3 col-4 newRow-2" id="input-form-row-2">
                         <input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項"
                             autocomplete="off">
-                        <button class="btn btn-success" type="button" id="add-row-2">+</button>
+                        <button class="btn btn-success" type="button" id="addRow-2">+</button>
                     </div>
 
-                    {{-- <div id="new-row"></div> --}}
+                    {{-- <div id="newRow"></div> --}}
                 </div>
             </div>
             <p></p>
@@ -213,7 +213,7 @@
             });
 
             // 新增行
-            $("#add-row").click(function() {
+            $("#addRow").click(function() {
                 var html = '';
                 html += '<div class="input-group mb-3 col-4" id="input-form-row">';
                 html +=
@@ -222,10 +222,10 @@
                     '<button class="btn btn-danger" type="button" id="remove-row">-</button>';
                 html += '</div>';
 
-                $('.new-row').after(html);
+                $('.newRow').after(html);
             });
 
-            $("#add-row-2").click(function() {
+            $("#addRow-2").click(function() {
                 var html = '';
                 html += '<div class="input-group mb-3 col-4" id="input-form-row-2">';
                 html +=
@@ -234,7 +234,7 @@
                     '<button class="btn btn-danger" type="button" id="remove-row-2">-</button>';
                 html += '</div>';
 
-                $('.new-row-2').after(html);
+                $('.newRow-2').after(html);
             });
 
             // 移除行

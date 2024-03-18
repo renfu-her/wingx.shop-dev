@@ -52,40 +52,62 @@
                         </div>
                         <h1 class="mb-2 fs-2 fw-bold">{{ $product->name }}</h1>
                         <div class="d-flex justify-content-start align-items-center">
-                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2 product-cart">$ {{ $product->price }}
+                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2 product-cart price-origin">
+                                $ {{ $product->price }}
+                            </p>
+                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2 product-cart price-json-post"
+                                style="display: none">
+
                             </p>
                         </div>
 
                         <!-- Product Options-->
-                        <div class="border-top mt-4 mb-3">
-                            <div class="product-option mb-4 mt-4 ">
-                                <small class="text-uppercase d-block fw-bolder mb-2">
-                                    產品組合 :
-                                </small>
-                                <div class="">
-                                    <div clas="buts btns d-flex justify-content-start flex-wrap blue">
-                                        <div class="checkbox_resource resource-top">
-                                            <label>
-                                                <input type="radio" name="product_mix" value="{{ $product->price }}">
-                                                <span class="round button"
-                                                    onclick="selectItem('products', {{ $product->id }}, {{ $product->price }})">{{ $product->name }}</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    @foreach ($productMix as $k => $v)
+                        @if ($productTitleOne != null)
+                            <div class="border-top mt-4 mb-3">
+                                <div class="product-option mb-4 mt-4 ">
+                                    <small class="text-uppercase d-block fw-bolder mb-2">
+                                        {{ $productTitleOne->name }} :
+                                    </small>
+                                    <div class="">
                                         <div clas="buts btns d-flex justify-content-start flex-wrap blue">
                                             <div class="checkbox_resource resource-top">
-                                                <label>
-                                                    <input type="radio" name="product_mix" value="{{ $v->price }}">
-                                                    <span class="round button"
-                                                        onclick="selectItem('product_mixes', {{ $v->id }}, {{ $v->price }})">{{ $v->product_name }}</span>
-                                                </label>
+                                                @foreach ($productDetailOne as $option)
+                                                    <label>
+                                                        <input type="radio" name="options1" value="{{ $option->id }}"
+                                                            onchange="priceOne()">
+                                                        <span class="round button">{{ $option->name }}</span>
+                                                    </label>
+                                                @endforeach
                                             </div>
                                         </div>
-                                    @endforeach
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                        @if ($productTitleTwo != null)
+                            <div class="border-top mt-4 mb-3">
+                                <div class="product-option mb-4 mt-4 ">
+                                    <small class="text-uppercase d-block fw-bolder mb-2">
+                                        {{ $productTitleTwo->name }} :
+                                    </small>
+                                    <div class="">
+                                        <div clas="buts btns d-flex justify-content-start flex-wrap blue">
+                                            <div class="checkbox_resource resource-top">
+                                                @foreach ($productDetailTwo as $option)
+                                                    <label>
+                                                        <input type="radio" name="options2" value="{{ $option->id }}"
+                                                            onchange="priceTwo()">
+                                                        <span class="round button">{{ $option->name }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <!-- /Product Options-->
 
                         <div class="border-top mt-4 mb-3">
@@ -104,14 +126,16 @@
                         <!-- Add To Cart-->
                         <div class="d-flex justify-content-between mt-3">
                             <input type="hidden" id="dataBase">
-                            <input type="hidden" id="price">
-                            <input type="hidden" id="prod_id">
-                            @if($product->store_number <= 0)
-                            <div class="flex-grow-1 me-2 text-white d-flex align-items-center justify-content-center" style="background-color: gray;">無法訂購</div>
-                            @else    
-                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white"
-                                onclick="cart()">加入購物車</button>
-                            @endif    
+                            <input type="hidden" id="items">
+                            <input type="hidden" id="price" value="{{ $product->price }}">
+                            <input type="hidden" id="prod_id" value="{{ $product->id }}">
+                            @if ($product->store_number <= 0)
+                                <div class="flex-grow-1 me-2 text-white d-flex align-items-center justify-content-center"
+                                    style="background-color: gray;">無法訂購</div>
+                            @else
+                                <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white"
+                                    onclick="cart()">加入購物車</button>
+                            @endif
                             <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
                         </div>
                         <!-- /Add To Cart-->
@@ -214,7 +238,11 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     <script>
+        let options1 = 0;
+        let options2 = 0;
+
         $(function() {
+
             $('.increment').click(function() {
                 var currentVal = parseInt($(this).siblings('.product-qty').val(), 10);
                 $(this).siblings('.product-qty').val(currentVal + 1);
@@ -237,10 +265,36 @@
         }
 
         const cart = () => {
+
+            let opt1 = 0;
+            let opt2 = 0;
+            let opt1Checked = false;
+            let opt2Checked = false;
+
+            if ($('input[name="options1"]').length > 0) {
+                opt1Checked = true
+                opt1 = $('input[name="options1"]:checked').length;
+            }
+            if ($('input[name="options2"]').length > 0) {
+                opt2Checked = true
+                opt2 = $('input[name="options2"]:checked').length;
+            }
+
+            if (opt1 == 0 && opt1Checked == true) {
+                alert('沒有選擇商品規格');
+                return false
+            }
+
+            if (opt2 == 0 && opt2Checked == true) {
+                alert('沒有選擇商品規格');
+                return false;
+            }
+
             let qty = $('.product-qty').val()
             let price = $('#price').val()
             let prod_id = $('#prod_id').val()
             let dataBase = $('#dataBase').val()
+            let items = $('#items').val();
 
             if (prod_id == '') {
                 alert('目前沒有選擇商品')
@@ -257,7 +311,8 @@
                 dataBase: dataBase,
                 prod_id: prod_id,
                 price: price,
-                qty: qty
+                qty: qty,
+                items: items
             }, function(data) {
                 if (data.status == 'success') {
                     alert('加入購物車成功')
@@ -265,6 +320,31 @@
                 } else {
                     alert('加入購物車失敗')
                 }
+            })
+
+        }
+
+
+        const priceOne = () => {
+            options1 = $('input[name="options1"]:checked').val()
+            priceGet()
+        }
+
+        const priceTwo = () => {
+            options2 = $('input[name="options2"]:checked').val()
+            priceGet()
+        }
+
+        const priceGet = () => {
+            $.post('/price/get', {
+                'product_id': '{{ $product->id }}',
+                'options1': options1,
+                'options2': options2
+            }, function(items) {
+                $('#price').val(items.price)
+                $('#items').val(items.items)
+                $('.price-json-post').html('$ ' + items.price).show()
+                $('.price-origin').hide()
             })
         }
     </script>

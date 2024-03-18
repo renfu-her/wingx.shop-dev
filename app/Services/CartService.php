@@ -25,6 +25,7 @@ class CartService extends BaseService
             'dataBase' => $req['dataBase'],
             'prod_id' => $req['prod_id'],
             'price' => $req['price'],
+            'items' => $req['items'],
             'qty' => $req['qty'],
         ];
 
@@ -138,28 +139,29 @@ class CartService extends BaseService
         }
 
         foreach ($cart_array as $key => $value) {
-            if ($value['dataBase'] == 'products') {
-                $product = Product::find($value['prod_id']);
-                $cart[$key]['prod_name'] = $product->name;
-                $cart[$key]['prod_price'] = $value['price'];
-                $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
-            } else {
-                $product_mix = ProductMix::find($value['prod_id']);
-                $product = Product::find($product_mix->product_id);
-                $prod_name = [];
-                array_push($prod_name, $product->name);
-                if (!empty($product_mix->product_mix2)) {
-                    array_push($prod_name, $product_mix->product_mix1);
-                }
-                if (!empty($product_mix->product_mix2)) {
-                    array_push($prod_name, $product_mix->product_mix2);
-                }
+            $product = Product::find($value['prod_id']);
+            $cart[$key]['prod_name'] = $product->name;
+            $cart[$key]['prod_price'] = $value['price'];
+            $cart[$key]['sub_total'] = $value['price'] * $value['qty'];
+            // if ($value['dataBase'] == 'products') {
+
+            // } else {
+            //     $product_mix = ProductMix::find($value['prod_id']);
+            //     $product = Product::find($product_mix->product_id);
+            //     $prod_name = [];
+            //     array_push($prod_name, $product->name);
+            //     if (!empty($product_mix->product_mix2)) {
+            //         array_push($prod_name, $product_mix->product_mix1);
+            //     }
+            //     if (!empty($product_mix->product_mix2)) {
+            //         array_push($prod_name, $product_mix->product_mix2);
+            //     }
 
 
-                $cart[$key]['prod_name'] = implode('+', $prod_name);
-                $cart[$key]['prod_price'] = $product_mix->price;
-                $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
-            }
+            //     $cart[$key]['prod_name'] = implode('+', $prod_name);
+            //     $cart[$key]['prod_price'] = $product_mix->price;
+            //     $cart[$key]['sub_total'] = $product_mix->price * $value['qty'];
+            // }
 
             if ($product->define_image == 0) {
                 $cart[$key]['prod_image'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
@@ -167,8 +169,6 @@ class CartService extends BaseService
                 $cart[$key]['prod_image'] = asset('upload/images/' . $product->id . '/' . $product->image);
             }
         }
-
-        // dd($cart);
 
         return $cart;
     }

@@ -8,6 +8,7 @@ use App\Services\CartService;
 
 use App\Models\Member;
 use App\Models\Order;
+use App\Models\ProductDetail;
 
 use App\Services\EcPayService;
 

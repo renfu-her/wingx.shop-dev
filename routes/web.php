@@ -23,8 +23,10 @@ use App\Http\Controllers\Test\TestController;
 use Illuminate\Auth\Events\Login;
 
 route::get('/', [IndexController::class, 'index']);
-route::get('/category/{category_id}', [CategoryController::class, 'index']);
-route::get('/product/{product_id}', [ProductIndexController::class, 'index']);
+route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
+route::get('/product/{product_id}', [ProductIndexController::class, 'index'])->name('product.index');
+route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
+route::post('/product/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
@@ -73,7 +75,7 @@ route::get('/captcha', function () {
     return Captcha::create();
 });
 
-route::get('/logout', function(){
+route::get('/logout', function () {
     auth()->logout();
     session()->forget(['cart', 'member_id', 'member_name', 'member_email']);
     return redirect('/');
@@ -89,9 +91,8 @@ Route::get('/auth/line/callback', [LineController::class, 'lineLoginCallback']);
 route::get('/xmlToJson', [InvoiceLotteryController::class, 'readXmlToJson']);
 
 // Test route
-route::group(['prefix' => 'test'], function(){
+route::group(['prefix' => 'test'], function () {
     route::get('/order', [TestController::class, 'orderStatus']);
     route::get('/queryOrderStatus', [TestController::class, 'queryOrderStatus']);
     route::get('/eInvoice/{order_no}', [TestController::class, 'eInvoice']);
 });
-
