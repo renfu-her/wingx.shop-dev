@@ -67,7 +67,8 @@ class CartService extends BaseService
                 'order_no' => $order->id,
                 'prod_id' => $id,
                 'qty' => $details['qty'],
-                'price' => $product->price
+                'price' => $product->price,
+                'items' => $details['items'],
             ]);
         }
 

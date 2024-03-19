@@ -125,7 +125,7 @@
 
                         <!-- Add To Cart-->
                         <div class="d-flex justify-content-between mt-3">
-                            <input type="hidden" id="dataBase" value="product">
+                            <input type="hidden" id="dataBase" value="products">
                             <input type="hidden" id="items">
                             <input type="hidden" id="price" value="{{ $product->price }}">
                             <input type="hidden" id="prod_id" value="{{ $product->id }}">

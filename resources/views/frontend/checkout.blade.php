@@ -177,7 +177,11 @@
                                         </div>
                                         <div>
                                             <p class="mb-1 fs-6 fw-bolder">{{ $value['prod_name'] }}</p>
+                                            @if (!empty($value['items']))
+                                                <p class="mb-1 fs-6 fw-bolder">{!! $value['items'] !!}</p>
+                                            @endif
                                         </div>
+
                                     </div>
                                     <div class="flex-shrink-0 fw-bolder">
                                         <span>$ {{ number_format($value['sub_total']) }}</span>
