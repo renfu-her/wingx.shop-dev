@@ -107,6 +107,7 @@ class OrderController extends Controller
                 'price' => $order_detail['price'],
                 'data_base' => $order_detail['dataBase'],
                 'sub_total' => $order_detail['price'] * $order_detail['qty'],
+                'items' => $order_detail['items'],
             ]);
         }
 
