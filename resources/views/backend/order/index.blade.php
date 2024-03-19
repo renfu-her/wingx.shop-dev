@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">訂單管理</h1>
@@ -25,6 +24,7 @@
                                 <th style="width: 20%">訂購產品</th>
                                 <th style="width: 6%">金額</th>
                                 <th style="width: 6%">運費</th>
+                                <th style="width: 8%">運送方式</th>
                                 <th style="width: 6%">總金額</th>
                                 <th style="width: 8%">付款類別</th>
                                 <th style="width: 8%">付款狀態</th>
@@ -45,6 +45,13 @@
                                     </td>
                                     <td>{{ $value->total }}</td>
                                     <td>{{ $value->ship_price }}</td>
+                                    <td>
+                                        @if ($value['ship_price'] == 80)
+                                            中華郵政
+                                        @elseif($value['ship_price'] == 150)
+                                            宅配
+                                        @endif
+                                    </td>
                                     <td>{{ $value->ttl_price }}</td>
                                     <td>{{ $value['payment_name'] }}</td>
                                     <td>{!! $value->status_name !!}</td>
