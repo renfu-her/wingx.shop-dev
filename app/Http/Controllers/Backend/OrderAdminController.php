@@ -21,36 +21,36 @@ class OrderAdminController extends Controller
 
         $orders = Order::orderBy('id', 'desc')->paginate(10);
 
-        foreach($orders as $key => $value){
+        foreach ($orders as $key => $value) {
 
             // 付款方式
             $payment = $value->payment;
             $payment_name = '';
-            if($payment == 'CREDIT'){
+            if ($payment == 'Credit_CreditCard') {
                 $payment_name = '信用卡';
             }
-            if($payment == 'WEBATM'){
+            if ($payment == 'WebATM_LAND') {
                 $payment_name = 'WebATM';
             }
-            if($payment == 'VACC'){
+            if ($payment == 'VACC') {
                 $payment_name = 'ATM 轉帳';
             }
-            if($payment == 'CVS'){
+            if ($payment == 'CVS') {
                 $payment_name = '超商代碼繳費';
             }
 
             // 0:待付款 1:完成付款 2:付款失敗 3:取消訂單 9:訂單異常
             $status_name = '';
-            if($value->status == 0 || $value->status == 9){
+            if ($value->status == 0 || $value->status == 9) {
                 $status_name = '<span style="color: green">待付款</span>';
             }
-            if($value->status == 1){
+            if ($value->status == 1) {
                 $status_name = '<span style="color: blue">完成付款</span>';
             }
-            if($value->status == 2){
+            if ($value->status == 2) {
                 $status_name = '<span style="color: red">付款失敗</span>';
             }
-            if($value->status == 3){
+            if ($value->status == 3) {
                 $status_name = '<span style="color: gray">取消訂單</span>';
             }
 
@@ -60,6 +60,25 @@ class OrderAdminController extends Controller
             $orders[$key]['status_name'] = $status_name;
             $orders[$key]['payment_name'] = $payment_name;
             $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
+
+            $orderDetail = OrderDetail::where('order_id', $value['id'])->get();
+
+            $orders[$key]['product'] = [];
+            $orderDetailArr = [];
+            // dd($orderDetail->toArray());
+            foreach ($orderDetail as $dKey => $detail) {
+                $product = Product::find($detail['product_id']);
+                // dd($product->toArray());
+                $items = [
+                    'name' => $detail['name'],
+                    'price' => $detail['price'],
+                    'qty' => $detail['qty'],
+                    'items' => $detail['items']
+                ];
+                array_push($orderDetailArr, $items);
+            }
+
+            $orders[$key]['product'] = $orderDetailArr;
         }
 
         return view('backend.order.index', compact('orders'));
@@ -74,7 +93,7 @@ class OrderAdminController extends Controller
 
         $orderDetails = OrderDetail::where('order_id', $id)->get();
 
-        foreach($orderDetails as $key => $value){
+        foreach ($orderDetails as $key => $value) {
             $product = Product::find($value['product_id']);
             $orderDetails[$key]['product_name'] = $product->name ?? '';
         }
