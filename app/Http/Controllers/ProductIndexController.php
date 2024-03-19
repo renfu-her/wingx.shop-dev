@@ -143,15 +143,16 @@ class ProductIndexController extends Controller
 
         if (!empty($details)) {
             $html = '';
+            $detailName = '';
             foreach ($details as $key => $detail) {
                 if ($key == 0) {
-                    $html .= $this->makeForm($detail, 'add', $num, $key);
+                    $detailName = $detail->name;
                 } else {
                     $html .= $this->makeForm($detail, 'delete', $num, $key);
                 }
             }
 
-            return $html;
+            return response()->json(['html' => $html, 'detailName' => $detailName]);
         }
     }
 
@@ -164,12 +165,8 @@ class ProductIndexController extends Controller
             $options = '2';
         }
 
-        $makeNumRow = '';
-        if ($addOrDel == 'add') {
-            $makeNumRow = 'newRow' . $makeNum;
-        }
 
-        $html = '<div class="input-group mb-3 col-4 ' . $makeNumRow . '" id="input-form-row' . $makeNum . '" >';
+        $html = '<div class="input-group mb-3 col-4" id="input-form-row' . $makeNum . '" >';
         $html .= '<input type="text" name="options' . $options . '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '" >';
 
 

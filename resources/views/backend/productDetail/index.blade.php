@@ -29,7 +29,7 @@
                 <div class="row spec-one">
                     <div class="input-group mb-3 col-4 newRow" id="input-form-row">
                         <input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項"
-                            autocomplete="off">
+                            id="init-options1" autocomplete="off">
                         <button class="btn btn-success" type="button" id="addRow">+</button>
                     </div>
 
@@ -53,7 +53,7 @@
                 <div class="row spec-two">
                     <div class="input-group mb-3 col-4 newRow-2" id="input-form-row-2">
                         <input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項"
-                            autocomplete="off">
+                            id="init-options2" autocomplete="off">
                         <button class="btn btn-success" type="button" id="addRow-2">+</button>
                     </div>
 
@@ -124,13 +124,10 @@
                 $.post('/product/spec', {
                     'product_id': '{{ $product->id }}',
                     'num': 1
-                }, function(item) {
-                    if (item != '') {
-                        $('.spec-one').html('');
-                        $('.spec-one').html(item);
-                    } else {
-                        $('.spec-one').html('');
-                        $('.spec-one').html(makeInit(1, 'add'));
+                }, function(items) {
+                    if (items.html != '') {
+                        $('#init-options1').val(items.detailName)
+                        $('.newRow').after(items.html);
                     }
                 })
 
@@ -138,14 +135,10 @@
                 $.post('/product/spec', {
                     'product_id': '{{ $product->id }}',
                     'num': 2
-                }, function(item) {
-
-                    if (item != '') {
-                        $('.spec-two').html('');
-                        $('.spec-two').html(item);
-                    } else {
-                        $('.spec-two').html('');
-                        $('.spec-two').html(makeInit(2, 'add'));
+                }, function(items) {
+                    if (items.html != '') {
+                        $('#init-options2').val(items.detailName)
+                        $('.newRow-2').after(items.html);
                     }
 
                 })
@@ -164,38 +157,6 @@
                 })
 
             }
-
-            function makeInit(num, addOrDel) {
-
-                makeNum = '';
-                if (num == 2) {
-                    makeNum = '-2'
-
-                }
-
-                makeNumRow = '';
-                if (addOrDel == 'add') {
-                    makeNumRow = 'newRow' + $makeNum;
-                }
-
-                var html = '';
-                html += '<div class="input-group mb-3 col-4 ' + makeNumRow + '" id="input-form-row' + makeNum +
-                    '">';
-                html +=
-                    '<input type="text" name="options' + num +
-                    '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
-
-                if (addOrDel == 'add') {
-                    html += '<button class="btn btn-success" type="button" id="addRow' + makeNum + '">+</button>'
-                } else {
-                    html += '<button class="btn btn-danger" type="button" id="removeRow' + makeNum +
-                        '">-</button>';
-                }
-
-                html += '</div>';
-                return html;
-            }
-
 
             // 函數: 計算非空輸入的數量
             function countFilledInputs(selector, countVar) {
@@ -268,12 +229,14 @@
                 options1Count = countFilledInputs('input[name="options1[]"]',
                     options1Count);
                 makeOptione1();
+                makeOptione2();
                 // console.log('Options1 filled count:', options1Count);
             });
 
             $(document).on('keyup', 'input[name="options2[]"]', function() {
                 options2Count = countFilledInputs('input[name="options2[]"]',
                     options2Count);
+                makeOptione1();
                 makeOptione2();
                 // console.log('Options2 filled count:', options2Count);
             });
@@ -321,9 +284,13 @@
             // 移除行
             $(document).on('click', '#removeRow', function() {
                 $(this).closest('#input-form-row').remove();
+                makeOptione1();
+                makeOptione2();
             });
             $(document).on('click', '#removeRow-2', function() {
                 $(this).closest('#input-form-row-2').remove();
+                makeOptione1();
+                makeOptione2();
             });
 
         })
