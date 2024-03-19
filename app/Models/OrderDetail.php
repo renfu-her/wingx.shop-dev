@@ -16,6 +16,7 @@ class OrderDetail extends Model
         'price',
         'qty',
         'sub_total',
-        'data_base'
+        'data_base',
+        'items'
     ];
 }
