@@ -24,7 +24,7 @@ use Illuminate\Auth\Events\Login;
 
 route::get('/', [IndexController::class, 'index']);
 route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
-route::get('/product/{product_id}', [ProductIndexController::class, 'index'])->name('product.index');
+route::get('/product/{product_id}', [ProductIndexController::class, 'index'])->name('product.indexId');
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
 route::post('/product/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
 route::post('/product/spec/list', [ProductIndexController::class, 'specList'])->name('product.spec.list');
