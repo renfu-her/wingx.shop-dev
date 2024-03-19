@@ -141,9 +141,10 @@ class ProductIndexController extends Controller
             $details = ProductDetailTwo::where('product_id', $product_id)->get();
         }
 
+        $html = '';
+        $detailName = '';
         if (!empty($details)) {
-            $html = '';
-            $detailName = '';
+
             foreach ($details as $key => $detail) {
                 if ($key == 0) {
                     $detailName = $detail->name;
@@ -154,6 +155,8 @@ class ProductIndexController extends Controller
 
             return response()->json(['html' => $html, 'detailName' => $detailName]);
         }
+
+        return response()->json(['html' => $html, 'detailName' => $detailName]);
     }
 
     private function makeForm($data, $addOrDel = 'delete', $num, $key)
