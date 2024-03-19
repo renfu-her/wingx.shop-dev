@@ -140,7 +140,7 @@ class OrderController extends Controller
         ];
 
         if(config('config.APP_ENV') == 'dev'){
-            $url = "https://wingx-shop.test/cart/thanks";
+            $url = "https://wingx-shop.dev-laravel.co/cart/thanks";
         } else {
             $url = "https://wingx.shop/cart/thanks";
         }
