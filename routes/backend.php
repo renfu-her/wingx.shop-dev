@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\QaAdminController;
 use App\Http\Controllers\Backend\PolicyAdminController;
 use App\Http\Controllers\Backend\ProductDetailController;
+use App\Http\Controllers\Backend\CategoryController;
 
 route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
@@ -30,6 +31,10 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     // 產品管理
     route::resource('/product', ProductController::class);
     route::get('/product/delete/{product_id}', [ProductController::class, 'delete']);
+
+    // 產品分類
+    route::resource('/productCategory', CategoryController::class);
+    route::get('/productCategory/delete/{product_id}', [CategoryController::class, 'delete']);
 
     // 產品圖片管理
     route::get('/product/image/{product_id}', [ProductImageController::class, 'index'])->name('product_image.index');
