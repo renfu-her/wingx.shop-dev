@@ -19,6 +19,14 @@ class CategoryController extends Controller
             compact('productCategory')
         );
     }
+
+    public function create(Request $request)
+    {
+
+        return view('backend/category/create');
+    }
+
+
     // store
     public function edit(Request $request, $id)
     {
@@ -29,6 +37,19 @@ class CategoryController extends Controller
             compact('category')
         );
     }
+
+    public function store(Request $request)
+    {
+
+        $data = $request->all();
+
+        unset($data['_token']);
+        unset($data['_method']);
+
+        $category =  ProductCategory::create($data);
+
+        return redirect('/backend/productCategory');
+    }
     // update
     public function update(Request $request, $id)
     {
@@ -37,10 +58,9 @@ class CategoryController extends Controller
         unset($data['_token']);
         unset($data['_method']);
 
-        ProductCategory::where($data)->update(['id' => $id]);
+        ProductCategory::where('id', $id)->update($data);
 
         return redirect('/backend/productCategory');
-
     }
     // destroy
     public function delete(Request $request, $id)

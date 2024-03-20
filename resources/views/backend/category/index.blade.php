@@ -24,7 +24,8 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%">ID</th>
-                                <th style="width: 79%">分類標題</th>
+                                <th style="width: 69%">分類標題</th>
+                                <th style="width: 10%">順序</th>
                                 <th style="width: 8%">編輯</th>
                                 <th style="width: 8%">刪除</th>
                             </tr>
@@ -34,6 +35,7 @@
                                 <tr>
                                     <td>{{ $value->id }}</td>
                                     <td>{{ $value->name }}</td>
+                                    <td>{{ $value->sort }}</td>
                                     <td>
                                         <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
                                             <i class="fa-solid fa-pen-to-square"></i>

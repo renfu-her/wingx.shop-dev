@@ -28,6 +28,11 @@
                                             <x:form::input name="name" label="名稱" required />
                                         </div>
 
+                                        <div class="mt-3">
+                                            <x:form::input type="number" name="sort" label="順序" required />
+                                        </div>
+
+
                                         <div class="mt-3 text-center">
                                             <x:form::button.link class="btn-secondary" href="/backend/productCategory">取消
                                             </x:form::button.link>
@@ -54,7 +59,28 @@
 
     <script>
         $(function() {
+            $('#form_post').on('submit', function() {
 
+                error_msg = [];
+
+                // 檢查名稱欄位是否為空
+                if ($.trim($('input[name="name"]').val()) == '') {
+                    error_msg.push('名稱不得為空白'); // 使用 push 方法添加元素到數組
+                }
+
+                // 檢查順序欄位是否為空
+                if ($.trim($('input[name="sort"]').val()) == '') {
+                    error_msg.push('順序不得為空白'); // 使用 push 方法添加元素到數組
+                }
+
+                // 如果 error_msg 有元素（即，如果有錯誤訊息）
+                if (error_msg.length > 0) {
+                    alert(error_msg.join(',')); // 將所有的錯誤訊息合併成一個字串並顯示
+                    return false; // 阻止表單提交
+                }
+
+                return true
+            })
         })
     </script>
 @endsection
