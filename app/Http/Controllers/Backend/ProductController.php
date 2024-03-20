@@ -10,6 +10,8 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\Ship;
 
+use Yajra\DataTables\DataTables;
+
 class ProductController extends Controller
 {
     // 產品首頁
@@ -29,7 +31,7 @@ class ProductController extends Controller
             $products = $products->where('name', 'like', '%' . $req['prod_name'] . '%');
         }
 
-        $products = $products->orderByDesc('id')->get();
+        $products = $products->orderByDesc('id')->paginate(10);
 
         foreach ($products as $product) {
             $product->category_name = ProductCategory::where('id', $product->category_id)->value('name');
@@ -66,6 +68,7 @@ class ProductController extends Controller
             )
         );
     }
+
 
     // 產品新增頁面
     public function create(Request $request)

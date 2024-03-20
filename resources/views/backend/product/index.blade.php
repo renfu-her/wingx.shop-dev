@@ -31,7 +31,8 @@
                         </div>
                         <label class="m-1 col-form-label text-right">標題(可以打部分文字)： </label>
                         <div class="m-1">
-                            <input type="text" class="form-control" id="prod_name" name="prod_name" value="{{ $prod_name }}">
+                            <input type="text" class="form-control" id="prod_name" name="prod_name"
+                                value="{{ $prod_name }}">
                         </div>
                         <div class="m-1 text-center">
                             <button type="submit" class="btn btn-success">搜尋</button>
@@ -95,7 +96,9 @@
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
+                {{ $products->links() }}
             </div>
         </div>
 
@@ -107,16 +110,6 @@
 @section('js')
     <script>
         $(function() {
-            $('#dataTable').DataTable({
-                columnDefs: [{
-                    targets: [4, 5],
-                    orderable: false
-                }],
-                "language": {
-                    "url": "/admin/zh-HANT.json"
-                }
-            })
-
             $('#search-form').on('submit', function(e) {
                 e.preventDefault();
                 var data = $(this).serialize();

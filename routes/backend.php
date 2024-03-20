@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\PolicyAdminController;
 use App\Http\Controllers\Backend\ProductDetailController;
 use App\Http\Controllers\Backend\CategoryController;
 
-route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
+route::group(['prefix' => 'backend', 'middleware' => 'auth', 'name' => 'backend.'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
 
     // 管理者管理
@@ -35,6 +35,8 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     // 產品分類
     route::resource('/productCategory', CategoryController::class);
     route::get('/productCategory/delete/{product_id}', [CategoryController::class, 'delete']);
+
+    route::get('/product/data', [ProductController::class, 'getProductData'])->name('product.data');
 
     // 產品圖片管理
     route::get('/product/image/{product_id}', [ProductImageController::class, 'index'])->name('product_image.index');
