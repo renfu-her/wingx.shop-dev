@@ -19,8 +19,8 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%">ID</th>
-                                <th style="width: 15%">訂單編號</th>
-                                <th style="width: 10%">訂購者</th>
+                                <th style="width: 10%">訂單編號</th>
+                                <th style="width: 15%">訂購者</th>
                                 <th style="width: 20%">訂購產品</th>
                                 <th style="width: 6%">金額</th>
                                 <th style="width: 6%">運費</th>
@@ -36,7 +36,9 @@
                                 <tr>
                                     <td>{{ $value->id }}</td>
                                     <td>{{ $value->order_no }}</td>
-                                    <td>{{ $value->member_name }} <br> {{ $value->member_email }}</td>
+                                    <td>收件者：{{ $value->name }} <br>
+                                        收件地址：{{ $value->zipcode }}{{ $value->county }}{{ $value->district }}{{ $value->address }}
+                                        <br> E-mail：{{ $value->member_email }}</td>
                                     <td>
                                         @foreach ($value['product'] as $detail)
                                             <span style="font-weight: 600">{{ $detail['name'] }} </span> <br>
