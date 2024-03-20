@@ -22,9 +22,9 @@
                                 <th style="width: 10%">訂單編號</th>
                                 <th style="width: 15%">訂購者</th>
                                 <th style="width: 20%">訂購產品</th>
+                                <th style="width: 8%">運送方式</th>
                                 <th style="width: 6%">金額</th>
                                 <th style="width: 6%">運費</th>
-                                <th style="width: 8%">運送方式</th>
                                 <th style="width: 6%">總金額</th>
                                 <th style="width: 8%">付款類別</th>
                                 <th style="width: 8%">付款狀態</th>
@@ -45,8 +45,6 @@
                                             {!! $detail['items'] !!} <br>
                                         @endforeach
                                     </td>
-                                    <td>{{ $value->total }}</td>
-                                    <td>{{ $value->ship_price }}</td>
                                     <td>
                                         @if ($value['ship_price'] == 80)
                                             中華郵政
@@ -54,6 +52,8 @@
                                             宅配
                                         @endif
                                     </td>
+                                    <td>{{ $value->total }}</td>
+                                    <td>{{ $value->ship_price }}</td>
                                     <td>{{ $value->ttl_price }}</td>
                                     <td>{{ $value['payment_name'] }}</td>
                                     <td>{!! $value->status_name !!}</td>
