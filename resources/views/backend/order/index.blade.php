@@ -38,11 +38,13 @@
                                     <td>{{ $value->order_no }}</td>
                                     <td>收件者：{{ $value->name }} <br>
                                         收件地址：{{ $value->zipcode }}{{ $value->county }}{{ $value->district }}{{ $value->address }}
-                                        <br> E-mail：{{ $value->member_email }}</td>
+                                        <br> E-mail：{{ $value->member_email }}
+                                    </td>
                                     <td>
                                         @foreach ($value['product'] as $detail)
-                                            <span style="font-weight: 600">{{ $detail['name'] }} x {{ $detail['qty'] }}</span> <br>
-                                            {!! str_replace('<br>', '，', $detail['items']) !!} <br>
+                                            <span style="font-weight: 600">{{ $detail['name'] }} x
+                                                {{ $detail['qty'] }}</span> <br>
+                                            <span style="maigin-left: 10px">{!! str_replace('<br>', '，', $detail['items']) !!}</span> <br>
                                         @endforeach
                                     </td>
                                     <td>
