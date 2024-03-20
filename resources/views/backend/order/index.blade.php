@@ -41,7 +41,7 @@
                                         <br> E-mail：{{ $value->member_email }}</td>
                                     <td>
                                         @foreach ($value['product'] as $detail)
-                                            <span style="font-weight: 600">{{ $detail['name'] }} </span> <br>
+                                            <span style="font-weight: 600">{{ $detail['name'] }} x {{ $detail['qty'] }}</span> <br>
                                             {!! $detail['items'] !!} <br>
                                         @endforeach
                                     </td>
