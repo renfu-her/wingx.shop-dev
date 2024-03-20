@@ -44,7 +44,7 @@
                                         @foreach ($value['product'] as $detail)
                                             <span style="font-weight: 600">{{ $detail['name'] }} x
                                                 {{ $detail['qty'] }}</span> <br>
-                                            <span style="maigin-left: 10px">{!! str_replace('<br>', '，', $detail['items']) !!}</span> <br>
+                                            <span style="padding-left: 10px">{!! str_replace('<br>', '，', $detail['items']) !!}</span> <br>
                                         @endforeach
                                     </td>
                                     <td>
