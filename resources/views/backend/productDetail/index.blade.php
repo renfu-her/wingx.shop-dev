@@ -3,108 +3,122 @@
 @section('title', 'Admin')
 
 @section('content')
-    <div class="container mt-5">
-        <form id="dynamic-form" method="post" action="/backend/product/detail/save">
-            <div class="spec">
-                <div class="row">
+    <div class="container-fluid">
 
-                    <div class="input-group mb-3 col-12">
-                        <h5>商品名稱</h5>
-                    </div>
-                    <div class="input-group mb-3 col-12">
-                        <input label="標題" value="{{ $product->name }}" class="form-control-plaintext"
-                            style="font-weight: 600" readonly />
-                        <input type="hidden" value="{{ $product->id }}" name="product_id">
-                    </div>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">產品規格管理</h1>
+        </div>
 
-                    <div class="input-group mb-3 col-12">
-                        <h5>規格一</h5>
-                    </div>
-                    <div class="input-group mb-3 col-4">
-                        <input type="text" name="title1" class="form-control m-input" placeholder="範例：顔色"
-                            autocomplete="off" value="{{ $productTitleOneName }}">
-                    </div>
-                </div>
+        <div class="card shadow mb-4">
 
-                <div class="row spec-one">
-                    <div class="input-group mb-3 col-4 newRow" id="input-form-row">
-                        <input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項"
-                            id="init-options1" autocomplete="off">
-                        <button class="btn btn-success" type="button" id="addRow">+</button>
-                    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="container mt-3">
+                        <form id="dynamic-form" method="post" action="/backend/product/detail/save">
+                            <div class="spec">
+                                <div class="row">
 
-                    {{-- <div id="newRow"></div> --}}
+                                    <div class="input-group mb-3 col-12">
+                                        <h5>商品名稱</h5>
+                                    </div>
+                                    <div class="input-group mb-3 col-12">
+                                        <input label="標題" value="{{ $product->name }}" class="form-control-plaintext"
+                                            style="font-weight: 600" readonly />
+                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                    </div>
+
+                                    <div class="input-group mb-3 col-12">
+                                        <h5>規格一</h5>
+                                    </div>
+                                    <div class="input-group mb-3 col-4">
+                                        <input type="text" name="title1" class="form-control m-input"
+                                            placeholder="範例：顔色" autocomplete="off" value="{{ $productTitleOneName }}">
+                                    </div>
+                                </div>
+
+                                <div class="row spec-one">
+                                    <div class="input-group mb-3 col-4 newRow" id="input-form-row">
+                                        <input type="text" name="options1[]" class="form-control m-input"
+                                            placeholder="輸入選項" id="init-options1" autocomplete="off">
+                                        <button class="btn btn-success" type="button" id="addRow">+</button>
+                                    </div>
+
+                                    {{-- <div id="newRow"></div> --}}
+                                </div>
+                            </div>
+                            <p></p>
+
+                            <div class="spec">
+                                <div class="row">
+                                    <div class="input-group mb-3 col-12">
+                                        <h5>規格二</h5>
+                                        {{-- <input type="text"> --}}
+                                    </div>
+                                    <div class="input-group mb-3 col-4">
+                                        <input type="text" name="title2" class="form-control m-input"
+                                            placeholder="範例：尺寸" autocomplete="off" value="{{ $productTitleTwoName }}">
+                                    </div>
+                                </div>
+
+                                <div class="row spec-two">
+                                    <div class="input-group mb-3 col-4 newRow-2" id="input-form-row-2">
+                                        <input type="text" name="options2[]" class="form-control m-input"
+                                            placeholder="輸入選項" id="init-options2" autocomplete="off">
+                                        <button class="btn btn-success" type="button" id="addRow-2">+</button>
+                                    </div>
+
+                                    {{-- <div id="newRow"></div> --}}
+                                </div>
+                            </div>
+                            <p></p>
+
+                            <div class="spec">
+                                <div class="container mt-5 row-change">
+                                    <div class="row list-header">
+                                        <!-- Define each column with the col class -->
+                                        <div class="col bordered-div gray-div title1">規格一</div>
+                                        <div class="col bordered-div gray-div title2" style="display: none">規格二</div>
+                                        <div class="col bordered-div gray-div">金額</div>
+                                        <div class="col bordered-div gray-div">數量</div>
+                                    </div>
+                                    <span id="row-dynamic-add">
+
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary m-3" onclick="submitForm()">存檔</button>
+                                <button type="button" class="btn btn-secondary m-3">取消</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <p></p>
-
-            <div class="spec">
-                <div class="row">
-                    <div class="input-group mb-3 col-12">
-                        <h5>規格二</h5>
-                        {{-- <input type="text"> --}}
-                    </div>
-                    <div class="input-group mb-3 col-4">
-                        <input type="text" name="title2" class="form-control m-input" placeholder="範例：尺寸"
-                            autocomplete="off" value="{{ $productTitleTwoName }}">
-                    </div>
-                </div>
-
-                <div class="row spec-two">
-                    <div class="input-group mb-3 col-4 newRow-2" id="input-form-row-2">
-                        <input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項"
-                            id="init-options2" autocomplete="off">
-                        <button class="btn btn-success" type="button" id="addRow-2">+</button>
-                    </div>
-
-                    {{-- <div id="newRow"></div> --}}
-                </div>
-            </div>
-            <p></p>
-
-            <div class="spec">
-                <div class="container mt-5 row-change">
-                    <div class="row list-header">
-                        <!-- Define each column with the col class -->
-                        <div class="col bordered-div gray-div title1">規格一</div>
-                        <div class="col bordered-div gray-div title2" style="display: none">規格二</div>
-                        <div class="col bordered-div gray-div">金額</div>
-                        <div class="col bordered-div gray-div">數量</div>
-                    </div>
-                    <span id="row-dynamic-add">
-
-                    </span>
-                </div>
-            </div>
-
-            <div class="row d-flex justify-content-center">
-                <button type="button" class="btn btn-primary m-3" onclick="submitForm()">存檔</button>
-                <button type="button" class="btn btn-secondary m-3">取消</button>
-            </div>
-        </form>
+        </div>
     </div>
-
-
 @endsection
 
 @section('css')
     <style>
         .spec {
-            background-color: white !important;
+            background-color: #f9f9f9 !important;
             padding: 20px !important;
         }
 
         .bordered-div {
             border: 1px solid #dee2e6;
+            background-color: white;
             /* Bootstrap default border color */
-            padding: 1rem;
+            padding: 0.5rem;
             /* Some padding inside the divs */
             margin-bottom: 0.5rem;
             /* Spacing between rows */
         }
 
         .gray-div {
-            background-color: #F8F8F8 !important;
+            background-color: white !important;
         }
     </style>
 @endsection
