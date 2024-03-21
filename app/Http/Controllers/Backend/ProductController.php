@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\Ship;
+use App\Models\OrderShip;
+use App\Models\ProductShip;
 
 use Yajra\DataTables\DataTables;
 
@@ -133,6 +135,7 @@ class ProductController extends Controller
     public function edit(Request $request, $id)
     {
         $product = Product::find($id);
+        $product_id = $product->id;
         $product_categories = ProductCategory::orderBy('id')->get();
         $product_category = [];
         foreach ($product_categories as $key => $value) {
@@ -145,15 +148,27 @@ class ProductController extends Controller
             $ships[$ship->id] = $ship->name;
         }
 
-
         $ship_ids = [];
         if (!empty($product)) {
             $ship_ids = explode(',', $product->ships);
         }
 
+        $orderShipArray = [];
+        $orderShips = ProductShip::where('product_id', $product_id)->with('ship')->get();
+        foreach ($orderShips as $ship) {
+            $ships = [
+                'id' => $ship['id'],
+                'ship_id' => $ship['ship_id'],
+                'price' => $ship['price'],
+                'status' => $ship['status'],
+                'name' => $ship->ship->name,
+            ];
+            array_push($orderShipArray, $ships);
+        }
+
         return view(
             'backend.product.edit',
-            compact('product', 'product_category', 'ships', 'ship_ids')
+            compact('product', 'product_category', 'ships', 'ship_ids', 'orderShipArray')
         );
     }
 
@@ -201,5 +216,15 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect('/backend/product');
+    }
+
+    public function updateShipPrice(Request $request)
+    {
+
+        $data = $request->all();
+
+        ProductShip::where('id', $data['shipId'])->update(['price' => $data['shipPrice']]);
+
+        return response()->json(['status' => 200]);
     }
 }

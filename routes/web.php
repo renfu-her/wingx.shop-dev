@@ -96,4 +96,5 @@ route::group(['prefix' => 'test'], function () {
     route::get('/order', [TestController::class, 'orderStatus']);
     route::get('/queryOrderStatus', [TestController::class, 'queryOrderStatus']);
     route::get('/eInvoice/{order_no}', [TestController::class, 'eInvoice']);
+    route::get('/shipToProductShip', [TestController::class, 'shipToProductShip']);
 });

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\OrderShip;
+use App\Models\Ship;
+use App\Models\Product;
+use App\Models\ProductShip;
 
 use App\Services\EcPayService;
 
@@ -85,5 +89,30 @@ class TestController extends Controller
 
     }
 
+    // ships to order_ships
+    public function shipToProductShip()
+    {
+
+        $products = Product::all();
+
+        $ships = Ship::all();
+
+        foreach($products as $product){
+
+            $product_id = $product['id'];
+
+            foreach($ships as $ship){
+                $createOrderShip = [
+                    'product_id' => $product_id,
+                    'ship_id' => $ship['id'],
+                    'price' => $ship['ship_price'],
+                    'status' => 1
+                ];
+                ProductShip::create($createOrderShip);                
+            }
+
+        }
+
+    }
 
 }

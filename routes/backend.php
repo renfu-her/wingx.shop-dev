@@ -76,6 +76,9 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth', 'name' => 'backend.
     // 商品管理細項
     route::get('/product/{product_id}/detail', [ProductDetailController::class, "edit"])->name('product.detail.edit');
     route::post('/product/detail/save', [ProductDetailController::class, "store"])->name('product.detail.save');
+
+    // product ship
+    route::post('/ship/update', [ProductController::class,'updateShipPrice'])->name('product.updateShipPrice'); 
 });
 
 route::get('/backend/login', [AuthController::class, 'login'])->name('backend_login');
