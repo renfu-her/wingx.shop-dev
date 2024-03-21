@@ -57,12 +57,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="/backend/productCategory">
                     <i class="fa-solid fa-folder"></i>
                     <span>分類管理</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" href="/backend/ship">
