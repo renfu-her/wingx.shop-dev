@@ -36,7 +36,7 @@
                                         <div class="mt-3">
                                             <x:form::input type="number" name="price" label="價格" required />
                                         </div>
- 
+
                                         <div class="mt-3">
                                             <x:form::input type="number" name="store_number" label="庫存" />
                                         </div>
@@ -48,15 +48,40 @@
                                         <div class="mt-3">
                                             <x:form::textarea name="description" label="詳細內容" rows="10" />
                                         </div>
-                                        {{--
-                                        <div class="mt-3">
-                                            <x:form::select class="form-control" name="is_free_ship" label="免運費"
-                                                :options="[0 => '停用', 1 => '啓用', ]" :selected="[0]" />
-                                        </div> --}}
 
                                         <div class="mt-3">
-                                            <x:form::checkbox class="form-checkbox" name="ships" label="運費方式"
-                                                :group="$ships"  multiple inline/>
+                                            <div>
+                                                <label class="form-label">運費方式</label>
+                                            </div>
+                                            <div class="list-group">
+                                                @foreach ($orderShipArray as $ship)
+                                                    <div
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <p class="fw-bold mb-1">{{ $ship['name'] }}</p>
+                                                        </div>
+                                                        <div class="row d-flex justify-content-between align-items-center">
+                                                            <input type="hidden" value="{{ $ship['price'] }}"
+                                                                name="shipPrice[{{ $ship['id'] }}]">
+                                                            <span
+                                                                class="m-1 ship-price-{{ $ship['id'] }}">NT${{ $ship['price'] }}</span>
+                                                            <button class="btn btn-outline-secondary btn-sm m-2"
+                                                                type="button"
+                                                                onclick="changePrice({{ $ship['id'] }}, '{{ $ship['name'] }}', {{ $ship['price'] }})"><i
+                                                                    class="fas fa-pencil-alt"></i></button>
+
+                                                            <div class="custom-control custom-switch m-2">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="shipStatus[{{ $ship['id'] }}]"
+                                                                    id="shipStatus-{{ $ship['id'] }}">
+                                                                <label class="custom-control-label"
+                                                                    for="shipStatus-{{ $ship['id'] }}"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <!-- 複製以上 div 來添加更多的列表項目... -->
+                                            </div>
                                         </div>
 
                                         <div class="mt-3">
@@ -80,6 +105,33 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shipName">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="mt-3">
+                        <x:form::input type="number" name="shipPrice" label="金額" required />
+                        <x:form::input type="hidden" name="shipId" label="ID" value="" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" id="shipSave">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('css')
@@ -91,6 +143,41 @@
     <script>
         $(function() {
 
+            $('#shipSave').on('click', function() {
+
+                error_msg = [];
+
+                shipPrice = $('input[name="shipPrice"]').val()
+                shipId = $('input[name="shipId"]').val()
+
+                $('input[name="shipPrice[' + shipId + ']"]').val(shipPrice)
+
+                if ($.trim(shipPrice) == '') {
+                    error_msg.push('運費金額不得為空白'); // 使用 push 方法添加元素到數組
+                }
+
+                // 如果 error_msg 有元素（即，如果有錯誤訊息）
+                if (error_msg.length > 0) {
+                    alert(error_msg.join(',')); // 將所有的錯誤訊息合併成一個字串並顯示
+                }
+
+                $('.ship-price-' + shipId).html('NT$' + shipPrice);
+
+                console.log(shipId, shipPrice);
+
+                $('#statusModal').modal('hide')
+            })
+
         })
+
+        const changePrice = (shipId, shipName, shipPrice) => {
+
+            $('#shipName').html(shipName);
+
+            $('input[name=shipPrice]').val(shipPrice)
+            $('input[name=shipId]').val(shipId)
+
+            $('#statusModal').modal('show')
+        }
     </script>
 @endsection

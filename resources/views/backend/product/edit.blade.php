@@ -57,16 +57,6 @@
                                             <x:form::textarea name="description" label="詳細內容" rows="10" />
                                         </div>
 
-                                        {{-- <div class="mt-3">
-                                            <x:form::select class="form-control" name="is_free_ship" label="免運費"
-                                                :options="[0 => '停用', 1 => '啓用', ]" :selected="[0]" />
-                                        </div> --}}
-
-                                        {{-- <div class="mt-3">
-                                            <x:form::checkbox class="form-checkbox" name="ships" label="運費方式"
-                                                :group="$ships" :checked="$ship_ids" multiple  inline/>
-                                        </div> --}}
-
                                         <div class="mt-3">
                                             <div>
                                                 <label class="form-label">運費方式</label>
@@ -92,7 +82,7 @@
                                                                 <input type="checkbox" class="custom-control-input"
                                                                     name="shipStatus[{{ $ship['id'] }}]"
                                                                     id="shipStatus-{{ $ship['id'] }}"
-                                                                    onclick="shipStatis({{ $ship['id'] }})"
+                                                                    onclick="shipStatus({{ $ship['id'] }})"
                                                                     @if ($ship['status'] == 1) checked @endif>
                                                                 <label class="custom-control-label"
                                                                     for="shipStatus-{{ $ship['id'] }}"></label>
@@ -215,7 +205,7 @@
             $('#statusModal').modal('show')
         }
 
-        const shipStatis = (shipId) => {
+        const shipStatus = (shipId) => {
 
 
             let isChecked = $('#shipStatus-' + shipId).prop('checked');

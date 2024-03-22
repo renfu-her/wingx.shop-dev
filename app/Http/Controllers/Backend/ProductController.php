@@ -87,8 +87,24 @@ class ProductController extends Controller
             $ships[$ship->id] = $ship->name;
         }
 
+        $orderShipArray = [];
+        $orderShips = Ship::all();
+        foreach ($orderShips as $ship) {
+            $ships = [
+                'id' => $ship['id'],
+                'ship_id' => $ship['ship_id'],
+                'price' => $ship['ship_price'],
+                'status' => 0,
+                'name' => $ship['name'],
+            ];
+            array_push($orderShipArray, $ships);
+        }
 
-        return view('backend.product.create', compact('product_category', 'ships'));
+
+        return view(
+            'backend.product.create',
+            compact('product_category', 'ships', 'orderShipArray')
+        );
     }
 
     // 產品新增儲存
@@ -126,7 +142,18 @@ class ProductController extends Controller
             $menuImage->save();
         }
 
+        $shipPrice = $request->shipPrice;
+        $shipStatus = $request->shipStatus;
+        foreach ($shipPrice as $key => $price) {
+            $create = [
+                'product_id' => $productId,
+                'price' => $price,
+                'status' => $shipStatus[$key] = 'on' ? 1 : 0,
+                'ship_id' => $key
+            ];
 
+            ProductShip::create($create);
+        }
 
         return redirect('/backend/product');
     }
@@ -235,7 +262,7 @@ class ProductController extends Controller
 
         $shipId = $data['shipId'];
         $shipStatus = $data['shipStatus'] == 'true' ? 1 : 0;
-       
+
         ProductShip::where('id', $shipId)->update(['status' => $shipStatus]);
 
         return response()->json(['status' => 200]);
