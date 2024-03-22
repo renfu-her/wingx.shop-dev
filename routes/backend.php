@@ -78,7 +78,8 @@ route::group(['prefix' => 'backend', 'middleware' => 'auth', 'name' => 'backend.
     route::post('/product/detail/save', [ProductDetailController::class, "store"])->name('product.detail.save');
 
     // product ship
-    route::post('/ship/update', [ProductController::class,'updateShipPrice'])->name('product.updateShipPrice'); 
+    route::post('/ship/update', [ProductController::class, 'updateShipPrice'])->name('product.updateShipPrice');
+    route::post('/ship/updateStatus', [ProductController::class, 'updateShipStatus'])->name('product.updateShipStatus');
 });
 
 route::get('/backend/login', [AuthController::class, 'login'])->name('backend_login');

@@ -227,4 +227,17 @@ class ProductController extends Controller
 
         return response()->json(['status' => 200]);
     }
+
+    public function updateShipStatus(Request $request)
+    {
+
+        $data = $request->all();
+
+        $shipId = $data['shipId'];
+        $shipStatus = $data['shipStatus'] == 'true' ? 1 : 0;
+       
+        ProductShip::where('id', $shipId)->update(['status' => $shipStatus]);
+
+        return response()->json(['status' => 200]);
+    }
 }

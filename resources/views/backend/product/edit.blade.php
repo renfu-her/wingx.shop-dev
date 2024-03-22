@@ -92,6 +92,7 @@
                                                                 <input type="checkbox" class="custom-control-input"
                                                                     name="shipStatus[{{ $ship['id'] }}]"
                                                                     id="shipStatus-{{ $ship['id'] }}"
+                                                                    onclick="shipStatis({{ $ship['id'] }})"
                                                                     @if ($ship['status'] == 1) checked @endif>
                                                                 <label class="custom-control-label"
                                                                     for="shipStatus-{{ $ship['id'] }}"></label>
@@ -212,6 +213,19 @@
             $('input[name=shipId]').val(shipId)
 
             $('#statusModal').modal('show')
+        }
+
+        const shipStatis = (shipId) => {
+
+
+            let isChecked = $('#shipStatus-' + shipId).prop('checked');
+
+            $.post("{{ route('product.updateShipStatus') }}", {
+                'shipId': shipId,
+                'shipStatus': isChecked
+            }, function(items) {
+                console.log(items)
+            })
         }
     </script>
 @endsection
