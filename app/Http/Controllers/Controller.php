@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductShip;
 use App\Models\Ship;
 
 class Controller extends BaseController
@@ -51,6 +52,11 @@ class Controller extends BaseController
     public function getShipAll()
     {
         $ships = Ship::where('status', 1)->get();
+        $carts = session()->get('cart');
+
+        foreach($carts as $cart) {
+            dd($cart);
+        }
         return $ships;
     }
 
