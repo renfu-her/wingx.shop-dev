@@ -145,10 +145,14 @@ class ProductController extends Controller
         $shipPrice = $request->shipPrice;
         $shipStatus = $request->shipStatus;
         foreach ($shipPrice as $key => $price) {
+            $status = 0;
+            if (empty($shipStatus[$key])) {
+                $status = 1;
+            }
             $create = [
                 'product_id' => $productId,
                 'price' => $price,
-                'status' => $shipStatus[$key] = 'on' ? 1 : 0,
+                'status' => $status,
                 'ship_id' => $key
             ];
 
