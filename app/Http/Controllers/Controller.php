@@ -55,8 +55,10 @@ class Controller extends BaseController
         $carts = session()->get('cart');
 
         foreach($carts as $cart) {
-            dd($cart);
+            // dd($cart);
         }
+
+    dd($carts);
         return $ships;
     }
 
