@@ -14,6 +14,7 @@ use App\Models\ProductDetailOne;
 use App\Models\ProductDetailTwo;
 use App\Models\ProductTitleOne;
 use App\Models\ProductTitleTwo;
+use App\Models\ProductShip;
 
 use App\Services\CartService;
 
@@ -69,6 +70,21 @@ class ProductIndexController extends Controller
         $productDetailOne = ProductDetailOne::where('product_id', $product_id)->get();
         $productDetailTwo = ProductDetailTwo::where('product_id', $product_id)->get();
 
+        $productShip = ProductShip::where('product_id', $product_id)
+            ->where('status', 1)
+            ->with(['ship'])
+            ->get();
+
+        $shipArray = [];
+        foreach ($productShip as $value) {
+            $insert = [
+                'id' => $value['id'],
+                'name' => $value['ship']['name'],
+                'price' => $value['price']
+            ];
+            array_push($shipArray, $insert);
+        }
+
         return view(
             'frontend.product',
             compact(
@@ -86,6 +102,7 @@ class ProductIndexController extends Controller
                 'productTitleTwo',
                 'productDetailOne',
                 'productDetailTwo',
+                'shipArray'
             )
         );
     }

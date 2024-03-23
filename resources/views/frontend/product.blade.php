@@ -171,7 +171,11 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex border-0 px-0 bg-transparent">
                                     <i class="ri-truck-line"></i>
-                                    <span class="fs-6 ms-3">運費：中華郵政 $80。 宅配 $150。</span>
+                                    <span class="fs-6 ms-3">運費：<br>
+                                        @foreach ($shipArray as $ship)
+                                            {{ $ship['name'] }} {{ $ship['price'] }} <br>
+                                        @endforeach
+                                    </span>
                                 </li>
                             </ul>
                         </div>

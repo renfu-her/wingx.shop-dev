@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -54,12 +55,29 @@ class Controller extends BaseController
         $ships = Ship::where('status', 1)->get();
         $carts = session()->get('cart');
 
-        foreach($carts as $cart) {
-            // dd($cart);
-        }
+        // 提取所有產品的 prod_id
+        $productIds = collect($carts)->pluck('prod_id')->unique()->all();
 
-    dd($carts);
-        return $ships;
+        $productShips = ProductShip::select('ship_id', DB::raw('MAX(price) as max_price'))
+            ->whereIn('product_id', $productIds)
+            ->where('status', 1)
+            ->groupBy('ship_id')
+            ->with(['ship']) // 預加載關聯的 Ship 模型
+            ->get();
+
+        $shipArray = [];    
+        foreach($productShips as $ship){
+            $insert = [
+                'id' => $ship['ship']['id'],
+                'name' => $ship['ship']['name'],
+                'status' => $ship['ship']['status'],
+                'price' => $ship['max_price'],
+            ];
+
+            array_push($shipArray, $insert);
+        }    
+
+        return $shipArray;
     }
 
     /**

@@ -24,7 +24,7 @@
 
                 <div class="col-12 col-lg-6 col-xl-7">
                     <!-- Checkout Panel Contact -->
-                    @if ($ships->count() > 0)
+                    @if (count($ships) > 0)
                         <div class="checkout-panel">
                             <h5 class="title-checkout">選擇送貨方式</h5>
                             <div class="row">
@@ -36,7 +36,7 @@
                                         <select name="ship_id" id="ship_id" class="form-select">
                                             <option value="">請選擇</option>
                                             @foreach ($ships as $ship)
-                                                <option value="{{ $ship->id }}">{{ $ship->name }}</option>
+                                                <option value="{{ $ship['id'] }}">{{ $ship['name'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -239,8 +239,8 @@
             const twzipcode = new TWzipcode();
 
             let ships = 0;
-            @if ($ships->count() > 0)
-                ships = {{ $ships->count() }};
+            @if (count($ships) > 0)
+                ships = {{ count($ships) }};
             @endif
 
             twzipcode.set({{ $member->zipcode }})
