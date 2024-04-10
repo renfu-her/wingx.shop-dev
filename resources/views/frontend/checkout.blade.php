@@ -45,6 +45,20 @@
                         </div>
                     @endif
 
+                    <div class="checkout-panel cart-map" style="display: none">
+                        
+                        <div class="row">
+
+                            <!-- Email-->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <a href="#!" onclick="cartMap()" class="btn btn-primary">電子地圖</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                     <div class="checkout-panel">
                         <h5 class="title-checkout">選擇發票類型</h5>
                         <div class="row">
@@ -356,6 +370,15 @@
                 }
             })
 
+            $('#ship_id').on('change', function(){
+                let shipId = $(this).val();
+                if(shipId < 3 &&  !isNaN(shipId)){
+                    $('.cart-map').show()
+                } else {
+                    $('.cart-map').hide()
+                }
+            })
+
         })
 
         function validateUIDInput(input) {
@@ -369,5 +392,6 @@
                 input.setCustomValidity('');
             }
         }
+        
     </script>
 @endsection
