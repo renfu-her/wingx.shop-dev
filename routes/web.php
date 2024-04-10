@@ -24,19 +24,17 @@ use Illuminate\Auth\Events\Login;
 
 route::get('/', [IndexController::class, 'index']);
 route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
-route::get('/product/{product_id}', [ProductIndexController::class, 'index'])->name('product.indexId');
+
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
-route::post('/product/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
-route::post('/product/spec/list', [ProductIndexController::class, 'specList'])->name('product.spec.list');
 
-route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
-route::get('/importStoreData', [ImportDataController::class, 'storeData']);
-route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']);
-
-route::get('/contact-us', [ContactController::class, 'index']);
+route::group(['prefix' => 'product', 'name' => 'product.'], function () {
+    route::get('/{product_id}', [ProductIndexController::class, 'index'])->name('product.indexId');
+    route::post('/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
+    route::post('/spec/list', [ProductIndexController::class, 'specList'])->name('product.spec.list');
+});
 
 // 購物車寫入 session cart
-route::group(['prefix' => 'cart', 'name' => 'cart.'], function(){
+route::group(['prefix' => 'cart', 'name' => 'cart.'], function () {
     route::get('/', [CartController::class, 'index']);
     route::post('/thanks', [CartController::class, 'thanks']);
     route::post('/order', [CartController::class, 'order']);
@@ -44,13 +42,23 @@ route::group(['prefix' => 'cart', 'name' => 'cart.'], function(){
     route::post('/count', [OrderController::class, 'cartCount']);
 });
 
-route::get('/order/list', [OrderController::class, 'list']);
-route::post('/order/store', [OrderController::class, 'store']);
-
+route::group(['prefix' => 'order', 'name' => 'order.'], function () {
+    route::get('/list', [OrderController::class, 'list']);
+    route::post('/store', [OrderController::class, 'store']);
+});
 
 // 會員個人資料
-route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-route::put('/profile/update/{member_id}', [ProfileController::class, 'update'])->name('profile.update');
+route::group(['prefix' => 'profile', 'name' => 'profile.'], function () {
+    route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+    route::put('/update/{member_id}', [ProfileController::class, 'update'])->name('profile.update');
+    
+});
+
+route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
+route::get('/importStoreData', [ImportDataController::class, 'storeData']);
+route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']);
+
+route::get('/contact-us', [ContactController::class, 'index']);
 
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
