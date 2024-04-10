@@ -111,9 +111,6 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        $express = Express::createTestData('UNIMART');
-
-        dd($express);
 
         return view(
             'frontend.checkout',
@@ -126,7 +123,6 @@ class CartController extends Controller
                 'ships',
                 'member',
                 'cart_count',
-                'express'
             )
         );
     }
@@ -202,9 +198,8 @@ class CartController extends Controller
         if (array_key_exists($deleteId, $cart)) {
             unset($cart[$deleteId]);
         }
-                
-        // 将更新后的购物车数组存回会话
-        session(['cart' => $cart]);        
 
+        // 将更新后的购物车数组存回会话
+        session(['cart' => $cart]);
     }
 }
