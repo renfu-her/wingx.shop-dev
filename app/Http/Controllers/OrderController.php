@@ -58,7 +58,7 @@ class OrderController extends Controller
         $cart = session()->get('cart');
 
         if(count($cart) == 0){
-            return redirect('/')->with(['message' => '訂單不需為 0 件']);
+            return redirect('/')->with(['message' => '訂單要 1 件以上！']);
         }
 
         $order_no = (new CartService())->generateOrderNo();
