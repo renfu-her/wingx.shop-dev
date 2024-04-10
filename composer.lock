@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48b5da16a141cad20e22010042a283cd",
+    "content-hash": "58316985b8365d4a3e3c55d5822ccfc2",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -7492,6 +7492,60 @@
                 }
             ],
             "time": "2023-07-31T07:08:24+00:00"
+        },
+        {
+            "name": "thoth-pharaoh/ecpay-express",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/castion2293/ecpay-express.git",
+                "reference": "3ae99b750a18007ccfc5e03e0bbc9a46d9263917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/castion2293/ecpay-express/zipball/3ae99b750a18007ccfc5e03e0bbc9a46d9263917",
+                "reference": "3ae99b750a18007ccfc5e03e0bbc9a46d9263917",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaoh\\Express\\ExpressServiceProvider"
+                    ],
+                    "aliases": {
+                        "Express": "Pharaoh\\Express\\Facades\\Express"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pharaoh\\Express\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Zhang",
+                    "email": "castion2293@yahoo.com.tw"
+                }
+            ],
+            "description": "綠界物流服務",
+            "support": {
+                "issues": "https://github.com/castion2293/ecpay-express/issues",
+                "source": "https://github.com/castion2293/ecpay-express/tree/v2.0.1"
+            },
+            "time": "2023-10-06T12:17:18+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

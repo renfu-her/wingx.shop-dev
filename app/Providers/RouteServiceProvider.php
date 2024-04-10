@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Pharaoh\Express\Facades\Express;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,10 +36,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(function(){
+                ->group(function () {
                     require base_path('routes/web.php');
                     require base_path('routes/backend.php');
                 });
         });
+
+        Express::routes();
     }
 }
