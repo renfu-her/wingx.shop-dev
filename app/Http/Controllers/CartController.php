@@ -113,6 +113,8 @@ class CartController extends Controller
 
         $express = Express::createTestData('FAMI');
 
+        dd($express);
+
         return view(
             'frontend.checkout',
             compact(

@@ -17,11 +17,11 @@
 
         <h1 class="mb-4 display-5 fw-bold text-center">結帳</h1>
         <p class="text-center mx-auto">請填寫以下資訊</p>
-        {{ $express }}
+
         <form action="/order/store" method="post" id="form_post">
             <div class="row g-md-8 mt-4">
                 <!-- Checkout Panel Left -->
-                
+
                 <div class="col-12 col-lg-6 col-xl-7">
                     <!-- Checkout Panel Contact -->
                     @if (count($ships) > 0)
