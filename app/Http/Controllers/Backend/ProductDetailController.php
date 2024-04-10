@@ -15,14 +15,12 @@ class ProductDetailController extends Controller
     public function edit(Request $request, $product_id)
     {
 
-        return (new Service($request, $product_id))
-                ->edit();
+        return (new Service($request, $product_id))->edit();
     }
     // store
     public function store(Request $request)
     {
-        return (new Service($request))
-                ->store();
+        return (new Service($request))->store();
     }
     // // update
     // public function update(Request $request, $id)
