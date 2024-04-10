@@ -272,7 +272,7 @@
                 $.post('/cart/delete', {
                     'deleteId': deleteId,
                 }, function() {
-                    // location.reload();
+                    location.reload();
                 })
             }
         }
