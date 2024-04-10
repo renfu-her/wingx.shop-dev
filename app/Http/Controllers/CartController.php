@@ -111,7 +111,7 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        $express = Express::createTestData('FAMI');
+        $express = Express::createTestData('UNIMART');
 
         dd($express);
 
