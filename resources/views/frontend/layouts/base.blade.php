@@ -230,7 +230,7 @@
                                     <div>
                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
                                             {{ $value['prod_name'] }}
-                                            <i class="ri-close-line"></i>
+                                            <i class="ri-close-line" onclick="cartDelete({{ $value['id'] }})"></i>
                                         </h6>
                                         <small class="d-block fw-bolder">{!! $value['items'] !!}</small>
                                         <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
@@ -263,6 +263,17 @@
 
     @include('frontend.layouts.footer_include')
 
+    <script>
+        const cartDelete = (deleteId) => {
+            if (confirm('確定要刪除？')) {
+                $.post('/cart/delete', {
+                    'deleteId': deleteId,
+                }, function() {
+                    location.reload();
+                })
+            }
+        }
+    </script>
 
 </body>
 

@@ -36,10 +36,13 @@ route::get('/importDetailData', [ImportDataController::class, 'storeDetailData']
 route::get('/contact-us', [ContactController::class, 'index']);
 
 // 購物車寫入 session cart
-route::get('/cart', [CartController::class, 'index']);
-route::post('/cart/thanks', [CartController::class, 'thanks']);
-route::post('/cart/order', [CartController::class, 'order']);
-route::post('/cart/count', [OrderController::class, 'cartCount']);
+route::group(['prefix' => 'cart', 'name' => 'cart.'], function(){
+    route::get('/', [CartController::class, 'index']);
+    route::post('/thanks', [CartController::class, 'thanks']);
+    route::post('/order', [CartController::class, 'order']);
+    route::post('/delete', [CartController::class, 'cartDelete']);
+    route::post('/count', [OrderController::class, 'cartCount']);
+});
 
 route::get('/order/list', [OrderController::class, 'list']);
 route::post('/order/store', [OrderController::class, 'store']);

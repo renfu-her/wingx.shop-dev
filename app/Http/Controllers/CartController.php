@@ -180,4 +180,23 @@ class CartController extends Controller
             return view('frontend.thanks', compact('status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         }
     }
+
+    // 刪除 cart session
+    public function cartDelete(Request $request)
+    {
+
+        $data = $request->all();
+        $deleteId = $data['deleteId'];
+
+        $cart = session('cart', []);
+
+        // 使用 array_values 和 array_filter 来重置键并移除具有特定 id 的项目
+        $updatedCart = array_values(array_filter($cart, function ($item) use ($deleteId) {
+            return $item['id'] != $deleteId;
+        }));
+        
+        // 将更新后的购物车数组存回会话
+        session(['cart' => $updatedCart]);        
+
+    }
 }
