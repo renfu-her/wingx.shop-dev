@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cart as $value)
+                            @foreach ($cart as $key => $value)
                                 <tr>
                                     <!-- image -->
                                     <td class="d-none d-sm-table-cell">
@@ -64,7 +64,7 @@
                                     <!-- Actions -->
                                     <td class="f-h-0">
                                         <div class="d-flex justify-content-between flex-column align-items-end h-100">
-                                            <i class="ri-close-circle-line ri-lg"></i>
+                                            <i class="ri-close-circle-line ri-lg" style="cursor: pointer" onclick="cartDelete({{ $key }})"></i>
                                             <p class="fw-bolder mt-3 m-sm-0">${{ number_format($value['sub_total']) }}</p>
                                         </div>
                                     </td>
