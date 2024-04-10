@@ -190,6 +190,8 @@ class CartController extends Controller
 
         $cart = session('cart', []);
 
+        dd($deleteId, $cart);
+
         // 使用 array_values 和 array_filter 来重置键并移除具有特定 id 的项目
         $updatedCart = array_values(array_filter($cart, function ($item) use ($deleteId) {
             return $item['id'] != $deleteId;
