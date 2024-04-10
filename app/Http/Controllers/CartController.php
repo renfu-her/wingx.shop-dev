@@ -111,6 +111,8 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
+        $express = Express::createTestData('FAMI');
+
         return view(
             'frontend.checkout',
             compact(
@@ -121,7 +123,8 @@ class CartController extends Controller
                 'tax',
                 'ships',
                 'member',
-                'cart_count'
+                'cart_count',
+                'express'
             )
         );
     }
