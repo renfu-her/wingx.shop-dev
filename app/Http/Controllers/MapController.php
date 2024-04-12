@@ -28,7 +28,7 @@ class MapController extends Controller
             ]);
 
 
-        dd($response->body());
+        return $response->body();
     }
 
     public function rewrite(Request $request)
