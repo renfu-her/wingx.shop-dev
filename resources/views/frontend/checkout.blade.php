@@ -45,18 +45,18 @@
                         </div>
                     @endif
                     <div class="checkout-panel cart-map" style="display: none">
-                        
+
                         <div class="row">
 
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a href="{{ route('cart.map') }}" target="_blink" class="btn btn-primary">電子地圖</a>
+                                    <a href="#!" onclick="cartMap()" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="checkout-panel">
                         <h5 class="title-checkout">選擇發票類型</h5>
@@ -369,9 +369,9 @@
                 }
             })
 
-            $('#ship_id').on('change', function(){
+            $('#ship_id').on('change', function() {
                 let shipId = $(this).val();
-                if(shipId < 3 &&  !isNaN(shipId)){
+                if (shipId < 3 && !isNaN(shipId)) {
                     $('.cart-map').show()
                 } else {
                     $('.cart-map').hide()
@@ -391,6 +391,19 @@
                 input.setCustomValidity('');
             }
         }
-        
+
+        const cartMap = () => {
+            $.post("{{ config('config.EXPRESS_MAP_URL') }}", {
+                "MerchantID": "{{ config('config.EXPRESS_MERCHANT_ID') }}",
+                "LogisticsType": "CSV",
+                "LogisticsSubType": "FAMIC2C",
+                "IsCollection": "N",
+                "ServerReplyURL": "{{ route('cart.map.rewrite') }}"
+            }, function(items){
+
+                console.log(items);
+
+            })
+        }
     </script>
 @endsection
