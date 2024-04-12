@@ -15,6 +15,7 @@ use App\Http\Controllers\LineController;
 use App\Http\Controllers\QAController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\InvoiceLotteryController;
+use App\Http\Controllers\MapController;
 
 use App\Http\Controllers\Api\ImportDataController;
 
@@ -40,6 +41,7 @@ route::group(['prefix' => 'cart', 'name' => 'cart.'], function () {
     route::post('/order', [CartController::class, 'order']);
     route::post('/delete', [CartController::class, 'cartDelete']);
     route::post('/count', [OrderController::class, 'cartCount']);
+    route::get('/map', [MapController::class, 'index'])->name('cart.map');
 });
 
 route::group(['prefix' => 'order', 'name' => 'order.'], function () {

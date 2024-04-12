@@ -44,7 +44,6 @@
                             </div>
                         </div>
                     @endif
-
                     <div class="checkout-panel cart-map" style="display: none">
                         
                         <div class="row">
@@ -52,7 +51,7 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a href="#!" onclick="cartMap()" class="btn btn-primary">電子地圖</a>
+                                    <a href="{{ route('') }}" target="_blink" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                         </div>

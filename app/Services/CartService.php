@@ -17,6 +17,7 @@ class CartService extends BaseService
 {
 
     // cart item
+    //MARK: cart
     public function cart($req)
     {
 
@@ -33,6 +34,7 @@ class CartService extends BaseService
     }
 
     // order detail
+    //MARK: Order All
     public function order()
     {
 
@@ -79,6 +81,7 @@ class CartService extends BaseService
     }
 
     // session cart get
+    //MARK: getCart
     public function getCart()
     {
 
@@ -103,6 +106,7 @@ class CartService extends BaseService
     }
 
     // 所有的 cart session 轉為 cart
+    // MARK: getCartAll
     public function getCartAll()
     {
 
