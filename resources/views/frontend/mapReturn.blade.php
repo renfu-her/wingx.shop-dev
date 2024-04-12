@@ -6,7 +6,7 @@
             // 創建一個陣列
             var dataArray = {!! $dataArrayJson !!};
 
-            consloe.log({!! $dataArrayJson !!})
+            console.log({!! $dataArrayJson !!})
 
             // 將陣列轉換為 JSON 字符串並存儲
             localStorage.setItem('returnedData', JSON.stringify(dataArray));
