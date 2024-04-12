@@ -14,8 +14,8 @@ class MapController extends Controller
     
     
         // dd(env('EXPRESS_MAP_URL'), env('EXPRESS_MERCHANT_ID'));
-        $mapHttp = Http::asForm()->post(env('EXPRESS_MAP_URL'), [
-            "MerchantID" => env('EXPRESS_MERCHANT_ID'),
+        $mapHttp = Http::asForm()->post(config('config.EXPRESS_MAP_URL'), [
+            "MerchantID" => config('config.EXPRESS_MERCHANT_ID'),
             "LogisticsType" => "CSV",
             "LogisticsSubType" => "FAMIC2C",
             "IsCollection" => "N",
