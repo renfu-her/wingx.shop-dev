@@ -29,7 +29,8 @@ class MapController extends Controller
 
         $res = $response->body();
 
-        return view('frontend.map', ['res' => $res]);
+        return $res;
+        // return view('frontend.map', ['res' => $res]);
     }
 
     public function rewrite(Request $request)
