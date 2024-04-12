@@ -26,14 +26,14 @@ class MapController extends Controller
                 'IsCollection' => 'N',
                 'ServerReplyURL' => 'https://wingx-shop.dev-laravel.co/cart/rewrite',
             ]);
-
-
-        
     }
 
     public function rewrite(Request $request)
     {
 
-        dd($request->all());
+        $dataArray = $request->all();
+        // 轉換為 JSON 字符串
+        $dataArrayJson = json_encode($dataArray);
+        return view('frontend.mapReturn', compact('dataArrayJson'));
     }
 }
