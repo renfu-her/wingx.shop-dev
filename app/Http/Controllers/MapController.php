@@ -12,6 +12,8 @@ class MapController extends Controller
     public function index(Request $request)
     {
     
+
+        dd();
         $mapHttp = Http::post(env('EXPRESS_MAP_URL'), [
             "MerchantID" => env('EXPRESS_MERCHANT_ID'),
             "LogisticsType" => "CSV",
