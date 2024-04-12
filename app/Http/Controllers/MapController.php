@@ -22,6 +22,8 @@ class MapController extends Controller
             "ServerReplyURL" => route('cart.map.rewrite')
         ]);
 
+        dd(config('config.EXPRESS_MAP_URL'), config('config.EXPRESS_MERCHANT_ID'), route('cart.map.rewrite'));
+
     }
 
     public function rewrite(Request $request)
