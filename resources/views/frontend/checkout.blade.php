@@ -396,6 +396,7 @@
             $.ajax({
                 url: "{{ config('config.EXPRESS_MAP_URL') }}",
                 dataType: 'html',
+                crossDomain: true,
                 contentType: "application/x-www-form-urlencoded",
                 type: "POST",
                 data: {
