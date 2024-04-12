@@ -51,8 +51,9 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
+
                                     {{-- <a href=" route('cart.map') " target="_blank" class="btn btn-primary">電子地圖</a> --}}
-                                    <a href="#!" onclick="cartMap()" class="btn btn-primary">電子地圖</a>
+                                    <a href="" id="cartMap" target="_blank" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                         </div>
@@ -373,6 +374,11 @@
             $('#ship_id').on('change', function() {
                 let shipId = $(this).val();
                 if (shipId < 3 && !isNaN(shipId)) {
+
+                    $('#cartMap').attr('href',
+                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&amp;LogisticsType=CVS&amp;LogisticsSubType=" +
+                        shipId +
+                        "&amp;IsCollection=Y&amp;ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
                     $('.cart-map').hide()
