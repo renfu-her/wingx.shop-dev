@@ -21,8 +21,7 @@ class MapController extends Controller
             "IsCollection" => "N",
             "ServerReplyURL" => route('cart.map.rewrite')
         ]);
-    
-        dd($mapHttp);
+
     }
 
     public function rewrite(Request $request)
