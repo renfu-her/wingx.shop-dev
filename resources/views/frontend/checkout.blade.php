@@ -393,16 +393,20 @@
         }
 
         const cartMap = () => {
-            $.post("{{ config('config.EXPRESS_MAP_URL') }}", {
-                "MerchantID": "{{ config('config.EXPRESS_MERCHANT_ID') }}",
-                "LogisticsType": "CSV",
-                "LogisticsSubType": "FAMIC2C",
-                "IsCollection": "N",
-                "ServerReplyURL": "{{ route('cart.map.rewrite') }}"
-            }, function(items){
-
+            $.ajax({
+                url: "{{ config('config.EXPRESS_MAP_URL') }}",
+                dataType: 'html',
+                contentType: "application/x-www-form-urlencoded",
+                type: "POST",
+                data: {
+                    "MerchantID": "{{ config('config.EXPRESS_MERCHANT_ID') }}",
+                    "LogisticsType": "CSV",
+                    "LogisticsSubType": "FAMIC2C",
+                    "IsCollection": "N",
+                    "ServerReplyURL": "{{ route('cart.map.rewrite') }}"
+                }
+            }, success: function(data) {
                 console.log(items);
-
             })
         }
     </script>
