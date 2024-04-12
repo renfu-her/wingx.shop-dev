@@ -404,9 +404,10 @@
                     "LogisticsSubType": "FAMIC2C",
                     "IsCollection": "N",
                     "ServerReplyURL": "{{ route('cart.map.rewrite') }}"
+                },
+                success: function(data) {
+                    console.log(items);
                 }
-            }, success: function(data) {
-                console.log(items);
             })
         }
     </script>
