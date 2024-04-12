@@ -51,7 +51,8 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a href="{{ route('cart.map') }}" target="_blank" class="btn btn-primary">電子地圖</a>
+                                    {{-- <a href=" route('cart.map') " target="_blank" class="btn btn-primary">電子地圖</a> --}}
+                                    <a href="#!" onclick="cartMap()" target="_blank" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                         </div>
@@ -393,23 +394,27 @@
         }
 
         const cartMap = () => {
-            $.ajax({
-                url: "{{ config('config.EXPRESS_MAP_URL') }}",
-                dataType: 'html',
-                crossDomain: true,
-                contentType: "application/x-www-form-urlencoded",
-                type: "POST",
-                data: {
-                    "MerchantID": "{{ config('config.EXPRESS_MERCHANT_ID') }}",
-                    "LogisticsType": "CSV",
-                    "LogisticsSubType": "FAMIC2C",
-                    "IsCollection": "N",
-                    "ServerReplyURL": "{{ route('cart.map.rewrite') }}"
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://logistics-stage.ecpay.com.tw/Express/map",
+                "method": "POST",
+                "headers": {
+                    "Accept": "text/html",
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
-                success: function(data) {
-                    console.log(items);
+                "data": {
+                    "MerchantID": "2000933",
+                    "LogisticsType": "CVS",
+                    "LogisticsSubType": "UNIMARTC2C",
+                    "IsCollection": "N",
+                    "ServerReplyURL": "https://wingx-shop.dev-laravel.co/cart/rewrite"
                 }
-            })
+            };
+
+            $.ajax(settings).done(function(response) {
+                console.log(response);
+            });
         }
     </script>
 @endsection
