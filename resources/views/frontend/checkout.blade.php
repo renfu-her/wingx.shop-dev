@@ -373,11 +373,18 @@
 
             $('#ship_id').on('change', function() {
                 let shipId = $(this).val();
+                if(shipId == 1) {
+                    shipName = 'FAMIC2C'
+                }
+                if(shipId == 2) {
+                    shipName = 'UNIMARTC2C'
+                }
+
                 if (shipId < 3 && !isNaN(shipId)) {
 
                     $('#cartMap').attr('href',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
-                        shipId +
+                        shipName +
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
