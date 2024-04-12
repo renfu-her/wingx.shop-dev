@@ -376,9 +376,9 @@
                 if (shipId < 3 && !isNaN(shipId)) {
 
                     $('#cartMap').attr('href',
-                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&amp;LogisticsType=CVS&amp;LogisticsSubType=" +
+                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
                         shipId +
-                        "&amp;IsCollection=Y&amp;ServerReplyURL={{ route('cart.map.rewrite') }}")
+                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
                     $('.cart-map').hide()
