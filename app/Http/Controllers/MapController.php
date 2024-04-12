@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -11,19 +12,23 @@ class MapController extends Controller
     // index
     public function index(Request $request)
     {
-    
-    
+
         // dd(env('EXPRESS_MAP_URL'), env('EXPRESS_MERCHANT_ID'));
-        $mapHttp = Http::asForm()->post(config('config.EXPRESS_MAP_URL'), [
-            "MerchantID" => config('config.EXPRESS_MERCHANT_ID'),
-            "LogisticsType" => "CSV",
-            "LogisticsSubType" => "FAMIC2C",
-            "IsCollection" => "N",
-            "ServerReplyURL" => route('cart.map.rewrite')
-        ]);
+        $response = Http::asForm()
+            ->withHeaders([
+                'Accept' => 'text/html',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ])
+            ->post('https://logistics-stage.ecpay.com.tw/Express/map', [
+                'MerchantID' => '2000933',
+                'LogisticsType' => 'CVS',
+                'LogisticsSubType' => 'UNIMARTC2C',
+                'IsCollection' => 'N',
+                'ServerReplyURL' => 'https://wingx-shop.dev-laravel.co/cart/rewrite',
+            ]);
 
-        dd(config('config.EXPRESS_MAP_URL'), config('config.EXPRESS_MERCHANT_ID'), route('cart.map.rewrite'));
 
+        dd($request->body());
     }
 
     public function rewrite(Request $request)
@@ -31,5 +36,4 @@ class MapController extends Controller
 
         dd($request->all());
     }
-    
 }
