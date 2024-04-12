@@ -13,7 +13,7 @@ class MapController extends Controller
     {
     
     
-        dd(env('EXPRESS_MAP_URL'), env('EXPRESS_MERCHANT_ID'));
+        // dd(env('EXPRESS_MAP_URL'), env('EXPRESS_MERCHANT_ID'));
         $mapHttp = Http::asForm()->post(env('EXPRESS_MAP_URL'), [
             "MerchantID" => env('EXPRESS_MERCHANT_ID'),
             "LogisticsType" => "CSV",
