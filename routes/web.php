@@ -28,32 +28,32 @@ route::get('/category/{category_id}', [CategoryController::class, 'index'])->nam
 
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
 
-route::group(['prefix' => 'product', 'name' => 'product.'], function () {
-    route::get('/{product_id}', [ProductIndexController::class, 'index'])->name('product.indexId');
-    route::post('/spec', [ProductIndexController::class, 'spec'])->name('product.spec');
-    route::post('/spec/list', [ProductIndexController::class, 'specList'])->name('product.spec.list');
+route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+    route::get('/{product_id}', [ProductIndexController::class, 'index'])->name('indexId');
+    route::post('/spec', [ProductIndexController::class, 'spec'])->name('spec');
+    route::post('/spec/list', [ProductIndexController::class, 'specList'])->name('spec.list');
 });
 
 // 購物車寫入 session cart
-route::group(['prefix' => 'cart', 'name' => 'cart.'], function () {
+route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
     route::get('/', [CartController::class, 'index']);
     route::post('/thanks', [CartController::class, 'thanks']);
     route::post('/order', [CartController::class, 'order']);
     route::post('/delete', [CartController::class, 'cartDelete']);
     route::post('/count', [OrderController::class, 'cartCount']);
-    route::get('/map', [MapController::class, 'index'])->name('cart.map');
-    route::get('/rewrite', [MapController::class, 'rewrite'])->name('cart.map.rewrite');
+    route::get('/map', [MapController::class, 'index'])->name('map');
+    route::get('/rewrite', [MapController::class, 'rewrite'])->name('map.rewrite');
 });
 
-route::group(['prefix' => 'order', 'name' => 'order.'], function () {
+route::group(['prefix' => 'order', 'as' => 'order.'], function () {
     route::get('/list', [OrderController::class, 'list']);
     route::post('/store', [OrderController::class, 'store']);
 });
 
 // 會員個人資料
-route::group(['prefix' => 'profile', 'name' => 'profile.'], function () {
-    route::get('/', [ProfileController::class, 'index'])->name('profile.index');
-    route::put('/update/{member_id}', [ProfileController::class, 'update'])->name('profile.update');
+route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    route::get('/', [ProfileController::class, 'index'])->name('index');
+    route::put('/update/{member_id}', [ProfileController::class, 'update'])->name('update');
     
 });
 
