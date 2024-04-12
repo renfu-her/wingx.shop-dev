@@ -22,7 +22,7 @@ class MapController extends Controller
             "ServerReplyURL" => "https://wingx-shop.dev-laravel.co/checkout"
         ]);
     
-        dd($mapHttp->json());
+        dd($mapHttp->body());
     }
     
 }
