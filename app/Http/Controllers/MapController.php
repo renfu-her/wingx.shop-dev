@@ -27,8 +27,9 @@ class MapController extends Controller
                 'ServerReplyURL' => 'https://wingx-shop.dev-laravel.co/cart/rewrite',
             ]);
 
+        $res = $response->body();
 
-        return $response->body();
+        return view('frontend.map', ['res' => $res]);
     }
 
     public function rewrite(Request $request)
