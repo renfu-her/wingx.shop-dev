@@ -42,6 +42,7 @@ route::group(['prefix' => 'cart', 'name' => 'cart.'], function () {
     route::post('/delete', [CartController::class, 'cartDelete']);
     route::post('/count', [OrderController::class, 'cartCount']);
     route::get('/map', [MapController::class, 'index'])->name('cart.map');
+    route::get('/rewrite', [MapController::class, 'rewrite'])->name('cart.map.rewrite');
 });
 
 route::group(['prefix' => 'order', 'name' => 'order.'], function () {

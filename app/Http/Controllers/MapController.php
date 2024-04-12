@@ -19,10 +19,16 @@ class MapController extends Controller
             "LogisticsType" => "CSV",
             "LogisticsSubType" => "FAMIC2C",
             "IsCollection" => "N",
-            "ServerReplyURL" => "https://wingx-shop.dev-laravel.co/checkout"
+            "ServerReplyURL" => route('cart.map.rewrite')
         ]);
     
         dd($mapHttp);
+    }
+
+    public function rewrite(Request $request)
+    {
+
+        dd($request->all());
     }
     
 }
