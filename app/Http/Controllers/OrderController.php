@@ -230,7 +230,8 @@ class OrderController extends Controller
                 'tax',
                 'ships',
                 'cart_count',
-                'orders'
+                'orders',
+                'cart'
             )
         );
     }
