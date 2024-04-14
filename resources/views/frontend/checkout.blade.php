@@ -399,7 +399,9 @@
                 $('input[name=CVSAddress]').val('');
                 $('input[name=CVSTelephone]').val('');
                 $('input[name=CVSOutSide]').val('');
-
+                // 清除數據或進行其他處理
+                localStorage.removeItem('returnedData');
+                
                 if (shipId < 3 && !isNaN(shipId)) {
                     $('#cartMap').attr('href',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
@@ -407,7 +409,6 @@
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
-
                     $('.cart-map').hide()
                 }
             })
