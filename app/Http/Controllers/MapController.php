@@ -30,7 +30,6 @@ class MapController extends Controller
 
     public function rewrite(Request $request)
     {
-
         $dataArray = $request->all();
         // 轉換為 JSON 字符串
         $dataArrayJson = json_encode($dataArray);
