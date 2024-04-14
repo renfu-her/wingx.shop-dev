@@ -15,16 +15,16 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    
+
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
         Paginator::useBootstrapFive();
-        if ($this->app->environment() == 'local')
-        {
-            $this->app->register('Barryvdh\Debugbar\ServiceProvider');
-        }
+        // if ($this->app->environment() == 'local')
+        // {
+        //     $this->app->register('Barryvdh\Debugbar\ServiceProvider');
+        // }
     }
 }
