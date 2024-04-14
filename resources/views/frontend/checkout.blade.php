@@ -401,7 +401,6 @@
                 $('input[name=CVSOutSide]').val('');
 
                 if (shipId < 3 && !isNaN(shipId)) {
-
                     $('#cartMap').attr('href',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
