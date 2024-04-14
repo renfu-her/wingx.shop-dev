@@ -408,13 +408,15 @@
 
         window.addEventListener('storage', function(event) {
             if (event.key === 'returnedData') {
+                console.log('Key changed:', event.key);
+                console.log('New value:', event.newValue);
                 // 從 JSON 字符串解析回陣列
-                var returnedArray = JSON.parse(event.value);
-                console.log(returnedArray);
+                // var returnedArray = JSON.parse(event.value);
+                // console.log(returnedArray);
                 // alert('Data returned from B: ' + returnedArray.join(", "));
 
                 // 清除數據或進行其他處理
-                localStorage.removeItem('returnedData');
+                // localStorage.removeItem('returnedData');
             }
         });
     </script>
