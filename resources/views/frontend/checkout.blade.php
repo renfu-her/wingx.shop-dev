@@ -409,7 +409,7 @@
         window.addEventListener('storage', function(event) {
             if (event.key === 'returnedData') {
                 // 從 JSON 字符串解析回陣列
-                var returnedArray = JSON.parse(event.newValue);
+                var returnedArray = JSON.parse(event.value);
                 console.log(returnedArray);
                 // alert('Data returned from B: ' + returnedArray.join(", "));
 
