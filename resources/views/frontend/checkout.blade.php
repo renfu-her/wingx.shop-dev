@@ -406,39 +406,5 @@
             }
         }
 
-        const cartMap = () => {
-            const settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://logistics-stage.ecpay.com.tw/Express/map",
-                "method": "POST",
-                "headers": {
-                    "Accept": "text/html",
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                "data": {
-                    "MerchantID": "2000933",
-                    "LogisticsType": "CVS",
-                    "LogisticsSubType": "UNIMARTC2C",
-                    "IsCollection": "N",
-                    "ServerReplyURL": "https://wingx-shop.dev-laravel.co/cart/rewrite"
-                }
-            };
-
-            $.ajax(settings).done(function(response) {
-                console.log(response);
-            });
-        }
-
-        window.addEventListener('storage', function(event) {
-            if (event.key === 'storeData') {
-                const data = JSON.parse(event.newValue);
-                updateMap(data);
-            }
-        });
-
-        const updateMap = (data) => {
-            console.log(data);
-        }
     </script>
 @endsection
