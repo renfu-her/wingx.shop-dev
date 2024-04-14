@@ -392,6 +392,14 @@
                     shipName = 'UNIMARTC2C'
                 }
 
+                $('#storeDisplay').hide();
+                $('input[name=LogisticsSubType]').val('');
+                $('input[name=CVSStoreID]').val('');
+                $('input[name=CVSStoreName]').val('');
+                $('input[name=CVSAddress]').val('');
+                $('input[name=CVSTelephone]').val('');
+                $('input[name=CVSOutSide]').val('');
+
                 if (shipId < 3 && !isNaN(shipId)) {
 
                     $('#cartMap').attr('href',
@@ -400,13 +408,7 @@
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
-                    $('#storeDisplay').hide();
-                    $('input[name=LogisticsSubType]').val('');
-                    $('input[name=CVSStoreID]').val('');
-                    $('input[name=CVSStoreName]').val('');
-                    $('input[name=CVSAddress]').val('');
-                    $('input[name=CVSTelephone]').val('');
-                    $('input[name=CVSOutSide]').val('');
+
                     $('.cart-map').hide()
                 }
             })
