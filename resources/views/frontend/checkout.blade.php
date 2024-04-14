@@ -415,7 +415,7 @@
         window.addEventListener('storage', function(event) {
             if (event.key === 'returnedData') {
                 console.log('Key changed:', event.key);
-                console.log('New value:', event.newValue);
+                // console.log('New value:', event.newValue);
                 // 從 JSON 字符串解析回陣列
                 let returnedArray = JSON.parse(event.newValue);
                 
