@@ -45,15 +45,22 @@
                         </div>
                     @endif
                     <div class="checkout-panel cart-map" style="display: none">
-
                         <div class="row">
-
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
 
                                     {{-- <a href=" route('cart.map') " target="_blank" class="btn btn-primary">電子地圖</a> --}}
                                     <a href="" id="cartMap" target="_blank" class="btn btn-primary">電子地圖</a>
+                                </div>
+                            </div>
+                            <div class="col-12" id="storeDisplay" style="display: none">
+                                <div class="form-group">
+                                    <label id="CVSStoreID" class="form-label"></label>
+                                    <label id="CVSStoreName" class="form-label"></label>
+                                    <label id="CVSAddress" class="form-label"></label>
+                                    <label id="CVSTelephone" class="form-label"></label>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -394,6 +401,7 @@
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}")
                     $('.cart-map').show()
                 } else {
+                    $('#storeDisplay').hide();
                     $('.cart-map').hide()
                 }
             })
@@ -412,6 +420,7 @@
             }
         }
 
+        //MARK: returnedData, json to array
         window.addEventListener('storage', function(event) {
             if (event.key === 'returnedData') {
                 console.log('Key changed:', event.key);
@@ -425,6 +434,12 @@
                 $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
                 $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
                 $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
+
+                $('#storeDisplay').show();
+                $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
+                $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
+                $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
+                $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
 
 
                 // 清除數據或進行其他處理
