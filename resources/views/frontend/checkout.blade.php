@@ -446,8 +446,7 @@
                 $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
                 $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
                 $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
-
-
+                
                 // 清除數據或進行其他處理
                 localStorage.removeItem('returnedData');
             }
