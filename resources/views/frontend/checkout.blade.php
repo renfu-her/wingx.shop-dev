@@ -410,7 +410,8 @@
             if (event.key === 'returnedData') {
                 // 從 JSON 字符串解析回陣列
                 var returnedArray = JSON.parse(event.newValue);
-                alert('Data returned from B: ' + returnedArray.join(", "));
+                console.log(returnedArray);
+                // alert('Data returned from B: ' + returnedArray.join(", "));
 
                 // 清除數據或進行其他處理
                 localStorage.removeItem('returnedData');
