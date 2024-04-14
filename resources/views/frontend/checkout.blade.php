@@ -226,6 +226,12 @@
                         </div>
                         <input type="hidden" name="ship_price">
                         <input type="hidden" name="total">
+                        <input type="hidden" name="LogisticsSubType">
+                        <input type="hidden" name="CVSStoreID">
+                        <input type="hidden" name="CVSStoreName">
+                        <input type="hidden" name="CVSAddress">
+                        <input type="hidden" name="CVSTelephone">
+                        <input type="hidden" name="CVSOutSide">
                         <button type="submit" class="btn btn-dark w-100" role="button">結 帳</button>
                     </div>
                 </div>
@@ -411,12 +417,18 @@
                 console.log('Key changed:', event.key);
                 console.log('New value:', event.newValue);
                 // 從 JSON 字符串解析回陣列
-                // var returnedArray = JSON.parse(event.value);
-                // console.log(returnedArray);
-                // alert('Data returned from B: ' + returnedArray.join(", "));
+                var returnedArray = JSON.parse(event.value);
+                
+                $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
+                $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
+                $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
+                $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
+                $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
+                $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
+
 
                 // 清除數據或進行其他處理
-                // localStorage.removeItem('returnedData');
+                localStorage.removeItem('returnedData');
             }
         });
     </script>
