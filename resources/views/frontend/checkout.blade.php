@@ -56,11 +56,10 @@
                             </div>
                             <div class="col-12" id="storeDisplay" style="display: none">
                                 <div class="form-group">
-                                    <label id="CVSStoreID" class="form-label"></label>
-                                    <label id="CVSStoreName" class="form-label"></label>
-                                    <label id="CVSAddress" class="form-label"></label>
-                                    <label id="CVSTelephone" class="form-label"></label>
-                                    
+                                    <label id="CVSStoreID" class="form-label"></label> <br>
+                                    <label id="CVSStoreName" class="form-label"></label> <br>
+                                    <label id="CVSAddress" class="form-label"></label> <br>
+                                    <label id="CVSTelephone" class="form-label"></label> <br>
                                 </div>
                             </div>
                         </div>
@@ -402,6 +401,12 @@
                     $('.cart-map').show()
                 } else {
                     $('#storeDisplay').hide();
+                    $('input[name=LogisticsSubType]').val('');
+                    $('input[name=CVSStoreID]').val('');
+                    $('input[name=CVSStoreName]').val('');
+                    $('input[name=CVSAddress]').val('');
+                    $('input[name=CVSTelephone]').val('');
+                    $('input[name=CVSOutSide]').val('');
                     $('.cart-map').hide()
                 }
             })
@@ -427,7 +432,7 @@
                 // console.log('New value:', event.newValue);
                 // 從 JSON 字符串解析回陣列
                 let returnedArray = JSON.parse(event.newValue);
-                
+
                 $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
                 $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
                 $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
