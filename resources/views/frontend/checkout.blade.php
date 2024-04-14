@@ -417,7 +417,7 @@
                 console.log('Key changed:', event.key);
                 console.log('New value:', event.newValue);
                 // 從 JSON 字符串解析回陣列
-                var returnedArray = JSON.parse(event.newValue);
+                let returnedArray = JSON.parse(event.newValue);
                 
                 $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
                 $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
