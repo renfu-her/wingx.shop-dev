@@ -429,5 +429,16 @@
                 console.log(response);
             });
         }
+
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'storeData') {
+                const data = JSON.parse(event.newValue);
+                updateMap(data);
+            }
+        });
+
+        const updateMap = (data) => {
+            console.log(data);
+        }
     </script>
 @endsection
