@@ -49,7 +49,7 @@ class EzPayService
         }
 
         $url = "https://inv.ezpay.com.tw/Api/invoice_issue";
-        if (config('config.APP_ENV') == 'dev') {
+        if (config('config.APP_ENV') == 'local') {
             $url = "https://cinv.ezpay.com.tw/Api/invoice_issue";
         }
 

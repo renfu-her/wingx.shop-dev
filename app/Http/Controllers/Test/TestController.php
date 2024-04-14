@@ -27,7 +27,7 @@ class TestController extends Controller
         $orders = Order::whereIn('status', [0, 9])->get();
         foreach ($orders as $key => $value) {
 
-            if(config('config.APP_ENV') == 'dev'){
+            if(config('config.APP_ENV') == 'local'){
                 $url = 'https://payment-stage.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
                 $merchantId = config('config.ECPAY_MERCHANT_ID_DEV');
                 $hashKey = config('config.ECPAY_HASH_KEY_DEV');

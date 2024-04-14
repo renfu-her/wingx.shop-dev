@@ -18,7 +18,7 @@ class EcPayService extends BaseService
 
     public function ecpayInvoice($order_no)
     {
-        if (config('config.APP_ENV') == 'dev') {
+        if (config('config.APP_ENV') == 'local') {
             $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue";
             $merchantId = config('config.INVOICE_ID_DEV');
             $hashKey = config('config.INVOICE_HASH_KEY_DEV');

@@ -143,7 +143,7 @@ class OrderController extends Controller
             'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
         ];
 
-        if(config('config.APP_ENV') == 'dev'){
+        if(config('config.APP_ENV') == 'local'){
             $url = config('config.APP_URL') . "/cart/thanks";
         } else {
             $url = "https://wingx.shop/cart/thanks";
