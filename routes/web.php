@@ -28,10 +28,10 @@ route::get('/category/{category_id}', [CategoryController::class, 'index'])->nam
 
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
 
-route::group(['prefix' => 'product', 'as' => 'product.'], function () {
-    route::get('/{product_id}', [ProductIndexController::class, 'index'])->name('indexId');
-    route::post('/spec', [ProductIndexController::class, 'spec'])->name('spec');
-    route::post('/spec/list', [ProductIndexController::class, 'specList'])->name('spec.list');
+route::group(['prefix' => 'product', 'as' => 'product.', 'controller' => ProductIndexController::class], function () {
+    route::get('/{product_id}', 'index')->name('indexId');
+    route::post('/spec', 'spec')->name('spec');
+    route::post('/spec/list', 'specList')->name('spec.list');
 });
 
 // 購物車寫入 session cart
@@ -54,7 +54,6 @@ route::group(['prefix' => 'order', 'as' => 'order.'], function () {
 route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     route::get('/', [ProfileController::class, 'index'])->name('index');
     route::put('/update/{member_id}', [ProfileController::class, 'update'])->name('update');
-    
 });
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
