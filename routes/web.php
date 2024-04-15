@@ -23,38 +23,68 @@ use App\Http\Controllers\Test\TestController;
 
 use Illuminate\Auth\Events\Login;
 
-route::get('/', [IndexController::class, 'index']);
+route::get('/', [IndexController::class, 'index'])->name('home.index');
 route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
 
 route::post('/price/get', [ProductIndexController::class, 'priceGet'])->name('product.priceGet');
 
-route::group(['prefix' => 'product', 'as' => 'product.', 'controller' => ProductIndexController::class], function () {
-    route::get('/{product_id}', 'index')->name('indexId');
-    route::post('/spec', 'spec')->name('spec');
-    route::post('/spec/list', 'specList')->name('spec.list');
-});
+route::group(
+    [
+        'controller' => ProductIndexController::class,
+        'prefix' => 'product',
+        'as' => 'product.'
+    ],
+    function () {
+        route::get('/{product_id}', 'index')->name('indexId');
+        route::post('/spec', 'spec')->name('spec');
+        route::post('/spec/list', 'specList')->name('spec.list');
+    }
+);
 
 // 購物車寫入 session cart
-route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
-    route::get('/', [CartController::class, 'index']);
-    route::post('/thanks', [CartController::class, 'thanks']);
-    route::post('/order', [CartController::class, 'order']);
-    route::post('/delete', [CartController::class, 'cartDelete']);
-    route::post('/count', [OrderController::class, 'cartCount']);
-    route::get('/map', [MapController::class, 'index'])->name('map');
-    route::post('/rewrite', [MapController::class, 'rewrite'])->name('map.rewrite');
-});
+route::group(
+    [
+        'controller' => CartController::class,
+        'prefix' => 'cart',
+        'as' => 'cart.'
+    ],
+    function () {
+        route::get('/', 'index')->name('index');
+        route::post('/thanks', 'thanks');
+        route::post('/order', 'order');
+        route::post('/delete', 'cartDelete');
+        route::post('/count', [OrderController::class, 'cartCount']);
+        route::group(['controller' => MapController::class], function () {
+            route::get('/map', 'index')->name('map');
+            route::post('/rewrite', 'rewrite')->name('map.rewrite');
+        });
+    }
+);
 
-route::group(['prefix' => 'order', 'as' => 'order.'], function () {
-    route::get('/list', [OrderController::class, 'list']);
-    route::post('/store', [OrderController::class, 'store']);
-});
+route::group(
+    [
+        'controller' => OrderController::class,
+        'prefix' => 'order',
+        'as' => 'order.'
+    ],
+    function () {
+        route::get('/list', 'list');
+        route::post('/store', 'store');
+    }
+);
 
-// 會員個人資料
-route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-    route::get('/', [ProfileController::class, 'index'])->name('index');
-    route::put('/update/{member_id}', [ProfileController::class, 'update'])->name('update');
-});
+// // 會員個人資料
+route::group(
+    [
+        'controller' => ProfileController::class,
+        'prefix' => 'profile',
+        'as' => 'profile.'
+    ],
+    function () {
+        route::get('/', 'index')->name('index');
+        route::put('/update/{member_id}', 'update')->name('update');
+    }
+);
 
 route::get('/importData/{product_id}', [ImportDataController::class, 'index']);
 route::get('/importStoreData', [ImportDataController::class, 'storeData']);
@@ -66,7 +96,7 @@ route::get('/contact-us', [ContactController::class, 'index']);
 route::get('/checkout', [CartController::class, 'checkout']);
 
 // Q&A 列表
-route::get('/qa', [QAController::class, 'index']);
+route::get('/qa', [QAController::class, 'index'])->name('qaIndex');
 
 // 登入
 route::get('login', [LoginController::class, 'index']);
