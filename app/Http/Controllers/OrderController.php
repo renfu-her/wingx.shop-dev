@@ -42,7 +42,7 @@ class OrderController extends Controller
     {
         $req = $request->all();
 
-        $member_id = $request->session()->get('member_id');
+        $member_id = session()->get('member_id');
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }

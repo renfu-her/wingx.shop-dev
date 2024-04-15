@@ -110,8 +110,7 @@ class LoginController extends Controller
         session()->put('member_id', $member->id);
         session()->put('member_email', $member->email);
         session()->put('member_name', $member->name);
-        
-        dd(session()->all());
+    
 
         return redirect('/');
     }
