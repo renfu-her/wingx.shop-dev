@@ -99,25 +99,32 @@ route::get('/checkout', [CartController::class, 'checkout']);
 route::get('/qa', [QAController::class, 'index'])->name('qaIndex');
 
 // 登入
-route::get('login', [LoginController::class, 'index']);
-route::post('login', [LoginController::class, 'login']);
-route::post('/sign-up', [LoginController::class, 'signUp']);
-route::post('/forgot-password', [LoginController::class, 'forgot_password']);
-route::post('/check_email', [LoginController::class, 'check_email']);
-route::post('/reset_password', [LoginController::class, 'reset_password']);
-route::get('/reset_password', [LoginController::class, 'reset_verify_password']);
-route::post('/verify_password', [LoginController::class, 'verify_password']);
-route::get('/verify_email', [LoginController::class, 'verify_email']);
-route::post('/email_verify', [LoginController::class, 'email_verify']);
+route::group(
+    [
+        'controller' => LoginController::class
+    ],
+    function () {
+        route::get('login', 'index');
+        route::post('login', 'login');
+        route::post('/sign-up', 'signUp');
+        route::post('/forgot-password', 'forgot_password');
+        route::post('/check_email', 'check_email');
+        route::post('/reset_password', 'reset_password');
+        route::get('/reset_password', 'reset_verify_password');
+        route::post('/verify_password', 'verify_password');
+        route::get('/verify_email', 'verify_email');
+        route::post('/email_verify', 'email_verify');
 
-// LINE 合併 Email
-route::get('/line-combine', [LoginController::class, 'lineCombine']);
+        // LINE 合併 Email
+        route::get('/line-combine', 'lineCombine');
+    }
+);
 
 route::get('/privacy', [PolicyController::class, 'privacy_policy']);
 
-route::get('/captcha', function () {
-    return Captcha::create();
-});
+// route::get('/captcha', function () {
+//     return Captcha::create();
+// });
 
 route::get('/logout', function () {
     auth()->logout();
@@ -135,9 +142,9 @@ Route::get('/auth/line/callback', [LineController::class, 'lineLoginCallback']);
 route::get('/xmlToJson', [InvoiceLotteryController::class, 'readXmlToJson']);
 
 // Test route
-route::group(['prefix' => 'test'], function () {
-    route::get('/order', [TestController::class, 'orderStatus']);
-    route::get('/queryOrderStatus', [TestController::class, 'queryOrderStatus']);
-    route::get('/eInvoice/{order_no}', [TestController::class, 'eInvoice']);
-    route::get('/shipToProductShip', [TestController::class, 'shipToProductShip']);
+route::group(['controller' => TestController::class,'prefix' => 'test'], function () {
+    route::get('/order',  'orderStatus');
+    route::get('/queryOrderStatus',  'queryOrderStatus');
+    route::get('/eInvoice/{order_no}',  'eInvoice');
+    route::get('/shipToProductShip',  'shipToProductShip');
 });
