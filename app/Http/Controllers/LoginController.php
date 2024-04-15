@@ -91,35 +91,27 @@ class LoginController extends Controller
     {
         $req = $request->all();
 
-        dd($req);
-        try {
-            $member = Member::where([
-                'email' => trim($req['email']),
-            ])->first();
+        $member = Member::where([
+            'email' => trim($req['email']),
+        ])->first();
 
-            if (!$member) {
-                return redirect('/')->with(['message' => 'Email 輸入錯誤']);
-            }
-
-            if (!Hash::check($req['password'], $member->password)) {
-                return redirect('/')->with(['message' => '密碼輸入錯誤']);
-            }
-
-            if ($member->status != 1) {
-                return redirect('/')->with(['message' => 'E-mail尚未認證，請至信箱收信或重發認證信']);
-            }
-
-            $request->session()->put('member_id', $member->id);
-            $request->session()->put('member_email', $member->email);
-            $request->session()->put('member_name', $member->name);
-
-            return redirect('/');
-        } catch (\Exception $e) {
-            $message = mb_convert_encoding($e->getMessage(), 'utf-8', 'auto');
-            $response['message'] = $message;
-            Log::error('=== Login ===');
-            Log::error($message);
+        if (!$member) {
+            return redirect('/')->with(['message' => 'Email 輸入錯誤']);
         }
+
+        if (!Hash::check($req['password'], $member->password)) {
+            return redirect('/')->with(['message' => '密碼輸入錯誤']);
+        }
+
+        if ($member->status != 1) {
+            return redirect('/')->with(['message' => 'E-mail尚未認證，請至信箱收信或重發認證信']);
+        }
+
+        $request->session()->put('member_id', $member->id);
+        $request->session()->put('member_email', $member->email);
+        $request->session()->put('member_name', $member->name);
+
+        return redirect('/');
     }
 
     // check email exist
