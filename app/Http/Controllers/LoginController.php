@@ -90,6 +90,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $req = $request->all();
+
+        dd($req);
         try {
             $member = Member::where([
                 'email' => trim($req['email']),
