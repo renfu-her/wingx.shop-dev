@@ -77,7 +77,7 @@
                         <div class="content">
                             <div class="error"></div>
                             <div class="form loginBox" style="display: block;">
-                                <form method="post" action="/login" id="form_login">
+                                <form method="post" action="{{ route('post.login') }}" id="form_login">
                                     <input id="email" class="form-control" type="text" placeholder="Email"
                                         name="email">
                                     <div
@@ -122,7 +122,7 @@
                     <div class="box">
                         <div class="content registerBox" style="display: none;">
                             <div class="form">
-                                <form id="form-signup" method="post" action="/sign-up">
+                                <form id="form-signup" method="post" action="{{ route('post.signUp') }}">
                                     <input id="signup_username" class="form-control" type="text" placeholder="會員名稱"
                                         name="signup_username">
                                     <input id="signup_email" class="form-control" type="text" placeholder="Email"

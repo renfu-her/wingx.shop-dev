@@ -106,16 +106,16 @@ route::group(
         'controller' => LoginController::class
     ],
     function () {
-        route::get('login', 'index');
-        route::post('login', 'login');
-        route::post('/sign-up', 'signUp');
-        route::post('/forgot-password', 'forgot_password');
-        route::post('/check_email', 'check_email');
-        route::post('/reset_password', 'reset_password');
-        route::get('/reset_password', 'reset_verify_password');
-        route::post('/verify_password', 'verify_password');
-        route::get('/verify_email', 'verify_email');
-        route::post('/email_verify', 'email_verify');
+        route::get('login', 'index')->name('get.login');
+        route::post('login', 'login')->name('post.login');
+        route::post('/sign-up', 'signUp')->name('post.signUp');
+        route::post('/forgot-password', 'forgot_password')->name('post.forgotPassword');
+        route::post('/check_email', 'check_email')->name('post.checkEmail');
+        route::post('/reset_password', 'reset_password')->name('post.resetPassword');
+        route::get('/reset_password', 'reset_verify_password')->name('get.resetVerifyPassword');
+        route::post('/verify_password', 'verify_password')->name('post.verifyPassword');
+        route::get('/verify_email', 'verify_email')->name('post.verifyEmail');
+        route::post('/email_verify', 'email_verify')->name('post.emailVerify');
 
         // LINE 合併 Email
         route::get('/line-combine', 'lineCombine');
