@@ -58,6 +58,8 @@ route::group(
             route::get('/map', 'index')->name('map');
             route::post('/rewrite', 'rewrite')->name('map.rewrite');
         });
+        route::post('/server/reply', 'serverReply');
+        route::post('/client/reply', 'clientReply');
     }
 );
 

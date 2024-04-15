@@ -202,4 +202,19 @@ class CartController extends Controller
         // 将更新后的购物车数组存回会话
         session(['cart' => $cart]);
     }
+
+    // server, client reply
+    public function serverReply(Request $request)
+    {
+
+        $data = $request->all();
+        dd($data);
+    }
+
+    public function clientReply(Request $request)
+    {
+
+        $data = $request->all();
+        dd($data);
+    }
 }

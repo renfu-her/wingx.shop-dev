@@ -14,6 +14,9 @@ use App\Models\OrderDetail;
 use App\Models\Member;
 // use MingJSHK\NewebPay\Facades\NewebPay;
 use TsaiYiHua\ECPay\Checkout;
+use Pharaoh\Express\Facades\Express;
+use Illuminate\Support\Facades\Http;
+
 
 class OrderController extends Controller
 {
@@ -26,12 +29,12 @@ class OrderController extends Controller
     }
 
     // 訂單數量
-    public function cartCount(Request $request){
+    public function cartCount(Request $request)
+    {
 
         $cartService = (new CartService())->getCart();
 
         return $cartService;
-
     }
 
     // order store and order detail
@@ -40,7 +43,7 @@ class OrderController extends Controller
         $req = $request->all();
 
         $member_id = $request->session()->get('member_id');
-        if(empty($member_id)){
+        if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }
 
@@ -57,7 +60,7 @@ class OrderController extends Controller
 
         $cart = session()->get('cart');
 
-        if(count($cart) == 0){
+        if (count($cart) == 0) {
             return redirect('/')->with(['message' => '訂單要 1 件以上！']);
         }
 
@@ -91,9 +94,9 @@ class OrderController extends Controller
         $order_id = $order->id;
         $desc = [];
 
-        foreach($cart as $order_detail){
+        foreach ($cart as $order_detail) {
             $order_detail['order_id'] = $order->id;
-            if($order_detail['dataBase'] == 'products'){
+            if ($order_detail['dataBase'] == 'products') {
                 $product = Product::find($order_detail['prod_id']);
                 array_push($desc, $product->name);
                 $name = $product->name;
@@ -131,7 +134,7 @@ class OrderController extends Controller
         $desc = implode('+', $desc);
         $desc = substr($desc, 0, 50);
 
-        if(!$desc || empty($desc) == ''){
+        if (!$desc || empty($desc) == '') {
             $desc = '商品組合';
         }
 
@@ -143,14 +146,50 @@ class OrderController extends Controller
             'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
         ];
 
-        if(config('config.APP_ENV') == 'local'){
+        if (config('config.APP_ENV') == 'local') {
             $url = config('config.APP_URL') . "/cart/thanks";
         } else {
             $url = "https://wingx.shop/cart/thanks";
         }
 
-        return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
+        // 店到店
+        // CVSStoreID 有值 
+        if (!empty($req['CVSStoreID'])) {
+            if (config('config.APP_ENV') == 'local') {
+                $mapUrl = 'https://logistics-stage.ecpay.com.tw/Express/Create';
+            } else {
+                $mapUrl = 'https://logistics.ecpay.com.tw/Express/Create';
+            }
 
+            $logisticsData = [
+                'MerchantID' => config('config.EXPRESS_MERCHANT_ID'),
+                'MerchantTradeDate' => date('Y/m/d H:i:s'),
+                'LogisticsType' => 'CVS',
+                'LogisticsSubType' => $req['LogisticsSubType'],
+                'GoodsAmount' => $ttl_total,
+                'CollectionAmount' => $ttl_total,
+                'IsCollection' => 'N',
+                'GoodsName' => $desc,
+                'SenderName' => session()->get('member_name'),
+                'SenderPhone' => $req['mobile'],
+                'SenderCellPhone' => $req['mobile'],
+                'ReceiverName' => $req['name'],
+                'ReceiverPhone' => $req['mobile'],
+                'ReceiverCellPhone' => $req['mobile'],
+                'ReceiverEmail' => $req['email'],
+                'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
+                'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply'
+            ];
+
+            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
+            $logisticsData['CheckMacValue'] = $checkMacValue;
+
+            $logistics = Http::post($mapUrl, $logisticsData);
+
+        
+        }
+
+        return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
     }
 
     // order list
@@ -180,19 +219,19 @@ class OrderController extends Controller
         $cart_count = json_decode($cart_count->getContent(), true);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
-        foreach($orders as $key => $value){
+        foreach ($orders as $key => $value) {
 
             $payment = $value->payment;
-            if(str_contains($payment, 'Credit')){
+            if (str_contains($payment, 'Credit')) {
                 $payment_name = '信用卡';
             }
-            if(str_contains($payment, 'ATM')){
+            if (str_contains($payment, 'ATM')) {
                 $payment_name = 'ATM 轉帳';
             }
-            if(str_contains($payment, 'WebATM')){
+            if (str_contains($payment, 'WebATM')) {
                 $payment_name = 'WebATM';
             }
-            if(str_contains($payment, 'CVS')){
+            if (str_contains($payment, 'CVS')) {
                 $payment_name = '超商代碼繳費';
             }
 
@@ -200,12 +239,12 @@ class OrderController extends Controller
             $orders[$key]['ttl_price'] = $value->total + $value->ship_price;
 
             $order_details = OrderDetail::where('order_id', $value->id)->get();
-            foreach($order_details as $k => $v){
+            foreach ($order_details as $k => $v) {
                 $product = Product::find($v->product_id);
 
                 $order_details[$k]['image_url'] = '';
-                if($product){
-                    if($product->define_image == 0){
+                if ($product) {
+                    if ($product->define_image == 0) {
                         $order_details[$k]['image_url'] = 'https://down-tw.img.susercontent.com/file/' . $product->image;
                     } else {
                         $order_details[$k]['image_url'] = asset('upload/images/' . $product->id . '/' . $product->image);
@@ -234,5 +273,41 @@ class OrderController extends Controller
                 'cart'
             )
         );
+    }
+
+    // 檢查碼
+    private function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
+    {
+        // 0) 如果資料中有 null，必需轉成空字串
+        $params = array_map('strval', $params);
+
+        // 1) 如果資料中有 CheckMacValue 必需先移除
+        unset($params['CheckMacValue']);
+
+        // 2) 將鍵值由 A-Z 排序
+        uksort($params, 'strcasecmp');
+
+        // 3) 將陣列轉為 query 字串
+        $paramsString = urldecode(http_build_query($params));
+
+        // 4) 最前方加入 HashKey，最後方加入 HashIV
+        $paramsString = "HashKey={$hashKey}&{$paramsString}&HashIV={$hashIV}";
+
+        // 5) 做 URLEncode
+        $paramsString = urlencode($paramsString);
+
+        // 6) 轉為全小寫
+        $paramsString = strtolower($paramsString);
+
+        // 7) 轉換特定字元(與 dotNet 相符的字元)
+        $search  = ['%2d', '%5f', '%2e', '%21', '%2a', '%28', '%29'];
+        $replace = ['-',   '_',   '.',   '!',   '*',   '(',   ')'];
+        $paramsString = str_replace($search, $replace, $paramsString);
+
+        // 8) 進行編碼
+        $paramsString = $encType ? hash('sha256', $paramsString) : md5($paramsString);
+
+        // 9) 轉為全大寫後回傳
+        return strtoupper($paramsString);
     }
 }
