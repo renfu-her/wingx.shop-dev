@@ -433,25 +433,25 @@
         window.addEventListener('message', function(event) {
 
             if (event.data.message != undefined) {
-                console.log(event.data.message);
+                // console.log(event.data.message);
+                let returnedArray = JSON.parse(event.data.message);
+
+                $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
+                $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
+                $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
+                $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
+                $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
+                $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
+
+                $('#storeDisplay').show();
+                $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
+                $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
+                $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
+                $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
             }
 
-            console.log(event.data.message);
 
-            // let returnedArray = JSON.parse(event.newValue);
 
-            // $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
-            // $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
-            // $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
-            // $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
-            // $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
-            // $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
-
-            // $('#storeDisplay').show();
-            // $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
-            // $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
-            // $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
-            // $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
 
         });
     </script>
