@@ -449,7 +449,7 @@
                 $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
 
                 // 清除數據或進行其他處理
-                localStorage.removeItem('returnedData');
+                sessionStorage.removeItem('returnedData');
             }
         });
     </script>
