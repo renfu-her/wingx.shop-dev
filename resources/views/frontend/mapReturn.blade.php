@@ -10,7 +10,7 @@
             sessionStorage.setItem('returnedData', JSON.stringify(dataArray));
 
             // 關閉當前標籤
-            // window.close();
+            window.close();
         }
 
         performOperationsAndReturn();
