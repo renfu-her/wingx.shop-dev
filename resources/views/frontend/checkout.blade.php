@@ -401,12 +401,13 @@
                 $('input[name=CVSOutSide]').val('');
                 // 清除數據或進行其他處理
                 localStorage.removeItem('returnedData');
-                
+
                 if (shipId < 3 && !isNaN(shipId)) {
                     $('#cartMap').attr('href',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
-                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite', ['sessionId' => session()->getId()]) }}")
+                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite', ['sessionId' => session()->getId()]) }}"
+                    )
                     $('.cart-map').show()
                 } else {
                     $('.cart-map').hide()
@@ -428,29 +429,26 @@
         }
 
         //MARK: returnedData, json to array
-        window.addEventListener('storage', function(event) {
-            if (event.key === 'returnedData') {
-                console.log('Key changed:', event.key);
-                // console.log('New value:', event.newValue);
-                // 從 JSON 字符串解析回陣列
-                let returnedArray = JSON.parse(event.newValue);
+        window.addEventListener('message', function(event) {
+            console.log('data:', event.data);
+            // console.log('New value:', event.newValue);
+            // 從 JSON 字符串解析回陣列
+            // let returnedArray = JSON.parse(event.newValue);
 
-                $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
-                $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
-                $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
-                $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
-                $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
-                $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
+            // $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
+            // $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
+            // $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
+            // $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
+            // $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
+            // $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
 
-                $('#storeDisplay').show();
-                $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
-                $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
-                $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
-                $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
+            // $('#storeDisplay').show();
+            // $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
+            // $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
+            // $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
+            // $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
 
-                // 清除數據或進行其他處理
-                sessionStorage.removeItem('returnedData');
-            }
+
         });
     </script>
 @endsection

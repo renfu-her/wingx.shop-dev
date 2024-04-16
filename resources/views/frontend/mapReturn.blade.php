@@ -5,9 +5,8 @@
         function performOperationsAndReturn() {
             // 創建一個陣列
             var dataArray = {!! $dataArrayJson !!};
-            
-            // 將陣列轉換為 JSON 字符串並存儲
-            sessionStorage.setItem('returnedData', JSON.stringify(dataArray));
+
+            window.opener.postMessage(dataArray, config('config.APP_URL') . '/checkout');
 
             // 關閉當前標籤
             window.close();
