@@ -383,7 +383,7 @@
 
             // 電子地圖
             $('#cartMap').on('click', function() {
-                window.open((this).attr('value'), '_blank')
+                window.open($(this).attr('value'), '_blank')
             })
 
             $('#ship_id').on('change', function() {
