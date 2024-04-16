@@ -49,22 +49,22 @@ class OrderController extends Controller
 
         $member = Member::find($member_id);
 
-        // $email = $member->email;
-        // $total = intval(str_replace(',', '', $req['total']));
+        $email = $member->email;
+        $total = intval(str_replace(',', '', $req['total']));
 
-        // $ttl_total = $total + $req['ship_price'];
-        // $amount = round($ttl_total / 1.05);
-        // $tax = $ttl_total - $amount;
+        $ttl_total = $total + $req['ship_price'];
+        $amount = round($ttl_total / 1.05);
+        $tax = $ttl_total - $amount;
 
-        // $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
+        $req['accept_terms'] = $req['accept_terms'] == 'true' ? 1 : 0;
 
-        // $cart = session()->get('cart');
+        $cart = session()->get('cart');
 
-        // if (count($cart) == 0) {
-        //     return redirect('/')->with(['message' => '訂單要 1 件以上！']);
-        // }
+        if (count($cart) == 0) {
+            return redirect('/')->with(['message' => '訂單要 1 件以上！']);
+        }
 
-        // $order_no = (new CartService())->generateOrderNo();
+        $order_no = (new CartService())->generateOrderNo();
 
         // $order = Order::create([
         //     'order_no' => $order_no,
@@ -92,19 +92,19 @@ class OrderController extends Controller
         // ]);
 
         // $order_id = $order->id;
-        // $desc = [];
+        $desc = [];
 
-        // foreach ($cart as $order_detail) {
-        //     $order_detail['order_id'] = $order->id;
-        //     if ($order_detail['dataBase'] == 'products') {
-        //         $product = Product::find($order_detail['prod_id']);
-        //         array_push($desc, $product->name);
-        //         $name = $product->name;
-        //     } else {
-        //         $product = ProductMix::find($order_detail['prod_id']);
-        //         array_push($desc, $product->description ?? '商品組合');
-        //         $name = $product->description ?? '商品組合';
-        //     }
+        foreach ($cart as $order_detail) {
+            $order_detail['order_id'] = $order->id;
+            if ($order_detail['dataBase'] == 'products') {
+                $product = Product::find($order_detail['prod_id']);
+                array_push($desc, $product->name);
+                $name = $product->name;
+            } else {
+                $product = ProductMix::find($order_detail['prod_id']);
+                array_push($desc, $product->description ?? '商品組合');
+                $name = $product->description ?? '商品組合';
+            }
 
         //     OrderDetail::create([
         //         'order_id' => $order_id,
@@ -116,7 +116,7 @@ class OrderController extends Controller
         //         'sub_total' => $order_detail['price'] * $order_detail['qty'],
         //         'items' => $order_detail['items'],
         //     ]);
-        // }
+        }
 
         // // 使用者寫入資料
         // Member::where('id', $member_id)->update(
@@ -131,12 +131,12 @@ class OrderController extends Controller
         //     ]
         // );
 
-        // $desc = implode('+', $desc);
-        // $desc = substr($desc, 0, 50);
+        $desc = implode('+', $desc);
+        $desc = substr($desc, 0, 50);
 
-        // if (!$desc || empty($desc) == '') {
-        //     $desc = '商品組合';
-        // }
+        if (!$desc || empty($desc) == '') {
+            $desc = '商品組合';
+        }
 
         // $formData = [
         //     'CustomField1' => $order_no,
