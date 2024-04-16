@@ -18,6 +18,7 @@ class MapController extends Controller
 
         // session id
         session()->setId($sessionId);
+        dd($sessionId, $dataArrayJson);
         
         return view('frontend.mapReturn', compact('dataArrayJson'));
         
