@@ -4,7 +4,7 @@
     $(document).ready(function() {
         function performOperationsAndReturn() {
             // 創建一個陣列
-            var dataArray = {!! $dataArrayJson !!};
+            const dataArray = {!! $dataArrayJson !!};
 
             window.opener.postMessage(dataArray, "{{ config('config.APP_URL') . '/checkout' }}");
 
