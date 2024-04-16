@@ -6,7 +6,7 @@
             // 創建一個陣列
             var dataArray = {!! $dataArrayJson !!};
 
-            window.opener.postMessage(dataArray, config('config.APP_URL') . '/checkout');
+            window.opener.postMessage(dataArray, "{{ config('config.APP_URL') . '/checkout' }}");
 
             // 關閉當前標籤
             window.close();
