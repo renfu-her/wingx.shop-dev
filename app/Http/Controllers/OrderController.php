@@ -188,7 +188,6 @@ class OrderController extends Controller
 
             dd($logistics);
 
-        
         }
 
         // return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
