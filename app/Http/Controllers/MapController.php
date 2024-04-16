@@ -28,14 +28,14 @@ class MapController extends Controller
             ]);
     }
 
-    public function rewrite(Request $request)
+    public function rewrite(Request $request, $sessionId)
     {
         $dataArray = $request->all();
         // 轉換為 JSON 字符串
         $dataArrayJson = json_encode($dataArray);
 
         // session id
-        session()->setId($dataArray['sessionId']);
+        session()->setId($sessionId);
         
         return view('frontend.mapReturn', compact('dataArrayJson'));
         
