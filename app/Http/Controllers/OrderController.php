@@ -95,7 +95,11 @@ class OrderController extends Controller
         $desc = [];
 
         foreach ($cart as $order_detail) {
+<<<<<<< HEAD
             // $order_detail['order_id'] = $order->id;
+=======
+            $order_detail['order_id'] = $order->id;
+>>>>>>> 9040307bae98653726cf526724d7d231e2751071
             if ($order_detail['dataBase'] == 'products') {
                 $product = Product::find($order_detail['prod_id']);
                 array_push($desc, $product->name);
