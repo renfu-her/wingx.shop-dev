@@ -186,7 +186,7 @@ class OrderController extends Controller
 
             $logistics = Http::post($mapUrl, $logisticsData);
 
-            dd($logistics->body());
+            dd($logistics->body(), $mapUrl, config('config.EXPRESS_MERCHANT_ID'), $logisticsData);
 
         }
 
