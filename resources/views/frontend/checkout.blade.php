@@ -49,9 +49,7 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-
-                                    {{-- <a href=" route('cart.map') " target="_blank" class="btn btn-primary">電子地圖</a> --}}
-                                    <a href="" id="cartMap" target="_blank" class="btn btn-primary">電子地圖</a>
+                                    <a type="button" href="" id="cartMap" target="_blank" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                             <div class="col-12" id="storeDisplay" style="display: none">
@@ -383,6 +381,11 @@
                 }
             })
 
+            // 電子地圖
+            $('#cartMap').on('click', function(){
+                window.open((this).attr('href'), '_blank')
+            })
+
             $('#ship_id').on('change', function() {
                 let shipId = $(this).val();
                 if (shipId == 1) {
@@ -399,9 +402,7 @@
                 $('input[name=CVSAddress]').val('');
                 $('input[name=CVSTelephone]').val('');
                 $('input[name=CVSOutSide]').val('');
-                // 清除數據或進行其他處理
-                localStorage.removeItem('returnedData');
-
+                
                 if (shipId < 3 && !isNaN(shipId)) {
                     $('#cartMap').attr('href',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
