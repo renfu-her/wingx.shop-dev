@@ -56,7 +56,7 @@ route::group(
         route::post('/count', [OrderController::class, 'cartCount']);
         route::group(['controller' => MapController::class], function () {
             route::get('/map', 'index')->name('map');
-            route::post('/rewrite/{sessionId}', 'rewrite')->name('map.rewrite');
+            route::post('/rewrite', 'rewrite')->name('map.rewrite');
         });
         route::post('/server/reply', 'serverReply');
         route::post('/client/reply', 'clientReply');
