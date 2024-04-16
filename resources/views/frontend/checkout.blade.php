@@ -431,11 +431,11 @@
 
         //MARK: returnedData, json to array
         window.addEventListener('message', function(event) {
-            if (event.origin !== "{{ config('config.APP_URL') . '/cart/rewrite' }}") {
-                // 可以忽略消息或做一些錯誤處理
-                return;
-            }
-            console.log('data:', event.data);
+            // if (event.origin !== "{{ config('config.APP_URL') . '/cart/rewrite' }}") {
+            //     // 可以忽略消息或做一些錯誤處理
+            //     return;
+            // }
+            console.log('data:', event.data, event.origin);
             // console.log('New value:', event.newValue);
             // 從 JSON 字符串解析回陣列
             let returnedArray = JSON.parse(event.newValue);
