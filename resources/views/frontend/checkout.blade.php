@@ -431,31 +431,26 @@
 
         //MARK: returnedData, json to array
         window.addEventListener('message', function(event) {
-            // if (event.origin !== "{{ config('config.APP_URL') . '/cart/rewrite' }}") {
+            // if (event.origin !== "{{ config('config.APP_URL') }}") {
             //     // 可以忽略消息或做一些錯誤處理
             //     return;
             // }
-            // console.log('New value:', event.newValue);
-            // 從 JSON 字符串解析回陣列
-            if (event.newValue !== undefined) {
-                console.log('data:', event.data, event.origin);
-                let returnedArray = JSON.parse(event.newValue);
+            
+            console.log(event.data, event.origin);
+            // let returnedArray = JSON.parse(event.newValue);
 
-                $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
-                $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
-                $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
-                $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
-                $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
-                $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
+            // $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
+            // $('input[name=CVSStoreID]').val(returnedArray['CVSStoreID']);
+            // $('input[name=CVSStoreName]').val(returnedArray['CVSStoreName']);
+            // $('input[name=CVSAddress]').val(returnedArray['CVSAddress']);
+            // $('input[name=CVSTelephone]').val(returnedArray['CVSTelephone']);
+            // $('input[name=CVSOutSide]').val(returnedArray['CVSOutSide']);
 
-                $('#storeDisplay').show();
-                $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
-                $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
-                $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
-                $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
-
-            }
-
+            // $('#storeDisplay').show();
+            // $('#CVSStoreID').html('代號：' + returnedArray['CVSStoreID'])
+            // $('#CVSStoreName').html('名稱：' + returnedArray['CVSStoreName'])
+            // $('#CVSAddress').html('地址：' + returnedArray['CVSAddress'])
+            // $('#CVSTelephone').html('電話：' + returnedArray['CVSTelephone'])
 
         });
     </script>
