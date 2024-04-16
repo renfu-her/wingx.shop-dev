@@ -383,7 +383,7 @@
 
             // 電子地圖
             $('#cartMap').on('click', function() {
-                window.open((this).val(), '_blank')
+                window.open((this).attr('value'), '_blank')
             })
 
             $('#ship_id').on('change', function() {
@@ -404,7 +404,7 @@
                 $('input[name=CVSOutSide]').val('');
 
                 if (shipId < 3 && !isNaN(shipId)) {
-                    $('#cartMap').val(
+                    $('#cartMap').attr('value',
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite', ['sessionId' => session()->getId()]) }}"
