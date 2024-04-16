@@ -49,7 +49,7 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a type="button" href="" id="cartMap" target="_blank" class="btn btn-primary">電子地圖</a>
+                                    <a type="button" value="" id="cartMap" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                             <div class="col-12" id="storeDisplay" style="display: none">
@@ -382,8 +382,8 @@
             })
 
             // 電子地圖
-            $('#cartMap').on('click', function(){
-                window.open((this).attr('href'), '_blank')
+            $('#cartMap').on('click', function() {
+                window.open((this).val(), '_blank')
             })
 
             $('#ship_id').on('change', function() {
@@ -402,9 +402,9 @@
                 $('input[name=CVSAddress]').val('');
                 $('input[name=CVSTelephone]').val('');
                 $('input[name=CVSOutSide]').val('');
-                
+
                 if (shipId < 3 && !isNaN(shipId)) {
-                    $('#cartMap').attr('href',
+                    $('#cartMap').val(
                         "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite', ['sessionId' => session()->getId()]) }}"
