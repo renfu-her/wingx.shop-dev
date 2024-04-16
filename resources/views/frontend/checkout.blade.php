@@ -431,12 +431,13 @@
 
         //MARK: returnedData, json to array
         window.addEventListener('message', function(event) {
-            // if (event.origin !== "{{ config('config.APP_URL') }}") {
-            //     // 可以忽略消息或做一些錯誤處理
-            //     return;
-            // }
-            
-            console.log(event.data, event.origin);
+
+            if (event.data.message != undefined) {
+                console.log(event.data.message);
+            }
+
+            console.log(event.data.message);
+
             // let returnedArray = JSON.parse(event.newValue);
 
             // $('input[name=LogisticsSubType]').val(returnedArray['LogisticsSubType']);
