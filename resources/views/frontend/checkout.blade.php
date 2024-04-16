@@ -436,7 +436,7 @@
                 console.log(event.data.message);
                 // let msg = JSON.parse(event.data.message);
 
-                const msg = event.data.message
+                const msg = event.data.message;
 
                 console.log(msg.CVSStoreName, msg.CVSAddress, msg.CVSTelephone, msg.CVSOutSide);
 
@@ -448,10 +448,10 @@
                 $('input[name=CVSOutSide]').val(msg.CVSOutSide);
 
                 $('#storeDisplay').show();
-                $('#CVSStoreID').html('代號：' + msg.CVSStoreID)
-                $('#CVSStoreName').html('名稱：' + msg.CVSStoreName)
-                $('#CVSAddress').html('地址：' + msg.CVSAddress)
-                $('#CVSTelephone').html('電話：' + msg.CVSTelephone)
+                $('#CVSStoreID').html('代號：' + msg.CVSStoreID);
+                $('#CVSStoreName').html('名稱：' + msg.CVSStoreName);
+                $('#CVSAddress').html('地址：' + msg.CVSAddress);
+                $('#CVSTelephone').html('電話：' + msg.CVSTelephone);
             }
         });
     </script>
