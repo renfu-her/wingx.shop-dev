@@ -438,8 +438,6 @@
 
                 const msg = event.data.message;
 
-                console.log(msg.CVSStoreName, msg.CVSAddress, msg.CVSTelephone, msg.CVSOutSide);
-
                 $('input[name=LogisticsSubType]').val(msg.LogisticsSubType);
                 $('input[name=CVSStoreID]').val(msg.CVSStoreID);
                 $('input[name=CVSStoreName]').val(msg.CVSStoreName);
