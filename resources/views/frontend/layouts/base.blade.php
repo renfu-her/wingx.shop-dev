@@ -20,6 +20,7 @@
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/libs.bundle.css') }}" />
@@ -230,7 +231,8 @@
                                     <div>
                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
                                             {{ $value['prod_name'] }}
-                                            <i class="ri-close-line" style="cursor: pointer" onclick="cartDelete({{ $key }})"></i>
+                                            <i class="ri-close-line" style="cursor: pointer"
+                                                onclick="cartDelete({{ $key }})"></i>
                                         </h6>
                                         <small class="d-block fw-bolder">{!! $value['items'] !!}</small>
                                         <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>

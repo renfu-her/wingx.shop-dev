@@ -19,6 +19,7 @@
         <p class="text-center mx-auto">請填寫以下資訊</p>
 
         <form action="/order/store" method="post" id="form_post">
+            @csrf
             <div class="row g-md-8 mt-4">
                 <!-- Checkout Panel Left -->
 
@@ -236,6 +237,7 @@
                         <input type="hidden" name="CVSAddress">
                         <input type="hidden" name="CVSTelephone">
                         <input type="hidden" name="CVSOutSide">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <button type="submit" class="btn btn-dark w-100" role="button">結 帳</button>
                     </div>
                 </div>
