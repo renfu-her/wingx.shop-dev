@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "doctrine/dbal": "^4.0",
         "ecpay/sdk": "^1.2",
         "erusev/parsedown": "^1.7",
         "getsolaris/laravel-make-service": "^1.1",
