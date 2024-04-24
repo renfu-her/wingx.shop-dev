@@ -195,17 +195,11 @@ class OrderController extends Controller
 
             $logistics = Http::asForm()->post($mapUrl, $logisticsData);
 
-            dd(
-                $logistics->body(),
-                $mapUrl,
-                $logisticsData,
-                $merchantID,
-                config('config.APP_ENV'),
-                config('config.EXPRESS_HASH_KEY_DEV'),
-                config('config.EXPRESS_HASH_IV_DEV'),
-                
-            );
+            
+            return view('frontend.order.ecpayStore', compact('logistics'));
         }
+
+
 
         // return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
     }
