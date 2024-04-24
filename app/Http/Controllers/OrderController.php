@@ -159,7 +159,7 @@ class OrderController extends Controller
                 'GoodsAmount' => $ttl_total,
                 'CollectionAmount' => $ttl_total,
                 // 'IsCollection' => 'N',
-                // 'GoodsName' => $desc,
+                'GoodsName' => $desc,
                 'SenderName' => '陳慧珊',
                 'SenderPhone' => '06-7944217',
                 // 'SenderCellPhone' => $req['mobile'],
