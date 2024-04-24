@@ -166,7 +166,7 @@ class OrderController extends Controller
                 'GoodsName' => $desc,
                 'SenderName' => '陳慧珊',
                 'SenderPhone' => '06-7944217',
-                'SenderCellPhone' => $req['mobile'],
+                'SenderCellPhone' => '0922123456',
                 'ReceiverName' => $req['name'],
                 // 'ReceiverPhone' => $req['mobile'],
                 'ReceiverCellPhone' => $req['mobile'],
