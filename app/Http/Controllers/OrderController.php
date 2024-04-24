@@ -197,6 +197,8 @@ class OrderController extends Controller
 
             $orderData = Http::asForm()->post($mapUrl, $logisticsData);
 
+            session()->forget('cart');
+
             return view('frontend.order.store', compact('orderData'));
         } else {
 
