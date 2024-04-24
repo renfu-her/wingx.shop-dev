@@ -217,6 +217,8 @@ class CartController extends Controller
 
         $data = $request->all();
 
+        dd($data);
+
         return view('frontend.order.clientReply', compact('data'));
     }
 }
