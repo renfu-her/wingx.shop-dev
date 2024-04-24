@@ -142,6 +142,10 @@ class OrderController extends Controller
         // 店到店
         // CVSStoreID 有值 
         if (!empty($req['CVSStoreID'])) {
+
+            $order->cvs_store_id = $req['CVSStoreID'];
+            $order->save();
+
             if (config('config.APP_ENV') == 'local') {
                 $mapUrl = 'https://logistics-stage.ecpay.com.tw/Express/Create';
                 $merchantID = config('config.EXPRESS_MERCHANT_ID_DEV');
