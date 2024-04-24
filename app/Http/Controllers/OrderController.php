@@ -12,6 +12,7 @@ use App\Models\ProductMix;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Member;
+use App\Models\CvsStoreDetail;
 // use MingJSHK\NewebPay\Facades\NewebPay;
 use TsaiYiHua\ECPay\Checkout;
 use Pharaoh\Express\Facades\Express;
@@ -146,6 +147,16 @@ class OrderController extends Controller
             $order->cvs_store_id = $req['CVSStoreID'];
             $order->save();
 
+            //TODO: 寫入或者更新 cvs_store_details
+            CvsStoreDetail::updateOrCreate(
+                ['store_id' => $req['CVSStoreID']],
+                [
+                    'store_name' => $req['CVSStoreName'],
+                    'address' => $req['CVSStoreAddress'],
+                    'telephone' => $req['CVSTelephone'],
+                ]
+            );
+
             if (config('config.APP_ENV') == 'local') {
                 $mapUrl = 'https://logistics-stage.ecpay.com.tw/Express/Create';
                 $merchantID = config('config.EXPRESS_MERCHANT_ID_DEV');
@@ -164,9 +175,9 @@ class OrderController extends Controller
                 'CollectionAmount' => $ttl_total,
                 // 'IsCollection' => 'N',
                 'GoodsName' => $desc,
-                'SenderName' => '陳慧珊',
-                'SenderPhone' => '06-7944217',
-                'SenderCellPhone' => '0922123456',
+                'SenderName' => '林柏宏',
+                'SenderPhone' => '0975113071',
+                'SenderCellPhone' => '0975113071',
                 'ReceiverName' => $req['name'],
                 // 'ReceiverPhone' => $req['mobile'],
                 'ReceiverCellPhone' => $req['mobile'],
