@@ -208,7 +208,7 @@ class CartController extends Controller
     {
 
         $data = $request->all();
-        
+
         // return view('frontend.order.ecpayStore', compact('data'));
     }
 
@@ -216,7 +216,7 @@ class CartController extends Controller
     {
 
         $data = $request->all();
-    
-        return view('frontend.order.ecpayStore', compact('data'));
+
+        return view('frontend.order.clientReply', compact('data'));
     }
 }
