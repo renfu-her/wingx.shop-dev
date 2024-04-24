@@ -194,7 +194,15 @@ class OrderController extends Controller
 
             $logistics = Http::post($mapUrl, $logisticsData);
 
-            dd($logistics->body(), $mapUrl, $merchantID, $logisticsData);
+            dd(
+                $logistics->body(),
+                $mapUrl,
+                $logisticsData,
+                $merchantID,
+                config('config.APP_ENV'),
+                config('config.EXPRESS_HASH_IV_DEV'),
+                config('config.EXPRESS_HASH_KEY_DEV')
+            );
         }
 
         // return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
