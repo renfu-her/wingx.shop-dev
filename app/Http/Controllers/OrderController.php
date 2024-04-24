@@ -183,7 +183,6 @@ class OrderController extends Controller
                 'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
                 'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
                 'PlatformID' => $merchantID,
-                
             ];
 
             if (config('config.APP_ENV') == 'local') {
