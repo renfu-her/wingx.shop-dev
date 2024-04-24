@@ -314,7 +314,7 @@ class OrderController extends Controller
         // 5) 做 URLEncode
         $paramsString = urlencode($paramsString);
 
-        dd($paramsString);
+        // dd($paramsString);
 
         // 6) 轉為全小寫
         $paramsString = strtolower($paramsString);
