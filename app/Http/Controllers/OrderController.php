@@ -183,7 +183,6 @@ class OrderController extends Controller
                 'ReceiverStoreID' => $req['CVSStoreID'],
                 'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
                 'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
-                'PlatformID' => "",
                 "Remark" => ""
             ];
 
@@ -195,7 +194,7 @@ class OrderController extends Controller
 
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
-            $logistics = Http::post($mapUrl, $logisticsData);
+            $logistics = Http::asForm()->post($mapUrl, $logisticsData);
 
             dd(
                 $logistics->body(),
