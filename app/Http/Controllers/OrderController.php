@@ -181,7 +181,9 @@ class OrderController extends Controller
                 'ReceiverEmail' => $req['email'],
                 'ReceiverStoreID ' => $req['CVSStoreID'],
                 'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
-                'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply'
+                'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
+                'PlatformID' => $merchantID,
+                
             ];
 
             if (config('config.APP_ENV') == 'local') {
@@ -200,8 +202,9 @@ class OrderController extends Controller
                 $logisticsData,
                 $merchantID,
                 config('config.APP_ENV'),
+                config('config.EXPRESS_HASH_KEY_DEV'),
                 config('config.EXPRESS_HASH_IV_DEV'),
-                config('config.EXPRESS_HASH_KEY_DEV')
+                
             );
         }
 
