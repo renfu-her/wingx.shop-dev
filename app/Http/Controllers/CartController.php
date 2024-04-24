@@ -234,7 +234,6 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-
         if ($data['LogisticsSubType'] == 'FAMIC2C') {
             $logisticsSubType = "全家店到店";
         } else {
