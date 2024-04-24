@@ -286,7 +286,7 @@ class OrderController extends Controller
 
 
         return view(
-            'frontend.order_list',
+            'frontend.order.orderList',
             compact(
                 'products',
                 'product_categories',
