@@ -106,16 +106,16 @@ class OrderController extends Controller
                 $name = $product->description ?? '商品組合';
             }
 
-        //     OrderDetail::create([
-        //         'order_id' => $order_id,
-        //         'name' => $name,
-        //         'product_id' => $order_detail['prod_id'],
-        //         'qty' => $order_detail['qty'],
-        //         'price' => $order_detail['price'],
-        //         'data_base' => $order_detail['dataBase'],
-        //         'sub_total' => $order_detail['price'] * $order_detail['qty'],
-        //         'items' => $order_detail['items'],
-        //     ]);
+            //     OrderDetail::create([
+            //         'order_id' => $order_id,
+            //         'name' => $name,
+            //         'product_id' => $order_detail['prod_id'],
+            //         'qty' => $order_detail['qty'],
+            //         'price' => $order_detail['price'],
+            //         'data_base' => $order_detail['dataBase'],
+            //         'sub_total' => $order_detail['price'] * $order_detail['qty'],
+            //         'items' => $order_detail['items'],
+            //     ]);
         }
 
         // // 使用者寫入資料
@@ -157,12 +157,14 @@ class OrderController extends Controller
         if (!empty($req['CVSStoreID'])) {
             if (config('config.APP_ENV') == 'local') {
                 $mapUrl = 'https://logistics-stage.ecpay.com.tw/Express/Create';
+                $merchantID = config('config.EXPRESS_MERCHANT_ID_DEV');
             } else {
                 $mapUrl = 'https://logistics.ecpay.com.tw/Express/Create';
+                $merchantID = config('config.EXPRESS_MERCHANT_ID');
             }
 
             $logisticsData = [
-                'MerchantID' => config('config.EXPRESS_MERCHANT_ID'),
+                'MerchantID' => $merchantID,
                 'MerchantTradeDate' => date('Y/m/d H:i:s'),
                 'LogisticsType' => 'CVS',
                 'LogisticsSubType' => $req['LogisticsSubType'],
@@ -182,13 +184,25 @@ class OrderController extends Controller
                 'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply'
             ];
 
-            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
+            if (config('config.APP_ENV') == 'local') {
+                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
+            } else {
+                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
+            }
+
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
             $logistics = Http::post($mapUrl, $logisticsData);
 
-            dd($logistics->body(), $mapUrl, config('config.EXPRESS_MERCHANT_ID'), $logisticsData);
-
+            dd(
+                $logistics->body(),
+                $mapUrl,
+                $logisticsData,
+                $merchantID,
+                config('config.APP_ENV'),
+                config('config.EXPRESS_HASH_IV_DEV'),
+                config('config.EXPRESS_HASH_KEY_DEV')
+            );
         }
 
         // return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();

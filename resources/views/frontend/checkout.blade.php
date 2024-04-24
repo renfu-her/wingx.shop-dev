@@ -406,8 +406,16 @@
                 $('input[name=CVSOutSide]').val('');
 
                 if (shipId < 3 && !isNaN(shipId)) {
+                    let appUrl = "{{ config('config.APP_ENV') }}"
+                    if (appUrl == 'local') {
+                        merchantID = "{{ config('config.EXPRESS_MERCHANT_ID_DEV') }}"
+                    } else {
+                        merchantID = "{{ config('config.EXPRESS_MERCHANT_ID') }}"
+                    }
+
                     $('#cartMap').attr('value',
-                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID={{ config('config.EXPRESS_MERCHANT_ID') }}&LogisticsType=CVS&LogisticsSubType=" +
+                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID=" + merchantID +
+                        "&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}"
                     )
