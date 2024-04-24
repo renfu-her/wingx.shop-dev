@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CvsStoreDetail extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'store_id',
+        'store_name',
+        'telephone',
+        'address',
+    ];
 }
