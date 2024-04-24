@@ -220,6 +220,20 @@ class CartController extends Controller
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
 
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+
+        foreach ($cart as $key => $value) {
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $ships = $this->getShipAll();
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
 
         if ($data['LogisticsSubType'] == 'FAMIC2C') {
             $logisticsSubType = "全家店到店";
@@ -233,7 +247,12 @@ class CartController extends Controller
                 'data',
                 'logisticsSubType',
                 'products',
-                'product_categories'
+                'product_categories',
+                'cart_count',
+                'cart',
+                'total',
+                'tax',
+                'ships',
             )
         );
     }
