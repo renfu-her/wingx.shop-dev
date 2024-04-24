@@ -165,7 +165,6 @@ class OrderController extends Controller
 
             $logisticsData = [
                 'MerchantID' => $merchantID,
-                "MerchantTradeNo" => "OID-" . date('YmdHis') . rand(1000, 9999),
                 'MerchantTradeDate' => date('Y/m/d H:i:s'),
                 'LogisticsType' => 'CVS',
                 'LogisticsSubType' => $req['LogisticsSubType'],
@@ -173,7 +172,7 @@ class OrderController extends Controller
                 'CollectionAmount' => $ttl_total,
                 'IsCollection' => 'N',
                 'GoodsName' => $desc,
-                'SenderName' => session()->get('member_name'),
+                'SenderName' => $req['name'],
                 'SenderPhone' => $req['mobile'],
                 'SenderCellPhone' => $req['mobile'],
                 'ReceiverName' => $req['name'],
@@ -316,7 +315,7 @@ class OrderController extends Controller
 
         // 5) 做 URLEncode
         $paramsString = urlencode($paramsString);
-        
+
         // 6) 轉為全小寫
         $paramsString = strtolower($paramsString);
 
