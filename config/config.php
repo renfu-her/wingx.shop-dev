@@ -14,16 +14,20 @@ return [
     'INVOICE_ID_DEV' => '2000933',
     'INVOICE_HASH_KEY_DEV' => 'XBERn1YOvpM9nfZc',
     'INVOCE_HASH_IV_DEV' => 'h1ONHk4P4yqbl5LK',
-    'INVOICE_ID' => '20000132',
-    'INVOICE_HASH_KEY' => 'ECPAY_HASH_KEY',
-    'INVOCE_HASH_IV' => 'ECPAY_HASH_IV',
+    'INVOICE_ID' => env('INVOICE_ID'),
+    'INVOICE_HASH_KEY' => env('ECPAY_HASH_KEY'),
+    'INVOCE_HASH_IV' => env('ECPAY_HASH_IV'),
 
     "EXPRESS_URL" => env("EXPRESS_URL", "https://logistics-stage.ecpay.com.tw/Express/v2/"),
     "EXPRESS_MAP_URL" => env("EXPRESS_MAP_URL", "https://logistics-stage.ecpay.com.tw/Express/map"),
-    "EXPRESS_MERCHANT_ID" => env("EXPRESS_MERCHANT_ID", "2000132"),
-    "EXPRESS_HASH_KEY" => env("EXPRESS_HASH_KEY", "5294y06JbISpM5x9"),
-    "EXPRESS_HASH_IV" => env("EXPRESS_HASH_IV", "v77hoKGq4kWxNNIS"),
+    "EXPRESS_MERCHANT_ID" => env("EXPRESS_MERCHANT_ID", "3383763"),
+    "EXPRESS_HASH_KEY" => env("EXPRESS_HASH_KEY", "jIS2talQzOhj9Hmp"),
+    "EXPRESS_HASH_IV" => env("EXPRESS_HASH_IV", "HJz5BtcreByPP2Z5"),
     "EXPRESS_VISION" => env("EXPRESS_VISION", "1.0.0"),
+    "EXPRESS_MERCHANT_ID_DEV" => env("EXPRESS_MERCHANT_ID_DEV", "2000933"),
+    "EXPRESS_HASH_KEY_DEV" => env("EXPRESS_HASH_KEY_DEV", "XBERn1YOvpM9nfZc"),
+    "EXPRESS_HASH_IV_DEV" => env("EXPRESS_HASH_IV_DEV", "h1ONHk4P4yqbl5LK"),
+    "EXPRESS_VISION_DEV" => env("EXPRESS_VISION_DEV", "1.0.0"),
 
 
 
