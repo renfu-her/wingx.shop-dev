@@ -214,7 +214,6 @@ class CartController extends Controller
 
     public function clientReply(Request $request)
     {
-
         $data = $request->all();
 
         dd($data);
