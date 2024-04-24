@@ -217,6 +217,8 @@ class CartController extends Controller
 
         $data = $request->all();
 
+        dd($data);
+
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
 

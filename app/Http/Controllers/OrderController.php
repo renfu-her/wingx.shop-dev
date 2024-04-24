@@ -303,6 +303,15 @@ class OrderController extends Controller
         );
     }
 
+    //TODO: 貨品的狀態 order status
+    public function orderStatus(Request $request, $orderId)
+    {
+        $data = $request->all();
+
+        $order = Order::find($orderId);
+
+    }
+
     // 檢查碼
     private function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
     {

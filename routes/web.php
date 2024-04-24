@@ -70,8 +70,9 @@ route::group(
         'as' => 'order.'
     ],
     function () {
-        route::get('/list', 'list');
-        route::post('/store', 'store');
+        route::get('/list', 'list')->name('list');
+        route::post('/store', 'store')->name('store');
+        route::get('/status/{orderId}', 'orderStatus')->name('status');
     }
 );
 
