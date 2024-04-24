@@ -57,7 +57,11 @@
                                             <span>訂單成立：{{ $value->created_at }}</span>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <span>付款方式：{{ $value->payment_name }}</span>
+                                            @if (!empty($value->cvs_store_id))
+                                                <span>付款方式：貨到付款</span>
+                                            @else
+                                                <span>付款方式：{{ $value->payment_name }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
