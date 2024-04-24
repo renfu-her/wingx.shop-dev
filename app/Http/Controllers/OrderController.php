@@ -66,32 +66,32 @@ class OrderController extends Controller
 
         $order_no = (new CartService())->generateOrderNo();
 
-        // $order = Order::create([
-        //     'order_no' => $order_no,
-        //     'name' => $req['name'],
-        //     'member_id' => $member_id,
-        //     'ship_id' => $req['ship_id'] ?? 0,
-        //     'total' => $total,
-        //     'status' => 9,
-        //     'email' => $req['email'],
-        //     'ship_date' => date('Y-m-d H:i:s'),
-        //     'ship_price' => $req['ship_price'],
-        //     'remark' => $req['remark'],
-        //     'county' => $req['county'],
-        //     'district' => $req['district'],
-        //     'zipcode' => $req['zipcode'],
-        //     'address' => $req['address'],
-        //     'mobile' => $req['mobile'],
-        //     'accept_terms' => $req['accept_terms'],
-        //     'type' => $req['type'],
-        //     'company_name' => $req['company_name'] ?? '',
-        //     'company_uid' => $req['company_uid'] ?? '',
-        //     'company_address' => $req['company_address'] ?? '',
-        //     'amount' => $amount,
-        //     'tax' => $tax,
-        // ]);
+        $order = Order::create([
+            'order_no' => $order_no,
+            'name' => $req['name'],
+            'member_id' => $member_id,
+            'ship_id' => $req['ship_id'] ?? 0,
+            'total' => $total,
+            'status' => 9,
+            'email' => $req['email'],
+            'ship_date' => date('Y-m-d H:i:s'),
+            'ship_price' => $req['ship_price'],
+            'remark' => $req['remark'],
+            'county' => $req['county'],
+            'district' => $req['district'],
+            'zipcode' => $req['zipcode'],
+            'address' => $req['address'],
+            'mobile' => $req['mobile'],
+            'accept_terms' => $req['accept_terms'],
+            'type' => $req['type'],
+            'company_name' => $req['company_name'] ?? '',
+            'company_uid' => $req['company_uid'] ?? '',
+            'company_address' => $req['company_address'] ?? '',
+            'amount' => $amount,
+            'tax' => $tax,
+        ]);
 
-        // $order_id = $order->id;
+        $order_id = $order->id;
         $desc = [];
 
         foreach ($cart as $order_detail) {
@@ -106,30 +106,30 @@ class OrderController extends Controller
                 $name = $product->description ?? '商品組合';
             }
 
-            //     OrderDetail::create([
-            //         'order_id' => $order_id,
-            //         'name' => $name,
-            //         'product_id' => $order_detail['prod_id'],
-            //         'qty' => $order_detail['qty'],
-            //         'price' => $order_detail['price'],
-            //         'data_base' => $order_detail['dataBase'],
-            //         'sub_total' => $order_detail['price'] * $order_detail['qty'],
-            //         'items' => $order_detail['items'],
-            //     ]);
+            OrderDetail::create([
+                'order_id' => $order_id,
+                'name' => $name,
+                'product_id' => $order_detail['prod_id'],
+                'qty' => $order_detail['qty'],
+                'price' => $order_detail['price'],
+                'data_base' => $order_detail['dataBase'],
+                'sub_total' => $order_detail['price'] * $order_detail['qty'],
+                'items' => $order_detail['items'],
+            ]);
         }
 
         // // 使用者寫入資料
-        // Member::where('id', $member_id)->update(
-        //     [
-        //         'username' => $req['name'],
-        //         'email' => $req['email'],
-        //         'county' => $req['county'],
-        //         'district' => $req['district'],
-        //         'zipcode' => $req['zipcode'],
-        //         'address' => $req['address'],
-        //         'mobile' => $req['mobile'],
-        //     ]
-        // );
+        Member::where('id', $member_id)->update(
+            [
+                'username' => $req['name'],
+                'email' => $req['email'],
+                'county' => $req['county'],
+                'district' => $req['district'],
+                'zipcode' => $req['zipcode'],
+                'address' => $req['address'],
+                'mobile' => $req['mobile'],
+            ]
+        );
 
         $desc = implode('+', $desc);
         $desc = substr($desc, 0, 50);
@@ -138,19 +138,6 @@ class OrderController extends Controller
             $desc = '商品組合';
         }
 
-        // $formData = [
-        //     'CustomField1' => $order_no,
-        //     'ItemDescription' => $desc,
-        //     'ItemName' => $desc,
-        //     'TotalAmount' => $ttl_total,
-        //     'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
-        // ];
-
-        // if (config('config.APP_ENV') == 'local') {
-        //     $url = config('config.APP_URL') . "/cart/thanks";
-        // } else {
-        //     $url = "https://wingx.shop/cart/thanks";
-        // }
 
         // 店到店
         // CVSStoreID 有值 
@@ -165,6 +152,7 @@ class OrderController extends Controller
 
             $logisticsData = [
                 'MerchantID' => $merchantID,
+                'MerchantTradeNo' => $order_no,
                 'MerchantTradeDate' => date('Y/m/d H:i:s'),
                 'LogisticsType' => 'CVS',
                 'LogisticsSubType' => $req['LogisticsSubType'],
@@ -195,13 +183,25 @@ class OrderController extends Controller
 
             $logistics = Http::asForm()->post($mapUrl, $logisticsData);
 
-            
             return view('frontend.order.ecpayStore', compact('logistics'));
+        } else {
+
+            $formData = [
+                'CustomField1' => $order_no,
+                'ItemDescription' => $desc,
+                'ItemName' => $desc,
+                'TotalAmount' => $ttl_total,
+                'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
+            ];
+
+            if (config('config.APP_ENV') == 'local') {
+                $url = config('config.APP_URL') . "/cart/thanks";
+            } else {
+                $url = "https://wingx.shop/cart/thanks";
+            }
+
+            return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
         }
-
-
-
-        // return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
     }
 
     // order list
