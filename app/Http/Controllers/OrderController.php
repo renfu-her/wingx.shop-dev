@@ -325,8 +325,9 @@ class OrderController extends Controller
         $paramsString = str_replace($search, $replace, $paramsString);
 
         // 8) 進行編碼
-        dd(md5($paramsString));
-        $paramsString = $encType ? hash('sha256', $paramsString) : md5($paramsString);
+        // dd(md5($paramsString));
+        // $paramsString = $encType ? hash('sha256', $paramsString) : md5($paramsString);
+        $paramsString = md5($paramsString);
 
         // 9) 轉為全大寫後回傳
         return strtoupper($paramsString);
