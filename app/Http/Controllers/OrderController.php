@@ -313,10 +313,12 @@ class OrderController extends Controller
         // 5) 做 URLEncode
         $paramsString = urlencode($paramsString);
 
-        dd($paramsString);
-        
+        // dd($paramsString);
+
         // 6) 轉為全小寫
         $paramsString = strtolower($paramsString);
+
+        dd($paramsString);
 
         // 7) 轉換特定字元(與 dotNet 相符的字元)
         $search  = ['%2d', '%5f', '%2e', '%21', '%2a', '%28', '%29'];
