@@ -172,7 +172,7 @@ class OrderController extends Controller
                 'CollectionAmount' => $ttl_total,
                 // 'IsCollection' => 'N',
                 // 'GoodsName' => $desc,
-                'SenderName' => $req['name'],
+                'SenderName' => '翼優寵物賣家',
                 'SenderPhone' => $req['mobile'],
                 // 'SenderCellPhone' => $req['mobile'],
                 'ReceiverName' => $req['name'],
