@@ -182,7 +182,6 @@ class OrderController extends Controller
                 'ReceiverStoreID' => $req['CVSStoreID'],
                 'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
                 'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
-                "Remark" => ""
             ];
 
             if (config('config.APP_ENV') == 'local') {
