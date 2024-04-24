@@ -165,6 +165,7 @@ class OrderController extends Controller
 
             $logisticsData = [
                 'MerchantID' => $merchantID,
+                "MerchantTradeNo" => "OID-" . date('YmdHis') . rand(1000, 9999),
                 'MerchantTradeDate' => date('Y/m/d H:i:s'),
                 'LogisticsType' => 'CVS',
                 'LogisticsSubType' => $req['LogisticsSubType'],
