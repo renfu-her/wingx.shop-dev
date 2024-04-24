@@ -217,12 +217,24 @@ class CartController extends Controller
 
         $data = $request->all();
 
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+
         if ($data['LogisticsSubType'] == 'FAMIC2C') {
             $logisticsSubType = "全家店到店";
         } else {
             $logisticsSubType = "7-11 交貨便";
         }
 
-        return view('frontend.order.clientReply', compact('data', 'logisticsSubType'));
+        return view(
+            'frontend.order.clientReply',
+            compact(
+                'data',
+                'logisticsSubType',
+                'products',
+                'product_categories'
+            )
+        );
     }
 }
