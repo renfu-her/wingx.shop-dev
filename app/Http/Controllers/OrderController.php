@@ -185,9 +185,9 @@ class OrderController extends Controller
 
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
-            $logistics = Http::asForm()->post($mapUrl, $logisticsData);
+            $orderData = Http::asForm()->post($mapUrl, $logisticsData);
 
-            return view('frontend.order.ecpayStore', compact('logistics'));
+            return view('frontend.order.ecpayStore', compact('orderData'));
         } else {
 
             $formData = [

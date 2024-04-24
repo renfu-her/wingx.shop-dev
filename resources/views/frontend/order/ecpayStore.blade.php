@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    {!! $logistics !!}
+    {!! $orderData !!}
 </body>
 
 </html>
