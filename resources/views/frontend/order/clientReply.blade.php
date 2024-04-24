@@ -9,7 +9,7 @@
                         <h5 class="card-title text-center mb-5 fw-light fs-5">店到店</h5>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="type" class="form-label">訂單結果 </label>
+                                <label for="type" class="form-label">物流狀態 </label>
                                 <input type="text" class="form-control" value="{{ $data->RtnMsg }}">
                             </div>
                         </div>
