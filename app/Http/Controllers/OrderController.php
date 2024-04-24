@@ -179,7 +179,7 @@ class OrderController extends Controller
                 'ReceiverPhone' => $req['mobile'],
                 'ReceiverCellPhone' => $req['mobile'],
                 'ReceiverEmail' => $req['email'],
-                'ReceiverStoreID ' => $req['CVSStoreID'],
+                'ReceiverStoreID' => $req['CVSStoreID'],
                 'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
                 'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
                 'PlatformID' => "",
