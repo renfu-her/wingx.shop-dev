@@ -310,11 +310,11 @@ class OrderController extends Controller
         // 4) 最前方加入 HashKey，最後方加入 HashIV
         $paramsString = "HashKey={$hashKey}&{$paramsString}&HashIV={$hashIV}";
 
-        dd($paramsString);
-
         // 5) 做 URLEncode
         $paramsString = urlencode($paramsString);
 
+        dd($paramsString);
+        
         // 6) 轉為全小寫
         $paramsString = strtolower($paramsString);
 
