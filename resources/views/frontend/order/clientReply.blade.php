@@ -10,7 +10,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="type" class="form-label">物流狀態 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data->RtnMsg }}" readonly>
+                                <input type="text" class="form-control-plaintext" value="{{ $data['RtnMsg'] }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -22,13 +22,13 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="type" class="form-label">寄貨編號 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data->CVSPaymentNo }}" readonly>
+                                <input type="text" class="form-control-plaintext" value="{{ $data['CVSPaymentNo'] }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="type" class="form-label">物流交易編號 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data->AllPayLogisticsID }}" readonly>
+                                <input type="text" class="form-control-plaintext" value="{{ $data['AllPayLogisticsID'] }}" readonly>
                             </div>
                         </div>
                     </div>
