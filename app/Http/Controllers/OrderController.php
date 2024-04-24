@@ -139,7 +139,6 @@ class OrderController extends Controller
             $desc = '商品組合';
         }
 
-
         // 店到店
         // CVSStoreID 有值 
         if (!empty($req['CVSStoreID'])) {
