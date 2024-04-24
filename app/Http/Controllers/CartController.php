@@ -208,7 +208,8 @@ class CartController extends Controller
     {
 
         $data = $request->all();
-        dd($data);
+        
+        return view('frontend.order.ecpayStore', compact('data'));
     }
 
     public function clientReply(Request $request)

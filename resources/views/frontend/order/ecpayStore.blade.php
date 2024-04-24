@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    {!! $orderData !!}
+    {!! $data !!}
 </body>
 
 </html>
