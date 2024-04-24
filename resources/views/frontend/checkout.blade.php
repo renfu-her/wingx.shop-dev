@@ -391,10 +391,10 @@
             $('#ship_id').on('change', function() {
                 let shipId = $(this).val();
                 if (shipId == 1) {
-                    shipName = 'FAMI'
+                    shipName = 'FAMIC2C'
                 }
                 if (shipId == 2) {
-                    shipName = 'UNIMART'
+                    shipName = 'UNIMARTC2C'
                 }
 
                 $('#storeDisplay').hide();
