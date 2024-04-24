@@ -151,7 +151,7 @@ class OrderController extends Controller
                 ['store_id' => $req['CVSStoreID']],
                 [
                     'store_name' => $req['CVSStoreName'],
-                    'address' => $req['CVSStoreAddress'],
+                    'address' => $req['CVSAddress'],
                     'telephone' => $req['CVSTelephone'],
                 ]
             );
