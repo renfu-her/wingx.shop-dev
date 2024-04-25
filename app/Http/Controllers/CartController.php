@@ -216,10 +216,12 @@ class CartController extends Controller
     {
         $data = $request->all();
 
-        dd($data);
-        $order = Order::where()->fitrst();
+        // dd($data);
+        $order = Order::where('order_no', $data['MerchantTradeNo'])->first();
+        $order->pay_logistics_id = $data['AllPayLogisticsID'];
+        $order->sae();
 
-        
+
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
 
