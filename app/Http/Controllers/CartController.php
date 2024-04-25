@@ -219,7 +219,7 @@ class CartController extends Controller
         // dd($data);
         $order = Order::where('order_no', $data['MerchantTradeNo'])->first();
         $order->pay_logistics_id = $data['AllPayLogisticsID'];
-        $order->sae();
+        $order->save();
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
