@@ -79,14 +79,18 @@
 
                                         </div>
                                         <div class="col-12 col-md-3" style="font-weight: 600">
-                                            @if ($value->status == 0 || $value->status == 9)
-                                                <span class="text-icon" style="color: green">待付款</span>
-                                            @elseif($value->status == 1)
-                                                <span class="text-icon" style="color: blue">完成付款</span>
-                                            @elseif($value->status == 2)
-                                                <span class="text-icon" style="color: red">付款失敗</span>
-                                            @elseif($value->status == 3)
-                                                <span class="text-icon" style="color: #aaa">取消訂單</span>
+                                            @if (!empty($value->cvs_store_id))
+                                                <span class="text-icon" style="color: green">出貨中</span>
+                                            @else
+                                                @if ($value->status == 0 || $value->status == 9)
+                                                    <span class="text-icon" style="color: green">待付款</span>
+                                                @elseif($value->status == 1)
+                                                    <span class="text-icon" style="color: blue">完成付款</span>
+                                                @elseif($value->status == 2)
+                                                    <span class="text-icon" style="color: red">付款失敗</span>
+                                                @elseif($value->status == 3)
+                                                    <span class="text-icon" style="color: #aaa">取消訂單</span>
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
