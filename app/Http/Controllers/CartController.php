@@ -221,7 +221,6 @@ class CartController extends Controller
         $order->pay_logistics_id = $data['AllPayLogisticsID'];
         $order->sae();
 
-
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
 
