@@ -29,6 +29,8 @@ return [
     "EXPRESS_HASH_IV_DEV" => env("EXPRESS_HASH_IV_DEV", "h1ONHk4P4yqbl5LK"),
     "EXPRESS_VISION_DEV" => env("EXPRESS_VISION_DEV", "1.0.0"),
 
-
+    // 物流查詢
+    "EXPRESS_LOGISTICS_DEV" => 'https://logistics-stage.ecpay.com.tw/Helper/QueryLogisticsTradeInfo/V4',
+    "EXPRESS_LOGISTICS" => 'https://logistics.ecpay.com.tw/Helper/QueryLogisticsTradeInfo/V4',
 
 ];

@@ -17,7 +17,7 @@ use App\Models\CvsStoreDetail;
 use TsaiYiHua\ECPay\Checkout;
 use Pharaoh\Express\Facades\Express;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -304,11 +304,37 @@ class OrderController extends Controller
     }
 
     //TODO: 貨品的狀態 order status
-    public function orderStatus(Request $request, $orderId)
+    public function orderStatus(Request $request, $logisticsId)
     {
         $data = $request->all();
 
-        $order = Order::find($orderId);
+        $order = Order::where('pay_logistics_id', $logisticsId)->first();
+
+        if(config('config.APP_ENV') == 'local'){
+            $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
+            $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
+        } else {
+            $logisticsUrl = config('config.EXPRESS_LOGISTICS');
+            $merchantId = config('config.EXPRESS_MERCHANT_ID');
+        }
+
+        $logisticsData = [
+            'MerchantID' => $merchantId,
+            "AllPayLogisticsID" => $logisticsId,
+            "TimeStamp" => Carbon::now()->timestamp,
+        ];
+
+        if (config('config.APP_ENV') == 'local') {
+            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
+        } else {
+            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
+        }
+
+        $logisticsData['CheckMacValue'] = $checkMacValue;
+
+        $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
+
+        dd($logistics->body());
 
     }
 
