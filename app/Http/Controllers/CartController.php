@@ -217,6 +217,7 @@ class CartController extends Controller
         $data = $request->all();
 
         dd($data);
+        $order = Order::where()->fitrst();
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
