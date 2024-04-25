@@ -71,8 +71,8 @@ route::group(
     ],
     function () {
         route::get('/list', 'list')->name('list');
-        route::post('/store', 'store')->name('dataStore');
-        route::get('/status/{orderId}', 'orderStatus')->name('status');
+        route::post('/store', 'store')->name('data.store');
+        route::get('/status/{logisticsId}', 'orderStatus')->name('data.status');
     }
 );
 

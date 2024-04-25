@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             @if (!empty($value->cvs_store_id))
-                                                <span>付款方式：貨到付款 <a href="" target="_blink">貨態查詢</a></span>
+                                                <span>付款方式：貨到付款 <a href="{{ route('order.data.status') }}" target="_blink">貨態查詢</a></span>
                                             @else
                                                 <span>付款方式：{{ $value->payment_name }}</span>
                                             @endif
