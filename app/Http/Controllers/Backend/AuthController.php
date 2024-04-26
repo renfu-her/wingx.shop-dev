@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -19,21 +22,32 @@ class AuthController extends Controller
     // 登入驗證
     public function login_verify(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
-        
-        if (Auth::attempt($credentials)) {
-            dd(Auth::check());
-            return redirect('/backend/product');
-        } else {
-            return redirect()->back()->with(['message' => '帳號或者密碼輸入錯誤']);
+        $data = $request->all();
+
+        $user = User::where('email', $data['email'])->first();
+
+        if (!$user) {
+            return redirect('/')->with(['message' => 'Email 輸入錯誤']);
         }
+
+        if (!Hash::check($data['password'], $user->password)) {
+            return redirect('/')->with(['message' => '密碼輸入錯誤']);
+        }
+
+        session()->put('userId', $user->id);
+        session()->put('userEmail', $user->email);
+        session()->put('userName', $user->name);
+
+        return redirect('/backend/product');
+        
     }
 
     // 登出
     public function logout(Request $request)
     {
-        Auth::logout();
+        session()->forget(['userId', 'userEmail', 'userName']);
 
         return redirect('/backend/login');
     }
