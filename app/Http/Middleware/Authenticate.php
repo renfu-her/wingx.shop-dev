@@ -15,10 +15,9 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         
-        dd(session()->get('userId'));
+        // dd(session()->get('userId'));
         if (!session()->get('userId')) {
             return route('backend_login');
         }
-        return null;
     }
 }
