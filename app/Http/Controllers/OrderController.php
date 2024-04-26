@@ -344,7 +344,7 @@ class OrderController extends Controller
             $logisticsArray['LogisticsName'] = '7-11 交貨便';
         }
 
-        $logisticsStatus = LogisticsStatus::where('code', $logisticsData['LogisticsStatus'])->first();
+        $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
         $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
         
 
