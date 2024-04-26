@@ -29,11 +29,11 @@ class AuthController extends Controller
         $user = User::where('email', $data['email'])->first();
 
         if (!$user) {
-            return redirect('/')->with(['message' => 'Email 輸入錯誤']);
+            return redirect('/backend')->with(['message' => 'Email 輸入錯誤']);
         }
 
         if (!Hash::check($data['password'], $user->password)) {
-            return redirect('/')->with(['message' => '密碼輸入錯誤']);
+            return redirect('/backend')->with(['message' => '密碼輸入錯誤']);
         }
 
         session()->put('userId', $user->id);
