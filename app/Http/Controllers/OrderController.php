@@ -347,7 +347,6 @@ class OrderController extends Controller
         $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
         $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
         
-
         return view('frontend.order.orderStatus', compact('logisticsArray', 'order'));
     }
 
