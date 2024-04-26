@@ -22,6 +22,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            dd(Auth::check());
             return redirect('/backend/product');
         } else {
             return redirect()->back()->with(['message' => '帳號或者密碼輸入錯誤']);
