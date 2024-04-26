@@ -40,6 +40,8 @@ class AuthController extends Controller
         session()->put('userEmail', $user->email);
         session()->put('userName', $user->name);
 
+        dd(session()->get('userId'));
+
         return redirect('/backend/product');
         
     }
