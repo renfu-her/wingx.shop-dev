@@ -10,7 +10,7 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="type" class="form-label">物流狀態 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data['LogisticsStatusName'] }}" readonly>
+                                <input type="text" class="form-control-plaintext" value="{{ $logisticsArray['LogisticsStatusName'] }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
