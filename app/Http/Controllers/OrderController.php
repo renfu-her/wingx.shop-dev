@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Member;
 use App\Models\CvsStoreDetail;
+use App\Models\LogisticsStatus;
 // use MingJSHK\NewebPay\Facades\NewebPay;
 use TsaiYiHua\ECPay\Checkout;
 use Pharaoh\Express\Facades\Express;
@@ -310,7 +311,7 @@ class OrderController extends Controller
 
         $order = Order::where('pay_logistics_id', $logisticsId)->first();
 
-        if(config('config.APP_ENV') == 'local'){
+        if (config('config.APP_ENV') == 'local') {
             $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
             $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
         } else {
@@ -334,8 +335,20 @@ class OrderController extends Controller
 
         $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
 
-        dd($logistics->body());
+        $logisticsArray = [];
+        parse_str($logistics, $logisticsArray);
 
+        if($logisticsArray['LogisticsType'] == 'CVS_FAMIC2C'){
+            $logisticsArray['LogisticsName'] = '全家店到店';
+        } else {
+            $logisticsArray['LogisticsName'] = '7-11 交貨便';
+        }
+
+        $logisticsStatus = LogisticsStatus::where('code', $logisticsData['LogisticsStatus'])->first();
+        $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
+        
+
+        return view('frontend.order.orderStatus', compact('logisticsArray', 'order'));
     }
 
     // 檢查碼
