@@ -335,7 +335,7 @@ class OrderController extends Controller
         $logisticsArray = [];
         parse_str($logistics, $logisticsArray);
 
-        if($logisticsArray['LogisticsType'] == 'CVS_FAMIC2C'){
+        if ($logisticsArray['LogisticsType'] == 'CVS_FAMIC2C') {
             $logisticsArray['LogisticsName'] = '全家店到店';
         } else {
             $logisticsArray['LogisticsName'] = '7-11 交貨便';
@@ -343,8 +343,35 @@ class OrderController extends Controller
 
         $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
         $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
-        
-        return view('frontend.order.orderStatus', compact('logisticsArray', 'order'));
+
+        $products = $this->getProduct();
+        $product_categories = $this->getProductCategory();
+
+        $total = 0;
+        $tax = 0;
+        $cart = (new CartService())->getCartAll();
+        foreach ($cart as $key => $value) {
+            $total += $value['prod_price'] * $value['qty'];
+            $tax +=  ($value['prod_price'] * $value['qty']) * 0.05;
+        }
+
+        $ships = $this->getShipAll();
+
+        $cart_count = (new CartService())->getCart();
+        $cart_count = json_decode($cart_count->getContent(), true);
+
+        return view(
+            'frontend.order.orderStatus',
+            compact(
+                'logisticsArray',
+                'order',
+                'products',
+                'product_categories',
+                'total',
+                'tax',
+                'cart_count'
+            )
+        );
     }
 
     // 檢查碼
