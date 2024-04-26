@@ -409,12 +409,14 @@
                     let appUrl = "{{ config('config.APP_ENV') }}"
                     if (appUrl == 'local') {
                         merchantID = "{{ config('config.EXPRESS_MERCHANT_ID_DEV') }}"
+                        url = "https://logistics-stage.ecpay.com.tw/Express/map"; 
                     } else {
                         merchantID = "{{ config('config.EXPRESS_MERCHANT_ID') }}"
+                        url = "https://logistics.ecpay.com.tw/Express/map"
                     }
 
                     $('#cartMap').attr('value',
-                        "https://logistics-stage.ecpay.com.tw/Express/map?MerchantID=" + merchantID +
+                        url + "?MerchantID=" + merchantID +
                         "&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
                         "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}"
