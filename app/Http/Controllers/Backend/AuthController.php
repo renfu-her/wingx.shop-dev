@@ -14,7 +14,8 @@ class AuthController extends Controller
 {
 
     // 登入頁面
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         return view('backend.login.login');
     }
@@ -22,28 +23,15 @@ class AuthController extends Controller
     // 登入驗證
     public function login_verify(Request $request)
     {
-        // $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-        $data = $request->all();
 
-        $user = User::where('email', $data['email'])->first();
-
-        if (!$user) {
-            return redirect('/backend')->with(['message' => 'Email 輸入錯誤']);
+        if (Auth::attempt($credentials)) {
+            dd(Auth::check());
+            return redirect('/backend/product');
+        } else {
+            return redirect()->back()->with(['message' => '帳號或者密碼輸入錯誤']);
         }
-
-        if (!Hash::check($data['password'], $user->password)) {
-            return redirect('/backend')->with(['message' => '密碼輸入錯誤']);
-        }
-
-        session()->put('userId', $user->id);
-        session()->put('userEmail', $user->email);
-        session()->put('userName', $user->name);
-
-        dd(session()->get('userId'));
-
-        return redirect('/backend/product');
-        
     }
 
     // 登出

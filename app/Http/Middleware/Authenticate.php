@@ -14,12 +14,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        
-        // dd(session()->get('userId'));
-        if (!session()->get('userId')) {
+
+        // return $request->expectsJson() ? null : route('backend_login');
+        if (!$request->expectsJson()) {
             return route('backend_login');
         }
-
-        return '';
     }
 }
