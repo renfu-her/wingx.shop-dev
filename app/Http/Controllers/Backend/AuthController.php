@@ -21,6 +21,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        
         if (Auth::attempt($credentials)) {
             dd(Auth::check());
             return redirect('/backend/product');
