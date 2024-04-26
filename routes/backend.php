@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\PolicyAdminController;
 use App\Http\Controllers\Backend\ProductDetailController;
 use App\Http\Controllers\Backend\CategoryController;
 
-route::group(['prefix' => 'backend', 'middleware' => 'auth', 'name' => 'backend.'], function () {
+route::group(['prefix' => 'backend', 'middleware' => 'adminAuth', 'name' => 'backend.'], function () {
     route::get('/', [AdminController::class, 'backendTo']);
 
     // 管理者管理
