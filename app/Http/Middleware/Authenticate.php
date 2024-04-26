@@ -20,6 +20,6 @@ class Authenticate extends Middleware
             return route('backend_login');
         }
 
-        return redirect('/backend/product');
+        return null;
     }
 }
