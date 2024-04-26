@@ -2,30 +2,24 @@
 
 @section('content')
     <section class="mt-0 ">
-
         <!-- Category Top Banner -->
         <div class="py-6 bg-img-cover bg-light bg-overlay-gradient-dark position-relative overflow-hidden mb-4 bg-pos-center-center"
             style="background-image: url(./assets/images/banners/banner-1.jpg);">
             <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
                 <div class="col-12 col-md-6">
                     <p class="lead text-white mb-0">
-
                     </p>
                 </div>
             </div>
         </div>
         <!-- Category Top Banner -->
-
         <div class="container">
-
             <div class="row">
-
                 <!-- Category Aside/Sidebar -->
                 <div class="d-none d-lg-flex col-lg-3">
                     <div class="pe-4">
                         <!-- Category Aside -->
                         <aside>
-
                             <!-- Filter Category -->
                             <div class="mb-4">
                                 <h2 class="mb-4 fs-6 mt-2 fw-bolder">商品目録</h2>
