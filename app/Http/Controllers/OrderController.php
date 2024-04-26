@@ -33,7 +33,6 @@ class OrderController extends Controller
     // 訂單數量
     public function cartCount(Request $request)
     {
-
         $cartService = (new CartService())->getCart();
 
         return $cartService;
@@ -224,8 +223,6 @@ class OrderController extends Controller
     // order list
     public function list(Request $request)
     {
-
-
         $member_id = session()->get('member_id');
         $member = Member::find($member_id);
 
