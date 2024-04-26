@@ -19,5 +19,7 @@ class Authenticate extends Middleware
         if (!session()->get('userId')) {
             return route('backend_login');
         }
+
+        return null;
     }
 }
