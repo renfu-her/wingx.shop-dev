@@ -26,7 +26,7 @@ class AuthController extends Controller
         
         $data = $request->all();
         
-        $user = User::where('name', $data['name'])->where('enabled', 1)->first();
+        $user = User::where('email', $data['email'])->where('status', 1)->first();
 
         if(empty($user)){
 
@@ -34,8 +34,9 @@ class AuthController extends Controller
 
         }elseif(Hash::check($data['password'], $user->password)){
 
-            session(['userId' => $user->id]);
-            session(['userName' => $user->name]);
+            session()->put('userId', $user->id);
+            session()->put('userName', $user->name);
+            session()->put('userEmail', $user->email);
             return redirect('/backend/product');
 
         }else{
