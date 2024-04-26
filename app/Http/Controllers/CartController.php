@@ -108,11 +108,13 @@ class CartController extends Controller
 
         $ships = $this->getShipAll();
         $shipLogistics = $total + 60;
-
-        // if($shipLogistics > 20000){
-        //     unset($ship[1]);
-        //     unset($ship[2]);
-        // }
+        if ($shipLogistics > 20000) {
+            foreach ($ships as $key => $ship) {
+                if ($ship['id'] == 1 || $ship['id'] == 2) {
+                    unset($ships[$key]);
+                }
+            }
+        }
 
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
