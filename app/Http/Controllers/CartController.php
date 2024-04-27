@@ -9,6 +9,7 @@ use App\Services\CartService;
 use App\Models\Member;
 use App\Models\Order;
 use App\Models\ProductDetail;
+use App\Models\CvsStoreDetail;
 
 use App\Services\EcPayService;
 
@@ -251,6 +252,10 @@ class CartController extends Controller
             $logisticsSubType = "7-11 交貨便";
         }
 
+        // csv_store_id 來取得店家資訊
+        $cvs_store_id = $order->cvs_store_id;
+        $storeDetails = CvsStoreDetail::where('', $cvs_store_id)->first();
+
         return view(
             'frontend.order.clientReply',
             compact(
@@ -263,6 +268,7 @@ class CartController extends Controller
                 'total',
                 'tax',
                 'ships',
+                'storeDetails'
             )
         );
     }

@@ -29,9 +29,23 @@
                         </div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label for="type" class="form-label">物流交易編號 </label>
+                                <label for="type" class="form-label">商店名稱 </label>
                                 <input type="text" class="form-control-plaintext"
-                                    value="{{ $data['AllPayLogisticsID'] }}" readonly>
+                                    value="{{ $storeDetails->store_name }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label for="type" class="form-label">商店電話號碼 </label>
+                                <input type="text" class="form-control-plaintext"
+                                    value="{{ $storeDetails->telephone }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label for="type" class="form-label">商店地址 </label>
+                                <input type="text" class="form-control-plaintext"
+                                    value="{{ $storeDetails->address }}" readonly>
                             </div>
                         </div>
                     </div>
