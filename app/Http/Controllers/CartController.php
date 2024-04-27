@@ -254,7 +254,7 @@ class CartController extends Controller
 
         // csv_store_id 來取得店家資訊
         $cvs_store_id = $order->cvs_store_id;
-        $storeDetails = CvsStoreDetail::where('', $cvs_store_id)->first();
+        $storeDetails = CvsStoreDetail::where('store_id', $cvs_store_id)->first();
 
         return view(
             'frontend.order.clientReply',

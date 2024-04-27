@@ -360,6 +360,10 @@ class OrderController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
+        // csv_store_id 來取得店家資訊
+        $cvs_store_id = $order->cvs_store_id;
+        $storeDetails = CvsStoreDetail::where('store_id', $cvs_store_id)->first();
+
         return view(
             'frontend.order.orderStatus',
             compact(
@@ -369,7 +373,8 @@ class OrderController extends Controller
                 'product_categories',
                 'total',
                 'tax',
-                'cart_count'
+                'cart_count',
+                'storeDetails',
             )
         );
     }
