@@ -234,6 +234,11 @@
         </script>
     @endif
 
+    @if (Session::has('error'))
+        <script>
+            alert('{{ Session::get('error') }}')
+        </script>
+    @endif
     <style>
         [x-cloak] {
             display: none !important;

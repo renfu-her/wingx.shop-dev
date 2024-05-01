@@ -50,6 +50,12 @@
         </script>
     @endif
 
+    @if(Session::has('error'))
+        <script>
+            alert('{{ Session::get('error') }}')
+        </script>
+    @endif
+
 </body>
 
 </html>
