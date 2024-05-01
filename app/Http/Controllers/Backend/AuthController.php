@@ -23,26 +23,23 @@ class AuthController extends Controller
     // 登入驗證
     public function login_verify(Request $request)
     {
-        
+
         $data = $request->all();
-        
+
         $user = User::where('email', $data['email'])->where('status', 1)->first();
 
-        if(empty($user)){
+        if (empty($user)) {
 
-            return view('backend.login.login')->with(['error'=>"使用者輸入錯誤或者不存在"]);
-
-        }elseif(Hash::check($data['password'], $user->password)){
+            return view('backend.login.login')->with(['error' => "使用者輸入錯誤或者不存在"]);
+        } elseif (Hash::check($data['password'], $user->password)) {
 
             session()->put('userId', $user->id);
             session()->put('userName', $user->name);
             session()->put('userEmail', $user->email);
             return redirect('/backend/product');
+        } else {
 
-        }else{
-
-            return view('backend.login.login')->with(['error'=>"密碼錯誤"]);
-
+            return view('backend.login.login')->with(['error' => "密碼錯誤"]);
         }
     }
 
