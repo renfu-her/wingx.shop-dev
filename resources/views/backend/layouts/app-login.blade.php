@@ -44,15 +44,15 @@
 
     @yield('js')
 
-    @if(Session::has('message'))
+    @if(session()->has('message'))
         <script>
-            alert("{{ Session::get('message') }}")
+            alert("{{ session()->get('message') }}")
         </script>
     @endif
 
-    @if(Session::has('error'))
+    @if(session()->has('error'))
         <script>
-            alert("{{ Session::get('error') }}")
+            alert("{{ session()->get('error') }}")
         </script>
     @endif
 
