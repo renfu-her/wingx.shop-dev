@@ -46,13 +46,13 @@
 
     @if(Session::has('message'))
         <script>
-            alert('{{ Session::get('message') }}')
+            alert("{{ Session::get('message') }}")
         </script>
     @endif
 
     @if(Session::has('error'))
         <script>
-            alert('{{ Session::get('error') }}')
+            alert("{{ Session::get('error') }}")
         </script>
     @endif
 
