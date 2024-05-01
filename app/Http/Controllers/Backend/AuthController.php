@@ -36,7 +36,6 @@ class AuthController extends Controller
             session()->put('userEmail', $user->email);
             return redirect('/backend/product');
         } else {
-
             return view('backend.login.login')->with(['error' => "密碼錯誤"]);
         }
     }
