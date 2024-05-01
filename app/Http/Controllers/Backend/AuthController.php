@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         if(empty($user)){
 
-            return view('backend.login.login', ['error'=>"使用者輸入錯誤或者不存在"]);
+            return view('backend.login.login')->with(['error'=>"使用者輸入錯誤或者不存在"]);
 
         }elseif(Hash::check($data['password'], $user->password)){
 
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         }else{
 
-            return view('backend.login.login', ['error'=>"密碼錯誤"]);
+            return view('backend.login.login')->with(['error'=>"密碼錯誤"]);
 
         }
     }
