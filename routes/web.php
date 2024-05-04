@@ -145,10 +145,14 @@ Route::get('/auth/line/callback', [LineController::class, 'lineLoginCallback']);
 route::get('/xmlToJson', [InvoiceLotteryController::class, 'readXmlToJson']);
 
 // Test route
-route::group(['controller' => TestController::class,'prefix' => 'test'], function () {
-    route::get('/order',  'orderStatus');
-    route::get('/queryOrderStatus',  'queryOrderStatus');
-    route::get('/eInvoice/{order_no}',  'eInvoice');
-    route::get('/shipToProductShip',  'shipToProductShip');
-    route::get('/getLogisticsStatus',  'getLogisticsStatus');
+route::group([
+    'controller' => TestController::class,
+    'prefix' => 'test',
+    'as' => 'test.'
+], function () {
+    route::get('/order',  'orderStatus')->name('orderStatus');
+    route::get('/queryOrderStatus',  'queryOrderStatus')->name('queryOrderStatus');
+    route::get('/eInvoice/{order_no}',  'eInvoice')->name('eInvoice');
+    route::get('/shipToProductShip',  'shipToProductShip')->name('shipToProductShip');
+    route::get('/getLogisticsStatus',  'getLogisticsStatus')->name('getLogisticsStatus');
 });
