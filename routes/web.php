@@ -150,4 +150,5 @@ route::group(['controller' => TestController::class,'prefix' => 'test'], functio
     route::get('/queryOrderStatus',  'queryOrderStatus');
     route::get('/eInvoice/{order_no}',  'eInvoice');
     route::get('/shipToProductShip',  'shipToProductShip');
+    route::get('/getLogisticsStatus',  'getLogisticsStatus');
 });

@@ -77,7 +77,7 @@ class OrderStatus extends Command
      * @param int $encType 編碼方式 (1=sha256, 0=md5)
      * @return string
      */
-    function ecpayCheckMacValue(array $params, $hashKey, $hashIV, $encType = 1)
+    public function ecpayCheckMacValue(array $params, $hashKey, $hashIV, $encType = 1)
     {
         // 0) 如果資料中有 null，必需轉成空字串
         $params = array_map('strval', $params);

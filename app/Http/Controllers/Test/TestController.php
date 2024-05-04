@@ -14,13 +14,13 @@ use App\Models\OrderShip;
 use App\Models\Ship;
 use App\Models\Product;
 use App\Models\ProductShip;
+use App\Models\LogisticsStatus;
 
 use App\Services\EcPayService;
+use Carbon\Carbon;
 
 class TestController extends Controller
 {
-
-
     // 檢查訂單狀態
     public function queryOrderStatus(){
         Log::info('=== Test 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
@@ -70,6 +70,53 @@ class TestController extends Controller
         }
         Log::info('=== Test 訂單狀態更新完成 ===');
     }
+
+    public function getLogisticsStatus()
+    {
+
+        Log::info('=== 物流訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
+        $order = Order::where('pay_logistics_id', '!=', '')->first();
+
+        if (config('config.APP_ENV') == 'local') {
+            $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
+            $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
+        } else {
+            $logisticsUrl = config('config.EXPRESS_LOGISTICS');
+            $merchantId = config('config.EXPRESS_MERCHANT_ID');
+        }
+
+        foreach ($order as $key => $value) {
+            $logisticsData = [
+                'MerchantID' => $merchantId,
+                "AllPayLogisticsID" => $value['pay_logistics_id'],
+                "TimeStamp" => Carbon::now()->timestamp,
+            ];
+
+            if (config('config.APP_ENV') == 'local') {
+                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
+            } else {
+                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
+            }
+
+            $logisticsData['CheckMacValue'] = $checkMacValue;
+
+            $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
+
+            $logisticsArray = [];
+            parse_str($logistics, $logisticsArray);
+
+            $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
+            $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
+
+            $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
+            if($logisticsArray['LogisticsStatus'] == 2){
+                $orderData->logistics_status = 2;
+                $orderData->save();
+            }
+        }
+        Log::info('=== 物流訂單狀態更新完成 ===');
+    }
+
 
     // 檢查電子發票
     public function eInvoice(Request $request, $order_no){
