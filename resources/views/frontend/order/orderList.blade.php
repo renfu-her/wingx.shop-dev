@@ -58,7 +58,9 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             @if (!empty($value->cvs_store_id))
-                                                <span>付款方式：貨到付款 <a href="{{ route('order.data.status', $value->pay_logistics_id) }}" target="_blink">貨態查詢</a></span>
+                                                <span>付款方式：貨到付款 <a
+                                                        href="{{ route('order.data.status', $value->pay_logistics_id) }}"
+                                                        target="_blink">貨態查詢</a></span>
                                             @else
                                                 <span>付款方式：{{ $value->payment_name }}</span>
                                             @endif
@@ -80,10 +82,18 @@
                                         </div>
                                         <div class="col-12 col-md-3" style="font-weight: 600">
                                             @if (!empty($value->cvs_store_id))
-                                                <span class="text-icon" style="color: green">出貨中</span>
+                                                @if ($value->logistics_status == 2030 || $value->logistics_status == 3024)
+                                                    <span class="text-icon" style="color: lightgreen">商品已送至物流中心</span>
+                                                @elseif($value->logistics_status == 2063 || $value->logistics_status == 2073 || $value->logistics_status == 3018)
+                                                    <span class="text-icon" style="color: green">商品已送達門市</span>
+                                                @elseif($value->logistics_status == 2067 || $value->logistics_status == 3022)
+                                                    <span class="text-icon" style="color: blue">消費者成功取件</span>
+                                                @elseif($value->logistics_status == 2074 || $value->logistics_status == 3020)
+                                                    <span class="text-icon" style="color: red">消費者七天未取件</span>
+                                                @endif
                                             @else
                                                 @if ($value->status == 0 || $value->status == 9)
-                                                    <span class="text-icon" style="color: green">待付款</span>
+                                                    <span class="text-icon" style="color: lightgreen">待付款</span>
                                                 @elseif($value->status == 1)
                                                     <span class="text-icon" style="color: blue">完成付款</span>
                                                 @elseif($value->status == 2)
