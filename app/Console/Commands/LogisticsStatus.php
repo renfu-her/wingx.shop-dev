@@ -63,16 +63,7 @@ class LogisticsStatus extends Command
     }
 
 
-    /**
-     * 綠界檢查碼產生器
-     *
-     * @author Liao San Kai
-     * @param array $params 表單資料
-     * @param string $hashKey hashKey
-     * @param string $hashIV hashIV
-     * @param int $encType 編碼方式 (1=sha256, 0=md5)
-     * @return string
-     */
+    // 檢查碼
     public function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
     {
         // 0) 如果資料中有 null，必需轉成空字串
@@ -93,6 +84,8 @@ class LogisticsStatus extends Command
         // 5) 做 URLEncode
         $paramsString = urlencode($paramsString);
 
+        // dd($paramsString);
+
         // 6) 轉為全小寫
         $paramsString = strtolower($paramsString);
 
@@ -102,7 +95,9 @@ class LogisticsStatus extends Command
         $paramsString = str_replace($search, $replace, $paramsString);
 
         // 8) 進行編碼
-        $paramsString = $encType ? hash('sha256', $paramsString) : md5($paramsString);
+        // dd(md5($paramsString));
+        // $paramsString = $encType ? hash('sha256', $paramsString) : md5($paramsString);
+        $paramsString = md5($paramsString);
 
         // 9) 轉為全大寫後回傳
         return strtoupper($paramsString);
