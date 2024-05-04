@@ -21,7 +21,7 @@ class LogisticsStatus extends Command
     {
 
         Log::info('=== 物流訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
-        $order = Order::where('pay_logistics_id', '!=', '')->first();
+        $order = Order::where('pay_logistics_id', '!=', '')->get();
 
         if (config('config.APP_ENV') == 'local') {
             $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
