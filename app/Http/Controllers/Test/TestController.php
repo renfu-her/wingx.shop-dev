@@ -106,7 +106,7 @@ class TestController extends Controller
             parse_str($logistics, $logisticsArray);
 
             $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
-            dd($logisticsStatus, $logisticsArray);
+            // dd($logisticsStatus, $logisticsArray);
             $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
 
             $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
