@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use TsaiYiHua\ECPay\QueryTradeInfo;
 use Illuminate\Support\Facades\Http;
+use App\Models\LogisticsStatus as LogisticsStatusData;
 
 use App\Models\Order;
 use Carbon\Carbon;
@@ -50,7 +51,7 @@ class LogisticsStatus extends Command
             $logisticsArray = [];
             parse_str($logistics, $logisticsArray);
 
-            $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
+            $logisticsStatus = LogisticsStatusData::where('code', $logisticsArray['LogisticsStatus'])->first();
             // dd($logisticsStatus, $logisticsArray);
             $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
 
