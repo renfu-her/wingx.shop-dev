@@ -22,12 +22,13 @@ use Carbon\Carbon;
 class TestController extends Controller
 {
     // 檢查訂單狀態
-    public function queryOrderStatus(){
+    public function queryOrderStatus()
+    {
         Log::info('=== Test 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
         $orders = Order::whereIn('status', [0, 9])->get();
         foreach ($orders as $key => $value) {
 
-            if(config('config.APP_ENV') == 'local'){
+            if (config('config.APP_ENV') == 'local') {
                 $url = 'https://payment-stage.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
                 $merchantId = config('config.ECPAY_MERCHANT_ID_DEV');
                 $hashKey = config('config.ECPAY_HASH_KEY_DEV');
@@ -54,7 +55,7 @@ class TestController extends Controller
 
             parse_str($status->body(), $orderStatusArray);
 
-            if($orderStatusArray['TradeStatus'] == 1){
+            if ($orderStatusArray['TradeStatus'] == 1) {
                 $order = Order::where('order_no', $value->order_no)->first();
                 $order->status = 1;
                 $order->save();
@@ -66,7 +67,6 @@ class TestController extends Controller
             Log::info('status: ' . $orderStatusArray['TradeStatus']);
             Log::info('= order status end =');
             sleep(5);
-
         }
         Log::info('=== Test 訂單狀態更新完成 ===');
     }
@@ -106,25 +106,25 @@ class TestController extends Controller
             parse_str($logistics, $logisticsArray);
 
             $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
+            dd($logisticsStatus, $logisticsArray);
             $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
 
             $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
-            if($logisticsArray['LogisticsStatus'] == 2){
-                $orderData->logistics_status = 2;
-                $orderData->save();
-            }
+            $orderData->logistics_status = $logisticsArray['LogisticsStatus'];
+            $orderData->save();
         }
         Log::info('=== 物流訂單狀態更新完成 ===');
     }
 
 
     // 檢查電子發票
-    public function eInvoice(Request $request, $order_no){
+    public function eInvoice(Request $request, $order_no)
+    {
 
         $ecpayService = new EcPayService();
         $eInvoice = $ecpayService->ecpayInvoice($order_no);
 
-        if($eInvoice['TransCode'] == 1){
+        if ($eInvoice['TransCode'] == 1) {
 
             $e_invoice = $eInvoice['Data'];
 
@@ -133,7 +133,6 @@ class TestController extends Controller
             $order->invoice_random_no = $e_invoice['RandomNumber'];
             $order->save();
         };
-
     }
 
     // ships to order_ships
@@ -144,22 +143,19 @@ class TestController extends Controller
 
         $ships = Ship::all();
 
-        foreach($products as $product){
+        foreach ($products as $product) {
 
             $product_id = $product['id'];
 
-            foreach($ships as $ship){
+            foreach ($ships as $ship) {
                 $createOrderShip = [
                     'product_id' => $product_id,
                     'ship_id' => $ship['id'],
                     'price' => $ship['ship_price'],
                     'status' => 1
                 ];
-                ProductShip::create($createOrderShip);                
+                ProductShip::create($createOrderShip);
             }
-
         }
-
     }
-
 }
