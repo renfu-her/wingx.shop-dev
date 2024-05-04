@@ -380,7 +380,7 @@ class OrderController extends Controller
     }
 
     // 檢查碼
-    private function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
+    public function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
     {
         // 0) 如果資料中有 null，必需轉成空字串
         $params = array_map('strval', $params);
