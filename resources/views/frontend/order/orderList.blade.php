@@ -82,7 +82,9 @@
                                         </div>
                                         <div class="col-12 col-md-3" style="font-weight: 600">
                                             @if (!empty($value->cvs_store_id))
-                                                @if ($value->logistics_status == 2030 || $value->logistics_status == 3024)
+                                                @if($value->logistics_status == 300)
+                                                    <span class="text-icon" style="color: darkgreen">訂單處理中(已收到訂單資料)</span>
+                                                @elseif ($value->logistics_status == 2030 || $value->logistics_status == 3024)
                                                     <span class="text-icon" style="color: darkgreen">商品已送至物流中心</span>
                                                 @elseif($value->logistics_status == 2063 || $value->logistics_status == 2073 || $value->logistics_status == 3018)
                                                     <span class="text-icon" style="color: green">商品已送達門市</span>
