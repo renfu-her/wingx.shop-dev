@@ -44,6 +44,7 @@ class Order extends Model
         'amount',
         'tax',
         'manual_status',
-        'cvs_store_id'
+        'cvs_store_id',
+        'logistics_status'
     ];
 }
