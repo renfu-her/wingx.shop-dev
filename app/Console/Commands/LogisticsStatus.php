@@ -21,7 +21,7 @@ class LogisticsStatus extends Command
     {
 
         Log::info('=== 物流訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
-        $order = Order::where('pay_logistics_id', '!=', '')->get();
+        $order = Order::where('pay_logistics_id', '!=', null)->get();
 
         if (config('config.APP_ENV') == 'local') {
             $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
@@ -52,13 +52,12 @@ class LogisticsStatus extends Command
             parse_str($logistics, $logisticsArray);
 
             $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
+            // dd($logisticsStatus, $logisticsArray);
             $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
 
             $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
-            if($logisticsArray['LogisticsStatus'] == 2){
-                $orderData->logistics_status = 2;
-                $orderData->save();
-            }
+            $orderData->logistics_status = $logisticsArray['LogisticsStatus'];
+            $orderData->save();
         }
         Log::info('=== 物流訂單狀態更新完成 ===');
     }
