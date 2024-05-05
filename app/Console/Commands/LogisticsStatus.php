@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Log;
 use TsaiYiHua\ECPay\QueryTradeInfo;
 use Illuminate\Support\Facades\Http;
 use App\Models\LogisticsStatus as LogisticsStatusData;
+use App\Models\Order; // Add this line
 
-use App\Models\Order;
 use Carbon\Carbon;
 
 class LogisticsStatus extends Command
@@ -21,7 +21,9 @@ class LogisticsStatus extends Command
     public function handle()
     {
         Log::info('=== 物流訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
-        $order = Order::where('pay_logistics_id', '!=', null)->get();
+        $order = Order::where('pay_logistics_id', '!=', null)
+            ->whereNotIn('pay_logistics_id', [2067, 3022, 2074, 3020])
+            ->get();
 
         if (config('config.APP_ENV') == 'local') {
             $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
