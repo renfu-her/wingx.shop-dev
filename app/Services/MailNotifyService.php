@@ -6,6 +6,7 @@ use App\Services\BaseService;
 
 use App\Models\MailNotify;
 use App\Models\Member;
+use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -44,6 +45,34 @@ class MailNotifyService extends BaseService
         ];
 
         Mail::send('frontend.email.email_verify', $data, function ($message) use ($data) {
+            $message->to($data['email'])->bcc($this->bcc_list)
+                ->subject($data['subject']);
+        });
+    }
+
+    // 寄送 Order 通知信
+    public function order_notify(int $order_id = 0)
+    {
+        // 驗證 MailNotify 取得內容
+        $mailNotify = MailNotify::find(2);
+
+        $order = Order::find($order_id);
+        $member = Member::find($order->member_id);
+        $content = $mailNotify->content;
+        $website =  config('app.url') . '/order/' . $order->order_no;
+        $content = str_replace(
+            ["\n", '{name}', '{website}', '{order_no}', '{order_date}', '{order_total}'],
+            ["<br>", $member->name, $website, $order->order_no, $order->created_at, $order->total],
+            $content
+        );
+
+        $data = [
+            'email' => trim($member->email),
+            'content' => $content,
+            'subject' => $mailNotify->subject,
+        ];
+
+        Mail::send('frontend.email.order_notify', $data, function ($message) use ($data) {
             $message->to($data['email'])->bcc($this->bcc_list)
                 ->subject($data['subject']);
         });
