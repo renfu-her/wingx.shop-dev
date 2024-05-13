@@ -60,7 +60,8 @@
                                             @if (!empty($value->cvs_store_id))
                                                 <span>付款方式：貨到付款 <a
                                                         href="{{ route('order.data.status', $value->pay_logistics_id) }}"
-                                                        target="_blink">貨態查詢</a></span>
+                                                        target="_blink">貨態查詢</a>
+                                                </span>
                                                 <span>
                                                     @if (!empty($value->cvs_store_id))
                                                         <a href="{{ route('order.cancelOrder', $value->pay_logistics_id) }}"
