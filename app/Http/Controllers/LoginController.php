@@ -111,7 +111,6 @@ class LoginController extends Controller
         Auth::login($member);
 
         dd(Auth::user()->id);
-
         return redirect('/');
     }
 
