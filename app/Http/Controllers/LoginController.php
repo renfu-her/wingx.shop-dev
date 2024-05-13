@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Member;
 use App\Models\Product;
@@ -107,10 +108,9 @@ class LoginController extends Controller
             return redirect('/')->with(['message' => 'E-mail尚未認證，請至信箱收信或重發認證信']);
         }
 
-        session()->put('member_id', $member->id);
-        session()->put('member_email', $member->email);
-        session()->put('member_name', $member->name);
-    
+        Auth::login($member, true);
+
+        dd(Auth::user()->id);
 
         return redirect('/');
     }
