@@ -108,7 +108,7 @@ class LoginController extends Controller
             return redirect('/')->with(['message' => 'E-mail尚未認證，請至信箱收信或重發認證信']);
         }
 
-        Auth::login($member, true);
+        Auth::login($member);
 
         dd(Auth::user()->id);
 
