@@ -63,7 +63,7 @@
                                                         target="_blink">貨態查詢</a></span>
                                                 <span>
                                                     @if (!empty($value->cvs_store_id))
-                                                        <a href="{{ route('order.cancalOrder', $value->pay_logistics_id) }}"
+                                                        <a href="{{ route('order.cancelOrder', $value->pay_logistics_id) }}"
                                                             target="_blink">取消貨品</a>
                                                     @endif
                                                 </span>
