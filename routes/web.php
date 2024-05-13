@@ -73,6 +73,7 @@ route::group(
         route::get('/list', 'list')->name('list');
         route::post('/store', 'store')->name('data.store');
         route::get('/status/{logisticsId}', 'orderStatus')->name('data.status');
+        route::post('/cancel', 'cancelOrder')->name('cancelOrder');
     }
 );
 

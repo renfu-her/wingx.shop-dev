@@ -379,6 +379,18 @@ class OrderController extends Controller
         );
     }
 
+    // 取消貨品寄送
+    public function cancelOrder(Request $request)
+    {
+        $data = $request->all();
+
+        $order = Order::where('pay_logistics_id', $data['AllPayLogisticsID'])->first();
+        $order->status = 3;
+        $order->save();
+
+        return redirect()->route('order.list');
+    }
+
     // 檢查碼
     public function checkMacValue(array $params, $hashKey, $hashIV, $encType = 1)
     {

@@ -61,6 +61,12 @@
                                                 <span>付款方式：貨到付款 <a
                                                         href="{{ route('order.data.status', $value->pay_logistics_id) }}"
                                                         target="_blink">貨態查詢</a></span>
+                                                <span>
+                                                    @if (!empty($value->cvs_store_id))
+                                                        <a href="{{ route('order.cancalOrder', $value->pay_logistics_id) }}"
+                                                            target="_blink">取消貨品</a>
+                                                    @endif
+                                                </span>
                                             @else
                                                 <span>付款方式：{{ $value->payment_name }}</span>
                                             @endif
@@ -82,7 +88,7 @@
                                         </div>
                                         <div class="col-12 col-md-3" style="font-weight: 600">
                                             @if (!empty($value->cvs_store_id))
-                                                @if($value->logistics_status == 0)
+                                                @if ($value->logistics_status == 0)
                                                     <span class="text-icon" style="color: gray">尚未收到物流資料</span>
                                                 @elseif($value->logistics_status == 300)
                                                     <span class="text-icon" style="color: darkgreen">訂單處理中(已收到訂單資料)</span>
@@ -94,6 +100,9 @@
                                                     <span class="text-icon" style="color: blue">消費者成功取件</span>
                                                 @elseif($value->logistics_status == 2074 || $value->logistics_status == 3020)
                                                     <span class="text-icon" style="color: red">消費者七天未取件</span>
+                                                @endif
+                                                @if ($value->status == 3)
+                                                    <span class="text-icon" style="color: #aaa">取消訂單</span>
                                                 @endif
                                             @else
                                                 @if ($value->status == 0 || $value->status == 9)

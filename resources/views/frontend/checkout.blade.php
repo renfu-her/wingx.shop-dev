@@ -419,7 +419,7 @@
                         url + "?MerchantID=" + merchantID +
                         "&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
-                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}"
+                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}?sessionID={{ session()->getId() }}"
                     )
                     $('.cart-map').show()
                 } else {

@@ -7,6 +7,8 @@ use App\Services\BaseService;
 use App\Models\MailNotify;
 use App\Models\Member;
 use App\Models\Order;
+use App\Models\OrderDetail;
+
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -54,15 +56,29 @@ class MailNotifyService extends BaseService
     public function order_notify(int $order_id = 0)
     {
         // 驗證 MailNotify 取得內容
-        $mailNotify = MailNotify::find(2);
+        $mailNotify = MailNotify::find(3);
 
         $order = Order::find($order_id);
         $member = Member::find($order->member_id);
         $content = $mailNotify->content;
+
+        $orderDetail = OrderDetail::where('order_id', $order->id)->get();
+        $orderDetails = [];
+        foreach ($orderDetail as $key => $value) {
+            $data = [
+                'product_name' => $value->name,
+                'qty' => $value->qty,
+                'price' => $value->price,
+                'subTotal' => $value->sub_total,
+            ];
+
+            array_push($data, $orderDetails);
+        }
+
         $website =  config('app.url') . '/order/' . $order->order_no;
         $content = str_replace(
-            ["\n", '{name}', '{website}', '{order_no}', '{order_date}', '{order_total}'],
-            ["<br>", $member->name, $website, $order->order_no, $order->created_at, $order->total],
+            ["\n", '{name}', '{website}', '{order_no}', '{order_date}', '{order_total}', '{orderDetails}'],
+            ["<br>", $member->name, $website, $order->order_no, $order->created_at, $order->total, $orderDetails],
             $content
         );
 
@@ -77,5 +93,4 @@ class MailNotifyService extends BaseService
                 ->subject($data['subject']);
         });
     }
-
 }
