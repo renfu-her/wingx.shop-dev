@@ -13,4 +13,10 @@ class LogisticsStatus extends Model
         'code',
         'message'
     ];
+
+    // 定義反向關聯
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'logistics_status', 'code');
+    }
 }

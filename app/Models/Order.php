@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'order_no',
         'member_id',
         'coupon_id',
@@ -47,4 +48,16 @@ class Order extends Model
         'cvs_store_id',
         'logistics_status'
     ];
+
+    // 自定義關聯方法
+    public function logisticsStatus(): BelongsTo
+    {
+        return $this->belongsTo(LogisticsStatus::class, 'logistics_status', 'code');
+    }
+
+    // 添加一個屬性來獲取 logistics_status 的 message
+    public function getLogisticsMessageAttribute(): ?string
+    {
+        return $this->logisticsStatus ? $this->logisticsStatus->message : null;
+    }
 }
