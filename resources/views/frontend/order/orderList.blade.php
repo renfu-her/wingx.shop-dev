@@ -64,8 +64,10 @@
                                                 </span>
                                                 <span>
                                                     @if (!empty($value->cvs_store_id))
-                                                        <a href="{{ route('order.cancelOrder', $value->pay_logistics_id) }}"
-                                                            target="_blink">取消貨品</a>
+                                                        @if ($value->logistics_status == 300)
+                                                            <a href="{{ route('order.cancelOrder', $value->pay_logistics_id) }}"
+                                                                target="_blink">取消貨品</a>
+                                                        @endif
                                                     @endif
                                                 </span>
                                             @else
@@ -102,7 +104,8 @@
                                                 @elseif($value->logistics_status == 2074 || $value->logistics_status == 3020)
                                                     <span class="text-icon" style="color: red">消費者七天未取件</span>
                                                 @else
-                                                    <span class="text-icon" style="color: red">{{ $value->logistics_message }}</span>
+                                                    <span class="text-icon"
+                                                        style="color: red">{{ $value->logistics_message }}</span>
                                                 @endif
                                                 @if ($value->status == 3)
                                                     <span class="text-icon" style="color: #aaa">取消訂單</span>
