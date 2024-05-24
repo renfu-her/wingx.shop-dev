@@ -101,6 +101,8 @@
                                                     <span class="text-icon" style="color: blue">消費者成功取件</span>
                                                 @elseif($value->logistics_status == 2074 || $value->logistics_status == 3020)
                                                     <span class="text-icon" style="color: red">消費者七天未取件</span>
+                                                @else
+                                                    <span class="text-icon" style="color: red">{{ $value->logistics_message }}</span>
                                                 @endif
                                                 @if ($value->status == 3)
                                                     <span class="text-icon" style="color: #aaa">取消訂單</span>
