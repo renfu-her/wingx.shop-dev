@@ -30,7 +30,7 @@ class XmlToJson extends Command
 
         Log::info('=== XmlToJson start ===');
 
-        $url = "https://invoice.etax.nat.gov.tw/invoice.xml";
+        $url = public_path("invoice.xml");
         $xmlString = file_get_contents($url);
 
         if ($xmlString) {
