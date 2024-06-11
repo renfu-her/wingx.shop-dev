@@ -15,7 +15,7 @@ class Cros
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        $response->header('Access-Control-Allow-Origin', 'https://mfme.map.com.tw');
+        $response->header('Access-Control-Allow-Origin', '*');
         return $response;
     }
 }
