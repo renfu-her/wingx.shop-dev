@@ -13,8 +13,8 @@ class MapController extends Controller
     public function rewrite(Request $request)
     {
         $dataArray = $request->all();
-        // session_id($dataArray['sessionID']);
-        // session_start();
+        session_id($dataArray['sessionID']);
+        session_start();
 
         $data = [
             'message' => $dataArray
@@ -23,7 +23,8 @@ class MapController extends Controller
         // 轉換為 JSON 字符串
         $dataArrayJson = json_encode($data);
 
+        // dd($dataArray['sessionID']);
 
-        return view('frontend.mapReturn', compact('dataArrayJson'));
+        return view('frontend.mapReturn', compact('dataArrayJson', 'dataArray'));
     }
 }

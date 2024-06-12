@@ -19,6 +19,7 @@ use TsaiYiHua\ECPay\Checkout;
 use Pharaoh\Express\Facades\Express;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -224,6 +225,7 @@ class OrderController extends Controller
     public function list(Request $request)
     {
         $member_id = Auth::guard('member')->user()->id;
+        
         $member = Member::find($member_id);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();

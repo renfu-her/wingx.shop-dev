@@ -110,6 +110,7 @@ class LoginController extends Controller
         // 嘗試登入
         if (Auth::guard('member')->attempt($credentials)) {
             
+            // dd(session()->regenerate(), auth()->guard('member')->user());
             session()->regenerate();
 
             return redirect()->intended('/');

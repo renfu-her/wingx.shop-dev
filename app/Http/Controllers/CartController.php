@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    
+    public function __construct()
+    {
+           
+    }
+
     // cart
     public function index(Request $request)
     {
@@ -86,7 +92,9 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
 
-        $member_id = Auth::guard('member')->user()->id;
+        // $this->middleware('auth:member');
+        // dd(auth()->guard('member')->user());
+        $member_id = Auth::guard('member')->user()->id ?? '';
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }

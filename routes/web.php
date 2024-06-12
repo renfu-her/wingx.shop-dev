@@ -16,6 +16,7 @@ use App\Http\Controllers\QAController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\InvoiceLotteryController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\SessionController;
 
 use App\Http\Controllers\Api\ImportDataController;
 
@@ -98,6 +99,7 @@ route::get('/contact-us', [ContactController::class, 'index']);
 
 // 購物車詳細資料
 route::get('/checkout', [CartController::class, 'checkout']);
+route::post('/store-session-id', [SessionController::class, 'store'])->name('storeSessionId');
 
 // Q&A 列表
 route::get('/qa', [QAController::class, 'index'])->name('qaIndex');
