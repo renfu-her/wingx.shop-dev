@@ -185,7 +185,6 @@ class ProductIndexController extends Controller
             $options = '2';
         }
 
-
         $html = '<div class="input-group mb-3 col-4" id="input-form-row' . $makeNum . '" >';
         $html .= '<input type="text" name="options' . $options . '[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off" value="' . $data['name'] . '" >';
 

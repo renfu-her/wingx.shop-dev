@@ -64,7 +64,8 @@
                                     <!-- Actions -->
                                     <td class="f-h-0">
                                         <div class="d-flex justify-content-between flex-column align-items-end h-100">
-                                            <i class="ri-close-circle-line ri-lg" style="cursor: pointer" onclick="cartDelete({{ $key }})"></i>
+                                            <i class="ri-close-circle-line ri-lg" style="cursor: pointer"
+                                                onclick="cartDelete({{ $key }})"></i>
                                             <p class="fw-bolder mt-3 m-sm-0">${{ number_format($value['sub_total']) }}</p>
                                         </div>
                                     </td>
@@ -108,12 +109,12 @@
                     <!-- Checkout Button-->
                     <a href="/category/1" class="btn btn-white w-100 text-center mt-3" role="button"><i
                             class="ri-secure-payment-line align-bottom"></i> 繼續購物</a>
-                    @if (Session::has('member_id'))
+                    @if (auth()->guard('member')->check())
                         <a href="/checkout" class="btn btn-orange w-100 text-center mt-3" role="button"><i
                                 class="ri-paypal-line align-bottom"></i> 結帳</a>
                     @else
-                        <a href="#" onclick="loginOnSystem()" class="btn btn-orange w-100 text-center mt-3" role="button"><i
-                                class="ri-paypal-line align-bottom"></i> 結帳</a>
+                        <a href="#" onclick="loginOnSystem()" class="btn btn-orange w-100 text-center mt-3"
+                            role="button"><i class="ri-paypal-line align-bottom"></i> 結帳</a>
                     @endif
                     <!-- Checkout Button-->
                 </div>

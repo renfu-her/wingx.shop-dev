@@ -50,7 +50,7 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a type="button" value="" id="cartMap" class="btn btn-primary">電子地圖</a>
+                                    <a type="botton" id="cartMap" value="" class="btn btn-primary">電子地圖</a>
                                 </div>
                             </div>
                             <div class="col-12" id="storeDisplay" style="display: none">
@@ -409,7 +409,7 @@
                     let appUrl = "{{ config('config.APP_ENV') }}"
                     if (appUrl == 'local') {
                         merchantID = "{{ config('config.EXPRESS_MERCHANT_ID_DEV') }}"
-                        url = "https://logistics-stage.ecpay.com.tw/Express/map"; 
+                        url = "https://logistics-stage.ecpay.com.tw/Express/map";
                     } else {
                         merchantID = "{{ config('config.EXPRESS_MERCHANT_ID') }}"
                         url = "https://logistics.ecpay.com.tw/Express/map"

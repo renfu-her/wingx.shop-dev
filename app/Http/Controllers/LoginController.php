@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Member;
 use App\Models\Product;
@@ -89,31 +90,36 @@ class LoginController extends Controller
     // 登入
     public function login(Request $request)
     {
-        $req = $request->all();
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $member = Member::where([
-            'email' => trim($req['email']),
-        ])->first();
+        // 檢查會員是否存在
+        $member = Member::where('email', $request->email)->first();
 
         if (!$member) {
-            return redirect('/')->with(['message' => 'Email 輸入錯誤']);
+            return redirect('/')->with('message', 'Email 輸入錯誤');
         }
 
-        if (!Hash::check($req['password'], $member->password)) {
-            return redirect('/')->with(['message' => '密碼輸入錯誤']);
-        }
-
+        // 檢查會員狀態
         if ($member->status != 1) {
-            return redirect('/')->with(['message' => 'E-mail尚未認證，請至信箱收信或重發認證信']);
+            return redirect('/')->with('message', 'E-mail尚未認證，請至信箱收信或重發認證信');
         }
 
-        session()->put('member_id', $member->id);
-        session()->put('member_email', $member->email);
-        session()->put('member_name', $member->name);
-    
+        // 嘗試登入
+        if (Auth::guard('member')->attempt($credentials)) {
+            
+            session()->regenerate();
 
-        return redirect('/');
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => '提供的憑據不匹配我們的記錄。',
+        ]);
     }
+
 
     // check email exist
     public function check_email(Request $request)

@@ -15,6 +15,7 @@ use App\Services\EcPayService;
 
 use MingJSHK\NewebPay\Facades\NewebPay;
 use Pharaoh\Express\Facades\Express;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -22,7 +23,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         if (!$member_id) {
             redirect('/')->with(['message' => '請先登入會員']);
         }
@@ -68,7 +69,7 @@ class CartController extends Controller
     public function order(Request $request)
     {
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
 
         $req = $request->all();
         $req['member_id'] = $member_id;
@@ -85,7 +86,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }

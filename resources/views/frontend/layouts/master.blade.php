@@ -232,7 +232,8 @@
                                     <div>
                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
                                             {{ $value['prod_name'] }}
-                                            <i class="ri-close-line" style="cursor: pointer" onclick="cartDelete({{ $key }})"></i>
+                                            <i class="ri-close-line" style="cursor: pointer"
+                                                onclick="cartDelete({{ $key }})"></i>
                                         </h6>
                                         <small class="d-block fw-bolder">{!! $value['items'] !!}</small>
                                         <small class="d-block text-muted fw-bolder">數量: {{ $value['qty'] }}</small>
@@ -248,7 +249,7 @@
                         <p class="m-0 fw-bolder">總金額</p>
                         <p class="m-0 fw-bolder">$ {{ $total }}</p>
                     </div>
-                    @if (Session::has('member_id'))
+                    @if (auth()->guard('member')->check())
                         <a href="/checkout"
                             class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
                     @else

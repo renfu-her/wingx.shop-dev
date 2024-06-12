@@ -249,7 +249,7 @@
                         <p class="m-0 fw-bolder">總金額</p>
                         <p class="m-0 fw-bolder">$ {{ $total }}</p>
                     </div>
-                    @if (Session::has('member_id'))
+                    @if (auth()->guard('member')->check())
                         <a href="/checkout"
                             class="btn btn-orange btn-orange-chunky mt-5 mb-2 d-block text-center">結帳</a>
                     @else

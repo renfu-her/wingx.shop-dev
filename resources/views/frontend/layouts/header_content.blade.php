@@ -67,7 +67,7 @@
                 </button>
             </li> --}}
 
-            @if (Session::has('member_id'))
+            @if (auth()->guard('member')->check())
                 <!-- 使用者登登出 -->
                 <li class="ms-1 d-lg-inline-block">
                     <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="/logout">
@@ -76,7 +76,7 @@
                 </li>
             @endif
 
-            @if (Session::has('member_id'))
+            @if (auth()->guard('member')->check())
                 <!-- 直接導向購物車列表以頁面 -->
                 <li class="ms-1 d-lg-inline-block">
                     <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/order/list">

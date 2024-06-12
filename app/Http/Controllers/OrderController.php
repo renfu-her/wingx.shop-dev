@@ -43,7 +43,7 @@ class OrderController extends Controller
     {
         $req = $request->all();
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }
@@ -223,7 +223,7 @@ class OrderController extends Controller
     // order list
     public function list(Request $request)
     {
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         $member = Member::find($member_id);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();

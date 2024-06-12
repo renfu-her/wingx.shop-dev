@@ -38,7 +38,7 @@ class CartService extends BaseService
     public function order()
     {
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
 
         $order = Order::create([
             'member_id' => $member_id,

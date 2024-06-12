@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         if (!$member_id) {
             redirect('/')->with(['message' => '請先登入會員']);
         }
@@ -62,7 +62,7 @@ class ProfileController extends Controller
     {
         $req = $request->all();
 
-        $member_id = session()->get('member_id');
+        $member_id = Auth::guard('member')->user()->id;
         if (!$member_id) {
             redirect('/')->with(['message' => '請先登入會員']);
         }
@@ -79,7 +79,7 @@ class ProfileController extends Controller
             'address' => $req['address'],
         ]);
 
-        if(trim($req['password']) != ''){
+        if (trim($req['password']) != '') {
             $member->update([
                 'password' => Hash::make($req['password']),
             ]);

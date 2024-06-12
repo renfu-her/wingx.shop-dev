@@ -13,8 +13,8 @@ class MapController extends Controller
     public function rewrite(Request $request)
     {
         $dataArray = $request->all();
-        session_id($dataArray['sessionID']);
-        session_start();
+        // session_id($dataArray['sessionID']);
+        // session_start();
 
         $data = [
             'message' => $dataArray
