@@ -256,12 +256,8 @@
     <script src="{{ asset('frontend/js/twzipcode.min.js') }}"></script>
     <script>
         $(function() {
-            // new TwCitySelector({
-            //     el: '.city-selector-set',
-            //     elCounty: '.county', // 在 el 裡查找 element
-            //     elDistrict: '.district', // 在 el 裡查找 element
-            //     elZipcode: '.zipcode' // 在 el 裡查找 element
-            // });
+
+            $.post("https://demo.dev-laravel.co/api/map/remove/{{ auth()->guard('member')->user()->id }}");
 
             const twzipcode = new TWzipcode();
 
@@ -419,7 +415,7 @@
                         url + "?MerchantID=" + merchantID +
                         "&LogisticsType=CVS&LogisticsSubType=" +
                         shipName +
-                        "&IsCollection=Y&ServerReplyURL={{ route('cart.map.rewrite') }}?sessionID={{ session()->getId() }}"
+                        "&IsCollection=Y&ServerReplyURL=https://demo.dev-laravel.co/api/map/rewrite?memberId={{ auth()->guard('member')->user()->id }}"
                     )
                     $('.cart-map').show()
                 } else {
@@ -442,27 +438,56 @@
         }
 
         //MARK: returnedData, json to array
-        window.addEventListener('message', function(event) {
+        // window.addEventListener('message', function(event) {
 
-            if (event.data.message != undefined) {
-                console.log(event.data.message);
-                // let msg = JSON.parse(event.data.message);
+        //     if (event.data.message != undefined) {
+        //         console.log(event.data.message);
+        //         // let msg = JSON.parse(event.data.message);
 
-                const msg = event.data.message;
+        //         const msg = event.data.message;
 
-                $('input[name=LogisticsSubType]').val(msg.LogisticsSubType);
-                $('input[name=CVSStoreID]').val(msg.CVSStoreID);
-                $('input[name=CVSStoreName]').val(msg.CVSStoreName);
-                $('input[name=CVSAddress]').val(msg.CVSAddress);
-                $('input[name=CVSTelephone]').val(msg.CVSTelephone);
-                $('input[name=CVSOutSide]').val(msg.CVSOutSide);
+        //         $('input[name=LogisticsSubType]').val(msg.LogisticsSubType);
+        //         $('input[name=CVSStoreID]').val(msg.CVSStoreID);
+        //         $('input[name=CVSStoreName]').val(msg.CVSStoreName);
+        //         $('input[name=CVSAddress]').val(msg.CVSAddress);
+        //         $('input[name=CVSTelephone]').val(msg.CVSTelephone);
+        //         $('input[name=CVSOutSide]').val(msg.CVSOutSide);
 
-                $('#storeDisplay').show();
-                $('#CVSStoreID').html('代號：' + msg.CVSStoreID);
-                $('#CVSStoreName').html('名稱：' + msg.CVSStoreName);
-                $('#CVSAddress').html('地址：' + msg.CVSAddress);
-                $('#CVSTelephone').html('電話：' + msg.CVSTelephone);
-            }
-        });
+        //         $('#storeDisplay').show();
+        //         $('#CVSStoreID').html('代號：' + msg.CVSStoreID);
+        //         $('#CVSStoreName').html('名稱：' + msg.CVSStoreName);
+        //         $('#CVSAddress').html('地址：' + msg.CVSAddress);
+        //         $('#CVSTelephone').html('電話：' + msg.CVSTelephone);
+        //     }
+        // });
+
+
+
+        let intervalId = setInterval(function() {
+            $.post('https://demo.dev-laravel.co/api/map/logistics', {
+                memberId: "{{ auth()->guard('member')->user()->id }}"
+            }, function(res) {
+                console.log(res.status);
+                if (res.status == 'success') {
+                    const msg = res.data;
+
+                    $('input[name=LogisticsSubType]').val(msg.logistics_sub_type);
+                    $('input[name=CVSStoreID]').val(msg.cvs_store_id);
+                    $('input[name=CVSStoreName]').val(msg.cvs_store_name);
+                    $('input[name=CVSAddress]').val(msg.cvs_address);
+                    $('input[name=CVSTelephone]').val(msg.cvs_telephone);
+                    $('input[name=CVSOutSide]').val(msg.cvs_out_side);
+
+                    $('#CVSStoreID').html('代號：' + msg.cvs_store_id);
+                    $('#CVSStoreName').html('名稱：' + msg.cvs_store_name);
+                    $('#CVSAddress').html('地址：' + msg.cvs_address);
+                    $('#CVSTelephone').html('電話：' + msg.cvs_telephone);
+                    $('#storeDisplay').show();
+
+                    // 停止定時器
+                    clearInterval(intervalId);
+                }
+            });
+        }, 1000);
     </script>
 @endsection

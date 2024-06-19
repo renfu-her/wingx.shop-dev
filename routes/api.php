@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\ProductOrderController;
 use App\Http\Controllers\Api\PolicyAdminController;
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\LogisticsController;
 use App\Http\Controllers\InvoiceLotteryController;
 
 route::post('/ship/price', [ShipController::class, 'getPrice']);
@@ -20,6 +21,8 @@ route::get('/invoice-lotteries', [InvoiceLotteryController::class, 'getInvoiceLo
 
 route::post('/order/setManualStatus', [OrderApiController::class, 'setManualStatus']);
 
+// 電子地圖回傳的資料
+route::post('/map/logistics', [LogisticsController::class, 'logistics'])->name('api.map.logistics');
 
 // 登入路由
 route::post('/login', [AuthApiController::class, 'login'])->name('api.login');
