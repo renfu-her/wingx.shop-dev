@@ -33,6 +33,8 @@ class OrderLogisticsStatus extends Command
             ->where('invoice_no', '')
             ->get();
 
+        Log::info($orders);
+
         Log::info('=== 物流發票 Start ==');
         foreach ($orders as $order) {
             $ecpayService = new EcPayService();
