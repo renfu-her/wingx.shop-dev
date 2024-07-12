@@ -30,7 +30,7 @@ class OrderLogisticsStatus extends Command
     public function handle()
     {
         $orders = Order::whereIn('logistics_status', [2067, 3022])
-            ->where('invoice_no', '')
+            ->whereNull('invoice_no')
             ->get();
 
         Log::info($orders);
