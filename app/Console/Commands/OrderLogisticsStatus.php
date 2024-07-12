@@ -37,6 +37,8 @@ class OrderLogisticsStatus extends Command
         foreach ($orders as $order) {
             $ecpayService = new EcPayService();
             $eInvoice = $ecpayService->ecpayInvoice($order->order_no);
+            Log::info('=== 物流發票 : ' . $order->order_no);
+            Log::info($eInvoice);
             if ($eInvoice['TransCode'] == 1) {
                 $e_invoice = $eInvoice['Data'];
                 $invoiceNo = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
