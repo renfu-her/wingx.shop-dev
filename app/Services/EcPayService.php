@@ -34,6 +34,8 @@ class EcPayService extends BaseService
             'hashKey' => $hashKey,
             'hashIv' => $hashIV,
         ]);
+
+        dd($factory);
         $postService = $factory->create('PostWithAesJsonResponseService');
 
         $order = Order::where('order_no', $order_no)->first();
