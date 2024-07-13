@@ -67,7 +67,7 @@ class EcPayService extends BaseService
                 'TotalAmount' => ($saleAmount + $taxAmount),
             ];
             $input = [
-                'MerchantID' => '2000132',
+                'MerchantID' => $merchantId,
                 'RqHeader' => [
                     'Timestamp' => time(),
                     'Revision' => '1.0.0',
@@ -81,9 +81,9 @@ class EcPayService extends BaseService
             $itemAmount = round(($itemPriceIncludeTax * $itemCount), 0);
             $saleAmount = $itemAmount;
             $data = [
-                'MerchantID' => '2000132',
+                'MerchantID' => $merchantId,
                 'RelateNumber' => 'INV' . time(),
-                'CustomerPhone' => '0911222333',
+                'CustomerPhone' => $order->mobile,
                 'Print' => '0',
                 'Donation' => '0',
                 'CarrierType' => '1',
@@ -102,7 +102,7 @@ class EcPayService extends BaseService
                 'InvType' => '07'
             ];
             $input = [
-                'MerchantID' => '2000132',
+                'MerchantID' => $merchantId,
                 'RqHeader' => [
                     'Timestamp' => time(),
                     'Revision' => '3.0.0',
