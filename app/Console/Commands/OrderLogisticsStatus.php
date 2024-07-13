@@ -38,12 +38,6 @@ class OrderLogisticsStatus extends Command
         Log::info('=== 物流發票 Start ==');
         foreach ($orders as $order) {
             $ecpayService = new EcPayService();
-            dd(
-                $ecpayService,
-                config('config.INVOICE_ID'),
-                config('config.INVOICE_HASH_KEY'),
-                config('config.INVOCE_HASH_IV')
-            );
             $eInvoice = $ecpayService->ecpayInvoice($order->order_no);
 
             Log::info('=== 物流發票 : ' . $order->order_no);

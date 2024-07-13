@@ -111,6 +111,7 @@ class EcPayService extends BaseService
 
         }
 
+        dd($postService->post($input, $url), $input, $url);
         $response = $postService->post($input, $url);
 
         return $response;
