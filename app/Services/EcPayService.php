@@ -37,8 +37,6 @@ class EcPayService extends BaseService
 
         $postService = $factory->create('PostWithAesJsonResponseService');
 
-        dd($order_no);
-
         $order = Order::where('order_no', $order_no)->first();
 
         if (!empty($order->company_uid)) {
@@ -114,7 +112,7 @@ class EcPayService extends BaseService
 
         }
 
-        dd($postService->post($input, $url), $input, $url);
+        dd($input, $url);
         $response = $postService->post($input, $url);
 
         return $response;
