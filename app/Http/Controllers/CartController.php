@@ -213,6 +213,7 @@ class CartController extends Controller
         // 使用 HTML 格式構建郵件內容
         $message = "<h1>感謝您訂購商品</h1>";
         $message .= "<table style='width: 100%; border-collapse: collapse;'>";
+        $message .= "<p>若您於垃圾信件中收到此通知，請點選上方「這不是垃圾信」的按鍵或將選擇「加入通訊錄」。</p>";
         $message .= "<tr><th style='border: 1px solid #ddd; padding: 8px;'>商品名稱</th><th style='border: 1px solid #ddd; padding: 8px;'>數量</th><th style='border: 1px solid #ddd; padding: 8px;'>價格</th><th style='border: 1px solid #ddd; padding: 8px;'>材質</th></tr>";
 
         foreach ($orderDetails as $detail) {
@@ -225,6 +226,8 @@ class CartController extends Controller
         }
 
         $message .= "</table>";
+
+        $message .= "<p style='text-align: center;'><a href='https://wingx.shop/order/list' style='display: inline-block; background-color: #6a5acd; color: white; padding: 10px 20px; text-align: center; text-decoration: none; border-radius: 5px;'>訂單查詢</a></p>"; // 新增的按鈕
 
         // 使用 Mail::html 發送 HTML 郵件
         Mail::html($message, function ($mail) use ($to, $subject) {
