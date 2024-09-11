@@ -190,7 +190,7 @@ class CartController extends Controller
             };
 
             // 獲取訂單詳細信息
-            $orderDetails = OrderDetail::where('id', $order->id)->get(); // 根據您的邏輯獲取訂單詳細信息
+            $orderDetails = OrderDetail::where('order_id', $order->id)->get(); // 根據您的邏輯獲取訂單詳細信息
 
             // 發送郵件
             $this->sendOrderConfirmationEmail($order, $orderDetails); // 傳遞 OrderDetail
