@@ -50,7 +50,7 @@
                             <!-- Email-->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <a type="botton" id="cartMap" value="" class="btn btn-primary">電子地圖</a>
+                                    <a type="botton" id="cartMap" value="" class="btn btn-primary">取件門市</a>
                                 </div>
                             </div>
                             <div class="col-12" id="storeDisplay" style="display: none">
