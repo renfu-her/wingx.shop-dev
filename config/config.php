@@ -11,9 +11,12 @@ return [
     "ECPAY_HASH_IV" => env('ECPAY_HASH_IV'),
 
     // invoice config
-    'INVOICE_ID_DEV' => '2000933',
-    'INVOICE_HASH_KEY_DEV' => 'XBERn1YOvpM9nfZc',
-    'INVOCE_HASH_IV_DEV' => 'h1ONHk4P4yqbl5LK',
+    // 'INVOICE_ID_DEV' => '2000933',
+    // 'INVOICE_HASH_KEY_DEV' => 'XBERn1YOvpM9nfZc',
+    // 'INVOCE_HASH_IV_DEV' => 'h1ONHk4P4yqbl5LK',
+    'INVOICE_ID_DEV' => '2000132',
+    'INVOICE_HASH_KEY_DEV' => 'ejCk326UnaZWKisg',
+    'INVOCE_HASH_IV_DEV' => 'q9jcZX8Ib9LM8wYk',
     'INVOICE_ID' => env('INVOICE_ID'),
     'INVOICE_HASH_KEY' => env('ECPAY_HASH_KEY'),
     'INVOCE_HASH_IV' => env('ECPAY_HASH_IV'),

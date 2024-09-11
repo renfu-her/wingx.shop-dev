@@ -8,6 +8,7 @@ use App\Services\CartService;
 
 use App\Models\Member;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\CvsStoreDetail;
 
@@ -16,14 +17,12 @@ use App\Services\EcPayService;
 use MingJSHK\NewebPay\Facades\NewebPay;
 use Pharaoh\Express\Facades\Express;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
-    
-    public function __construct()
-    {
-           
-    }
+
+    public function __construct() {}
 
     // cart
     public function index(Request $request)
@@ -190,6 +189,12 @@ class CartController extends Controller
                 $order->save();
             };
 
+            // 獲取訂單詳細信息
+            $orderDetails = OrderDetail::where('id', $order->id)->get(); // 根據您的邏輯獲取訂單詳細信息
+
+            // 發送郵件
+            $this->sendOrderConfirmationEmail($order, $orderDetails); // 傳遞 OrderDetail
+
             $status = 'success';
             return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         } else {
@@ -198,6 +203,34 @@ class CartController extends Controller
 
             return view('frontend.thanks', compact('status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
         }
+    }
+
+    private function sendOrderConfirmationEmail($order, $orderDetails)
+    {
+        $to = $order->email; // 確保訂單中有 email 欄位
+        $subject = '感謝您訂購商品';
+
+        // 使用 HTML 格式構建郵件內容
+        $message = "<h1>感謝您訂購商品</h1>";
+        $message .= "<table style='width: 100%; border-collapse: collapse;'>";
+        $message .= "<tr><th style='border: 1px solid #ddd; padding: 8px;'>商品名稱</th><th style='border: 1px solid #ddd; padding: 8px;'>數量</th><th style='border: 1px solid #ddd; padding: 8px;'>價格</th><th style='border: 1px solid #ddd; padding: 8px;'>材質</th></tr>";
+
+        foreach ($orderDetails as $detail) {
+            $message .= "<tr>";
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->name}</td>"; // 假設有 product_name 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->qty}</td>"; // 假設有 quantity 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->price}</td>"; // 假設有 price 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->items}</td>"; // 假設有 price 屬性
+            $message .= "</tr>";
+        }
+
+        $message .= "</table>";
+
+        // 使用 Mail::html 發送 HTML 郵件
+        Mail::html($message, function ($mail) use ($to, $subject) {
+            $mail->to($to)
+                ->subject($subject);
+        });
     }
 
     // 刪除 cart session

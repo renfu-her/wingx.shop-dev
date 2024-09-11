@@ -6,8 +6,11 @@ use App\Services\BaseService;
 
 use Illuminate\Support\Facades\Http;
 use Ecpay\Sdk\Factories\Factory;
+use Illuminate\Support\Facades\Mail;
 
+use App\Models\User;
 use App\Models\Order;
+
 
 /**
  * Class EcPayService
@@ -109,7 +112,6 @@ class EcPayService extends BaseService
                 ],
                 'Data' => $data,
             ];
-
         }
 
         // dd($input, $url);
@@ -117,4 +119,5 @@ class EcPayService extends BaseService
 
         return $response;
     }
+
 }
