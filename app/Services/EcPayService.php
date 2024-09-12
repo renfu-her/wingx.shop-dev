@@ -42,6 +42,10 @@ class EcPayService extends BaseService
 
         $order = Order::where('order_no', $order_no)->first();
 
+        // 載具類型
+        $carrier_type = $order->carrier_type;
+        $carrier_num = $order->carrier_num;
+
         if (!empty($order->company_uid)) {
             $itemCount = 1;
             $itemPrice = $order->amount;
@@ -69,6 +73,12 @@ class EcPayService extends BaseService
                 'TaxAmount' => $taxAmount,
                 'TotalAmount' => ($saleAmount + $taxAmount),
             ];
+
+            if ($carrier_type > 2) {
+                $data['CarrierType'] = $carrier_type;
+                $data['CarrierNum'] = $carrier_num;
+            }
+
             $input = [
                 'MerchantID' => $merchantId,
                 'RqHeader' => [
@@ -104,6 +114,12 @@ class EcPayService extends BaseService
                 ],
                 'InvType' => '07'
             ];
+
+            if ($carrier_type > 2) {
+                $data['CarrierType'] = $carrier_type;
+                $data['CarrierNum'] = $carrier_num;
+            }
+            
             $input = [
                 'MerchantID' => $merchantId,
                 'RqHeader' => [
@@ -119,5 +135,4 @@ class EcPayService extends BaseService
 
         return $response;
     }
-
 }

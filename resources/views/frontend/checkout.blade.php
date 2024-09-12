@@ -144,7 +144,13 @@
                                     <input type="text" name="carrier_num" id="carrier_num" class="form-control">
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="col-12">
+                            <div class="alert alert-info" role="alert">
+                                <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
+                                <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇公司用(統編)，請務必確認選用之電子發票載具類型是否正確。</p>
+                            </div>
                         </div>
                     </div>
 
@@ -303,6 +309,16 @@
             twzipcode.set({{ $member->zipcode }})
 
 
+            // 載具類型
+            $('#carrier_type').on('change', function() {
+                let carrier_type = $(this).val();
+                if (carrier_type > 1) {
+                    $('.carrier-form').show();
+                } else {
+                    $('.carrier-form').hide();
+                }
+            })
+
             if (ships > 0) {
                 $('#ship_id').change(function() {
                     let ship_id = $(this).val();
@@ -335,6 +351,8 @@
                 let company_name = $('#company_name').val();
                 let company_uid = $('#company_uid').val();
                 let company_address = $('#company_address').val();
+                let carrier_type = $('#carrier_type').val();
+                let carrier_num = $('#carrier_num').val();
 
 
                 $('input[name=total]').val(total);
@@ -389,6 +407,12 @@
 
                 if ($('#accept_terms').prop('checked') == false) {
                     error_msg.push('請勾選同意付款條件');
+                }
+
+                if (carrier_type > 1) {
+                    if (carrier_num == '') {
+                        error_msg.push('請填寫載具號碼');
+                    }
                 }
 
                 if (error_msg.length > 0) {
