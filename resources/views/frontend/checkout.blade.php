@@ -319,6 +319,19 @@
                 }
             })
 
+            // 載具編號檢查
+            // $('#carrier_num').on('change', function() {
+            //     let carrier_num = $(this).val();
+            //     if (carrier_type === 3 && carrier_num.length === 8) {
+            //         $.get('/order/checkCarrierNum', {
+            //             barCode: carrier_num
+            //         }, function(res) {
+            //             console.log(res);
+            //         })
+            //     }
+            // })
+
+
             if (ships > 0) {
                 $('#ship_id').change(function() {
                     let ship_id = $(this).val();
@@ -336,8 +349,30 @@
                 $('.ship_price').text('$ 0');
             }
 
-            $('#form_post').on('submit', function() {
+            $('#form_post').on('submit', function(e) {
+                e.preventDefault();
+                let carrier_type = $('#carrier_type').val();
+                let carrier_num = $('#carrier_num').val();
 
+                if (carrier_type == '3') {
+                    $.get('/order/checkCarrierNum', {
+                        barCode: carrier_num
+                    }, function(res) {
+                        if (res.IsExist === 'N' && res.RtnCode === 1) {
+                            
+                            submitForm();
+                        } else {
+                            alert('載具號碼驗證失敗，請檢查後重試');
+                        }
+                    });
+                } else {
+                    // 如果不需要API验证,直接提交表单
+                    submitForm();
+                }
+
+            })
+
+            const submitForm = () => {
                 let name = $('#name').val();
                 let address = $('#address').val();
                 let county = $('#county').val();
@@ -351,9 +386,6 @@
                 let company_name = $('#company_name').val();
                 let company_uid = $('#company_uid').val();
                 let company_address = $('#company_address').val();
-                let carrier_type = $('#carrier_type').val();
-                let carrier_num = $('#carrier_num').val();
-
 
                 $('input[name=total]').val(total);
 
@@ -415,17 +447,14 @@
                     }
                 }
 
+
                 if (error_msg.length > 0) {
                     alert(error_msg.join('\n'));
-                    return false;
                 } else {
 
-                    return true;
+                    $('#form_post')[0].submit();
                 }
-
-
-                return false;
-            })
+            }
 
             $('#type').on('change', function() {
                 let type = $(this).val();

@@ -75,6 +75,7 @@ route::group(
         route::post('/store', 'store')->name('data.store');
         route::get('/status/{logisticsId}', 'orderStatus')->name('data.status');
         route::post('/cancel', 'cancelOrder')->name('cancelOrder');
+        route::get('/checkCarrierNum',  'checkCarrierNum')->name('checkCarrierNum');
     }
 );
 
@@ -158,4 +159,5 @@ route::group([
     route::get('/eInvoice/{order_no}',  'eInvoice')->name('eInvoice');
     route::get('/shipToProductShip',  'shipToProductShip')->name('shipToProductShip');
     route::get('/getLogisticsStatus',  'getLogisticsStatus')->name('getLogisticsStatus');
+    // route::get('/checkCarrierNum',  'checkCarrierNum')->name('checkCarrierNum');
 });

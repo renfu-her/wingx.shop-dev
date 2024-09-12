@@ -96,7 +96,7 @@ class OrderController extends Controller
             'carrier_num' => $req['carrier_num'] ?? '',
         ]);
 
-        
+
 
         $order_id = $order->id;
         $desc = [];
@@ -230,6 +230,66 @@ class OrderController extends Controller
 
             return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
         }
+    }
+
+    public function checkCarrierNum(Request $request)
+    {
+        if (config('config.APP_ENV') == 'local') {
+            $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/CheckBarcode";
+            $merchantId = config('config.INVOICE_ID_DEV');
+            $hashKey = config('config.INVOICE_HASH_KEY_DEV');
+            $hashIV = config('config.INVOCE_HASH_IV_DEV');
+        } else {
+            $url = "https://einvoice.ecpay.com.tw/B2CInvoice/CheckBarcode";
+            $merchantId = config('config.INVOICE_ID');
+            $hashKey = config('config.INVOICE_HASH_KEY');
+            $hashIV = config('config.INVOCE_HASH_IV');
+        }
+
+        $data = [
+            'MerchantID' => $merchantId,
+            'BarCode' => $request['barCode'],
+        ];
+
+        $encryptedData = $this->encryptECPay(json_encode($data), $hashKey, $hashIV);
+
+
+        $requestData = [
+            'MerchantID' => $merchantId,
+            'RqHeader' => [
+                'Timestamp' => time(),
+                'Revision' => '1.0.0',
+            ],
+            'Data' => $encryptedData,
+        ];
+
+        $response = Http::post($url, $requestData)->json();
+
+
+        if (isset($response['Data'])) {
+            $decryptedData = $this->decryptECPay($response['Data'], $hashKey, $hashIV);
+            $resultData = json_decode($decryptedData, true);
+
+            return response()->json($resultData);
+        }
+    }
+
+    private function encryptECPay($data, $hashKey, $hashIV)
+    {
+        $data = urlencode($data);
+        $cipher = "aes-128-cbc";
+        $options = OPENSSL_RAW_DATA;
+        $encrypted = openssl_encrypt($data, $cipher, $hashKey, $options, $hashIV);
+        return base64_encode($encrypted);
+    }
+
+    private function decryptECPay($encryptedData, $hashKey, $hashIV)
+    {
+        $cipher = "aes-128-cbc";
+        $options = OPENSSL_RAW_DATA;
+        $decoded = base64_decode($encryptedData);
+        $decrypted = openssl_decrypt($decoded, $cipher, $hashKey, $options, $hashIV);
+        return urldecode($decrypted);
     }
 
     private function sendOrderConfirmationEmail($order, $orderDetails)

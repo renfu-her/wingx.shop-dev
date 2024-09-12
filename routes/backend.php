@@ -80,6 +80,7 @@ route::group(['prefix' => 'backend', 'middleware' => 'adminAuth', 'name' => 'bac
     // product ship
     route::post('/ship/update', [ProductController::class, 'updateShipPrice'])->name('product.updateShipPrice');
     route::post('/ship/updateStatus', [ProductController::class, 'updateShipStatus'])->name('product.updateShipStatus');
+
 });
 
 route::get('/backend/login', [AuthController::class, 'login'])->name('backend_login');
