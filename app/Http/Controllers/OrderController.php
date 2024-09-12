@@ -20,6 +20,7 @@ use Pharaoh\Express\Facades\Express;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -175,9 +176,9 @@ class OrderController extends Controller
                 'CollectionAmount' => $ttl_total,
                 // 'IsCollection' => 'N',
                 'GoodsName' => $desc,
-                'SenderName' => '林柏宏',
-                'SenderPhone' => '0975113071',
-                'SenderCellPhone' => '0975113071',
+                'SenderName' => $member->username,
+                'SenderPhone' => $member->mobile,
+                'SenderCellPhone' => $member->mobile,
                 'ReceiverName' => $req['name'],
                 // 'ReceiverPhone' => $req['mobile'],
                 'ReceiverCellPhone' => $req['mobile'],
@@ -197,6 +198,12 @@ class OrderController extends Controller
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
             $orderData = Http::asForm()->post($mapUrl, $logisticsData);
+
+            // 獲取訂單詳細信息
+            $orderDetails = OrderDetail::where('order_id', $order->id)->get(); // 根據您的邏輯獲取訂單詳細信息
+
+            // 發送郵件
+            $this->sendOrderConfirmationEmail($order, $orderDetails); // 添加這行來發送郵件
 
             session()->forget('cart');
 
@@ -221,11 +228,43 @@ class OrderController extends Controller
         }
     }
 
+    private function sendOrderConfirmationEmail($order, $orderDetails)
+    {
+        $to = $order->email; // 確保訂單中有 email 欄位
+        $subject = '感謝您訂購商品';
+
+        // 使用 HTML 格式構建郵件內容
+        $message = "<h2>感謝您訂購商品</h2>";
+        $message .= "<p style='color: red; font-weight: bold; font-size: 22px;'>商品/貨品到商店後，會發送簡訊通知要前往付款</p>";
+        $message .= "<table style='width: 100%; border-collapse: collapse;'>";
+        $message .= "<p>若您於垃圾信件中收到此通知，請點選上方「這不是垃圾信」的按鍵或將選擇「加入通訊錄」。</p>";
+        $message .= "<tr><th style='border: 1px solid #ddd; padding: 8px;'>商品名稱</th><th style='border: 1px solid #ddd; padding: 8px;'>數量</th><th style='border: 1px solid #ddd; padding: 8px;'>價格</th><th style='border: 1px solid #ddd; padding: 8px;'>材質</th></tr>";
+
+        foreach ($orderDetails as $detail) {
+            $message .= "<tr>";
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->name}</td>"; // 假設有 product_name 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->qty}</td>"; // 假設有 quantity 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->price}</td>"; // 假設有 price 屬性
+            $message .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$detail->items}</td>"; // 假設有 price 屬性
+            $message .= "</tr>";
+        }
+
+        $message .= "</table>";
+
+        $message .= "<p style='text-align: center;'><a href='https://wingx.shop/order/list' style='display: inline-block; background-color: #6a5acd; color: white; padding: 10px 20px; text-align: center; text-decoration: none; border-radius: 5px;'>訂單查詢</a></p>"; // 新增的按鈕
+
+        // 使用 Mail::html 發送 HTML 郵件
+        Mail::html($message, function ($mail) use ($to, $subject) {
+            $mail->to($to)
+                ->subject($subject);
+        });
+    }
+
     // order list
     public function list(Request $request)
     {
         $member_id = Auth::guard('member')->user()->id;
-        
+
         $member = Member::find($member_id);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
