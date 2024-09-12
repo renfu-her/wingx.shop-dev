@@ -92,7 +92,11 @@ class OrderController extends Controller
             'company_address' => $req['company_address'] ?? '',
             'amount' => $amount,
             'tax' => $tax,
+            'carrier_type' => $req['carrier_type'] ?? '',
+            'carrier_num' => $req['carrier_num'] ?? '',
         ]);
+
+        
 
         $order_id = $order->id;
         $desc = [];

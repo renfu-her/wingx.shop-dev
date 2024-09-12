@@ -46,7 +46,9 @@ class Order extends Model
         'tax',
         'manual_status',
         'cvs_store_id',
-        'logistics_status'
+        'logistics_status',
+        'carrier_type',
+        'carrier_num',
     ];
 
     // 自定義關聯方法
