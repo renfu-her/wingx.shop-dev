@@ -113,6 +113,40 @@
                         </div>
                     </div>
 
+                    <div class="checkout-panel">
+                        <h5 class="title-checkout">留存方式</h5>
+                        <div class="row">
+
+                            <!-- Email-->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="carrier_type" class="form-label">留存方式</label>
+                                    <select name="carrier_type" id="carrier_type" class="form-select">
+                                        <option value="">請選擇</option>
+                                        <option value="1">綠界電子發票載具</option>
+                                        <option value="2">自然人憑證號碼</option>
+                                        <option value="3">手機條碼載具</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-panel carrier-form" style="display: none">
+                        <h5 class="title-checkout">載具編號</h5>
+                        <div class="row">
+
+                            <!-- Email-->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="type" class="form-label">載具編號 <span
+                                            style="color: red">*</span></label>
+                                    <input type="text" name="carrier_num" id="carrier_num" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                     <div class="checkout-panel">
                         <h5 class="title-checkout">填寫個人資訊</h5>
