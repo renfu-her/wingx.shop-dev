@@ -333,7 +333,7 @@ class OrderController extends Controller
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }
-        
+
         $member = Member::find($member_id);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
@@ -490,11 +490,11 @@ class OrderController extends Controller
     }
 
     // 取消貨品寄送
-    public function cancelOrder(Request $request)
+    public function cancelOrder(Request $request, $logisticsId)
     {
         $data = $request->all();
 
-        $order = Order::where('pay_logistics_id', $data['AllPayLogisticsID'])->first();
+        $order = Order::where('pay_logistics_id', $logisticsId)->first();
         $order->status = 3;
         $order->save();
 

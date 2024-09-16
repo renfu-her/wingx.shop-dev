@@ -74,7 +74,7 @@ route::group(
         route::get('/list', 'list')->name('list');
         route::post('/store', 'store')->name('data.store');
         route::get('/status/{logisticsId}', 'orderStatus')->name('data.status');
-        route::get('/cancel', 'cancelOrder')->name('cancelOrder');
+        route::get('/cancel/{logisticsId}', 'cancelOrder')->name('cancelOrder');
         route::get('/checkCarrierNum',  'checkCarrierNum')->name('checkCarrierNum');
     }
 );
