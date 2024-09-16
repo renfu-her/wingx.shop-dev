@@ -161,7 +161,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="email" class="form-label">Email
-                                        <span>*(請一定要填寫，方便我們通知您購物狀況)</span></label>
+                                        <span><span style="color: red;">*</span> (請一定要填寫，方便我們通知您購物狀況)</span></label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         value="{{ $member->email }}">
                                 </div>
@@ -360,7 +360,7 @@
                         barCode: carrier_num
                     }, function(res) {
                         if (res.IsExist === 'N' && res.RtnCode === 1) {
-                            
+
                             submitForm();
                         } else {
                             alert('載具號碼驗證失敗，請檢查後重試');
