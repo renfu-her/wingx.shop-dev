@@ -327,7 +327,11 @@ class OrderController extends Controller
     // order list
     public function list(Request $request)
     {
-        $member_id = Auth::guard('member')->user()->id;
+        $member_id = Auth::guard('member')->user()->id ?? '';
+
+        if (empty($member_id)) {
+            return redirect('/')->with(['message' => '請先登入會員']);
+        }
 
         $member = Member::find($member_id);
 
