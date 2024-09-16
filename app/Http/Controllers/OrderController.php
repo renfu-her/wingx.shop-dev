@@ -333,6 +333,7 @@ class OrderController extends Controller
             return redirect('/')->with(['message' => '請先登入會員']);
         }
 
+        
         $member = Member::find($member_id);
 
         $orders = Order::where('member_id', $member_id)->orderBy('id', 'desc')->get();
