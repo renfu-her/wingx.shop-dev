@@ -124,7 +124,7 @@
                                     <select name="carrier_type" id="carrier_type" class="form-select">
                                         <option value="">請選擇</option>
                                         <option value="1">綠界電子發票載具</option>
-                                        <option value="2">自然人憑證號碼</option>
+                                        {{-- <option value="2">自然人憑證號碼</option> --}}
                                         <option value="3">手機條碼載具</option>
                                     </select>
                                 </div>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" id="carrier-description" style="display: none">
                             <div class="alert alert-info" role="alert">
                                 <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
                                 <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇公司用(統編)，請務必確認選用之電子發票載具類型是否正確。</p>
@@ -314,8 +314,10 @@
                 let carrier_type = $(this).val();
                 if (carrier_type > 1) {
                     $('.carrier-form').show();
+                    $('#carrier-description').show();
                 } else {
                     $('.carrier-form').hide();
+                    $('#carrier-description').hide();
                 }
             })
 
