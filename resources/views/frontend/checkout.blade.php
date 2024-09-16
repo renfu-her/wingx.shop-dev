@@ -131,7 +131,7 @@
                         </div>
                     </div>
 
-                    <div class="checkout-panel carrier-form" style="display: none">
+                    <div class="checkout-panel carrier-form">
                         <h5 class="title-checkout">載具編號</h5>
                         <div class="row">
 
@@ -313,11 +313,13 @@
                 let carrier_type = $(this).val();
                 if (carrier_type > 1) {
                     $('.carrier-form').show();
-                    $('#carrier-description').show();
+                    // $('#carrier-description').show();
                 } else {
                     $('.carrier-form').hide();
-                    $('#carrier-description').hide();
+                    // $('#carrier-description').hide();
                 }
+
+                
             })
 
             // 載具編號檢查
