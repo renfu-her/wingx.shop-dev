@@ -329,10 +329,10 @@ class OrderController extends Controller
     {
         $member_id = Auth::guard('member')->user()->id ?? '';
 
+        // 沒有登入的狀況
         if (empty($member_id)) {
             return redirect('/')->with(['message' => '請先登入會員']);
         }
-
         
         $member = Member::find($member_id);
 
