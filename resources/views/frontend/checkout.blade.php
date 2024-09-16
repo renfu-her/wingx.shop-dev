@@ -124,7 +124,6 @@
                                     <select name="carrier_type" id="carrier_type" class="form-select">
                                         <option value="">請選擇</option>
                                         <option value="1">綠界電子發票載具</option>
-                                        {{-- <option value="2">自然人憑證號碼</option> --}}
                                         <option value="3">手機條碼載具</option>
                                     </select>
                                 </div>
