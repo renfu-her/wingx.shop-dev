@@ -131,6 +131,17 @@
                         </div>
                     </div>
 
+                    <div class="checkout-panel">
+                        <div class="row">
+                            <div class="col-12" id="carrier-description">
+                                <div class="alert alert-info" role="alert">
+                                    <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
+                                    <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇三聯式發票(公司行號)，請務必確認選用之電子發票載具類型是否正確。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="checkout-panel carrier-form" style="display: none">
                         <h5 class="title-checkout">載具編號</h5>
                         <div class="row">
@@ -140,17 +151,6 @@
                                     <label for="type" class="form-label">載具編號 <span
                                             style="color: red">*</span></label>
                                     <input type="text" name="carrier_num" id="carrier_num" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="checkout-panel">
-                        <div class="row">
-                            <div class="col-12" id="carrier-description">
-                                <div class="alert alert-info" role="alert">
-                                    <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
-                                    <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇三聯式發票(公司行號)，請務必確認選用之電子發票載具類型是否正確。</p>
                                 </div>
                             </div>
                         </div>
