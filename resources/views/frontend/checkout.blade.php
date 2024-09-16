@@ -133,9 +133,7 @@
 
                     <div class="checkout-panel carrier-form" style="display: none">
                         <h5 class="title-checkout">載具編號</h5>
-                        
                         <div class="row">
-
                             <!-- Email-->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
@@ -145,11 +143,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-12" id="carrier-description" >
-                            <div class="alert alert-info" role="alert">
-                                <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
-                                <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇三聯式發票(公司行號)，請務必確認選用之電子發票載具類型是否正確。</p>
+                    <div class="checkout-panel">
+                        <div class="row">
+                            <div class="col-12" id="carrier-description">
+                                <div class="alert alert-info" role="alert">
+                                    <p>根據財政部令「電子發票實施作業要點」，在 WingX 官網消費後不另行寄送紙本發票。</p>
+                                    <p>依統一發票使用辦法規定：個人發票一經開立，即無法更改或改開公司戶發票。須開立統編請選擇三聯式發票(公司行號)，請務必確認選用之電子發票載具類型是否正確。</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -314,13 +316,9 @@
                 let carrier_type = $(this).val();
                 if (carrier_type > 1) {
                     $('.carrier-form').show();
-                    // $('#carrier-description').show();
                 } else {
                     $('.carrier-form').hide();
-                    // $('#carrier-description').hide();
                 }
-
-                
             })
 
             // 載具編號檢查
