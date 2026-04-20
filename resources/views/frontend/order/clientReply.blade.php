@@ -10,7 +10,7 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="type" class="form-label">物流狀態 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data['RtnMsg'] }}" readonly>
+                                <input type="text" class="form-control-plaintext" value="{{ $data['RtnMsg'] ?? '物流資料已更新' }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
@@ -23,7 +23,7 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="type" class="form-label">寄貨編號 </label>
-                                <input type="text" class="form-control-plaintext" value="{{ $data['CVSPaymentNo'] }}"
+                                <input type="text" class="form-control-plaintext" value="{{ $data['CVSPaymentNo'] ?? '' }}"
                                     readonly>
                             </div>
                         </div>
@@ -31,21 +31,21 @@
                             <div class="form-group">
                                 <label for="type" class="form-label">商店名稱 </label>
                                 <input type="text" class="form-control-plaintext"
-                                    value="{{ $storeDetails->store_name }}" readonly>
+                                    value="{{ $storeDetails->store_name ?? '' }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="type" class="form-label">商店電話號碼 </label>
                                 <input type="text" class="form-control-plaintext"
-                                    value="{{ $storeDetails->telephone }}" readonly>
+                                    value="{{ $storeDetails->telephone ?? '' }}" readonly>
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="type" class="form-label">商店地址 </label>
                                 <input type="text" class="form-control-plaintext"
-                                    value="{{ $storeDetails->address }}" readonly>
+                                    value="{{ $storeDetails->address ?? '' }}" readonly>
                             </div>
                         </div>
                     </div>

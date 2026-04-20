@@ -61,6 +61,7 @@ route::group(
         });
         route::post('/server/reply', 'serverReply');
         route::post('/client/reply', 'clientReply');
+        route::post('/payment/notify', 'paymentNotify')->name('payment.notify');
     }
 );
 

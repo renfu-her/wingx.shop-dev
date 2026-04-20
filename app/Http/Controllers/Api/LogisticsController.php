@@ -8,16 +8,20 @@ use App\Models\OrderLogistics;
 
 class LogisticsController extends Controller
 {
-    
     public function logistics(Request $request)
     {
-        $dataArray = $request->all();
+        $member = auth()->guard('member')->user();
+        if (!$member) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => '請先登入會員',
+                'data' => []
+            ], 401);
+        }
 
-        $memberId = auth()->guard('member')->user()->id;
+        $logistics = OrderLogistics::where('member_id', $member->id)->latest('id')->first();
 
-        $logistics = OrderLogistics::where('member_id', $memberId)->first();
-
-        if(!empty($logistics)){
+        if (!empty($logistics)) {
             return response()->json([
                 'status' => 'success',
                 'data' => $logistics

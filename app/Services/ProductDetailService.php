@@ -38,7 +38,14 @@ class ProductDetailService extends BaseService
 
     public function edit()
     {
+        return view(
+            'backend.productDetail.index',
+            $this->getEditViewData()
+        );
+    }
 
+    public function getEditViewData()
+    {
         $product = Product::find($this->dataId);
 
         $productTitleOne = ProductTitleOne::where('product_id', $this->dataId)->first();
@@ -53,10 +60,7 @@ class ProductDetailService extends BaseService
             $productTitleTwoName = $productTitleTwo->name;
         }
 
-        return view(
-            'backend.productDetail.index',
-            compact('product', 'productTitleOne', 'productTitleTwo', 'productTitleOneName', 'productTitleTwoName')
-        );
+        return compact('product', 'productTitleOne', 'productTitleTwo', 'productTitleOneName', 'productTitleTwoName');
     }
 
     public function store()

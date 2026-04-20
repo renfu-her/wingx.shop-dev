@@ -52,12 +52,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%">ID</th>
-                                <th style="width: 15%">標題</th>
-                                <th style="width: 15%">封面圖檔</th>
-                                <th style="width: 7%; color: blue">價格</th>
-                                <th style="width: 8%; color: red">庫存</th>
-                                <th style="width: 10%">圖檔維護</th>
-                                <th style="width: 10%">產品規格</th>
+                                <th style="width: 17%">標題</th>
+                                <th style="width: 18%">封面圖檔</th>
+                                <th style="width: 9%; color: blue">價格</th>
+                                <th style="width: 9%; color: red">庫存</th>
                                 <th style="width: 8%">編輯</th>
                                 <th style="width: 8%">刪除</th>
                             </tr>
@@ -68,20 +66,10 @@
                                     <td>{{ $value->id }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>
-                                        <img src="{!! $value->image_url !!}" class="w-100" alt="">
+                                        <img src="{!! $value->image_url !!}" style="width: 150px; max-width: 100%;" alt="">
                                     </td>
                                     <td style="color: blue">{{ number_format($value->price) }}</td>
                                     <td style="color: red">{{ number_format($value->store_number) }}</td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="edit_image_row({{ $value->id }})">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="edit_mix({{ $value->id }})">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </td>
                                     <td>
                                         <button class="btn btn-primary" onclick="edit_row({{ $value->id }})">
                                             <i class="fa-solid fa-pen-to-square"></i>
@@ -123,14 +111,6 @@
 
         const add_row = () => {
             location.href = '/backend/product/create';
-        }
-
-        const edit_image_row = (id) => {
-            location.href = '/backend/product/image/' + id;
-        }
-
-        const edit_mix = (product_id) => {
-            location.href = '/backend/product/' + product_id + '/detail';
         }
 
         const delete_row = (id) => {

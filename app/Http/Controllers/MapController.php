@@ -15,18 +15,29 @@ class MapController extends Controller
     public function rewrite(Request $request)
     {
         $res = $request->all();
+        $memberId = $res['memberId'] ?? null;
 
-        $memberId = $res['memberId'];
+        if (empty($memberId) || empty($res['CVSStoreID'])) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => '門市資料不完整',
+            ], 422);
+        }
 
-        OrderLogistics::updateOrCreate([
+        $logistics = OrderLogistics::updateOrCreate([
             'member_id' => $memberId
         ], [
-            'logistics_sub_type' => $res['LogisticsSubType'],
+            'logistics_sub_type' => $res['LogisticsSubType'] ?? null,
             'cvs_store_id' => $res['CVSStoreID'],
-            'cvs_store_name' => $res['CVSStoreName'],
-            'cvs_address' => $res['CVSAddress'],
-            'cvs_telephone' => $res['CVSTelephone'],
-            'cvs_out_side' => $res['CVSOutSide']
+            'cvs_store_name' => $res['CVSStoreName'] ?? null,
+            'cvs_address' => $res['CVSAddress'] ?? null,
+            'cvs_telephone' => $res['CVSTelephone'] ?? null,
+            'cvs_out_side' => $res['CVSOutSide'] ?? null,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $logistics,
         ]);
     }
 }

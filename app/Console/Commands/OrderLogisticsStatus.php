@@ -22,7 +22,7 @@ class OrderLogisticsStatus extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '依物流狀態補開電子發票';
 
     /**
      * Execute the console command.
@@ -42,7 +42,7 @@ class OrderLogisticsStatus extends Command
 
             Log::info('=== 物流發票 : ' . $order->order_no);
             Log::info($eInvoice);
-            if ($eInvoice['TransCode'] == 1) {
+            if (($eInvoice['TransCode'] ?? null) == 1) {
                 $e_invoice = $eInvoice['Data'];
                 $invoiceNo = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
                 $order = Order::where('order_no', $order->order_no)->first();

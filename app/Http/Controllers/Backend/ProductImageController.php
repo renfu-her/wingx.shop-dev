@@ -13,6 +13,7 @@ class ProductImageController extends Controller
     // 產品圖片管理頁面
     public function index(Request $request, $product_id)
     {
+        $product = Product::find($product_id);
         $product_images = ProductImage::where('product_id', $product_id)->get();
         foreach ($product_images as $product_image) {
             if($product_image->define_image == 0){
@@ -23,6 +24,7 @@ class ProductImageController extends Controller
         }
 
         return view('backend.productImage.index', [
+            'product' => $product,
             'product_images' => $product_images,
             'product_id' => $product_id,
         ]);

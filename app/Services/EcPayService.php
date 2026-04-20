@@ -21,17 +21,11 @@ class EcPayService extends BaseService
 
     public function ecpayInvoice($order_no)
     {
-        if (config('config.APP_ENV') == 'local') {
-            $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue";
-            $merchantId = config('config.INVOICE_ID_DEV');
-            $hashKey = config('config.INVOICE_HASH_KEY_DEV');
-            $hashIV = config('config.INVOCE_HASH_IV_DEV');
-        } else {
-            $url = "https://einvoice.ecpay.com.tw/B2CInvoice/Issue";
-            $merchantId = config('config.INVOICE_ID');
-            $hashKey = config('config.INVOICE_HASH_KEY');
-            $hashIV = config('config.INVOCE_HASH_IV');
-        }
+        $invoiceConfig = config('ecpay.invoice');
+        $url = $invoiceConfig['issue_url'];
+        $merchantId = $invoiceConfig['merchant_id'];
+        $hashKey = $invoiceConfig['hash_key'];
+        $hashIV = $invoiceConfig['hash_iv'];
 
         $factory = new Factory([
             'hashKey' => $hashKey,
@@ -87,7 +81,7 @@ class EcPayService extends BaseService
                 ],
                 'Data' => $data,
             ];
-            $url = 'https://einvoice-stage.ecpay.com.tw/B2BInvoice/Issue';
+            $url = $invoiceConfig['b2b_issue_url'];
         } else {
             $itemCount = 1;
             $itemPriceIncludeTax = (int)$order->amount + (int)$order->tax;

@@ -5,107 +5,54 @@
 @section('content')
     <div class="container-fluid">
 
-        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">產品管理 - 編輯</h1>
         </div>
 
-        <!-- DataTales Example -->
-
         <div class="row">
             <div class="col-lg-12">
-                <!-- Default Bootstrap Form Controls-->
                 <div id="default">
-                    <div class="card mb-4">
+                    <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <!-- Component Preview-->
-                            <div class="sbp-preview">
-                                <div class="sbp-preview-content">
+                            <ul class="nav nav-tabs" id="productEditTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link @if ($activeTab === 'basic') active @endif" id="product-basic-tab"
+                                        data-toggle="tab" href="#product-basic" role="tab" aria-controls="product-basic"
+                                        aria-selected="{{ $activeTab === 'basic' ? 'true' : 'false' }}">
+                                        基本資料
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link @if ($activeTab === 'specs') active @endif" id="product-specs-tab"
+                                        data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs"
+                                        aria-selected="{{ $activeTab === 'specs' ? 'true' : 'false' }}">
+                                        規格
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link @if ($activeTab === 'images') active @endif" id="product-images-tab"
+                                        data-toggle="tab" href="#product-images" role="tab" aria-controls="product-images"
+                                        aria-selected="{{ $activeTab === 'images' ? 'true' : 'false' }}">
+                                        圖檔維護
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content border border-top-0 rounded-bottom p-4" id="productEditTabsContent">
+                                <div class="tab-pane fade @if ($activeTab === 'basic') show active @endif" id="product-basic"
+                                    role="tabpanel" aria-labelledby="product-basic-tab">
                                     <x:form::form method="PUT" id="form_post" enctype="multipart/form-data"
                                         :action="route('product.update', $product->id)" :bind="$product">
-
-                                        <div class="mt-3">
-                                            <x:form::select name="category_id" class="form-control" label="分類"
-                                                :options="$product_category" :selected="$product->category_id" required />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input name="name" label="標題" required />
-                                        </div>
-
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="price" label="價格" required />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::input type="number" name="store_number" label="庫存" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            @if ($product->define_image == 1)
-                                                <img src="{{ asset('upload/images/' . $product->id . '/' . $product->image) }}"
-                                                    style="width: 15rem">
-                                            @else
-                                                <img src="https://down-tw.img.susercontent.com/file/{{ $product->image }}"
-                                                    style="width: 15rem" alt="">
-                                            @endif
-                                            <x:form::input type="file" name="image" label="封面圖片" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::textarea name="description" label="詳細內容" rows="10" />
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <div>
-                                                <label class="form-label">運費方式</label>
-                                            </div>
-                                            <div class="list-group">
-                                                @foreach ($orderShipArray as $ship)
-                                                    <div
-                                                        class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <div>
-                                                            <p class="fw-bold mb-1">{{ $ship['name'] }}</p>
-                                                        </div>
-                                                        <div class="row d-flex justify-content-between align-items-center">
-                                                            <input type="hidden" value="{{ $ship['price'] }}"
-                                                                name="shipPrice[{{ $ship['id'] }}]">
-                                                            <span
-                                                                class="m-1 ship-price-{{ $ship['id'] }}">NT${{ $ship['price'] }}</span>
-                                                            <button class="btn btn-outline-secondary btn-sm m-2"
-                                                                type="button"
-                                                                onclick="changePrice({{ $ship['id'] }}, '{{ $ship['name'] }}', {{ $ship['price'] }})"><i
-                                                                    class="fas fa-pencil-alt"></i></button>
-
-                                                            <div class="custom-control custom-switch m-2">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="shipStatus[{{ $ship['id'] }}]"
-                                                                    id="shipStatus-{{ $ship['id'] }}"
-                                                                    onclick="shipStatus({{ $ship['id'] }})"
-                                                                    @if ($ship['status'] == 1) checked @endif>
-                                                                <label class="custom-control-label"
-                                                                    for="shipStatus-{{ $ship['id'] }}"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                <!-- 複製以上 div 來添加更多的列表項目... -->
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <x:form::select class="form-control" name="status" label="啓用狀態"
-                                                :options="[1 => '啓用', 0 => '停用']" :selected="$product->status" />
-                                        </div>
-
-                                        <div class="mt-3 text-center">
-                                            <x:form::button.link class="btn-secondary" href="/backend/product">取消
-                                            </x:form::button.link>
-                                            <x:form::button.submit id="submit">確認存檔</x:form::button.submit>
-                                        </div>
-
+                                        @include('backend.product._tabs_basic')
                                     </x:form::form>
+                                </div>
+                                <div class="tab-pane fade @if ($activeTab === 'specs') show active @endif" id="product-specs"
+                                    role="tabpanel" aria-labelledby="product-specs-tab">
+                                    @include('backend.product._tabs_specs')
+                                </div>
+                                <div class="tab-pane fade @if ($activeTab === 'images') show active @endif" id="product-images"
+                                    role="tabpanel" aria-labelledby="product-images-tab">
+                                    @include('backend.product._tabs_images')
                                 </div>
                             </div>
                         </div>
@@ -143,19 +90,180 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @section('css')
+    <style>
+        #productEditTabs .nav-link {
+            font-weight: 600;
+        }
 
+        #productEditTabsContent {
+            background: #fff;
+        }
+    </style>
 @endsection
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <script>
+        function initProductSpecEditor(productId) {
+            if (window.productSpecEditorInitialized === productId) {
+                return;
+            }
+            window.productSpecEditorInitialized = productId;
+
+            let options1Count = 0;
+            let options2Count = 0;
+
+            function init() {
+                $.post('/product/spec', {
+                    'product_id': productId,
+                    'num': 1
+                }, function(items) {
+                    if (items.html != '') {
+                        $('#init-options1').val(items.detailName)
+                        $('.newRow').after(items.html);
+                    }
+                })
+
+                $.post('/product/spec', {
+                    'product_id': productId,
+                    'num': 2
+                }, function(items) {
+                    if (items.html != '') {
+                        $('#init-options2').val(items.detailName)
+                        $('.newRow-2').after(items.html);
+                    }
+                })
+            }
+
+            function initList() {
+                $.post('/product/spec/list', {
+                    'product_id': productId
+                }, function(items) {
+                    $('.list-header').html(items.header)
+                    $('#row-dynamic-add').html(items.col);
+                })
+            }
+
+            function countFilledInputs(selector) {
+                let count = 0;
+                $(selector).each(function() {
+                    if ($(this).val().trim() !== '') {
+                        count++;
+                    }
+                });
+                return count;
+            }
+
+            function makeOptione1() {
+                let selector = 'input[name="options1[]"]';
+                $('#row-dynamic-add').html('')
+                let row = '';
+
+                $(selector).each(function() {
+                    if ($(this).val().trim() !== '') {
+                        row += '<div class="row">'
+                        row += '<div class="col bordered-div">' + $(this).val() + '</div>';
+                        row += '<div class="col bordered-div"><input type="number" class="form-control" name="price[]"></div>';
+                        row += '<div class="col bordered-div"><input type="number" class="form-control" name="num[]"></div>';
+                        row += '</div>'
+                    }
+                });
+                $('#row-dynamic-add').html(row)
+            }
+
+            function makeOptione2() {
+                let selectorOption1 = 'input[name="options1[]"]';
+                let selectorOption2 = 'input[name="options2[]"]';
+                $('#row-dynamic-add').html('')
+                let row = '';
+
+                $(selectorOption1).each(function() {
+                    if ($(this).val().trim() !== '') {
+                        row += '<div class="row">'
+                        row += '<div class="col bordered-div">' + $(this).val() + '</div>';
+                        row += '<div class="col-9">';
+                        $(selectorOption2).each(function() {
+                            if ($(this).val().trim() !== '') {
+                                row += '<div class="row">';
+                                row += '<div class="col bordered-div gray-div">' + $(this).val() + '</div>';
+                                row += '<div class="col bordered-div"><input type="number" class="form-control" name="price[]"></div>';
+                                row += '<div class="col bordered-div"><input type="number" class="form-control" name="num[]"></div>';
+                                row += '</div>'
+                            }
+                        })
+                        row += '</div>'
+                        row += '</div>'
+                    }
+                });
+                $('#row-dynamic-add').html(row)
+            }
+
+            $(document).off('keyup.productSpec1').on('keyup.productSpec1', 'input[name="options1[]"]', function() {
+                options1Count = countFilledInputs('input[name="options1[]"]');
+                makeOptione1();
+                makeOptione2();
+            });
+
+            $(document).off('keyup.productSpec2').on('keyup.productSpec2', 'input[name="options2[]"]', function() {
+                options2Count = countFilledInputs('input[name="options2[]"]');
+                makeOptione1();
+                makeOptione2();
+            });
+
+            $('input[name=title1]').off('keyup.productTitle1').on('keyup.productTitle1', function() {
+                $('.title1').html($(this).val())
+                if ($('.title1').html() == '') {
+                    $('.title1').html('規格一')
+                }
+            })
+
+            $('input[name=title2]').off('keyup.productTitle2').on('keyup.productTitle2', function() {
+                $('.title2').html($(this).val())
+                if ($('.title2').html() == '') {
+                    $('.title2').hide();
+                } else {
+                    $('.title2').show();
+                }
+            })
+
+            $('#addRow').off('click.productSpecAdd1').on('click.productSpecAdd1', function() {
+                let html = '';
+                html += '<div class="input-group mb-3 col-md-4 col-12 removeRow">';
+                html += '<input type="text" name="options1[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
+                html += '<button class="btn btn-danger removeItem" type="button">-</button>';
+                html += '</div>';
+                $('.spec-one').append(html);
+            })
+
+            $('#addRow-2').off('click.productSpecAdd2').on('click.productSpecAdd2', function() {
+                let html = '';
+                html += '<div class="input-group mb-3 col-md-4 col-12 removeRow">';
+                html += '<input type="text" name="options2[]" class="form-control m-input" placeholder="輸入選項" autocomplete="off">';
+                html += '<button class="btn btn-danger removeItem" type="button">-</button>';
+                html += '</div>';
+                $('.spec-two').append(html);
+            })
+
+            $(document).off('click.productSpecRemove').on('click.productSpecRemove', '.removeItem', function() {
+                $(this).closest('.removeRow').remove();
+                makeOptione1();
+                makeOptione2();
+            });
+
+            init();
+            initList();
+        }
+
+        function submitProductDetailForm() {
+            document.getElementById('dynamic-form').submit();
+        }
+
         $(function() {
+            initProductSpecEditor('{{ $product->id }}');
 
             $('#shipSave').on('click', function() {
 
@@ -165,13 +273,12 @@
                 shipId = $('input[name="shipId"]').val()
 
                 if ($.trim(shipPrice) == '') {
-                    error_msg.push('運費金額不得為空白'); // 使用 push 方法添加元素到數組
+                    error_msg.push('運費金額不得為空白');
                 }
 
-                // 如果 error_msg 有元素（即，如果有錯誤訊息）
                 if (error_msg.length > 0) {
-                    alert(error_msg.join(',')); // 將所有的錯誤訊息合併成一個字串並顯示
-                    return false; // 阻止表單提交
+                    alert(error_msg.join(','));
+                    return false;
                 }
 
                 $.post("{{ route('product.updateShipPrice') }}", {
@@ -206,8 +313,6 @@
         }
 
         const shipStatus = (shipId) => {
-
-
             let isChecked = $('#shipStatus-' + shipId).prop('checked');
 
             $.post("{{ route('product.updateShipStatus') }}", {

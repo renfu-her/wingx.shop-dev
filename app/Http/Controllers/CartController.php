@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\CvsStoreDetail;
+use App\Models\OrderLogistics;
 
 use App\Services\EcPayService;
 
@@ -146,9 +147,8 @@ class CartController extends Controller
     // order payment thanks
     public function thanks(Request $request)
     {
-
         $req = $request->all();
-
+        $paymentResult = $this->syncPaymentResult($req);
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
@@ -166,43 +166,90 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        // $neweb_pay = NewebPay::decode($req['TradeInfo']);
+        $order = $paymentResult['order'];
+        $status = $paymentResult['status'];
+        $message = $paymentResult['message'];
 
-        if ($req['RtnCode'] == 1) {
-
-            // 更新訂單
-            $merchantOrderNo = $req['CustomField1'];
-            $order = Order::where('order_no', $merchantOrderNo)->first();
-            $order->payment = $req['PaymentType'];
-            $order->status = 1;
-            $order->save();
-
-            // 更新發票
-            $ecpayService = new EcPayService();
-            $eInvoice = $ecpayService->ecpayInvoice($merchantOrderNo);
-
-            if ($eInvoice['TransCode'] == 1) {
-                $e_invoice = $eInvoice['Data'];
-                $order = Order::where('order_no', $merchantOrderNo)->first();
-                $order->invoice_no = $e_invoice['InvoiceNumber'] ?? $e_invoice['InvoiceNo'];
-                $order->invoice_random_no = $e_invoice['RandomNumber'];
-                $order->save();
-            };
-
-            // 獲取訂單詳細信息
-            $orderDetails = OrderDetail::where('order_id', $order->id)->get(); // 根據您的邏輯獲取訂單詳細信息
-
-            // 發送郵件
-            $this->sendOrderConfirmationEmail($order, $orderDetails); // 傳遞 OrderDetail
-
-            $status = 'success';
-            return view('frontend.thanks', compact('order', 'status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
-        } else {
-
-            $status = 'fail';
-
-            return view('frontend.thanks', compact('status', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
+        if ($status === 'success') {
+            session()->forget('cart');
         }
+
+        return view('frontend.thanks', compact('order', 'status', 'message', 'products', 'product_categories', 'cart', 'total', 'tax', 'ships', 'cart_count'));
+    }
+
+    public function paymentNotify(Request $request)
+    {
+        $paymentResult = $this->syncPaymentResult($request->all());
+
+        if ($paymentResult['status'] === 'success') {
+            return response('1|OK', 200)->header('Content-Type', 'text/plain');
+        }
+
+        return response('0|' . $paymentResult['message'], 200)->header('Content-Type', 'text/plain');
+    }
+
+    private function syncPaymentResult(array $data)
+    {
+        $orderNo = $this->resolvePaymentOrderNo($data);
+
+        if (empty($orderNo)) {
+            return [
+                'status' => 'fail',
+                'message' => '缺少訂單編號',
+                'order' => null,
+            ];
+        }
+
+        $order = Order::where('order_no', $orderNo)->first();
+        if (!$order) {
+            return [
+                'status' => 'fail',
+                'message' => '查無對應訂單',
+                'order' => null,
+            ];
+        }
+
+        $rtnCode = (int)($data['RtnCode'] ?? 0);
+        if ($rtnCode !== 1) {
+            return [
+                'status' => 'fail',
+                'message' => $data['RtnMsg'] ?? '訂單未完成，請重新確認您的訂單與付款項目',
+                'order' => $order,
+            ];
+        }
+
+        $wasPaid = (int)$order->status === 1;
+        $order->payment = $data['PaymentType'] ?? $order->payment;
+        $order->status = 1;
+        $order->save();
+
+        if (empty($order->invoice_no)) {
+            $ecpayService = new EcPayService();
+            $eInvoice = $ecpayService->ecpayInvoice($orderNo);
+
+            if (($eInvoice['TransCode'] ?? null) == 1) {
+                $eInvoiceData = $eInvoice['Data'];
+                $order->invoice_no = $eInvoiceData['InvoiceNumber'] ?? $eInvoiceData['InvoiceNo'] ?? $order->invoice_no;
+                $order->invoice_random_no = $eInvoiceData['RandomNumber'] ?? $order->invoice_random_no;
+                $order->save();
+            }
+        }
+
+        if (!$wasPaid) {
+            $orderDetails = OrderDetail::where('order_id', $order->id)->get();
+            $this->sendOrderConfirmationEmail($order, $orderDetails);
+        }
+
+        return [
+            'status' => 'success',
+            'message' => $data['RtnMsg'] ?? '已完成訂單，謝謝！',
+            'order' => $order,
+        ];
+    }
+
+    private function resolvePaymentOrderNo(array $data)
+    {
+        return $data['CustomField1'] ?? $data['MerchantTradeNo'] ?? null;
     }
 
     private function sendOrderConfirmationEmail($order, $orderDetails)
@@ -259,20 +306,25 @@ class CartController extends Controller
     // server, client reply
     public function serverReply(Request $request)
     {
+        $result = $this->syncLogisticsReply($request->all());
 
-        $data = $request->all();
+        if ($result['status'] === 'success') {
+            return response('1|OK', 200)->header('Content-Type', 'text/plain');
+        }
 
-        // return view('frontend.order.ecpayStore', compact('data'));
+        return response('0|' . $result['message'], 200)->header('Content-Type', 'text/plain');
     }
 
     public function clientReply(Request $request)
     {
         $data = $request->all();
+        $result = $this->syncLogisticsReply($data);
 
-        // dd($data);
-        $order = Order::where('order_no', $data['MerchantTradeNo'])->first();
-        $order->pay_logistics_id = $data['AllPayLogisticsID'];
-        $order->save();
+        if ($result['status'] !== 'success') {
+            abort(404, $result['message']);
+        }
+
+        $order = $result['order'];
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();
@@ -291,15 +343,13 @@ class CartController extends Controller
         $cart_count = (new CartService())->getCart();
         $cart_count = json_decode($cart_count->getContent(), true);
 
-        if ($data['LogisticsSubType'] == 'FAMIC2C') {
+        if (($data['LogisticsSubType'] ?? '') == 'FAMIC2C') {
             $logisticsSubType = "全家店到店";
         } else {
             $logisticsSubType = "7-11 交貨便";
         }
 
-        // csv_store_id 來取得店家資訊
-        $cvs_store_id = $order->cvs_store_id;
-        $storeDetails = CvsStoreDetail::where('store_id', $cvs_store_id)->first();
+        $storeDetails = $result['storeDetails'];
 
         return view(
             'frontend.order.clientReply',
@@ -316,5 +366,74 @@ class CartController extends Controller
                 'storeDetails'
             )
         );
+    }
+
+    private function syncLogisticsReply(array $data)
+    {
+        $orderNo = $data['MerchantTradeNo'] ?? null;
+        if (empty($orderNo)) {
+            return [
+                'status' => 'fail',
+                'message' => '缺少訂單編號',
+                'order' => null,
+                'storeDetails' => null,
+            ];
+        }
+
+        $order = Order::where('order_no', $orderNo)->first();
+        if (!$order) {
+            return [
+                'status' => 'fail',
+                'message' => '查無對應訂單',
+                'order' => null,
+                'storeDetails' => null,
+            ];
+        }
+
+        if (!empty($data['AllPayLogisticsID'])) {
+            $order->pay_logistics_id = $data['AllPayLogisticsID'];
+        }
+        if (!empty($data['RtnCode'])) {
+            $order->logistics_status = $data['RtnCode'];
+        }
+        if (!empty($data['CVSStoreID'])) {
+            $order->cvs_store_id = $data['CVSStoreID'];
+        }
+        $order->save();
+
+        $storeDetails = null;
+        if (!empty($data['CVSStoreID'])) {
+            $storeDetails = CvsStoreDetail::updateOrCreate(
+                ['store_id' => $data['CVSStoreID']],
+                [
+                    'store_name' => $data['CVSStoreName'] ?? '',
+                    'address' => $data['CVSAddress'] ?? '',
+                    'telephone' => $data['CVSTelephone'] ?? '',
+                ]
+            );
+        } elseif (!empty($order->cvs_store_id)) {
+            $storeDetails = CvsStoreDetail::where('store_id', $order->cvs_store_id)->first();
+        }
+
+        if (!empty($order->member_id)) {
+            OrderLogistics::updateOrCreate(
+                ['member_id' => $order->member_id],
+                [
+                    'logistics_sub_type' => $data['LogisticsSubType'] ?? null,
+                    'cvs_store_id' => $data['CVSStoreID'] ?? $order->cvs_store_id,
+                    'cvs_store_name' => $data['CVSStoreName'] ?? ($storeDetails->store_name ?? null),
+                    'cvs_address' => $data['CVSAddress'] ?? ($storeDetails->address ?? null),
+                    'cvs_telephone' => $data['CVSTelephone'] ?? ($storeDetails->telephone ?? null),
+                    'cvs_out_side' => $data['CVSOutSide'] ?? null,
+                ]
+            );
+        }
+
+        return [
+            'status' => 'success',
+            'message' => $data['RtnMsg'] ?? '物流資料已更新',
+            'order' => $order,
+            'storeDetails' => $storeDetails,
+        ];
     }
 }

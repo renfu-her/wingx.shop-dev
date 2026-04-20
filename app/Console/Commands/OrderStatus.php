@@ -21,19 +21,13 @@ class OrderStatus extends Command
 
         Log::info('=== 訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
         $orders = Order::whereIn('status', [0, 9])->get();
-        foreach ($orders as $key => $value) {
+        $paymentConfig = config('ecpay.payment');
+        $url = $paymentConfig['query_trade_info_url'];
+        $merchantId = $paymentConfig['merchant_id'];
+        $hashKey = $paymentConfig['hash_key'];
+        $hashIv = $paymentConfig['hash_iv'];
 
-            if (config('config.APP_ENV') == 'local') {
-                $url = 'https://payment-stage.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
-                $merchantId = config('config.ECPAY_MERCHANT_ID_DEV');
-                $hashKey = config('config.ECPAY_HASH_KEY_DEV');
-                $hashIv = config('config.ECPAY_HASH_IV_DEV');
-            } else {
-                $url = 'https://payment.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
-                $merchantId = config('config.ECPAY_MERCHANT_ID');
-                $hashKey = config('config.ECPAY_HASH_KEY');
-                $hashIv = config('config.ECPAY_HASH_IV');
-            }
+        foreach ($orders as $key => $value) {
 
             $checkMacValue = $this->ecpayCheckMacValue([
                 'MerchantID' => $merchantId,

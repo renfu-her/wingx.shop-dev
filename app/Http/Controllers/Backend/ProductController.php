@@ -11,6 +11,7 @@ use App\Models\ProductImage;
 use App\Models\Ship;
 use App\Models\OrderShip;
 use App\Models\ProductShip;
+use App\Services\ProductDetailService as Service;
 
 use Yajra\DataTables\DataTables;
 
@@ -165,6 +166,11 @@ class ProductController extends Controller
     // 產品編輯頁面
     public function edit(Request $request, $id)
     {
+        $activeTab = $request->query('tab', 'basic');
+        if (!in_array($activeTab, ['basic', 'specs', 'images'])) {
+            $activeTab = 'basic';
+        }
+
         $product = Product::find($id);
         $product_id = $product->id;
         $product_categories = ProductCategory::orderBy('id')->get();
@@ -197,9 +203,21 @@ class ProductController extends Controller
             array_push($orderShipArray, $ships);
         }
 
+        $product_images = ProductImage::where('product_id', $product_id)->get();
+        foreach ($product_images as $product_image) {
+            if ($product_image->define_image == 0) {
+                $product_image->image_url = 'https://down-tw.img.susercontent.com/file/' . $product_image->image;
+            } else {
+                $product_image->image_url = asset('upload/images/' . $product_image->product_id . '/' . $product_image->image);
+            }
+        }
+
+        $specTabData = (new Service($request, $product_id))->getEditViewData();
+        extract($specTabData);
+
         return view(
             'backend.product.edit',
-            compact('product', 'product_category', 'ships', 'ship_ids', 'orderShipArray')
+            compact('product', 'product_category', 'ships', 'ship_ids', 'orderShipArray', 'activeTab', 'productTitleOne', 'productTitleTwo', 'productTitleOneName', 'productTitleTwoName', 'product_images')
         );
     }
 

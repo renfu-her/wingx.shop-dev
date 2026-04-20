@@ -162,13 +162,10 @@ class OrderController extends Controller
                 ]
             );
 
-            if (config('config.APP_ENV') == 'local') {
-                $mapUrl = 'https://logistics-stage.ecpay.com.tw/Express/Create';
-                $merchantID = config('config.EXPRESS_MERCHANT_ID_DEV');
-            } else {
-                $mapUrl = 'https://logistics.ecpay.com.tw/Express/Create';
-                $merchantID = config('config.EXPRESS_MERCHANT_ID');
-            }
+            $logisticsConfig = config('ecpay.logistics');
+            $callbackBaseUrl = config('ecpay.callback_base_url');
+            $mapUrl = $logisticsConfig['create_url'];
+            $merchantID = $logisticsConfig['merchant_id'];
 
             $logisticsData = [
                 'MerchantID' => $merchantID,
@@ -189,15 +186,11 @@ class OrderController extends Controller
                 // 'ReceiverEmail' => $req['email'],
                 'ReceiverStoreID' => $req['CVSStoreID'],
                 'ReturnStoreID' => $req['CVSStoreID'],
-                'ServerReplyURL' => config('config.APP_URL') . '/cart/server/reply',
-                'ClientReplyURL' => config('config.APP_URL') . '/cart/client/reply',
+                'ServerReplyURL' => $callbackBaseUrl . '/cart/server/reply',
+                'ClientReplyURL' => $callbackBaseUrl . '/cart/client/reply',
             ];
 
-            if (config('config.APP_ENV') == 'local') {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
-            } else {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
-            }
+            $checkMacValue = $this->checkMacValue($logisticsData, $logisticsConfig['hash_key'], $logisticsConfig['hash_iv']);
 
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
@@ -214,37 +207,36 @@ class OrderController extends Controller
             return view('frontend.order.store', compact('orderData'));
         } else {
 
+            $callbackBaseUrl = config('ecpay.callback_base_url');
+            $notifyUrl = $callbackBaseUrl . '/cart/payment/notify';
+            $returnUrl = $callbackBaseUrl . '/cart/thanks';
+
             $formData = [
+                'OrderId' => $order_no,
                 'CustomField1' => $order_no,
                 'ItemDescription' => $desc,
                 'ItemName' => $desc,
                 'TotalAmount' => $ttl_total,
                 'PaymentMethod' => 'ALL', // ALL, Credit, ATM, WebATM
+                'NeedExtraPaidInfo' => 'Y',
+                'OrderResultURL' => $returnUrl,
             ];
 
-            if (config('config.APP_ENV') == 'local') {
-                $url = config('config.APP_URL') . "/cart/thanks";
-            } else {
-                $url = "https://wingx.shop/cart/thanks";
-            }
-
-            return $this->checkout->setReturnUrl($url)->setPostData($formData)->send();
+            return $this->checkout
+                ->setNotifyUrl($notifyUrl)
+                ->setReturnUrl($returnUrl)
+                ->setPostData($formData)
+                ->send();
         }
     }
 
     public function checkCarrierNum(Request $request)
     {
-        if (config('config.APP_ENV') == 'local') {
-            $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/CheckBarcode";
-            $merchantId = config('config.INVOICE_ID_DEV');
-            $hashKey = config('config.INVOICE_HASH_KEY_DEV');
-            $hashIV = config('config.INVOCE_HASH_IV_DEV');
-        } else {
-            $url = "https://einvoice.ecpay.com.tw/B2CInvoice/CheckBarcode";
-            $merchantId = config('config.INVOICE_ID');
-            $hashKey = config('config.INVOICE_HASH_KEY');
-            $hashIV = config('config.INVOCE_HASH_IV');
-        }
+        $invoiceConfig = config('ecpay.invoice');
+        $url = $invoiceConfig['check_barcode_url'];
+        $merchantId = $invoiceConfig['merchant_id'];
+        $hashKey = $invoiceConfig['hash_key'];
+        $hashIV = $invoiceConfig['hash_iv'];
 
         $data = [
             'MerchantID' => $merchantId,
@@ -417,14 +409,11 @@ class OrderController extends Controller
         $data = $request->all();
 
         $order = Order::where('pay_logistics_id', $logisticsId)->first();
-
-        if (config('config.APP_ENV') == 'local') {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
-        } else {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID');
-        }
+        $logisticsConfig = config('ecpay.logistics');
+        $logisticsUrl = $logisticsConfig['query_url'];
+        $merchantId = $logisticsConfig['merchant_id'];
+        $hashKey = $logisticsConfig['hash_key'];
+        $hashIV = $logisticsConfig['hash_iv'];
 
         $logisticsData = [
             'MerchantID' => $merchantId,
@@ -432,27 +421,29 @@ class OrderController extends Controller
             "TimeStamp" => Carbon::now()->timestamp,
         ];
 
-        if (config('config.APP_ENV') == 'local') {
-            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
-        } else {
-            $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
-        }
+        $checkMacValue = $this->checkMacValue($logisticsData, $hashKey, $hashIV);
 
         $logisticsData['CheckMacValue'] = $checkMacValue;
 
         $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
 
         $logisticsArray = [];
-        parse_str($logistics, $logisticsArray);
+        parse_str($logistics->body(), $logisticsArray);
 
-        if ($logisticsArray['LogisticsType'] == 'CVS_FAMIC2C') {
+        if (empty($logisticsArray['LogisticsStatus'])) {
+            return redirect()->route('order.list')->with([
+                'message' => '目前無法取得物流狀態，請稍後再試。',
+            ]);
+        }
+
+        if (($logisticsArray['LogisticsType'] ?? '') == 'CVS_FAMIC2C') {
             $logisticsArray['LogisticsName'] = '全家店到店';
         } else {
             $logisticsArray['LogisticsName'] = '7-11 交貨便';
         }
 
         $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
-        $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
+        $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message ?? null;
 
         $products = $this->getProduct();
         $product_categories = $this->getProductCategory();

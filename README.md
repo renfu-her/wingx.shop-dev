@@ -55,3 +55,53 @@
 ## 專案定位
 
 從目前程式結構與路由判斷，這是一個完整的電商網站系統，名稱為 `wingx-shop`，資料庫名稱也是 `wingx-shop`。
+
+## 綠界 ECPay 設定說明
+
+### 設定原則
+- 先使用測試資料驗證金流、物流、電子發票流程。
+- 測試沒問題後，再把 `.env` 中的 `ECPAY_MODE` 切成 `production`，並補上正式資料。
+- 測試與正式帳號/金鑰原始資料可參考：`docs/帳號密碼.md`
+
+### 主要 `.env` 參數
+- `ECPAY_MODE=test|production`
+- `ECPAY_CALLBACK_BASE_URL`
+- 金流：
+  - `ECPAY_TEST_MERCHANT_ID`
+  - `ECPAY_TEST_HASH_KEY`
+  - `ECPAY_TEST_HASH_IV`
+  - `ECPAY_PROD_MERCHANT_ID`
+  - `ECPAY_PROD_HASH_KEY`
+  - `ECPAY_PROD_HASH_IV`
+- 物流：
+  - `ECPAY_LOGISTICS_TEST_MERCHANT_ID`
+  - `ECPAY_LOGISTICS_TEST_HASH_KEY`
+  - `ECPAY_LOGISTICS_TEST_HASH_IV`
+  - `ECPAY_LOGISTICS_PROD_MERCHANT_ID`
+  - `ECPAY_LOGISTICS_PROD_HASH_KEY`
+  - `ECPAY_LOGISTICS_PROD_HASH_IV`
+- 電子發票：
+  - `ECPAY_INVOICE_TEST_MERCHANT_ID`
+  - `ECPAY_INVOICE_TEST_HASH_KEY`
+  - `ECPAY_INVOICE_TEST_HASH_IV`
+  - `ECPAY_INVOICE_PROD_MERCHANT_ID`
+  - `ECPAY_INVOICE_PROD_HASH_KEY`
+  - `ECPAY_INVOICE_PROD_HASH_IV`
+
+### 注意事項
+- 正式金流 HashIV 與正式物流 / 發票 HashIV 不同，不可混用。
+- 金流通知與前台返回已拆成：
+  - server notify：`POST /cart/payment/notify`
+  - client return：`POST /cart/thanks`
+- 物流門市回傳相關：
+  - 地圖回寫：`POST /cart/rewrite`
+  - 物流 server reply：`POST /cart/server/reply`
+  - 物流 client reply：`POST /cart/client/reply`
+- 既有測試入口：
+  - `GET /test/queryOrderStatus`
+  - `GET /test/getLogisticsStatus`
+  - `GET /test/eInvoice/{order_no}`
+
+### 本次調整紀錄
+- 已完成 `docs/plans/2026-04-20-ecpay-flow-alignment.md` 的 Task 1 ~ Task 6。
+- 包含：設定集中化、金流 notify/return 分流、物流門市資料保存修正、物流查詢防呆、電子發票設定分流。

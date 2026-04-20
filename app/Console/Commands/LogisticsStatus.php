@@ -24,14 +24,11 @@ class LogisticsStatus extends Command
         $order = Order::where('pay_logistics_id', '!=', null)
             ->whereNotIn('pay_logistics_id', [2067, 3022, 2074, 3020])
             ->get();
-
-        if (config('config.APP_ENV') == 'local') {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
-        } else {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID');
-        }
+        $logisticsConfig = config('ecpay.logistics');
+        $logisticsUrl = $logisticsConfig['query_url'];
+        $merchantId = $logisticsConfig['merchant_id'];
+        $hashKey = $logisticsConfig['hash_key'];
+        $hashIV = $logisticsConfig['hash_iv'];
 
         foreach ($order as $key => $value) {
             $logisticsData = [
@@ -40,22 +37,26 @@ class LogisticsStatus extends Command
                 "TimeStamp" => Carbon::now()->timestamp,
             ];
 
-            if (config('config.APP_ENV') == 'local') {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
-            } else {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
-            }
+            $checkMacValue = $this->checkMacValue($logisticsData, $hashKey, $hashIV);
 
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
             $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
 
             $logisticsArray = [];
-            parse_str($logistics, $logisticsArray);
+            parse_str($logistics->body(), $logisticsArray);
+
+            if (empty($logisticsArray['LogisticsStatus'])) {
+                Log::warning('物流狀態查詢缺少 LogisticsStatus', [
+                    'order_no' => $value['order_no'] ?? null,
+                    'pay_logistics_id' => $value['pay_logistics_id'] ?? null,
+                    'response' => $logistics->body(),
+                ]);
+                continue;
+            }
 
             $logisticsStatus = LogisticsStatusData::where('code', $logisticsArray['LogisticsStatus'])->first();
-            // dd($logisticsStatus, $logisticsArray);
-            $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
+            $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message ?? null;
 
             $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
             $orderData->logistics_status = $logisticsArray['LogisticsStatus'];

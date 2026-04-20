@@ -26,19 +26,12 @@ class TestController extends Controller
     {
         Log::info('=== Test 訂單狀態更新 Log ' . date('Y-m-d H:i:s') . ' ===');
         $orders = Order::whereIn('status', [0, 9])->get();
+        $paymentConfig = config('ecpay.payment');
+        $url = $paymentConfig['query_trade_info_url'];
+        $merchantId = $paymentConfig['merchant_id'];
+        $hashKey = $paymentConfig['hash_key'];
+        $hashIv = $paymentConfig['hash_iv'];
         foreach ($orders as $key => $value) {
-
-            if (config('config.APP_ENV') == 'local') {
-                $url = 'https://payment-stage.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
-                $merchantId = config('config.ECPAY_MERCHANT_ID_DEV');
-                $hashKey = config('config.ECPAY_HASH_KEY_DEV');
-                $hashIv = config('config.ECPAY_HASH_IV_DEV');
-            } else {
-                $url = 'https://payment.ecpay.com.tw/Cashier/QueryTradeInfo/V5';
-                $merchantId = config('config.ECPAY_MERCHANT_ID');
-                $hashKey = config('config.ECPAY_HASH_KEY');
-                $hashIv = config('config.ECPAY_HASH_IV');
-            }
 
             $checkMacValue = $this->ecpayCheckMacValue([
                 'MerchantID' => $merchantId,
@@ -76,14 +69,11 @@ class TestController extends Controller
 
         Log::info('=== 物流訂單狀態更新 ' . date('Y-m-d H:i:s') . ' ===');
         $order = Order::where('pay_logistics_id', '!=', null)->get();
-
-        if (config('config.APP_ENV') == 'local') {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS_DEV');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID_DEV');
-        } else {
-            $logisticsUrl = config('config.EXPRESS_LOGISTICS');
-            $merchantId = config('config.EXPRESS_MERCHANT_ID');
-        }
+        $logisticsConfig = config('ecpay.logistics');
+        $logisticsUrl = $logisticsConfig['query_url'];
+        $merchantId = $logisticsConfig['merchant_id'];
+        $hashKey = $logisticsConfig['hash_key'];
+        $hashIV = $logisticsConfig['hash_iv'];
 
         foreach ($order as $key => $value) {
             $logisticsData = [
@@ -92,22 +82,26 @@ class TestController extends Controller
                 "TimeStamp" => Carbon::now()->timestamp,
             ];
 
-            if (config('config.APP_ENV') == 'local') {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY_DEV'), config('config.EXPRESS_HASH_IV_DEV'));
-            } else {
-                $checkMacValue = $this->checkMacValue($logisticsData, config('config.EXPRESS_HASH_KEY'), config('config.EXPRESS_HASH_IV'));
-            }
+            $checkMacValue = $this->checkMacValue($logisticsData, $hashKey, $hashIV);
 
             $logisticsData['CheckMacValue'] = $checkMacValue;
 
             $logistics = Http::asForm()->post($logisticsUrl, $logisticsData);
 
             $logisticsArray = [];
-            parse_str($logistics, $logisticsArray);
+            parse_str($logistics->body(), $logisticsArray);
+
+            if (empty($logisticsArray['LogisticsStatus'])) {
+                Log::warning('Test 物流狀態查詢缺少 LogisticsStatus', [
+                    'order_no' => $value['order_no'] ?? null,
+                    'pay_logistics_id' => $value['pay_logistics_id'] ?? null,
+                    'response' => $logistics->body(),
+                ]);
+                continue;
+            }
 
             $logisticsStatus = LogisticsStatus::where('code', $logisticsArray['LogisticsStatus'])->first();
-            // dd($logisticsStatus, $logisticsArray);
-            $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message;
+            $logisticsArray['LogisticsStatusName'] = $logisticsStatus->message ?? null;
 
             $orderData = Order::where('pay_logistics_id', $value['pay_logistics_id'])->first();
             $orderData->logistics_status = $logisticsArray['LogisticsStatus'];
@@ -163,17 +157,11 @@ class TestController extends Controller
     
     public function checkCarrierNum(Request $request)
     {
-        if (config('config.APP_ENV') == 'local') {
-            $url = "https://einvoice-stage.ecpay.com.tw/B2CInvoice/CheckBarcode";
-            $merchantId = config('config.INVOICE_ID_DEV');
-            $hashKey = config('config.INVOICE_HASH_KEY_DEV');
-            $hashIV = config('config.INVOCE_HASH_IV_DEV');
-        } else {
-            $url = "https://einvoice.ecpay.com.tw/B2CInvoice/CheckBarcode";
-            $merchantId = config('config.INVOICE_ID');
-            $hashKey = config('config.INVOICE_HASH_KEY');
-            $hashIV = config('config.INVOCE_HASH_IV');
-        }
+        $invoiceConfig = config('ecpay.invoice');
+        $url = $invoiceConfig['check_barcode_url'];
+        $merchantId = $invoiceConfig['merchant_id'];
+        $hashKey = $invoiceConfig['hash_key'];
+        $hashIV = $invoiceConfig['hash_iv'];
 
         $data = [
             'MerchantID' => $merchantId,
